@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>.i{stroke:#0b0d12;fill:#0b0d12}.a{fill:#3355ff}@media (prefers-color-scheme:dark){.i{stroke:#f3f4f6;fill:#f3f4f6}.a{fill:#7d96ff}}</style>
+  <path class="i" d="M32 10A22 22 0 1 1 10 32" fill="none" style="fill:none" stroke-width="7" stroke-linecap="round"/>
+  <circle class="a" cx="10" cy="32" r="6"/>
+  <circle class="i" cx="32" cy="32" r="3.6" style="stroke:none"/>
+</svg>
