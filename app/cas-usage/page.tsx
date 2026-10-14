@@ -9,7 +9,7 @@ import { caseHref, processCases } from "@/lib/content/cases"
 import { pageMeta } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMeta({
-  title: "Cas d’usage de l’IA en entreprise | Jegsen",
+  title: "Cas d’usage de l’IA en entreprise | Jegsen IA",
   description:
     "Factures, bons de livraison, e-mails, comptes rendus, demandes entrantes, cerveau d’entreprise, workflows agentiques : les processus et usages techniques que nous mettons en production.",
   path: "/cas-usage",

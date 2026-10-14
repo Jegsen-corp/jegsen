@@ -159,10 +159,13 @@ function startAnimation(container: HTMLDivElement, canvas: HTMLCanvasElement, di
   const p2: Point = { x: 0, y: 0 }
 
   const resize = () => {
+    // Taille de mise en page (clientWidth/Height) et non getBoundingClientRect : le conteneur apparaît
+    // avec une animation de zoom (scale 0,96 → 1). Mesuré pendant ce zoom, le canvas gardait une taille
+    // trop petite, étirée ensuite par le CSS, et le cadran (canvas séparé) se décalait de l'arc et des aiguilles.
     const rect = container.getBoundingClientRect()
     dpr = Math.min(window.devicePixelRatio || 1, DPR_CAPS[dprLevel])
-    width = rect.width
-    height = rect.height
+    width = container.clientWidth
+    height = container.clientHeight
     rectLeft = rect.left
     rectTop = rect.top
     dialCache = null

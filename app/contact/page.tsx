@@ -10,7 +10,7 @@ import { pageMeta } from "@/lib/metadata"
 import { site } from "@/lib/site"
 
 export const metadata: Metadata = pageMeta({
-  title: "Contact : parlons de vos processus | Jegsen, Nantes",
+  title: "Contact : parlons de vos processus | Jegsen IA, Nantes",
   description:
     "Un premier échange sur l'automatisation de vos processus par l'IA, un diagnostic ou une formation. Jegsen est basé à Nantes et intervient dans toute la France.",
   path: "/contact",

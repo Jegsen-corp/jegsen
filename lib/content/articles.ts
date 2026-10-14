@@ -18,7 +18,7 @@ export const articles: ArticleMeta[] = [
     title:
       "Facture électronique 2026-2027 : ce qui change pour les PME, et où l’IA reste utile",
     crumb: "Facture électronique",
-    metaTitle: "Facture électronique 2026-2027 : calendrier PME et IA | Jegsen",
+    metaTitle: "Facture électronique 2026-2027 : calendrier PME et IA | Jegsen IA",
     description:
       "Réception obligatoire depuis le 1er septembre 2026, émission pour les PME au 1er septembre 2027 : le calendrier, ce que la réforme automatise, et ce qui reste à faire.",
     published: "2026-10-10",
@@ -31,7 +31,7 @@ export const articles: ArticleMeta[] = [
     title:
       "Calculer le retour sur investissement d’un projet d’IA : la méthode pour une PME",
     crumb: "ROI d’un projet IA",
-    metaTitle: "ROI d’un projet d’IA en PME : méthode et exemple | Jegsen",
+    metaTitle: "ROI d’un projet d’IA en PME : méthode et exemple | Jegsen IA",
     description:
       "Les formules pour estimer le gain, le coût et le délai de retour d’une automatisation par l’IA, un exemple chiffré pas à pas et les erreurs qui faussent le calcul.",
     published: "2026-10-10",
@@ -44,7 +44,7 @@ export const articles: ArticleMeta[] = [
     title:
       "Article 4 du règlement européen sur l’IA : ce que la « maîtrise de l’IA » demande aux PME",
     crumb: "Maîtrise de l’IA",
-    metaTitle: "Article 4 AI Act : la maîtrise de l’IA pour les PME | Jegsen",
+    metaTitle: "Article 4 AI Act : la maîtrise de l’IA pour les PME | Jegsen IA",
     description:
       "Qui est concerné par l'article 4 du règlement européen sur l'IA, ce qu'a changé l'omnibus de juillet 2026, et comment une PME peut s'y conformer.",
     published: "2026-10-10",

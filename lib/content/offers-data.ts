@@ -4,7 +4,7 @@ import type { OfferDetail } from "./types"
 export const offerDetails: OfferDetail[] = [
   {
     slug: "diagnostic-rentabilite-ia",
-    metaTitle: "Diagnostic IA pour PME et ETI, ROI chiffré | Jegsen",
+    metaTitle: "Diagnostic IA pour PME et ETI, ROI chiffré | Jegsen IA",
     metaDescription: "Diagnostic IA en 1 à 2 semaines : 3 à 5 cas d'usage chiffrés, hypothèses de ROI, risques et feuille de route priorisée. PME et ETI, Nantes et toute la France.",
     kicker: "Pour commencer",
     title: "Diagnostic de rentabilité IA",
@@ -75,7 +75,7 @@ export const offerDetails: OfferDetail[] = [
   },
   {
     slug: "sprint-integration-ia",
-    metaTitle: "Intégration IA et automatisation des processus | Jegsen",
+    metaTitle: "Intégration IA et automatisation des processus | Jegsen IA",
     metaDescription: "Un processus automatisé par l'IA mis en production en 2 à 6 semaines : documents, e-mails, comptes rendus, demandes. Intégré à votre SI, gains mesurés.",
     kicker: "Automatisez un processus",
     title: "Sprint d’intégration IA",
@@ -210,7 +210,7 @@ export const offerDetails: OfferDetail[] = [
   },
   {
     slug: "programme-formation-ia",
-    metaTitle: "Formation IA en entreprise et adoption | Jegsen, Nantes",
+    metaTitle: "Formation IA en entreprise et adoption | Jegsen IA, Nantes",
     metaDescription: "Formation IA des équipes, charte d'utilisation, ateliers par métier et accompagnement à l'adoption sur 1 à 3 semaines, avec indicateurs et bilan des gains.",
     kicker: "Formez vos équipes",
     title: "Programme IA et adoption",

@@ -4,7 +4,7 @@ import { Eyebrow } from "@/components/site/blocks"
 import { ButtonRow, LinkButton } from "@/components/site/links"
 
 export const metadata: Metadata = {
-  title: { absolute: "Page introuvable | Jegsen" },
+  title: { absolute: "Page introuvable | Jegsen IA" },
   robots: { index: false },
 }
 

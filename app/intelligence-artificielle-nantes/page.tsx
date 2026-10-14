@@ -9,7 +9,7 @@ import { offers } from "@/lib/content/offers"
 import { pageMeta } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMeta({
-  title: "Intégration et formation IA à Nantes pour PME et ETI | Jegsen",
+  title: "Intégration et formation IA à Nantes pour PME et ETI | Jegsen IA",
   description:
     "Accompagnement IA à Nantes et en Loire-Atlantique : diagnostic de rentabilité, automatisation des processus intégrée à votre SI et formation des équipes, sur site.",
   path: "/intelligence-artificielle-nantes",

@@ -3,8 +3,8 @@ import { site } from "@/lib/site"
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Jegsen : IA et automatisation pour PME et ETI",
-    short_name: "Jegsen",
+    name: "Jegsen IA",
+    short_name: "Jegsen IA",
     description: site.description,
     start_url: "/",
     display: "browser",

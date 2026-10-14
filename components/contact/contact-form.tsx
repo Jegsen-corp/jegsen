@@ -84,9 +84,17 @@ export function ContactFormFields() {
     }
 
     setSending(true)
+    data.delete("website")
+    data.set("size", sizeLabel)
+    data.set("subject", subjectLabel)
+    data.set("_subject", `[Site Jegsen] ${subjectLabel}`)
+    data.set("_replyto", String(data.get("email") || ""))
+    data.set("_template", "table")
+    data.set("_captcha", "false")
     try {
       const res = await fetch(site.formEndpoint, { method: "POST", body: data, headers: { Accept: "application/json" } })
-      if (!res.ok) throw new Error(String(res.status))
+      const json = await res.json().catch(() => ({}))
+      if (!res.ok || json.success === false || json.success === "false") throw new Error(String(res.status))
       form.reset()
       setConsent(false)
       setStatus("Merci, votre message est bien parti.")

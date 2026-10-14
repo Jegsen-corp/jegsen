@@ -5,7 +5,7 @@ export const useCases: UseCase[] = [
   {
     slug: "cerveau-entreprise",
     technical: true,
-    metaTitle: "Cerveau d’entreprise : une IA nourrie de vos données | Jegsen",
+    metaTitle: "Cerveau d’entreprise : une IA nourrie de vos données | Jegsen IA",
     metaDescription: "Procédures, contrats, fiches produits, historique : nous rassemblons le savoir de votre entreprise dans un cerveau d’entreprise interrogeable, qui cite ses sources et respecte vos droits d’accès.",
     title: "Construire le cerveau de votre entreprise à partir de vos données",
     shortTitle: "Cerveau d’entreprise",
@@ -117,7 +117,7 @@ export const useCases: UseCase[] = [
   {
     slug: "workflows-agentiques",
     technical: true,
-    metaTitle: "Workflows agentiques (agentic workflows) pour PME | Jegsen",
+    metaTitle: "Workflows agentiques (agentic workflows) pour PME | Jegsen IA",
     metaDescription: "Des agents IA qui enchaînent les étapes d’un processus dans vos outils : lire, décider, agir, avec des règles claires et une validation humaine aux points sensibles.",
     title: "Mettre en place des workflows agentiques dans vos outils",
     shortTitle: "Workflows agentiques",
@@ -228,7 +228,7 @@ export const useCases: UseCase[] = [
   {
     slug: "factures-fournisseurs",
     technical: false,
-    metaTitle: "Automatiser les factures fournisseurs avec l’IA | Jegsen",
+    metaTitle: "Automatiser les factures fournisseurs avec l’IA | Jegsen IA",
     metaDescription: "Lecture des factures, rapprochement avec les commandes et livraisons, imputation comptable et détection d’anomalies par l’IA, avec validation humaine des exceptions.",
     title: "Automatiser le traitement des factures fournisseurs avec l’IA",
     shortTitle: "Factures fournisseurs",
@@ -335,7 +335,7 @@ export const useCases: UseCase[] = [
   {
     slug: "bons-de-livraison",
     technical: false,
-    metaTitle: "Extraction des bons de livraison par IA | Jegsen",
+    metaTitle: "Extraction des bons de livraison par IA | Jegsen IA",
     metaDescription: "Bons de livraison, lettres de voiture, preuves de livraison : extraction automatique des données, contrôle des réserves et mise à jour du TMS ou de l’ERP.",
     title: "Extraire automatiquement les données des bons de livraison et lettres de voiture",
     shortTitle: "Bons de livraison",
@@ -441,7 +441,7 @@ export const useCases: UseCase[] = [
   {
     slug: "tri-emails",
     technical: false,
-    metaTitle: "Tri automatique des e-mails par IA | Jegsen",
+    metaTitle: "Tri automatique des e-mails par IA | Jegsen IA",
     metaDescription: "Classement, extraction des informations, routage vers la bonne personne et brouillons de réponse : l’IA traite vos boîtes partagées (contact@, commandes@, sav@).",
     title: "Trier et traiter automatiquement les e-mails de vos boîtes partagées",
     shortTitle: "Tri des e-mails",
@@ -547,7 +547,7 @@ export const useCases: UseCase[] = [
   {
     slug: "comptes-rendus",
     technical: false,
-    metaTitle: "Comptes rendus de réunion automatiques par IA | Jegsen",
+    metaTitle: "Comptes rendus de réunion automatiques par IA | Jegsen IA",
     metaDescription: "Comptes rendus de réunion, de visite ou d’intervention générés à partir de notes ou d’enregistrements, structurés selon vos modèles et enregistrés dans vos outils.",
     title: "Générer des comptes rendus de réunion et d’intervention avec l’IA",
     shortTitle: "Comptes rendus",
@@ -652,7 +652,7 @@ export const useCases: UseCase[] = [
   {
     slug: "qualification-demandes",
     technical: false,
-    metaTitle: "Qualifier et router les demandes entrantes avec l’IA | Jegsen",
+    metaTitle: "Qualifier et router les demandes entrantes avec l’IA | Jegsen IA",
     metaDescription: "Formulaires, e-mails, appels retranscrits : l’IA analyse chaque demande entrante, la qualifie, la priorise et la transmet à la bonne personne dans votre CRM.",
     title: "Qualifier et router automatiquement les demandes entrantes",
     shortTitle: "Qualification des demandes",

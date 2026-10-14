@@ -5,9 +5,10 @@ import { Icon, icons } from "@/components/site/icon"
 import { SplitSection } from "@/components/site/sections"
 import { CardIcon, SiteCard } from "@/components/site/site-card"
 import { pageMeta } from "@/lib/metadata"
+import { team } from "@/lib/site"
 
 export const metadata: Metadata = pageMeta({
-  title: "À propos : notre mission, rendre l’IA rentable | Jegsen",
+  title: "À propos : notre mission, rendre l’IA rentable | Jegsen IA",
   description:
     "Notre mission : transformer l'IA en levier de rentabilité pour les PME et ETI françaises, par la formation, le conseil et l'automatisation. Basé à Nantes.",
   path: "/a-propos",
@@ -61,13 +62,26 @@ export default function AboutPage() {
             produits évolutifs.
           </p>
           <p>Nous sommes basés à Nantes et intervenons partout en France.</p>
-          <p className="note">
-            <span className="todo">À COMPLÉTER</span> Présentation du fondateur et de l’équipe : parcours, expertises
-            (infrastructure, cybersécurité, développement…), photo. C’est l’un des contenus qui rassurent le plus un
-            dirigeant de PME.
-          </p>
         </div>
       </SplitSection>
+
+      {team.length > 0 && (
+        <section className="section">
+          <div className="container-site">
+            <Eyebrow>L’équipe</Eyebrow>
+            <h2 className="mb-8">Les personnes derrière Jegsen.</h2>
+            <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
+              {team.map((m, i) => (
+                <SiteCard key={m.name} delay={i * 0.08}>
+                  <h3>{m.name}</h3>
+                  <p className="mb-3 text-[13px] font-semibold text-brand">{m.role}</p>
+                  <p className="m-0">{m.bio}</p>
+                </SiteCard>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       <section className="section">
         <div className="container-site grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
