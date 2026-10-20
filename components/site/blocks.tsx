@@ -80,19 +80,17 @@ export function PageHero({
   crumbs,
   blobs,
   className,
-  containerClassName,
   children,
 }: {
   crumbs?: Crumb[]
   blobs?: (1 | 2 | 3)[]
   className?: string
-  containerClassName?: string
   children: ReactNode
 }) {
   return (
     <section className={cn("relative isolate overflow-hidden pt-[150px] pb-[60px]", className)}>
       {blobs && <HeroBackdrop blobs={blobs} />}
-      <div className={cn("container-site", containerClassName)}>
+      <div className="container-site">
         {crumbs && <Crumbs items={crumbs} />}
         {children}
       </div>

@@ -374,13 +374,6 @@
     background: var(--brand-soft);
     border: 1px solid var(--line);
   }
-  .todo {
-    color: #6b4b00;
-    background: #fff4d6;
-    border-radius: 6px;
-    padding: 1px 6px;
-    font-weight: 600;
-  }
 
   /* Bas de page : mot géant en dégradé */
   .footer-word {

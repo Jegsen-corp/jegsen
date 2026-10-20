@@ -13,14 +13,12 @@ export function MethodSection({
   title,
   lead,
   steps,
-  aside,
   className = "section",
 }: {
   eyebrow: string
   title: string
   lead?: ReactNode
   steps: Step[]
-  aside?: ReactNode
   className?: string
 }) {
   return (
@@ -30,7 +28,6 @@ export function MethodSection({
           <Eyebrow>{eyebrow}</Eyebrow>
           <h2>{title}</h2>
           {lead && <p className="lead">{lead}</p>}
-          {aside}
         </Reveal>
         <Steps steps={steps} />
       </div>

@@ -1,7 +1,40 @@
 // Contenu extrait du site d'origine. Les chaînes acceptent **gras** et [liens](/chemin).
 import type { OfferDetail } from "./types"
 
-export const offerDetails: OfferDetail[] = [
+const euros = new Intl.NumberFormat("fr-FR", {
+  style: "currency",
+  currency: "EUR",
+  maximumFractionDigits: 0,
+})
+
+export function formatEuros(amount: number) {
+  return euros.format(amount)
+}
+
+function priceRange(min: number, max: number) {
+  return `${formatEuros(min)} à ${formatEuros(max)} HT`
+}
+
+type OfferSource = Omit<OfferDetail, "facts" | "deliverablesLead"> & {
+  /** Puce « Livrable » de l'en-tête. */
+  factDeliverable: string
+}
+
+function finalize(offer: OfferSource): OfferDetail {
+  const range = priceRange(offer.priceMin, offer.priceMax)
+  const { factDeliverable, ...rest } = offer
+  return {
+    ...rest,
+    facts: [
+      { label: "Durée", value: offer.duration },
+      { label: "Prix indicatif", value: range },
+      { label: "Livrable", value: factDeliverable },
+    ],
+    deliverablesLead: `Prix indicatif de ${range}, selon le périmètre. Devis ferme après un premier échange.`,
+  }
+}
+
+const offerSources: OfferSource[] = [
   {
     slug: "diagnostic-rentabilite-ia",
     metaTitle: "Diagnostic IA pour PME et ETI, ROI chiffré | Jegsen IA",
@@ -10,20 +43,11 @@ export const offerDetails: OfferDetail[] = [
     title: "Diagnostic de rentabilité IA",
     crumb: "Diagnostic IA",
     lead: "En une à deux semaines, nous identifions où l'IA rapporte vraiment dans votre entreprise, et où elle ne rapporte pas.",
-    facts: [
-      {
-        label: "Durée",
-        value: "1 à 2 semaines",
-      },
-      {
-        label: "Prix indicatif",
-        value: "1 500 € à 3 500 € HT",
-      },
-      {
-        label: "Livrable",
-        value: "Plan d'action chiffré",
-      },
-    ],
+    duration: "1 à 2 semaines",
+    priceMin: 1500,
+    priceMax: 3500,
+    cardDeliverable: "Plan d'action chiffré, avec hypothèses de ROI et risques",
+    factDeliverable: "Plan d'action chiffré",
     forWho: [
       "Vous savez que l'IA peut vous faire gagner du temps, sans savoir par où commencer.",
       "Vous avez des équipes qui ressaisissent, trient, contrôlent ou reformulent toute la journée.",
@@ -48,7 +72,6 @@ export const offerDetails: OfferDetail[] = [
         text: "Priorisation par rentabilité et faisabilité, hypothèses explicites, prochaines étapes concrètes.",
       },
     ],
-    deliverablesLead: "Prix indicatif de 1 500 € à 3 500 € HT, selon le périmètre. Devis ferme après un premier échange.",
     deliverables: [
       "Cartographie des processus étudiés",
       "3 à 5 cas d'usage détaillés et chiffrés",
@@ -81,20 +104,12 @@ export const offerDetails: OfferDetail[] = [
     title: "Sprint d'intégration IA",
     crumb: "Intégration IA",
     lead: "Nous prenons un processus précis et nous le mettons en production, branché sur vos outils, avec des gains mesurés.",
-    facts: [
-      {
-        label: "Durée",
-        value: "2 à 6 semaines",
-      },
-      {
-        label: "Prix indicatif",
-        value: "5 000 € à 15 000 € HT",
-      },
-      {
-        label: "Livrable",
-        value: "Workflow opérationnel",
-      },
-    ],
+    duration: "2 à 6 semaines",
+    priceMin: 5000,
+    priceMax: 15000,
+    cardDeliverable: "Workflow opérationnel, tests, documentation, sécurisation et mesure des gains",
+    factDeliverable: "Workflow opérationnel",
+    featured: true,
     forWho: [
       "Un processus répétitif mobilise vos équipes et ralentit vos délais.",
       "Vous avez identifié un cas d'usage (avec ou sans diagnostic préalable).",
@@ -184,7 +199,6 @@ export const offerDetails: OfferDetail[] = [
         text: "Déploiement, documentation, transfert aux équipes, puis comparaison des indicateurs avant / après.",
       },
     ],
-    deliverablesLead: "Prix indicatif de 5 000 € à 15 000 € HT, selon le périmètre. Devis ferme après un premier échange.",
     deliverables: [
       "Workflow opérationnel en production",
       "Jeux de tests et rapport de recette",
@@ -216,20 +230,11 @@ export const offerDetails: OfferDetail[] = [
     title: "Programme IA et adoption",
     crumb: "Formation IA",
     lead: "Un outil que personne n'utilise ne rapporte rien. Nous formons vos équipes et encadrons les usages pour que les gains se matérialisent.",
-    facts: [
-      {
-        label: "Durée",
-        value: "1 à 3 semaines",
-      },
-      {
-        label: "Prix indicatif",
-        value: "2 000 € à 6 000 € HT",
-      },
-      {
-        label: "Livrable",
-        value: "Équipes formées",
-      },
-    ],
+    duration: "1 à 3 semaines",
+    priceMin: 2000,
+    priceMax: 6000,
+    cardDeliverable: "Équipes formées, usages encadrés, indicateurs d'adoption et bilan de gains",
+    factDeliverable: "Équipes formées",
     forWho: [
       "Vos salariés utilisent déjà des outils d'IA, sans règles communes.",
       "Vous avez déployé une solution et voulez qu'elle soit réellement adoptée.",
@@ -254,7 +259,6 @@ export const offerDetails: OfferDetail[] = [
         text: "Suivi de l'adoption, réponses aux questions, indicateurs d'usage et bilan des gains.",
       },
     ],
-    deliverablesLead: "Prix indicatif de 2 000 € à 6 000 € HT, selon le périmètre. Devis ferme après un premier échange.",
     deliverables: [
       "Équipes formées par métier",
       "Charte d'utilisation de l'IA",
@@ -279,3 +283,5 @@ export const offerDetails: OfferDetail[] = [
     ],
   },
 ]
+
+export const offerDetails: OfferDetail[] = offerSources.map(finalize)

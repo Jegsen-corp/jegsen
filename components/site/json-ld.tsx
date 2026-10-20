@@ -1,5 +1,6 @@
-import { founders, site } from "@/lib/site"
+import { offerDetails } from "@/lib/content/offers"
 import type { FaqItem } from "@/lib/content/types"
+import { founders, site } from "@/lib/site"
 
 export function JsonLd({ data }: { data: object }) {
   return (
@@ -73,17 +74,17 @@ export const organizationLd = {
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Prestations IA pour PME et ETI",
-        itemListElement: [
-          ["diagnostic-rentabilite-ia", "Diagnostic de rentabilité IA", 1500, 3500],
-          ["sprint-integration-ia", "Sprint d'intégration IA", 5000, 15000],
-          ["programme-formation-ia", "Programme IA et adoption", 2000, 6000],
-        ].map(([slug, name, minPrice, maxPrice]) => ({
+        itemListElement: offerDetails.map((offer) => ({
           "@type": "Offer",
-          itemOffered: { "@type": "Service", "@id": `${site.url}/offres/${slug}#service`, name },
+          itemOffered: {
+            "@type": "Service",
+            "@id": `${site.url}/offres/${offer.slug}#service`,
+            name: offer.title,
+          },
           priceSpecification: {
             "@type": "PriceSpecification",
-            minPrice,
-            maxPrice,
+            minPrice: offer.priceMin,
+            maxPrice: offer.priceMax,
             priceCurrency: "EUR",
             valueAddedTaxIncluded: false,
           },

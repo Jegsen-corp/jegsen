@@ -1,9 +1,9 @@
 import Link from "next/link"
 import type { ReactNode } from "react"
 
-const TOKEN = /\*\*(.+?)\*\*|\[(.+?)\]\((.+?)\)|\{\{(.+?)\}\}/g
+const TOKEN = /\*\*(.+?)\*\*|\[(.+?)\]\((.+?)\)/g
 
-/** Rend un texte court contenant **gras**, [liens](/chemin) et {{champs à compléter}}. */
+/** Rend un texte court contenant **gras** et [liens](/chemin). */
 export function RichText({ text }: { text: string }) {
   const out: ReactNode[] = []
   let last = 0
@@ -24,7 +24,7 @@ export function RichText({ text }: { text: string }) {
           </a>
         )
       )
-    } else if (m[4]) out.push(<span key={i} className="todo">{m[4]}</span>)
+    }
     last = i + m[0].length
   }
   if (last < text.length) out.push(text.slice(last))

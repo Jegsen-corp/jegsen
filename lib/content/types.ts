@@ -30,6 +30,13 @@ export type OfferDetail = {
   title: string
   crumb: string
   lead: string
+  duration: string
+  /** Prix de départ affiché sur les cartes, et borne basse du JSON-LD. */
+  priceMin: number
+  priceMax: number
+  /** Phrase de livrable sur les cartes (plus longue que la puce d'en-tête). */
+  cardDeliverable: string
+  featured?: boolean
   facts: { label: string; value: string }[]
   forWho: string[]
   examples?: { title: string; text: string; icon: IconShape[] }[]

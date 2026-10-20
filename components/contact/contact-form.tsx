@@ -62,7 +62,7 @@ export function ContactFormFields() {
     e.preventDefault()
     const form = e.currentTarget
     const data = new FormData(form)
-    if (data.get("website")) return // piège à robots
+    if (String(data.get("hp") || "").trim()) return // piège à robots
     data.set("subject", subject)
     data.set("size", size)
     const subjectLabel = subjects.find((s) => s.value === subject)?.label ?? "Contact"
@@ -84,7 +84,7 @@ export function ContactFormFields() {
     }
 
     setSending(true)
-    data.delete("website")
+    data.delete("hp")
     data.set("size", sizeLabel)
     data.set("subject", subjectLabel)
     data.set("_subject", `[Site Jegsen] ${subjectLabel}`)
@@ -162,7 +162,15 @@ export function ContactFormFields() {
           className={cn(fieldClass, "min-h-[150px] resize-y")}
         />
       </Field>
-      <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[9999px]" />
+      <input
+        type="text"
+        name="hp"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        defaultValue=""
+        className="pointer-events-none absolute -left-[9999px] size-0 opacity-0"
+      />
       <div className="grid grid-cols-[20px_1fr] gap-2.5 text-sm text-ink-2">
         <Checkbox
           id="consent"

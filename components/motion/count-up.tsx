@@ -27,5 +27,5 @@ export function CountUp({ to, duration = 1.4 }: { to: number; duration?: number 
     return () => controls.stop()
   }, [inView, reduce, to, duration])
 
-  return <span ref={ref}>{to}</span>
+  return <span ref={ref}>{reduce ? to : 0}</span>
 }
