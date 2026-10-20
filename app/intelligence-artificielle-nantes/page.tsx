@@ -1,3 +1,4 @@
+import Link from "next/link"
 import type { Metadata } from "next"
 import { Ping } from "@/components/motion/ambient"
 import { Reveal } from "@/components/motion/reveal"
@@ -99,6 +100,13 @@ export default function NantesPage() {
         lead="Des tâches de lecture, de vérification et de ressaisie, présentes dans la plupart des entreprises."
       >
         <CaseLinks />
+        <p className="mt-6 text-ink-2">
+          Méthode, contrôles et budget :{" "}
+          <Link href="/automatisation-ia-nantes" className="underline underline-offset-3">
+            notre offre d’automatisation IA à Nantes
+          </Link>
+          .
+        </p>
       </SplitSection>
 
       <FaqSection title="Travailler avec nous depuis Nantes." items={faq} />

@@ -140,7 +140,11 @@ export default function HomePage() {
               className="mb-6 text-[clamp(2.6rem,5.2vw,4.6rem)]"
             />
             <Reveal as="p" delay={0.35} className="lead mb-[34px]">
-              Depuis Nantes, nous aidons les PME et ETI à repérer les processus les plus rentables à automatiser, à les
+              Depuis Nantes, nous aidons les PME et ETI à repérer{" "}
+              <Link href="/automatisation-ia-nantes" className="underline decoration-line-strong underline-offset-3 hover:decoration-current">
+                les processus les plus rentables à automatiser
+              </Link>
+              , à les
               intégrer dans leur système d’information, à former leurs équipes et à{" "}
               <strong className="text-ink">mesurer les gains obtenus</strong>.
             </Reveal>

@@ -12,11 +12,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...useCases.map((c) => caseHref(c.slug)),
     "/ressources",
     ...articles.map((a) => articleHref(a.slug)),
+    "/automatisation-ia-nantes",
     "/intelligence-artificielle-nantes",
     "/a-propos",
     "/contact",
     "/mentions-legales",
     "/confidentialite",
   ]
-  return paths.map((path) => ({ url: `${site.url}${path === "/" ? "/" : path}`, lastModified: "2026-10-13" }))
+  // Date de dernière modification réelle du contenu de chaque page (et non la date du build).
+  const updated: Record<string, string> = {
+    "/": "2026-10-20",
+    "/automatisation-ia-nantes": "2026-10-20",
+    "/intelligence-artificielle-nantes": "2026-10-20",
+  }
+  return paths.map((path) => ({
+    url: `${site.url}${path === "/" ? "/" : path}`,
+    lastModified: updated[path] ?? "2026-10-13",
+  }))
 }

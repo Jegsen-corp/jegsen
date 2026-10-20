@@ -1,7 +1,11 @@
 export const site = {
   name: "Jegsen IA",
-  url: "https://www.jegsen.fr",
-  title: "Jegsen IA | Intégration IA et automatisation pour PME à Nantes",
+  /**
+   * Adresse canonique unique du site : canoniques, sitemap, robots, Open Graph, données structurées.
+   * Le site est servi et indexé sur le domaine nu (jegsen.fr). La variante www doit rediriger (301) ici.
+   */
+  url: "https://jegsen.fr",
+  title: "Automatisation et intégration IA pour PME à Nantes | Jegsen IA",
   description:
     "Jegsen rend l'IA rentable pour les PME et ETI : diagnostic chiffré, automatisation intégrée à votre SI, formation des équipes et gains mesurés. Basé à Nantes.",
   email: "jegsencorp@gmail.com", // adresse temporaire, à remplacer par contact@jegsen.fr une fois le domaine en place
@@ -44,8 +48,15 @@ export const mainNav = [
   { href: "/ressources", label: "Ressources" },
 ]
 
+/** Fondateurs, repris dans les données structurées de l’organisation. */
+export const founders = [
+  { name: "Matéo Mesguen", jobTitle: "Co-fondateur, CEO" },
+  { name: "Tom Jegou", jobTitle: "Co-fondateur, CTO" },
+]
+
 export const companyNav = [
   { href: "/a-propos", label: "À propos" },
+  { href: "/automatisation-ia-nantes", label: "Automatisation IA à Nantes" },
   { href: "/intelligence-artificielle-nantes", label: "IA à Nantes" },
   { href: "/ressources", label: "Ressources" },
   { href: "/contact", label: "Contact" },

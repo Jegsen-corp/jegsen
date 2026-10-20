@@ -1,4 +1,4 @@
-import { site } from "@/lib/site"
+import { founders, site } from "@/lib/site"
 import type { FaqItem } from "@/lib/content/types"
 
 export function JsonLd({ data }: { data: object }) {
@@ -41,6 +41,7 @@ export const organizationLd = {
       "@type": "ProfessionalService",
       "@id": `${site.url}/#organisation`,
       name: site.name,
+      alternateName: "Jegsen",
       url: site.url,
       logo: `${site.url}/logo.png`,
       image: `${site.url}/opengraph-image.png`,
@@ -53,6 +54,7 @@ export const organizationLd = {
         addressRegion: site.region,
         addressCountry: "FR",
       },
+      founder: founders.map((f) => ({ "@type": "Person", name: f.name, jobTitle: f.jobTitle })),
       areaServed: [
         { "@type": "City", name: "Nantes" },
         { "@type": "AdministrativeArea", name: "Loire-Atlantique" },
