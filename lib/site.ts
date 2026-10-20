@@ -5,9 +5,9 @@ export const site = {
    * Le site est servi et indexé sur le domaine nu (jegsen.fr). La variante www doit rediriger (301) ici.
    */
   url: "https://jegsen.fr",
-  title: "Automatisation et intégration IA pour PME à Nantes | Jegsen IA",
+  title: "Automatisation et intégration IA pour PME à Nantes | Jegsen",
   description:
-    "Jegsen rend l'IA rentable pour les PME et ETI : diagnostic chiffré, automatisation intégrée à votre SI, formation des équipes et gains mesurés. Basé à Nantes.",
+    "Automatisation IA pour PME et ETI à Nantes : diagnostic chiffré, intégration à votre SI, formation des équipes et gains mesurés.",
   email: "jegsencorp@gmail.com", // adresse temporaire, à remplacer par contact@jegsen.fr une fois le domaine en place
   city: "Nantes",
   postalCode: "44000",
