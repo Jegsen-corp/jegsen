@@ -49,6 +49,14 @@ export default function ContactPage() {
             >
               <ArrowIcon /> {site.email}
             </a>
+            <a
+              href={site.linkedin}
+              target="_blank"
+              rel="noopener"
+              className="group inline-flex items-center gap-2 text-[15px] font-semibold text-ink hover:[&_svg]:translate-x-1"
+            >
+              <ArrowIcon /> Jegsen sur LinkedIn
+            </a>
           </Reveal>
         </div>
         <SiteCard still className="self-start">

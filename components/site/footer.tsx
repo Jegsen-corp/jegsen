@@ -60,6 +60,11 @@ export function Footer() {
                 {site.email}
               </a>
             </li>
+            <li>
+              <a href={site.linkedin} className={linkClass} target="_blank" rel="noopener">
+                LinkedIn
+              </a>
+            </li>
             <li className="text-sm text-ink-3">
               {site.city}, {site.region}
             </li>

@@ -9,6 +9,8 @@ export const site = {
   description:
     "Automatisation IA pour PME et ETI à Nantes : diagnostic chiffré, intégration à votre SI, formation des équipes et gains mesurés.",
   email: "jegsencorp@gmail.com", // adresse temporaire, à remplacer par contact@jegsen.fr une fois le domaine en place
+  /** Page entreprise LinkedIn : pied de page, page contact et données structurées (sameAs). */
+  linkedin: "https://www.linkedin.com/company/jegsen",
   city: "Nantes",
   postalCode: "44000",
   region: "Pays de la Loire",

@@ -55,6 +55,7 @@ export const organizationLd = {
         addressRegion: site.region,
         addressCountry: "FR",
       },
+      sameAs: [site.linkedin],
       founder: founders.map((f) => ({ "@type": "Person", name: f.name, jobTitle: f.jobTitle })),
       areaServed: [
         { "@type": "City", name: "Nantes" },
