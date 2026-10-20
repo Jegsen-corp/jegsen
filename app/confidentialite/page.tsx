@@ -28,10 +28,10 @@ export default function PrivacyPage() {
         <h2>Données collectées</h2>
         <p>
           Par le formulaire de contact : nom et prénom, entreprise, adresse e-mail, téléphone (facultatif), effectif de
-          l’entreprise, sujet et contenu de votre message.
+          l'entreprise, sujet et contenu de votre message.
         </p>
         <p>
-          Le site ne dépose aucun cookie publicitaire ni traceur de mesure d’audience. Les polices de caractères sont
+          Le site ne dépose aucun cookie publicitaire ni traceur de mesure d'audience. Les polices de caractères sont
           hébergées avec le site, sans appel à un service tiers. Comme tout serveur web, celui qui héberge le site peut
           enregistrer des journaux techniques (adresse IP, date, page demandée) pour assurer sa sécurité et son bon
           fonctionnement.
@@ -41,14 +41,14 @@ export default function PrivacyPage() {
         <p>
           Vos données servent à répondre à votre demande et, si vous le souhaitez, à préparer une proposition
           commerciale. Ce traitement repose sur les mesures précontractuelles prises à votre demande (article 6.1.b du
-          RGPD). Elles ne sont ni vendues, ni louées, ni utilisées pour entraîner des modèles d’intelligence
+          RGPD). Elles ne sont ni vendues, ni louées, ni utilisées pour entraîner des modèles d'intelligence
           artificielle.
         </p>
 
         <h2>Destinataires</h2>
         <p>
           Vos données sont lues uniquement par les personnes de {legal.company} chargées de traiter votre demande. Pour
-          l’acheminer, nous faisons appel à deux prestataires techniques :
+          l'acheminer, nous faisons appel à deux prestataires techniques :
         </p>
         <ul>
           <li>
@@ -59,21 +59,21 @@ export default function PrivacyPage() {
           </li>
         </ul>
         <p>
-          Ces prestataires peuvent traiter les données en dehors de l’Union européenne. Si vous préférez éviter ce
-          circuit, écrivez-nous directement à l’adresse ci-dessus.
+          Ces prestataires peuvent traiter les données en dehors de l'Union européenne. Si vous préférez éviter ce
+          circuit, écrivez-nous directement à l'adresse ci-dessus.
         </p>
 
         <h2>Durée de conservation</h2>
         <p>
-          Trois ans à compter de notre dernier échange, si aucune relation commerciale ne s’engage. Si vous devenez
+          Trois ans à compter de notre dernier échange, si aucune relation commerciale ne s'engage. Si vous devenez
           client, vos données sont conservées pendant la durée de la relation, puis pendant les délais imposés par la
           loi, notamment en matière comptable.
         </p>
 
         <h2>Vos droits</h2>
         <p>
-          Vous disposez d’un droit d’accès, de rectification, d’effacement, de limitation, d’opposition et de
-          portabilité. Pour les exercer, écrivez à {mail}. Nous répondons dans un délai d’un mois. Vous pouvez aussi
+          Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation, d'opposition et de
+          portabilité. Pour les exercer, écrivez à {mail}. Nous répondons dans un délai d'un mois. Vous pouvez aussi
           introduire une réclamation auprès de la CNIL (<a href="https://www.cnil.fr">cnil.fr</a>).
         </p>
       </div>

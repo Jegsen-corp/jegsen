@@ -11,7 +11,7 @@ type RevealProps = HTMLMotionProps<"div"> & {
   as?: "div" | "section" | "article" | "ul" | "dl" | "p" | "span" | "h1" | "header"
 }
 
-/** Apparition au défilement, une seule fois, comme `data-reveal` sur le site d’origine. */
+/** Apparition au défilement, une seule fois, comme `data-reveal` sur le site d'origine. */
 export function Reveal({
   delay = 0,
   variant = "up",

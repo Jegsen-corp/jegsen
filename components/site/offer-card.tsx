@@ -29,7 +29,7 @@ export function Tag({ children, tone = "neutral" }: { children: React.ReactNode;
   )
 }
 
-/** Carte d’offre complète (accueil). */
+/** Carte d'offre complète (accueil). */
 export function OfferCard({ offer, delay }: { offer: OfferSummary; delay?: number }) {
   return (
     <SiteCard as="article" delay={delay} className={cn("flex min-h-full flex-col", offer.featured && "border-gradient border-[1.5px] border-transparent hover:border-transparent")}>
@@ -58,7 +58,7 @@ export function OfferCard({ offer, delay }: { offer: OfferSummary; delay?: numbe
   )
 }
 
-/** Carte d’offre compacte (pages offres, IA à Nantes). */
+/** Carte d'offre compacte (pages offres, IA à Nantes). */
 export function OfferCardCompact({ offer, delay, fromLabel = "dès" }: { offer: OfferSummary; delay?: number; fromLabel?: string }) {
   return (
     <SiteCard as="article" delay={delay} className="flex min-h-full flex-col">

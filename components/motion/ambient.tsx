@@ -44,7 +44,7 @@ export function Float({ delay = 0, className, children, ...props }: HTMLMotionPr
   )
 }
 
-/** Dégradé tournant derrière les blocs d’appel à l’action. */
+/** Dégradé tournant derrière les blocs d'appel à l'action. */
 export function SpinGlow() {
   const reduce = useReducedMotion()
   return (

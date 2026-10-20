@@ -14,7 +14,7 @@ export function articleMetadata(slug: string) {
   return pageMeta({ title: a.metaTitle, description: a.description, path: articleHref(slug) })
 }
 
-/** Carte d’article (liste des ressources et « À lire aussi »). */
+/** Carte d'article (liste des ressources et « À lire aussi »). */
 export function ArticleCard({ slug, compact }: { slug: string; compact?: boolean }) {
   const a = getArticle(slug)
   return (
@@ -99,10 +99,10 @@ export function ResourcesIntro() {
         <Eyebrow>Ressources</Eyebrow>
       </Reveal>
       <Reveal as="h1" className="max-w-[18ch] text-[clamp(2.4rem,5.4vw,4.4rem)]">
-        Comprendre avant d’automatiser.
+        Comprendre avant d'automatiser.
       </Reveal>
       <Reveal as="p" className="lead">
-        Des articles courts, sourcés et datés sur l’IA en entreprise.
+        Des articles courts, sourcés et datés sur l'IA en entreprise.
       </Reveal>
     </>
   )

@@ -11,7 +11,7 @@ export function Marquee({ items, label }: { items: string[]; label: string }) {
   const paused = useRef(false)
   const reduce = useReducedMotion()
 
-  // 48 s pour parcourir une demi-piste, comme l’original.
+  // 48 s pour parcourir une demi-piste, comme l'original.
   useAnimationFrame((_, delta) => {
     const track = trackRef.current
     if (!track || paused.current || reduce) return

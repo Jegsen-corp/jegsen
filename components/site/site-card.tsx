@@ -7,7 +7,7 @@ import { EASE } from "@/components/motion/reveal"
 import { cn } from "@/lib/utils"
 
 type SiteCardProps = ComponentProps<typeof Card> & {
-  /** Délai d’apparition au défilement (s). */
+  /** Délai d'apparition au défilement (s). */
   delay?: number
   /** Désactive le soulèvement au survol. */
   still?: boolean

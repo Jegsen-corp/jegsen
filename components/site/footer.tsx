@@ -23,7 +23,7 @@ export function Footer() {
           <div>
             <Logo />
             <p className="mt-4 max-w-[34ch] text-sm text-ink-3">
-              L’IA comme levier de rentabilité pour les PME et ETI françaises. Formation, conseil et automatisation des
+              L'IA comme levier de rentabilité pour les PME et ETI françaises. Formation, conseil et automatisation des
               processus, depuis {site.city}.
             </p>
           </div>
@@ -36,7 +36,7 @@ export function Footer() {
               </li>
             ))}
           </Column>
-          <Column title="Cas d’usage">
+          <Column title="Cas d'usage">
             {useCases.map((c) => (
               <li key={c.slug}>
                 <Link href={caseHref(c.slug)} className={linkClass}>

@@ -27,24 +27,24 @@ const tasks = [
   "Bons de livraison",
   "Comptes rendus de réunion",
   "Qualification des demandes",
-  "Saisie dans l’ERP",
+  "Saisie dans l'ERP",
   "Rapprochements comptables",
-  "Rapports d’intervention",
-  "Réponses aux appels d’offres",
+  "Rapports d'intervention",
+  "Réponses aux appels d'offres",
   "Suivi des commandes",
 ]
 
 const stats = [
-  { value: 18, text: "des entreprises de 10 salariés ou plus utilisent au moins une technologie d’IA en 2025." },
+  { value: 18, text: "des entreprises de 10 salariés ou plus utilisent au moins une technologie d'IA en 2025." },
   { value: 15, text: "seulement parmi celles de 10 à 49 salariés, contre 58 % au-delà de 250 salariés." },
-  { value: 53, text: "des entreprises qui utilisent l’IA disent être freinées par un manque d’expertise." },
-  { value: 73, text: "de ces utilisatrices s’en servent pour optimiser leurs coûts : temps, tâches répétitives." },
+  { value: 53, text: "des entreprises qui utilisent l'IA disent être freinées par un manque d'expertise." },
+  { value: 73, text: "de ces utilisatrices s'en servent pour optimiser leurs coûts : temps, tâches répétitives." },
 ]
 
 const method = [
   {
     title: "Identifier",
-    text: "Nous analysons vos processus, vos volumes et vos coûts pour repérer ceux dont l’automatisation est réellement rentable.",
+    text: "Nous analysons vos processus, vos volumes et vos coûts pour repérer ceux dont l'automatisation est réellement rentable.",
   },
   {
     title: "Intégrer",
@@ -52,7 +52,7 @@ const method = [
   },
   {
     title: "Former",
-    text: "Nous formons vos équipes par métier et posons des règles d’utilisation claires pour que les gains se matérialisent.",
+    text: "Nous formons vos équipes par métier et posons des règles d'utilisation claires pour que les gains se matérialisent.",
   },
   {
     title: "Mesurer",
@@ -62,7 +62,7 @@ const method = [
 
 const benefits = [
   { title: "Moins de saisie", text: "Les données arrivent déjà structurées dans vos outils." },
-  { title: "Moins d’erreurs", text: "Chaque document est contrôlé selon vos règles métier." },
+  { title: "Moins d'erreurs", text: "Chaque document est contrôlé selon vos règles métier." },
   { title: "Des délais plus courts", text: "Les dossiers avancent sans attendre une ressaisie." },
 ]
 
@@ -70,45 +70,45 @@ const commitments = [
   {
     icon: icons.euro,
     title: "Le ROI avant la technique",
-    text: "Chaque projet part d’un chiffrage : gain attendu, coût, hypothèses. Si l’IA n’est pas rentable sur un processus, nous vous le disons.",
+    text: "Chaque projet part d'un chiffrage : gain attendu, coût, hypothèses. Si l'IA n'est pas rentable sur un processus, nous vous le disons.",
   },
   {
     icon: icons.plug,
     title: "Intégré à votre SI",
-    text: "Nous nous branchons sur votre messagerie, votre GED et vos logiciels métiers. Vos équipes ne changent pas d’outil.",
+    text: "Nous nous branchons sur votre messagerie, votre GED et vos logiciels métiers. Vos équipes ne changent pas d'outil.",
   },
   {
     icon: icons.people,
-    title: "L’humain garde la main",
+    title: "L'humain garde la main",
     text: "Contrôles de cohérence automatiques, exceptions transmises à une personne, traçabilité de chaque action.",
   },
   {
     icon: icons.shield,
     title: "Sécurité et RGPD dès la conception",
-    text: "Choix des modèles et de l’hébergement selon la sensibilité de vos données, droits d’accès, journalisation.",
+    text: "Choix des modèles et de l'hébergement selon la sensibilité de vos données, droits d'accès, journalisation.",
   },
 ]
 
 const faq = [
   {
     q: "Par quoi commencer ?",
-    a: "Par le diagnostic de rentabilité : une à deux semaines pour identifier trois à cinq cas d’usage chiffrés. Si vous avez déjà un processus précis en tête, nous pouvons démarrer directement par un sprint d’intégration.",
+    a: "Par le diagnostic de rentabilité : une à deux semaines pour identifier trois à cinq cas d'usage chiffrés. Si vous avez déjà un processus précis en tête, nous pouvons démarrer directement par un sprint d'intégration.",
   },
   {
-    q: "Quelle taille d’entreprise accompagnez-vous ?",
+    q: "Quelle taille d'entreprise accompagnez-vous ?",
     a: "Les PME et ETI, quel que soit le secteur. Les cas les plus rentables se trouvent souvent là où des documents et des e-mails sont traités à la main en volume : transport, distribution, maintenance, services, industrie.",
   },
   {
     q: "Combien de temps avant de voir des résultats ?",
-    a: "Un sprint d’intégration met un processus en production en deux à six semaines. La mesure des gains commence dès la mise en production, par comparaison avec les indicateurs relevés au cadrage.",
+    a: "Un sprint d'intégration met un processus en production en deux à six semaines. La mesure des gains commence dès la mise en production, par comparaison avec les indicateurs relevés au cadrage.",
   },
   {
     q: "Nos données sont-elles en sécurité ?",
-    a: "Le choix des modèles, de l’hébergement et des accès fait partie du cadrage, en fonction de la sensibilité des données et de vos obligations (RGPD, secret professionnel, engagements contractuels).",
+    a: "Le choix des modèles, de l'hébergement et des accès fait partie du cadrage, en fonction de la sensibilité des données et de vos obligations (RGPD, secret professionnel, engagements contractuels).",
   },
   {
-    q: "Qu’est-ce qu’un workflow agentique ?",
-    a: "Un enchaînement d’étapes confié à un agent IA : comprendre une demande, chercher l’information, agir dans vos logiciels, puis rendre la main à une personne quand une décision l’exige. Nous le réservons aux processus où les demandes sont trop variées pour une automatisation classique.",
+    q: "Qu'est-ce qu'un workflow agentique ?",
+    a: "Un enchaînement d'étapes confié à un agent IA : comprendre une demande, chercher l'information, agir dans vos logiciels, puis rendre la main à une personne quand une décision l'exige. Nous le réservons aux processus où les demandes sont trop variées pour une automatisation classique.",
   },
   {
     q: "Intervenez-vous hors de Nantes ?",
@@ -136,7 +136,7 @@ export default function HomePage() {
               <span title="Coordonnées de Nantes">47°13′ N · 1°33′ O</span>
             </Reveal>
             <SplitWords
-              text="L’IA qui fait gagner du temps à vos équipes."
+              text="L'IA qui fait gagner du temps à vos équipes."
               className="mb-6 text-[clamp(2.6rem,5.2vw,4.6rem)]"
             />
             <Reveal as="p" delay={0.35} className="lead mb-[34px]">
@@ -145,7 +145,7 @@ export default function HomePage() {
                 les processus les plus rentables à automatiser
               </Link>
               , à les
-              intégrer dans leur système d’information, à former leurs équipes et à{" "}
+              intégrer dans leur système d'information, à former leurs équipes et à{" "}
               <strong className="text-ink">mesurer les gains obtenus</strong>.
             </Reveal>
             <Reveal delay={0.5}>
@@ -180,8 +180,8 @@ export default function HomePage() {
         <div className="container-site">
           <SectionHead
             eyebrow="Le constat"
-            title="L’IA progresse vite. Les PME restent à la traîne."
-            lead="L’usage de l’IA a triplé en deux ans dans les entreprises françaises, mais l’écart se creuse selon la taille. Le principal frein n’est pas la technologie : c’est l’expertise pour la mettre en œuvre."
+            title="L'IA progresse vite. Les PME restent à la traîne."
+            lead="L'usage de l'IA a triplé en deux ans dans les entreprises françaises, mais l'écart se creuse selon la taille. Le principal frein n'est pas la technologie : c'est l'expertise pour la mettre en œuvre."
           />
           <Reveal className="grid overflow-hidden rounded-[22px] border border-line bg-surface sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((s, i) => (
@@ -210,7 +210,7 @@ export default function HomePage() {
         <div className="container-site">
           <SectionHead
             eyebrow="Nos offres"
-            title="Trois façons de transformer l’IA en résultats."
+            title="Trois façons de transformer l'IA en résultats."
             lead="Commencez petit, mesurez, puis étendez ce qui fonctionne."
           />
           <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
@@ -220,26 +220,26 @@ export default function HomePage() {
           </div>
           <Reveal className="mt-8 flex justify-center">
             <LinkButton href="/cas-usage" variant="line" arrow>
-              Voir les cas d’usage
+              Voir les cas d'usage
             </LinkButton>
           </Reveal>
         </div>
       </section>
 
-      {/* Cerveau d’entreprise */}
+      {/* Cerveau d'entreprise */}
       <section className="section pt-0">
         <div className="container-site grid items-center gap-[clamp(32px,6vw,80px)] md:grid-cols-2">
           <Reveal>
-            <Eyebrow>Cerveau d’entreprise</Eyebrow>
+            <Eyebrow>Cerveau d'entreprise</Eyebrow>
             <h2>Vos données deviennent le cerveau de votre entreprise.</h2>
             <p className="lead">
               Procédures, contrats, fiches produits, historique des échanges : nous rassemblons ce savoir dispersé dans
-              un cerveau d’entreprise que vos équipes interrogent en langage courant, et sur lequel s’appuient toutes vos
+              un cerveau d'entreprise que vos équipes interrogent en langage courant, et sur lequel s'appuient toutes vos
               automatisations.
             </p>
             <ButtonRow className="mt-7">
               <LinkButton href="/cas-usage/cerveau-entreprise" arrow>
-                Découvrir le cerveau d’entreprise
+                Découvrir le cerveau d'entreprise
               </LinkButton>
             </ButtonRow>
           </Reveal>
@@ -275,7 +275,7 @@ export default function HomePage() {
         <div className="container-site relative">
           <SectionHead
             eyebrow="Notre produit · en développement"
-            title="L’automatisation documentaire, de bout en bout."
+            title="L'automatisation documentaire, de bout en bout."
             lead="Nous développons, à partir de projets réels, un outil qui récupère vos documents et e-mails, en extrait les données, vérifie leur cohérence, met à jour vos logiciels métiers et signale les exceptions à une personne. Un programme pilote est ouvert à quelques entreprises."
           />
           <Pipeline />
@@ -318,7 +318,7 @@ export default function HomePage() {
         <div className="container-site grid gap-[clamp(32px,6vw,80px)] md:grid-cols-2">
           <Reveal>
             <Eyebrow>Questions fréquentes</Eyebrow>
-            <h2>Ce que l’on nous demande le plus.</h2>
+            <h2>Ce que l'on nous demande le plus.</h2>
             <p className="lead">
               Une autre question ?{" "}
               <Link href="/contact" className="underline underline-offset-4">

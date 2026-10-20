@@ -6,7 +6,7 @@ export function getUseCase(slug: string) {
   return useCases.find((c) => c.slug === slug)
 }
 
-/** Processus métier (hors socle technique), dans l’ordre du site. */
+/** Processus métier (hors socle technique), dans l'ordre du site. */
 export const processCases = useCases.filter((c) => !c.technical)
 
 /** Les quatre premiers processus métier, hors cas courant. */

@@ -74,7 +74,7 @@ export function FaqSection({ title, items, eyebrow = "Questions" }: { title: str
   )
 }
 
-/** Liste de tous les cas d’usage détaillés. */
+/** Liste de tous les cas d'usage détaillés. */
 export function CaseLinks() {
   return (
     <Checklist

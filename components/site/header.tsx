@@ -90,7 +90,7 @@ export function Header() {
           showCloseButton={false}
           aria-describedby={undefined}
           onInteractOutside={(e) => {
-            // Le bouton burger gère lui-même l’ouverture et la fermeture.
+            // Le bouton burger gère lui-même l'ouverture et la fermeture.
             if ((e.target as Element | null)?.closest("header")) e.preventDefault()
           }}
           className="z-[55] gap-0 data-[side=top]:top-[72px] rounded-none border-b border-line bg-bg px-(--gutter) pt-3 pb-7 shadow-none xl:hidden"

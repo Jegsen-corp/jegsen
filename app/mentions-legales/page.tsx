@@ -83,7 +83,7 @@ export default function LegalNoticePage() {
           écrite préalable est interdite.
         </p>
         <p>
-          Les polices de caractères Inter et Inter Tight sont l’œuvre de Rasmus Andersson et sont utilisées sous licence
+          Les polices de caractères Inter et Inter Tight sont l'œuvre de Rasmus Andersson et sont utilisées sous licence
           SIL Open Font License 1.1.
         </p>
 
@@ -93,7 +93,7 @@ export default function LegalNoticePage() {
           juridique, fiscal ou comptable. Les prix indiqués sont des prix de départ hors taxes, précisés dans chaque devis.
         </p>
         <p>
-          Les liens vers des sites externes sont proposés pour faciliter la consultation de sources. {legal.company} n’est
+          Les liens vers des sites externes sont proposés pour faciliter la consultation de sources. {legal.company} n'est
           pas responsable de leur contenu.
         </p>
 

@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps<"/cas-usage/[slug]"
 }
 
 export default function UseCasePage({ params }: PageProps<"/cas-usage/[slug]">) {
-  // Le contenu dépend du paramètre d’URL : il est rendu sous Suspense pour garder une navigation instantanée.
+  // Le contenu dépend du paramètre d'URL : il est rendu sous Suspense pour garder une navigation instantanée.
   return (
     <Suspense fallback={<PageFallback />}>
       <UseCaseContent params={params} />
@@ -54,9 +54,9 @@ async function UseCaseContent({ params }: { params: PageProps<"/cas-usage/[slug]
           audience: { "@type": "BusinessAudience", name: c.audiences.join(", ") },
         }}
       />
-      <PageHero blobs={[1]} crumbs={[{ label: "Cas d’usage", href: "/cas-usage" }, { label: c.shortTitle }]}>
+      <PageHero blobs={[1]} crumbs={[{ label: "Cas d'usage", href: "/cas-usage" }, { label: c.shortTitle }]}>
         <Reveal>
-          <Eyebrow>{c.technical ? "Cas d’usage technique" : "Cas d’usage"}</Eyebrow>
+          <Eyebrow>{c.technical ? "Cas d'usage technique" : "Cas d'usage"}</Eyebrow>
         </Reveal>
         <Reveal as="h1" className="max-w-[20ch] text-[clamp(2.4rem,5.4vw,4.4rem)]">
           {c.title}
@@ -71,13 +71,13 @@ async function UseCaseContent({ params }: { params: PageProps<"/cas-usage/[slug]
               Étudier mon cas
             </LinkButton>
             <LinkButton href="/offres/sprint-integration-ia" variant="line">
-              Sprint d’intégration IA
+              Sprint d'intégration IA
             </LinkButton>
           </ButtonRow>
         </Reveal>
       </PageHero>
 
-      <SplitSection eyebrow="Aujourd’hui" title="Ce qui coûte du temps.">
+      <SplitSection eyebrow="Aujourd'hui" title="Ce qui coûte du temps.">
         <div className="prose-site">
           {c.today.map((p) => (
             <p key={p}>
@@ -112,7 +112,7 @@ async function UseCaseContent({ params }: { params: PageProps<"/cas-usage/[slug]
 
       <section className="section-tight">
         <div className="container-site">
-          <SectionHead eyebrow="Autres cas d’usage" title="Ce que nous automatisons aussi." />
+          <SectionHead eyebrow="Autres cas d'usage" title="Ce que nous automatisons aussi." />
           <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-4">
             {otherCases(slug).map((o) => (
               <SiteCard key={o.slug} as="article" className="p-[22px] py-[22px]">
@@ -129,7 +129,7 @@ async function UseCaseContent({ params }: { params: PageProps<"/cas-usage/[slug]
 
       <CtaBlock
         title="Ce processus vous coûte du temps ?"
-        lead="Un premier échange de 30 minutes pour estimer le gain sur vos volumes réels, et vous dire si l’automatisation est rentable."
+        lead="Un premier échange de 30 minutes pour estimer le gain sur vos volumes réels, et vous dire si l'automatisation est rentable."
       />
     </>
   )

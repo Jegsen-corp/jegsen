@@ -22,7 +22,7 @@ function Flow() {
   )
 }
 
-/** Sources → cerveau d’entreprise → usages. */
+/** Sources → cerveau d'entreprise → usages. */
 export function BrainDiagram() {
   return (
     <Reveal
@@ -38,7 +38,7 @@ export function BrainDiagram() {
       <Flow />
       <div className="inline-flex items-center gap-2.5 rounded-full bg-ink px-[22px] py-3.5 font-display font-semibold tracking-[-0.01em] text-bg shadow-[0_10px_34px_var(--glow)]">
         <LogoMark className="size-[22px] text-bg" />
-        Cerveau d’entreprise
+        Cerveau d'entreprise
       </div>
       <Flow />
       <div className="flex flex-wrap justify-center gap-2">

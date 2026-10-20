@@ -8,7 +8,7 @@ import { pageMeta } from "@/lib/metadata"
 import { team } from "@/lib/site"
 
 export const metadata: Metadata = pageMeta({
-  title: "À propos : notre mission, rendre l’IA rentable | Jegsen IA",
+  title: "À propos : notre mission, rendre l'IA rentable | Jegsen IA",
   description:
     "Notre mission : transformer l'IA en levier de rentabilité pour les PME et ETI françaises, par la formation, le conseil et l'automatisation. Basé à Nantes.",
   path: "/a-propos",
@@ -18,12 +18,12 @@ const values = [
   {
     icon: icons.chart,
     title: "Mesurer plutôt que promettre",
-    text: "Nous relevons vos indicateurs avant d’automatiser, puis après. Les gains annoncés sont ceux que vous constatez.",
+    text: "Nous relevons vos indicateurs avant d'automatiser, puis après. Les gains annoncés sont ceux que vous constatez.",
   },
   {
     icon: icons.people,
     title: "Accompagner les personnes",
-    text: "Une solution n’a de valeur que si les équipes l’adoptent. La formation fait partie du travail, pas d’une option.",
+    text: "Une solution n'a de valeur que si les équipes l'adoptent. La formation fait partie du travail, pas d'une option.",
   },
   {
     icon: icons.bolt,
@@ -40,20 +40,20 @@ export default function AboutPage() {
           <Eyebrow>À propos</Eyebrow>
         </Reveal>
         <Reveal as="h1" className="max-w-[18ch] text-[clamp(2.4rem,5.4vw,4.4rem)]">
-          Transformer l’IA en levier de rentabilité.
+          Transformer l'IA en levier de rentabilité.
         </Reveal>
         <Reveal as="p" className="lead">
-          Nous accompagnons les PME et ETI françaises dans leur adoption de l’IA, par la formation, le conseil et
-          l’automatisation de leurs processus métiers, avec un objectif : réduire les coûts, améliorer la productivité et
+          Nous accompagnons les PME et ETI françaises dans leur adoption de l'IA, par la formation, le conseil et
+          l'automatisation de leurs processus métiers, avec un objectif : réduire les coûts, améliorer la productivité et
           créer de la valeur mesurable.
         </Reveal>
       </PageHero>
 
-      <SplitSection eyebrow="Notre vision" title="Rendre l’IA concrètement utile, accessible et rentable.">
+      <SplitSection eyebrow="Notre vision" title="Rendre l'IA concrètement utile, accessible et rentable.">
         <div className="prose-site">
           <p>
-            Notre conviction : chaque entreprise possède déjà, dans ses documents et ses données, la matière d’un
-            véritable cerveau d’entreprise. Notre travail consiste à l’organiser et à le brancher sur les processus qui
+            Notre conviction : chaque entreprise possède déjà, dans ses documents et ses données, la matière d'un
+            véritable cerveau d'entreprise. Notre travail consiste à l'organiser et à le brancher sur les processus qui
             comptent.
           </p>
           <p>
@@ -68,7 +68,7 @@ export default function AboutPage() {
       {team.length > 0 && (
         <section className="section">
           <div className="container-site">
-            <Eyebrow>L’équipe</Eyebrow>
+            <Eyebrow>L'équipe</Eyebrow>
             <h2 className="mb-8">Les personnes derrière Jegsen.</h2>
             <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
               {team.map((m, i) => (

@@ -9,7 +9,7 @@ import { EASE } from "./reveal"
 /** Étapes numérotées, rail qui se remplit au défilement. */
 export function Steps({ steps }: { steps: Step[] }) {
   const ref = useRef<HTMLDivElement>(null)
-  // Progression : 0 quand le haut de la liste atteint 60 % de l’écran, 1 quand le bas l’atteint.
+  // Progression : 0 quand le haut de la liste atteint 60 % de l'écran, 1 quand le bas l'atteint.
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start 0.6", "end 0.6"] })
   const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1])
 

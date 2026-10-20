@@ -13,17 +13,17 @@ export const site = {
   postalCode: "44000",
   region: "Pays de la Loire",
   /**
-   * Envoi du formulaire : FormSubmit (formsubmit.co) relaie le message par e-mail vers l’adresse ci-dessus.
-   * Le premier envoi déclenche un e-mail d’activation à confirmer dans la boîte de réception.
+   * Envoi du formulaire : FormSubmit (formsubmit.co) relaie le message par e-mail vers l'adresse ci-dessus.
+   * Le premier envoi déclenche un e-mail d'activation à confirmer dans la boîte de réception.
    * Vide : ouverture de la messagerie du visiteur.
    */
   formEndpoint: "https://formsubmit.co/ajax/jegsencorp@gmail.com",
 }
 
 /**
- * Identité légale de l’éditeur (mentions légales, politique de confidentialité).
- * Les champs vides ne s’affichent pas, mais les champs marqués « obligatoire » doivent être remplis
- * (loi n° 2004-575 du 21 juin 2004, article 6 III) : le build les signale tant qu’ils manquent.
+ * Identité légale de l'éditeur (mentions légales, politique de confidentialité).
+ * Les champs vides ne s'affichent pas, mais les champs marqués « obligatoire » doivent être remplis
+ * (loi n° 2004-575 du 21 juin 2004, article 6 III) : le build les signale tant qu'ils manquent.
  */
 export const legal = {
   company: "Jegsen", // dénomination, obligatoire
@@ -44,11 +44,11 @@ export const mainNav = [
   { href: "/offres/diagnostic-rentabilite-ia", label: "Diagnostic" },
   { href: "/offres/sprint-integration-ia", label: "Intégration" },
   { href: "/offres/programme-formation-ia", label: "Formation" },
-  { href: "/cas-usage", label: "Cas d’usage" },
+  { href: "/cas-usage", label: "Cas d'usage" },
   { href: "/ressources", label: "Ressources" },
 ]
 
-/** Fondateurs, repris dans les données structurées de l’organisation. */
+/** Fondateurs, repris dans les données structurées de l'organisation. */
 export const founders = [
   { name: "Matéo Mesguen", jobTitle: "Co-fondateur, CEO" },
   { name: "Tom Jegou", jobTitle: "Co-fondateur, CTO" },

@@ -5,7 +5,7 @@ export function JsonLd({ data }: { data: object }) {
   return (
     <script
       type="application/ld+json"
-      // Le contenu est statique et contrôlé : pas de risque d’injection.
+      // Le contenu est statique et contrôlé : pas de risque d'injection.
       dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }}
     />
   )
@@ -66,16 +66,16 @@ export const organizationLd = {
         "Workflows agentiques",
         "Agents IA",
         "Extraction de données de documents",
-        "Formation à l’IA en entreprise",
-        "Intégration de systèmes d’information",
-        "Cerveau d’entreprise et bases de connaissances",
+        "Formation à l'IA en entreprise",
+        "Intégration de systèmes d'information",
+        "Cerveau d'entreprise et bases de connaissances",
       ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
         name: "Prestations IA pour PME et ETI",
         itemListElement: [
           ["diagnostic-rentabilite-ia", "Diagnostic de rentabilité IA", 1500, 3500],
-          ["sprint-integration-ia", "Sprint d’intégration IA", 5000, 15000],
+          ["sprint-integration-ia", "Sprint d'intégration IA", 5000, 15000],
           ["programme-formation-ia", "Programme IA et adoption", 2000, 6000],
         ].map(([slug, name, minPrice, maxPrice]) => ({
           "@type": "Offer",

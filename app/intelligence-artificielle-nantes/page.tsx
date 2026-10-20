@@ -27,11 +27,11 @@ const faq = [
   },
   {
     q: "Faut-il un service informatique en interne ?",
-    a: "Non. Nous travaillons avec votre prestataire informatique s’il y en a un, ou directement avec vous. Nous avons besoin d’accès aux outils concernés, pas d’une équipe technique.",
+    a: "Non. Nous travaillons avec votre prestataire informatique s'il y en a un, ou directement avec vous. Nous avons besoin d'accès aux outils concernés, pas d'une équipe technique.",
   },
   {
     q: "Par quoi commencer ?",
-    a: "Par un échange de 30 minutes sur un processus précis. S’il se prête à l’automatisation, nous proposons un diagnostic chiffré ou, si le besoin est déjà clair, un sprint d’intégration.",
+    a: "Par un échange de 30 minutes sur un processus précis. S'il se prête à l'automatisation, nous proposons un diagnostic chiffré ou, si le besoin est déjà clair, un sprint d'intégration.",
   },
 ]
 
@@ -46,7 +46,7 @@ export default function NantesPage() {
           <span>Loire-Atlantique · Pays de la Loire</span>
         </Reveal>
         <Reveal as="h1" className="max-w-[20ch] text-[clamp(2.4rem,5.4vw,4.4rem)]">
-          Intégration et formation à l’IA pour les entreprises nantaises.
+          Intégration et formation à l'IA pour les entreprises nantaises.
         </Reveal>
         <Reveal as="p" className="lead">
           Jegsen est basé à Nantes. Nous aidons les PME et ETI de Loire-Atlantique et des Pays de la Loire à identifier
@@ -64,20 +64,20 @@ export default function NantesPage() {
 
       <SplitSection
         eyebrow="Pourquoi un partenaire local"
-        title="L’IA se déploie auprès des équipes, pas seulement dans les outils."
+        title="L'IA se déploie auprès des équipes, pas seulement dans les outils."
       >
         <div className="prose-site">
           <p>
-            Un projet d’automatisation réussit quand il part du travail réel : observer comment une facture est traitée,
+            Un projet d'automatisation réussit quand il part du travail réel : observer comment une facture est traitée,
             comment une demande est triée, où se perdent les minutes. Ce travail se fait mieux dans vos locaux, avec les
             personnes concernées.
           </p>
           <p>
             Même logique pour la formation : des ateliers en présentiel, sur les tâches de chaque métier, ancrent les
-            nouveaux usages bien plus sûrement qu’un module en ligne générique.
+            nouveaux usages bien plus sûrement qu'un module en ligne générique.
           </p>
           <p>
-            Être à Nantes nous permet d’être présents au lancement, pendant les ateliers et lors de la mise en
+            Être à Nantes nous permet d'être présents au lancement, pendant les ateliers et lors de la mise en
             production, sans frais de déplacement disproportionnés pour un projet de PME.
           </p>
         </div>
@@ -103,7 +103,7 @@ export default function NantesPage() {
         <p className="mt-6 text-ink-2">
           Méthode, contrôles et budget :{" "}
           <Link href="/automatisation-ia-nantes" className="underline underline-offset-3">
-            notre offre d’automatisation IA à Nantes
+            notre offre d'automatisation IA à Nantes
           </Link>
           .
         </p>

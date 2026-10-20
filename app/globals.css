@@ -289,7 +289,7 @@
     opacity: 1;
   }
 
-  /* Bordure dégradée de l’offre mise en avant */
+  /* Bordure dégradée de l'offre mise en avant */
   .border-gradient {
     border: 1.5px solid transparent;
     background:
@@ -397,7 +397,7 @@
     padding-top: 0.05em;
   }
 
-  /* Bloc d’appel à l’action, fond animé */
+  /* Bloc d'appel à l'action, fond animé */
   .cta-glow {
     position: absolute;
     inset: auto -20% -60%;

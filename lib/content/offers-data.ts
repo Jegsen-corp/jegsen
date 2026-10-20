@@ -1,4 +1,4 @@
-// Contenu extrait du site d’origine. Les chaînes acceptent **gras** et [liens](/chemin).
+// Contenu extrait du site d'origine. Les chaînes acceptent **gras** et [liens](/chemin).
 import type { OfferDetail } from "./types"
 
 export const offerDetails: OfferDetail[] = [
@@ -29,7 +29,7 @@ export const offerDetails: OfferDetail[] = [
       "Vous avez des équipes qui ressaisissent, trient, contrôlent ou reformulent toute la journée.",
       "Vous voulez un chiffrage avant d'engager un budget de développement.",
     ],
-    stepsLead: "1 à 2 semaines, avec des points d’étape réguliers et des décisions prises sur la base de vos chiffres.",
+    stepsLead: "1 à 2 semaines, avec des points d'étape réguliers et des décisions prises sur la base de vos chiffres.",
     steps: [
       {
         title: "Cartographie",
@@ -60,7 +60,7 @@ export const offerDetails: OfferDetail[] = [
     showCases: true,
     faq: [
       {
-        q: "Que se passe-t-il si aucun cas d’usage n’est rentable ?",
+        q: "Que se passe-t-il si aucun cas d'usage n'est rentable ?",
         a: "Nous vous le disons. Un diagnostic qui conclut qu'il ne faut pas investir maintenant vous évite une dépense inutile. C'est un résultat aussi utile qu'une feuille de route.",
       },
       {
@@ -78,7 +78,7 @@ export const offerDetails: OfferDetail[] = [
     metaTitle: "Intégration IA et automatisation des processus | Jegsen IA",
     metaDescription: "Un processus automatisé par l'IA mis en production en 2 à 6 semaines : documents, e-mails, comptes rendus, demandes. Intégré à votre SI, gains mesurés.",
     kicker: "Automatisez un processus",
-    title: "Sprint d’intégration IA",
+    title: "Sprint d'intégration IA",
     crumb: "Intégration IA",
     lead: "Nous prenons un processus précis et nous le mettons en production, branché sur vos outils, avec des gains mesurés.",
     facts: [
@@ -97,7 +97,7 @@ export const offerDetails: OfferDetail[] = [
     ],
     forWho: [
       "Un processus répétitif mobilise vos équipes et ralentit vos délais.",
-      "Vous avez identifié un cas d’usage (avec ou sans diagnostic préalable).",
+      "Vous avez identifié un cas d'usage (avec ou sans diagnostic préalable).",
       "Vous voulez une solution en production, pas une démonstration.",
     ],
     examples: [
@@ -121,7 +121,7 @@ export const offerDetails: OfferDetail[] = [
       },
       {
         title: "Comptes rendus",
-        text: "Réunions, visites, interventions : un compte rendu structuré à partir de notes ou d’enregistrements.",
+        text: "Réunions, visites, interventions : un compte rendu structuré à partir de notes ou d'enregistrements.",
         icon: [
           {
             d: "M13 3L5 13.5h6L10 21l8-10.5h-6L13 3z",
@@ -148,7 +148,7 @@ export const offerDetails: OfferDetail[] = [
       },
       {
         title: "Workflows agentiques",
-        text: "Des agents IA qui enchaînent les étapes d’un processus dans vos outils, avec validation humaine des actions sensibles.",
+        text: "Des agents IA qui enchaînent les étapes d'un processus dans vos outils, avec validation humaine des actions sensibles.",
         icon: [
           {
             d: "M13 3L5 13.5h6L10 21l8-10.5h-6L13 3z",
@@ -156,7 +156,7 @@ export const offerDetails: OfferDetail[] = [
         ],
       },
       {
-        title: "Cerveau d’entreprise",
+        title: "Cerveau d'entreprise",
         text: "Vos documents et procédures rassemblés dans une base de connaissances interrogeable, qui cite ses sources.",
         icon: [
           {
@@ -165,7 +165,7 @@ export const offerDetails: OfferDetail[] = [
         ],
       },
     ],
-    stepsLead: "2 à 6 semaines, avec des points d’étape réguliers et des décisions prises sur la base de vos chiffres.",
+    stepsLead: "2 à 6 semaines, avec des points d'étape réguliers et des décisions prises sur la base de vos chiffres.",
     steps: [
       {
         title: "Cadrage",
@@ -232,10 +232,10 @@ export const offerDetails: OfferDetail[] = [
     ],
     forWho: [
       "Vos salariés utilisent déjà des outils d'IA, sans règles communes.",
-      "Vous avez déployé une solution et voulez qu’elle soit réellement adoptée.",
+      "Vous avez déployé une solution et voulez qu'elle soit réellement adoptée.",
       "Vous devez organiser la maîtrise de l'IA de vos équipes (article 4 du règlement européen sur l'IA).",
     ],
-    stepsLead: "1 à 3 semaines, avec des points d’étape réguliers et des décisions prises sur la base de vos chiffres.",
+    stepsLead: "1 à 3 semaines, avec des points d'étape réguliers et des décisions prises sur la base de vos chiffres.",
     steps: [
       {
         title: "État des lieux",

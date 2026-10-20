@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps<"/offres/[slug]">):
 }
 
 export default function OfferPage({ params }: PageProps<"/offres/[slug]">) {
-  // Le contenu dépend du paramètre d’URL : il est rendu sous Suspense pour garder une navigation instantanée.
+  // Le contenu dépend du paramètre d'URL : il est rendu sous Suspense pour garder une navigation instantanée.
   return (
     <Suspense fallback={<PageFallback />}>
       <OfferContent params={params} />
@@ -104,7 +104,7 @@ async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["p
       </SplitSection>
 
       {offer.showCases && (
-        <SplitSection eyebrow="Cas d’usage" title="Des exemples détaillés.">
+        <SplitSection eyebrow="Cas d'usage" title="Des exemples détaillés.">
           <CaseLinks />
         </SplitSection>
       )}

@@ -11,8 +11,8 @@ function subscribe(onChange: () => void) {
 }
 
 /**
- * Préférence « réduire les animations », sans écart d’hydratation :
- * `false` au rendu serveur et à l’hydratation, valeur réelle ensuite.
+ * Préférence « réduire les animations », sans écart d'hydratation :
+ * `false` au rendu serveur et à l'hydratation, valeur réelle ensuite.
  */
 export function useReducedMotion() {
   return useSyncExternalStore(

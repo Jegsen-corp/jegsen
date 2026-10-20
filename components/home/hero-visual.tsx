@@ -27,7 +27,7 @@ const mix = (a: RGB, b: RGB, t: number): RGB => [
 ]
 const easeInOutCubic = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
 const easeInOutSine = (t: number) => -(Math.cos(Math.PI * t) - 1) / 2
-/** Approche exponentielle, indépendante du nombre d’images par seconde. */
+/** Approche exponentielle, indépendante du nombre d'images par seconde. */
 const damp = (from: number, to: number, k: number, dt: number) => from + (to - from) * (1 - Math.exp(-k * dt))
 
 function radialSprite(stops: [number, string][], size: number) {
@@ -133,7 +133,7 @@ function startAnimation(container: HTMLDivElement, canvas: HTMLCanvasElement, di
   let tiltY = 0
   let targetTiltX = 0
   let targetTiltY = 0
-  let fillTarget = 0 // part de l’horloge à remplir
+  let fillTarget = 0 // part de l'horloge à remplir
   let fill = 0
   let handAngle = 0
   let pulse = 0
@@ -347,7 +347,7 @@ function startAnimation(container: HTMLDivElement, canvas: HTMLCanvasElement, di
     ctx.clearRect(0, 0, width, height)
     layout()
 
-    // Remplissage de l’horloge, puis retour à zéro en tournant les aiguilles à l’envers
+    // Remplissage de l'horloge, puis retour à zéro en tournant les aiguilles à l'envers
     if (resetProgress < 0) {
       fill = damp(fill, fillTarget, 3.2, dt)
       handAngle += dt * 0.3
@@ -384,7 +384,7 @@ function startAnimation(container: HTMLDivElement, canvas: HTMLCanvasElement, di
       return tmp
     }
 
-    // Chemin pointillé entre le réseau et l’horloge
+    // Chemin pointillé entre le réseau et l'horloge
     ctx.save()
     ctx.setLineDash([2, 8])
     ctx.lineWidth = 1
@@ -511,7 +511,7 @@ function startAnimation(container: HTMLDivElement, canvas: HTMLCanvasElement, di
     const elapsed = now - lastTime
     const dt = Math.min(0.05, elapsed / 1000)
     lastTime = now
-    // Baisse la résolution si l’appareil peine à suivre
+    // Baisse la résolution si l'appareil peine à suivre
     const ratio = window.devicePixelRatio || 1
     if (dprLevel < DPR_CAPS.length - 1 && Math.min(ratio, DPR_CAPS[dprLevel + 1]) < dpr) {
       frames++
@@ -625,7 +625,7 @@ function Label({ tone, title, text, className, delay }: { tone: "ai" | "time"; t
   )
 }
 
-/** Réseau neuronal (l’IA) qui alimente une horloge dont l’arc de temps gagné se remplit. */
+/** Réseau neuronal (l'IA) qui alimente une horloge dont l'arc de temps gagné se remplit. */
 export function HeroVisual() {
   const containerRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)

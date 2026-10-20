@@ -31,7 +31,7 @@ export default function ContactPage() {
           </Reveal>
           <Reveal as="p" className="lead">
             Décrivez-nous en quelques lignes la tâche qui mobilise le plus vos équipes. Nous vous proposons un premier
-            échange de 30 minutes pour évaluer si l’automatisation en vaut la peine.
+            échange de 30 minutes pour évaluer si l'automatisation en vaut la peine.
           </Reveal>
           <Reveal className="mt-7">
             <Checklist

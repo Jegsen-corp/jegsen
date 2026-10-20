@@ -16,22 +16,22 @@ import { site } from "@/lib/site"
 const path = "/automatisation-ia-nantes"
 const title = "Automatisation IA à Nantes pour PME et ETI | Jegsen IA"
 const description =
-  "Automatisation des processus par l’IA à Nantes : factures, e-mails, bons de livraison, demandes clients. Branchée sur vos outils, avec validation humaine des exceptions."
+  "Automatisation des processus par l'IA à Nantes : factures, e-mails, bons de livraison, demandes clients. Branchée sur vos outils, avec validation humaine des exceptions."
 
 export const metadata: Metadata = pageMeta({ title, description, path })
 
 const steps = [
   {
     title: "Un échange sur un processus précis",
-    text: "30 minutes, dans vos locaux à Nantes ou en visio. Nous regardons comment le travail se fait aujourd’hui : qui reçoit quoi, combien de fois, et où se perd le temps.",
+    text: "30 minutes, dans vos locaux à Nantes ou en visio. Nous regardons comment le travail se fait aujourd'hui : qui reçoit quoi, combien de fois, et où se perd le temps.",
   },
   {
     title: "Un chiffrage avant de construire",
-    text: "Volumes, temps passé, taux d’erreur, gain attendu. Si l’automatisation n’est pas rentable sur ce processus, nous le disons et nous nous arrêtons là.",
+    text: "Volumes, temps passé, taux d'erreur, gain attendu. Si l'automatisation n'est pas rentable sur ce processus, nous le disons et nous nous arrêtons là.",
   },
   {
     title: "Une mise en production dans vos outils",
-    text: "Le workflow est branché sur votre messagerie, votre GED, votre ERP ou votre logiciel métier. Un sprint d’intégration dure de deux à six semaines.",
+    text: "Le workflow est branché sur votre messagerie, votre GED, votre ERP ou votre logiciel métier. Un sprint d'intégration dure de deux à six semaines.",
   },
   {
     title: "Des exceptions confiées à une personne",
@@ -41,24 +41,24 @@ const steps = [
 
 const faq = [
   {
-    q: "Quels processus peut-on automatiser avec l’IA ?",
-    a: "Ceux qui reposent sur la lecture, le tri, la vérification et la ressaisie d’informations : factures fournisseurs, bons de livraison, e-mails entrants, demandes de devis, comptes rendus. Plus le volume est régulier et les règles claires, plus le gain est net.",
+    q: "Quels processus peut-on automatiser avec l'IA ?",
+    a: "Ceux qui reposent sur la lecture, le tri, la vérification et la ressaisie d'informations : factures fournisseurs, bons de livraison, e-mails entrants, demandes de devis, comptes rendus. Plus le volume est régulier et les règles claires, plus le gain est net.",
   },
   {
     q: "Quelle différence avec une automatisation classique ?",
-    a: "Une automatisation classique suit des règles fixes et bute sur les documents ou les messages qui varient. L’IA sait lire un document non standard ou comprendre une demande formulée librement. Nous combinons les deux : des règles là où elles suffisent, l’IA là où le contenu varie.",
+    a: "Une automatisation classique suit des règles fixes et bute sur les documents ou les messages qui varient. L'IA sait lire un document non standard ou comprendre une demande formulée librement. Nous combinons les deux : des règles là où elles suffisent, l'IA là où le contenu varie.",
   },
   {
-    q: "Combien coûte une automatisation par l’IA ?",
-    a: "Un sprint d’intégration est indiqué entre 5 000 € et 15 000 € HT selon le processus et les outils à connecter. Le diagnostic de rentabilité, entre 1 500 € et 3 500 € HT, permet de chiffrer le gain avant d’engager ce budget.",
+    q: "Combien coûte une automatisation par l'IA ?",
+    a: "Un sprint d'intégration est indiqué entre 5 000 € et 15 000 € HT selon le processus et les outils à connecter. Le diagnostic de rentabilité, entre 1 500 € et 3 500 € HT, permet de chiffrer le gain avant d'engager ce budget.",
   },
   {
     q: "Faut-il changer de logiciels ?",
-    a: "Non. L’automatisation se branche sur les outils que vos équipes utilisent déjà. Si un logiciel ne permet aucun échange de données, nous le signalons au moment du chiffrage.",
+    a: "Non. L'automatisation se branche sur les outils que vos équipes utilisent déjà. Si un logiciel ne permet aucun échange de données, nous le signalons au moment du chiffrage.",
   },
   {
-    q: "Que se passe-t-il quand l’IA se trompe ?",
-    a: "Chaque workflow comporte des contrôles de cohérence. Ce qui ne passe pas les contrôles, ou ce qui engage l’entreprise (paiement, envoi à un client), est soumis à une validation humaine avant toute action.",
+    q: "Que se passe-t-il quand l'IA se trompe ?",
+    a: "Chaque workflow comporte des contrôles de cohérence. Ce qui ne passe pas les contrôles, ou ce qui engage l'entreprise (paiement, envoi à un client), est soumis à une validation humaine avant toute action.",
   },
   {
     q: "Intervenez-vous autour de Nantes ?",
@@ -74,8 +74,8 @@ export default function AutomatisationNantesPage() {
           "@context": "https://schema.org",
           "@type": "Service",
           "@id": `${site.url}${path}#service`,
-          name: "Automatisation des processus par l’IA à Nantes",
-          serviceType: "Automatisation des processus métier par l’intelligence artificielle",
+          name: "Automatisation des processus par l'IA à Nantes",
+          serviceType: "Automatisation des processus métier par l'intelligence artificielle",
           description,
           url: `${site.url}${path}`,
           provider: { "@id": `${site.url}/#organisation` },
@@ -93,22 +93,22 @@ export default function AutomatisationNantesPage() {
           <Ping />
           <span className="text-[12.5px] font-bold tracking-[0.16em] text-ink uppercase">Nantes</span>
           <span aria-hidden="true" className="h-3.5 w-px flex-none bg-line-strong" />
-          <span>Automatisation des processus par l’IA</span>
+          <span>Automatisation des processus par l'IA</span>
         </Reveal>
         <Reveal as="h1" className="max-w-[20ch] text-[clamp(2.4rem,5.4vw,4.4rem)]">
           Automatisation IA à Nantes, branchée sur vos outils.
         </Reveal>
         <Reveal as="p" className="lead">
           Jegsen automatise les tâches de lecture, de tri et de ressaisie des PME et ETI nantaises : factures, bons de
-          livraison, e-mails, demandes clients. L’IA traite le volume, vos équipes gardent les décisions.
+          livraison, e-mails, demandes clients. L'IA traite le volume, vos équipes gardent les décisions.
         </Reveal>
         <Reveal className="mt-7">
           <ButtonRow>
             <LinkButton href="/contact?offre=sprint-integration-ia" arrow>
-              Parler d’un processus
+              Parler d'un processus
             </LinkButton>
             <LinkButton href="/offres/diagnostic-rentabilite-ia" variant="line">
-              Chiffrer le gain d’abord
+              Chiffrer le gain d'abord
             </LinkButton>
           </ButtonRow>
         </Reveal>
@@ -128,7 +128,7 @@ export default function AutomatisationNantesPage() {
                 <p className="mb-6">{c.summary}</p>
                 <div className="mt-auto">
                   <ArrowLink href={caseHref(c.slug)} stretched>
-                    Voir le cas d’usage
+                    Voir le cas d'usage
                   </ArrowLink>
                 </div>
               </SiteCard>
@@ -140,22 +140,22 @@ export default function AutomatisationNantesPage() {
       <MethodSection
         eyebrow="Méthode"
         title="Du premier échange à la mise en production."
-        lead="Un processus à la fois, chiffré avant d’être construit, mesuré une fois en production."
+        lead="Un processus à la fois, chiffré avant d'être construit, mesuré une fois en production."
         steps={steps}
       />
 
       <SplitSection
         eyebrow="Règles ou IA"
-        title="L’IA là où le contenu varie, des règles là où elles suffisent."
+        title="L'IA là où le contenu varie, des règles là où elles suffisent."
       >
         <div className="prose-site">
           <p>
             Une automatisation classique enchaîne des règles fixes. Elle fonctionne tant que les documents et les
-            messages arrivent toujours sous la même forme. Dès qu’un fournisseur change de modèle de facture ou qu’un
-            client formule sa demande autrement, elle s’arrête.
+            messages arrivent toujours sous la même forme. Dès qu'un fournisseur change de modèle de facture ou qu'un
+            client formule sa demande autrement, elle s'arrête.
           </p>
           <p>
-            L’IA lève ce blocage : elle lit un document non standard, comprend une demande écrite librement, et en
+            L'IA lève ce blocage : elle lit un document non standard, comprend une demande écrite librement, et en
             extrait les informations utiles. Nous la réservons aux étapes qui en ont besoin, et gardons des règles simples
             partout ailleurs, plus prévisibles et moins coûteuses.
           </p>
@@ -164,14 +164,14 @@ export default function AutomatisationNantesPage() {
             <Link href={caseHref("workflows-agentiques")} className="underline underline-offset-3">
               workflows agentiques
             </Link>
-            , toujours avec une validation humaine aux étapes qui engagent l’entreprise.
+            , toujours avec une validation humaine aux étapes qui engagent l'entreprise.
           </p>
         </div>
       </SplitSection>
 
       <SplitSection
         eyebrow="Pourquoi un partenaire nantais"
-        title="Automatiser un processus commence par l’observer."
+        title="Automatiser un processus commence par l'observer."
       >
         <div className="prose-site">
           <p>
@@ -181,7 +181,7 @@ export default function AutomatisationNantesPage() {
           </p>
           <p>
             Basés à Nantes, nous venons dans vos locaux au lancement, pendant les tests et à la mise en production. Pour
-            former vos équipes aux usages quotidiens de l’IA, voir aussi{" "}
+            former vos équipes aux usages quotidiens de l'IA, voir aussi{" "}
             <Link href="/intelligence-artificielle-nantes" className="underline underline-offset-3">
               notre accompagnement IA à Nantes
             </Link>

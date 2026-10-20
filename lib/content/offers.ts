@@ -25,7 +25,7 @@ export const offers: OfferSummary[] = [
   {
     slug: "sprint-integration-ia",
     kicker: "Automatisez un processus",
-    title: "Sprint d’intégration IA",
+    title: "Sprint d'intégration IA",
     duration: "2 à 6 semaines",
     description:
       "Nous prenons un processus précis et nous le mettons en production, branché sur vos outils, avec des gains mesurés.",

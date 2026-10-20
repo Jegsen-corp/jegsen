@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils"
 
 const subjects = [
   { value: "diagnostic-rentabilite-ia", label: "Diagnostic de rentabilité IA" },
-  { value: "sprint-integration-ia", label: "Sprint d’intégration IA" },
+  { value: "sprint-integration-ia", label: "Sprint d'intégration IA" },
   { value: "programme-formation-ia", label: "Programme IA et adoption" },
   { value: "pilote", label: "Programme pilote (automatisation documentaire)" },
   { value: "autre", label: "Autre demande" },
@@ -46,7 +46,7 @@ function Row({ children }: { children: ReactNode }) {
   return <div className="grid gap-4 sm:grid-cols-2">{children}</div>
 }
 
-/** Formulaire relié au paramètre `?offre=` de l’URL (à placer sous un Suspense). */
+/** Formulaire relié au paramètre `?offre=` de l'URL (à placer sous un Suspense). */
 export function ContactFormFields() {
   const params = useSearchParams()
   const initial = params.get("offre")
@@ -79,7 +79,7 @@ export function ContactFormFields() {
         String(data.get("message") || ""),
       ].join("\n")
       window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(`[Site] ${subjectLabel}`)}&body=${encodeURIComponent(body)}`
-      setStatus("Votre messagerie s’ouvre avec le message pré-rempli. Il ne reste qu’à l’envoyer.")
+      setStatus("Votre messagerie s'ouvre avec le message pré-rempli. Il ne reste qu'à l'envoyer.")
       return
     }
 
@@ -99,7 +99,7 @@ export function ContactFormFields() {
       setConsent(false)
       setStatus("Merci, votre message est bien parti.")
     } catch {
-      setStatus(`L’envoi a échoué. Écrivez-nous directement à ${site.email}.`)
+      setStatus(`L'envoi a échoué. Écrivez-nous directement à ${site.email}.`)
     } finally {
       setSending(false)
     }
@@ -173,7 +173,7 @@ export function ContactFormFields() {
           className="mt-0.5 border-line-strong data-[state=checked]:border-brand data-[state=checked]:bg-brand"
         />
         <label htmlFor="consent">
-          J’accepte que mes données soient utilisées pour répondre à ma demande, conformément à la{" "}
+          J'accepte que mes données soient utilisées pour répondre à ma demande, conformément à la{" "}
           <Link href="/confidentialite" className="underline underline-offset-3">
             politique de confidentialité
           </Link>

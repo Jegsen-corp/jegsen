@@ -133,8 +133,8 @@ export function Split({ className, children }: { className?: string; children: R
 }
 
 export function CtaBlock({
-  title = "Combien l’IA peut-elle vous faire gagner ?",
-  lead = "Un premier échange de 30 minutes pour regarder un de vos processus et vous dire, chiffres à l’appui, si l’automatisation en vaut la peine.",
+  title = "Combien l'IA peut-elle vous faire gagner ?",
+  lead = "Un premier échange de 30 minutes pour regarder un de vos processus et vous dire, chiffres à l'appui, si l'automatisation en vaut la peine.",
 }: {
   title?: string
   lead?: string
@@ -164,7 +164,7 @@ export function CtaBlock({
   )
 }
 
-/** Espace réservé pendant le chargement d’une page dépendant de l’URL. */
+/** Espace réservé pendant le chargement d'une page dépendant de l'URL. */
 export function PageFallback() {
   return <div aria-hidden="true" className="min-h-svh" />
 }

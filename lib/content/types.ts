@@ -5,14 +5,14 @@ export type FaqItem = { q: string; a: string }
 
 export type UseCase = {
   slug: string
-  /** Cas d’usage technique (socle) plutôt que processus métier. */
+  /** Cas d'usage technique (socle) plutôt que processus métier. */
   technical: boolean
   metaTitle: string
   metaDescription: string
   title: string
   shortTitle: string
   lead: string
-  /** Résumé court utilisé dans les cartes « Autres cas d’usage ». */
+  /** Résumé court utilisé dans les cartes « Autres cas d'usage ». */
   summary: string
   audiences: string[]
   today: string[]
