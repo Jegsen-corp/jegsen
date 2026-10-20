@@ -47,8 +47,8 @@ export function OfferCard({ offer, delay }: { offer: OfferSummary; delay?: numbe
       </p>
       <OfferFooter>
         <div>
-          <small className="text-[13px] text-ink-3">À partir de</small>
-          <strong className="block font-display text-2xl tracking-[-0.03em]">{offer.fromPrice}</strong>
+          <small className="text-[13px] text-ink-3">{offer.priceLabel}</small>
+          <strong className="block font-display text-2xl tracking-[-0.03em]">{offer.price}</strong>
         </div>
         <ArrowLink href={offerHref(offer.slug)} stretched aria-label={`En savoir plus : ${offer.title}`}>
           Détails
@@ -59,7 +59,7 @@ export function OfferCard({ offer, delay }: { offer: OfferSummary; delay?: numbe
 }
 
 /** Carte d'offre compacte (pages offres, IA à Nantes). */
-export function OfferCardCompact({ offer, delay, fromLabel = "dès" }: { offer: OfferSummary; delay?: number; fromLabel?: string }) {
+export function OfferCardCompact({ offer, delay }: { offer: OfferSummary; delay?: number }) {
   return (
     <SiteCard as="article" delay={delay} className="flex min-h-full flex-col">
       <OfferKicker>{offer.kicker}</OfferKicker>
@@ -69,7 +69,7 @@ export function OfferCardCompact({ offer, delay, fromLabel = "dès" }: { offer: 
         <div>
           <small className="text-[13px] text-ink-3">{offer.duration}</small>
           <strong className="block font-display text-2xl tracking-[-0.03em]">
-            {fromLabel} {offer.fromPrice}
+            {offer.compactPrice}
           </strong>
         </div>
         <ArrowLink href={offerHref(offer.slug)} stretched>

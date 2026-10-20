@@ -22,6 +22,11 @@ export type UseCase = {
   faq: FaqItem[]
 }
 
+export type OfferPricing =
+  | { kind: "forfait"; amount: number; note: string }
+  | { kind: "from"; amount: number; note: string }
+  | { kind: "perDay"; amount: number; groupMax: number; note: string }
+
 export type OfferDetail = {
   slug: string
   metaTitle: string
@@ -31,9 +36,10 @@ export type OfferDetail = {
   crumb: string
   lead: string
   duration: string
-  /** Prix de départ affiché sur les cartes, et borne basse du JSON-LD. */
-  priceMin: number
-  priceMax: number
+  /** Prix affiché : forfait fixe, « sur devis, à partir de », ou prix à la journée. */
+  pricing: OfferPricing
+  /** Libellé du bouton d'action de la page d'offre (par défaut « Demander un devis »). */
+  ctaLabel?: string
   /** Phrase de livrable sur les cartes (plus longue que la puce d'en-tête). */
   cardDeliverable: string
   featured?: boolean

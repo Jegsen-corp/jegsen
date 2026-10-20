@@ -92,7 +92,7 @@ const commitments = [
 const faq = [
   {
     q: "Par quoi commencer ?",
-    a: "Par le diagnostic de rentabilité : une à deux semaines pour identifier trois à cinq cas d'usage chiffrés. Si vous avez déjà un processus précis en tête, nous pouvons démarrer directement par un sprint d'intégration.",
+    a: "Par le diagnostic de rentabilité : une semaine, en forfait, pour identifier deux à trois cas d'usage chiffrés. Si vous avez déjà un processus précis en tête, nous pouvons démarrer directement par un sprint d'intégration.",
   },
   {
     q: "Quelle taille d'entreprise accompagnez-vous ?",

@@ -50,7 +50,7 @@ const faq = [
   },
   {
     q: "Combien coûte une automatisation par l'IA ?",
-    a: "Un sprint d'intégration est indiqué entre 5 000 € et 15 000 € HT selon le processus et les outils à connecter. Le diagnostic de rentabilité, entre 1 500 € et 3 500 € HT, permet de chiffrer le gain avant d'engager ce budget.",
+    a: "Un sprint d'intégration est établi sur devis, à partir de 5 000 € HT selon le processus et les outils à connecter. Le diagnostic de rentabilité, forfait de 1 900 € HT déduit du sprint si vous l'enchaînez, permet de chiffrer le gain avant d'engager ce budget.",
   },
   {
     q: "Faut-il changer de logiciels ?",

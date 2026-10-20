@@ -68,7 +68,7 @@ async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["p
         <Reveal className="mt-8">
           <ButtonRow>
             <LinkButton href={`/contact?offre=${slug}`} arrow>
-              Demander un devis
+              {offer.ctaLabel ?? "Demander un devis"}
             </LinkButton>
           </ButtonRow>
         </Reveal>

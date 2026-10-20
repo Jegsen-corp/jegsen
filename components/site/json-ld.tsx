@@ -1,6 +1,20 @@
 import { offerDetails } from "@/lib/content/offers"
-import type { FaqItem } from "@/lib/content/types"
+import type { FaqItem, OfferPricing } from "@/lib/content/types"
 import { founders, site } from "@/lib/site"
+
+/** Prix au format schema.org : forfait (price), à partir de (minPrice) ou prix à la journée. */
+function priceSpecification(p: OfferPricing) {
+  const base = { priceCurrency: "EUR", valueAddedTaxIncluded: false }
+  if (p.kind === "from") return { "@type": "PriceSpecification", minPrice: p.amount, ...base }
+  if (p.kind === "perDay")
+    return {
+      "@type": "UnitPriceSpecification",
+      price: p.amount,
+      referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "DAY" },
+      ...base,
+    }
+  return { "@type": "PriceSpecification", price: p.amount, ...base }
+}
 
 export function JsonLd({ data }: { data: object }) {
   return (
@@ -82,13 +96,7 @@ export const organizationLd = {
             "@id": `${site.url}/offres/${offer.slug}#service`,
             name: offer.title,
           },
-          priceSpecification: {
-            "@type": "PriceSpecification",
-            minPrice: offer.priceMin,
-            maxPrice: offer.priceMax,
-            priceCurrency: "EUR",
-            valueAddedTaxIncluded: false,
-          },
+          priceSpecification: priceSpecification(offer.pricing),
         })),
       },
     },

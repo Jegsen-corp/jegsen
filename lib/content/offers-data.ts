@@ -1,18 +1,34 @@
 // Contenu extrait du site d'origine. Les chaînes acceptent **gras** et [liens](/chemin).
-import type { OfferDetail } from "./types"
+import type { OfferDetail, OfferPricing } from "./types"
 
 const euros = new Intl.NumberFormat("fr-FR", {
   style: "currency",
   currency: "EUR",
   maximumFractionDigits: 0,
+  // « 1 900 € » et non « 1900 € » : séparateur de milliers aussi pour les nombres à 4 chiffres
+  useGrouping: "always",
 })
 
 export function formatEuros(amount: number) {
   return euros.format(amount)
 }
 
-function priceRange(min: number, max: number) {
-  return `${formatEuros(min)} à ${formatEuros(max)} HT`
+/** Libellés de prix dérivés du modèle de prix de chaque offre. */
+export function priceLabels(pricing: OfferPricing) {
+  const amount = `${formatEuros(pricing.amount)} HT`
+  switch (pricing.kind) {
+    case "forfait":
+      return { fact: `${amount}, forfait`, cardLabel: "Forfait", card: amount, compact: amount }
+    case "from":
+      return { fact: `Sur devis, à partir de ${amount}`, cardLabel: "Sur devis, à partir de", card: amount, compact: `dès ${amount}` }
+    case "perDay":
+      return {
+        fact: `À partir de ${amount} la journée`,
+        cardLabel: "À partir de",
+        card: `${amount} / jour`,
+        compact: `dès ${amount} / jour`,
+      }
+  }
 }
 
 type OfferSource = Omit<OfferDetail, "facts" | "deliverablesLead"> & {
@@ -21,16 +37,16 @@ type OfferSource = Omit<OfferDetail, "facts" | "deliverablesLead"> & {
 }
 
 function finalize(offer: OfferSource): OfferDetail {
-  const range = priceRange(offer.priceMin, offer.priceMax)
+  const price = priceLabels(offer.pricing)
   const { factDeliverable, ...rest } = offer
   return {
     ...rest,
     facts: [
       { label: "Durée", value: offer.duration },
-      { label: "Prix indicatif", value: range },
+      { label: "Prix", value: price.fact },
       { label: "Livrable", value: factDeliverable },
     ],
-    deliverablesLead: `Prix indicatif de ${range}, selon le périmètre. Devis ferme après un premier échange.`,
+    deliverablesLead: offer.pricing.note,
   }
 }
 
@@ -38,14 +54,18 @@ const offerSources: OfferSource[] = [
   {
     slug: "diagnostic-rentabilite-ia",
     metaTitle: "Diagnostic IA pour PME et ETI, ROI chiffré | Jegsen IA",
-    metaDescription: "Diagnostic IA en 1 à 2 semaines : 3 à 5 cas d'usage chiffrés, hypothèses de ROI, risques et feuille de route priorisée. PME et ETI, Nantes et toute la France.",
+    metaDescription: "Diagnostic IA en une semaine, forfait de 1 900 € HT : 2 à 3 cas d'usage chiffrés, hypothèses de ROI, risques et prochaines étapes. PME et ETI, Nantes et toute la France.",
     kicker: "Pour commencer",
     title: "Diagnostic de rentabilité IA",
     crumb: "Diagnostic IA",
-    lead: "En une à deux semaines, nous identifions où l'IA rapporte vraiment dans votre entreprise, et où elle ne rapporte pas.",
-    duration: "1 à 2 semaines",
-    priceMin: 1500,
-    priceMax: 3500,
+    lead: "En une semaine, nous identifions où l'IA rapporte vraiment dans votre entreprise, et où elle ne rapporte pas.",
+    duration: "1 semaine",
+    pricing: {
+      kind: "forfait",
+      amount: 1900,
+      note: "Forfait de 1 900 € HT. Si vous enchaînez avec un sprint d'intégration, ce montant en est déduit.",
+    },
+    ctaLabel: "Réserver un diagnostic",
     cardDeliverable: "Plan d'action chiffré, avec hypothèses de ROI et risques",
     factDeliverable: "Plan d'action chiffré",
     forWho: [
@@ -53,11 +73,11 @@ const offerSources: OfferSource[] = [
       "Vous avez des équipes qui ressaisissent, trient, contrôlent ou reformulent toute la journée.",
       "Vous voulez un chiffrage avant d'engager un budget de développement.",
     ],
-    stepsLead: "1 à 2 semaines, avec des points d'étape réguliers et des décisions prises sur la base de vos chiffres.",
+    stepsLead: "Trois jours de travail répartis sur une semaine : une journée avec vos équipes, puis l'analyse et la restitution.",
     steps: [
       {
         title: "Cartographie",
-        text: "Entretiens avec les équipes, observation des processus, inventaire des outils et des flux de documents.",
+        text: "Une journée avec les équipes concernées : entretiens, observation de deux ou trois processus, outils et flux de documents.",
       },
       {
         title: "Mesure",
@@ -65,16 +85,16 @@ const offerSources: OfferSource[] = [
       },
       {
         title: "Sélection",
-        text: "Trois à cinq cas d'usage retenus, chacun avec un gain estimé, un coût de mise en œuvre et un niveau de risque.",
+        text: "Deux à trois cas d'usage retenus, chacun avec un gain estimé, un coût de mise en œuvre et un niveau de risque.",
       },
       {
         title: "Feuille de route",
-        text: "Priorisation par rentabilité et faisabilité, hypothèses explicites, prochaines étapes concrètes.",
+        text: "Priorisation par rentabilité et faisabilité, hypothèses explicites, prochaines étapes concrètes, présentées en une heure à la direction.",
       },
     ],
     deliverables: [
       "Cartographie des processus étudiés",
-      "3 à 5 cas d'usage détaillés et chiffrés",
+      "2 à 3 cas d'usage détaillés et chiffrés",
       "Hypothèses de ROI explicites et vérifiables",
       "Analyse des risques : données, sécurité, conformité, adoption",
       "Feuille de route priorisée",
@@ -105,8 +125,11 @@ const offerSources: OfferSource[] = [
     crumb: "Intégration IA",
     lead: "Nous prenons un processus précis et nous le mettons en production, branché sur vos outils, avec des gains mesurés.",
     duration: "2 à 6 semaines",
-    priceMin: 5000,
-    priceMax: 15000,
+    pricing: {
+      kind: "from",
+      amount: 5000,
+      note: "Sur devis, à partir de 5 000 € HT selon le processus et les outils à connecter. Devis ferme après le diagnostic ou un premier échange.",
+    },
     cardDeliverable: "Workflow opérationnel, tests, documentation, sécurisation et mesure des gains",
     factDeliverable: "Workflow opérationnel",
     featured: true,
@@ -231,8 +254,12 @@ const offerSources: OfferSource[] = [
     crumb: "Formation IA",
     lead: "Un outil que personne n'utilise ne rapporte rien. Nous formons vos équipes et encadrons les usages pour que les gains se matérialisent.",
     duration: "1 à 3 semaines",
-    priceMin: 2000,
-    priceMax: 6000,
+    pricing: {
+      kind: "perDay",
+      amount: 1950,
+      groupMax: 10,
+      note: "À partir de 1 950 € HT la journée, pour un groupe de 10 personnes au plus. Devis selon le nombre de journées et de groupes.",
+    },
     cardDeliverable: "Équipes formées, usages encadrés, indicateurs d'adoption et bilan de gains",
     factDeliverable: "Équipes formées",
     forWho: [
