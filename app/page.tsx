@@ -3,7 +3,7 @@ import type { Metadata } from "next"
 import { HeroBackdrop, Ping } from "@/components/motion/ambient"
 import { CountUp } from "@/components/motion/count-up"
 import { Marquee } from "@/components/motion/marquee"
-import { Reveal } from "@/components/motion/reveal"
+import { AboveFold, Reveal } from "@/components/motion/reveal"
 import { SplitWords } from "@/components/motion/split-words"
 import { Steps } from "@/components/motion/steps"
 import { BrainDiagram } from "@/components/home/brain-diagram"
@@ -122,55 +122,57 @@ export default function HomePage() {
       {/* Hero */}
       <section className="relative isolate flex min-h-[min(100svh,980px)] items-center overflow-hidden pt-[112px] pb-[70px] lg:pt-[140px]">
         <HeroBackdrop blobs={[1, 2, 3]} />
-        <div className="container-site grid items-center gap-[clamp(24px,4vw,64px)] lg:grid-cols-[1fr_1.08fr]">
-          <div>
-            <Reveal as="p" className="mb-7 flex flex-wrap items-center gap-x-3 gap-y-2.5 text-[13px] text-ink-3 tabular-nums">
-              <Ping />
-              <Link
-                href="/intelligence-artificielle-nantes"
-                className="border-b border-transparent text-[12.5px] font-bold tracking-[0.16em] text-ink uppercase transition-colors hover:border-current"
-              >
-                Nantes
-              </Link>
-              <span aria-hidden="true" className="h-3.5 w-px flex-none bg-line-strong" />
-              <span title="Coordonnées de Nantes">47°13′ N · 1°33′ O</span>
-            </Reveal>
-            <SplitWords
-              text="L'IA qui fait gagner du temps à vos équipes."
-              className="mb-6 text-[clamp(2.6rem,5.2vw,4.6rem)]"
-            />
-            <Reveal as="p" delay={0.35} className="lead mb-[34px]">
-              Depuis Nantes, nous aidons les PME et ETI à repérer{" "}
-              <Link href="/automatisation-ia-nantes" className="underline decoration-line-strong underline-offset-3 hover:decoration-current">
-                les processus les plus rentables à automatiser
-              </Link>
-              , à les
-              intégrer dans leur système d'information, à former leurs équipes et à{" "}
-              <strong className="text-ink">mesurer les gains obtenus</strong>.
-            </Reveal>
-            <Reveal delay={0.5}>
-              <ButtonRow>
-                <LinkButton href="/contact" arrow>
-                  Réserver un échange
-                </LinkButton>
-                <LinkButton href="#offres" variant="line">
-                  Découvrir nos offres
-                </LinkButton>
-              </ButtonRow>
-            </Reveal>
-            <Reveal delay={0.65} className="mt-[34px] flex flex-wrap gap-x-[18px] gap-y-2 text-sm text-ink-3">
-              {["Gains chiffrés avant de construire", "Intégré à vos outils", "Humain dans la boucle"].map((b) => (
-                <span key={b} className="inline-flex items-center gap-2">
-                  <Icon shapes={icons.check} className="size-4 text-time" />
-                  {b}
-                </span>
-              ))}
+        <AboveFold>
+          <div className="container-site grid items-center gap-[clamp(24px,4vw,64px)] lg:grid-cols-[1fr_1.08fr]">
+            <div>
+              <Reveal as="p" className="mb-7 flex flex-wrap items-center gap-x-3 gap-y-2.5 text-[13px] text-ink-3 tabular-nums">
+                <Ping />
+                <Link
+                  href="/intelligence-artificielle-nantes"
+                  className="border-b border-transparent text-[12.5px] font-bold tracking-[0.16em] text-ink uppercase transition-colors hover:border-current"
+                >
+                  Nantes
+                </Link>
+                <span aria-hidden="true" className="h-3.5 w-px flex-none bg-line-strong" />
+                <span title="Coordonnées de Nantes">47°13′ N · 1°33′ O</span>
+              </Reveal>
+              <SplitWords
+                text="L'IA qui fait gagner du temps à vos équipes."
+                className="mb-6 text-[clamp(2.6rem,5.2vw,4.6rem)]"
+              />
+              <Reveal as="p" delay={0.35} className="lead mb-[34px]">
+                Depuis Nantes, nous aidons les PME et ETI à repérer{" "}
+                <Link href="/automatisation-ia-nantes" className="underline decoration-line-strong underline-offset-3 hover:decoration-current">
+                  les processus les plus rentables à automatiser
+                </Link>
+                , à les
+                intégrer dans leur système d'information, à former leurs équipes et à{" "}
+                <strong className="text-ink">mesurer les gains obtenus</strong>.
+              </Reveal>
+              <Reveal delay={0.5}>
+                <ButtonRow>
+                  <LinkButton href="/contact" arrow>
+                    Réserver un échange
+                  </LinkButton>
+                  <LinkButton href="#offres" variant="line">
+                    Découvrir nos offres
+                  </LinkButton>
+                </ButtonRow>
+              </Reveal>
+              <Reveal delay={0.65} className="mt-[34px] flex flex-wrap gap-x-[18px] gap-y-2 text-sm text-ink-3">
+                {["Gains chiffrés avant de construire", "Intégré à vos outils", "Humain dans la boucle"].map((b) => (
+                  <span key={b} className="inline-flex items-center gap-2">
+                    <Icon shapes={icons.check} className="size-4 text-time" />
+                    {b}
+                  </span>
+                ))}
+              </Reveal>
+            </div>
+            <Reveal variant="scale" delay={0.2} className="mx-auto mt-2 w-full max-w-[520px] lg:mt-0 lg:max-w-none">
+              <HeroVisual />
             </Reveal>
           </div>
-          <Reveal variant="scale" delay={0.2} className="mx-auto mt-2 w-full max-w-[520px] lg:mt-0 lg:max-w-none">
-            <HeroVisual />
-          </Reveal>
-        </div>
+        </AboveFold>
       </section>
 
       <Marquee items={tasks} label="Exemples de tâches automatisables" />

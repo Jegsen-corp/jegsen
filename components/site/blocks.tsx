@@ -1,7 +1,7 @@
 import { Fragment, type ReactNode } from "react"
 import Link from "next/link"
 import { HeroBackdrop, SpinGlow } from "@/components/motion/ambient"
-import { Reveal } from "@/components/motion/reveal"
+import { AboveFold, Reveal } from "@/components/motion/reveal"
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -92,7 +92,7 @@ export function PageHero({
       {blobs && <HeroBackdrop blobs={blobs} />}
       <div className="container-site">
         {crumbs && <Crumbs items={crumbs} />}
-        {children}
+        <AboveFold>{children}</AboveFold>
       </div>
     </section>
   )

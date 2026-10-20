@@ -17,7 +17,7 @@
   --surface: #ffffff;
   --ink: #0b0d12;
   --ink-2: #464c58;
-  --ink-3: #7b818d;
+  --ink-3: #686e7a;
   --line: #0b0d1217;
   --line-strong: #0b0d1229;
   --brand: #3355ff;
@@ -431,8 +431,25 @@
   }
 }
 
+/* Titre du haut de l'accueil : mots qui apparaissent un à un, sans attendre le JavaScript */
+@keyframes word-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.4em);
+  }
+}
+
+.word-in {
+  display: inline-block;
+  animation: word-in 0.7s cubic-bezier(0.2, 0.7, 0.1, 1) both;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
+  }
+
+  .word-in {
+    animation: none;
   }
 }
