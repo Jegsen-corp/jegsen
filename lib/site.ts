@@ -8,7 +8,7 @@ export const site = {
   title: "Automatisation et intégration IA pour PME à Nantes | Jegsen",
   description:
     "Automatisation IA pour PME et ETI à Nantes : diagnostic chiffré, intégration à votre SI, formation des équipes et gains mesurés.",
-  email: "jegsencorp@gmail.com", // adresse temporaire, à remplacer par contact@jegsen.fr une fois le domaine en place
+  email: "contact@jegsen.fr",
   /** Page entreprise LinkedIn : pied de page, page contact et données structurées (sameAs). */
   linkedin: "https://www.linkedin.com/company/jegsen",
   city: "Nantes",
@@ -19,7 +19,7 @@ export const site = {
    * Le premier envoi déclenche un e-mail d'activation à confirmer dans la boîte de réception.
    * Vide : ouverture de la messagerie du visiteur.
    */
-  formEndpoint: "https://formsubmit.co/ajax/jegsencorp@gmail.com",
+  formEndpoint: "https://formsubmit.co/ajax/contact@jegsen.fr",
 }
 
 /**

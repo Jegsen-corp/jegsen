@@ -55,7 +55,7 @@ export default function PrivacyPage() {
             <strong>FormSubmit</strong> (formsubmit.co), qui reçoit le formulaire et le transmet par e-mail.
           </li>
           <li>
-            <strong>Google</strong>, au titre du service Gmail, qui héberge notre boîte de réception.
+            <strong>OVHcloud</strong>, qui héberge notre messagerie.
           </li>
         </ul>
         <p>
