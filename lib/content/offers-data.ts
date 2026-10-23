@@ -9,8 +9,12 @@ const euros = new Intl.NumberFormat("fr-FR", {
   useGrouping: "always",
 })
 
+/**
+ * Intl sépare les milliers par une espace fine insécable (U+202F). Avec l'interlettrage serré des titres,
+ * elle devient presque invisible (« 1900 € » à l'écran) : on la remplace par une espace insécable (U+00A0).
+ */
 export function formatEuros(amount: number) {
-  return euros.format(amount)
+  return euros.format(amount).replace(/\u202f/g, "\u00a0")
 }
 
 /** Libellés de prix dérivés du modèle de prix de chaque offre. */
