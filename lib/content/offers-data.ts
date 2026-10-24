@@ -327,7 +327,8 @@ const offerSources: OfferSource[] = [
   /**
    * Maintenance et suivi (MCO). Offre de suite, vendue par workflow en production.
    * Prix décidés le 25/10/2026 (étude tarifaire) : Essentiel 150 €, Standard 350 € et Premium 750 € HT par mois et par workflow.
-   * Premium promet une prise en charge prioritaire, sans délai chiffré tant que les fondateurs sont en alternance.
+   * Premium promet une prise en charge prioritaire, sans délai chiffré tant que les fondateurs sont en alternance,
+   * le rapport mensuel des gains (Standard : bilan trimestriel) et une revue technique trimestrielle.
    * Hébergement et consommation des modèles d'IA : sur devis, dans la proposition.
    */
   {
@@ -364,22 +365,22 @@ const offerSources: OfferSource[] = [
       {
         name: "Standard",
         amount: 350,
-        tagline: "Pour l'améliorer et suivre les gains.",
+        tagline: "Pour l'ajuster et suivre les gains.",
         items: [
           "Tout le palier Essentiel",
           "Ajustement des règles et des consignes",
-          "Rapport mensuel des gains",
-          "Point de suivi trimestriel",
+          "Point trimestriel avec bilan des gains",
         ],
       },
       {
         name: "Premium",
         amount: 750,
-        tagline: "Pour les processus critiques.",
+        tagline: "Pour un processus clé, qui suit les progrès de l'IA.",
         items: [
           "Tout le palier Standard",
           "Prise en charge prioritaire des incidents",
-          "Petites évolutions incluses chaque mois",
+          "Rapport mensuel des gains",
+          "Revue technique trimestrielle : nouveaux modèles testés sur vos données",
         ],
       },
     ],
@@ -404,14 +405,19 @@ const offerSources: OfferSource[] = [
       },
       {
         title: "Suivi des gains",
-        text: "Avec le palier Standard, un rapport mensuel compare les indicateurs à ceux d'avant l'automatisation, et un point trimestriel décide des ajustements.",
+        text: "Avec le palier Standard, un point trimestriel fait le bilan des gains et décide des ajustements. Avec le palier Premium, un rapport mensuel compare les indicateurs à ceux d'avant l'automatisation.",
+      },
+      {
+        title: "Revue technique",
+        text: "Avec le palier Premium, chaque trimestre, nous testons les nouveaux modèles d'IA sur vos données et vous recommandons, chiffres à l'appui, ce qui améliorerait la qualité ou réduirait les coûts.",
       },
     ],
     deliverables: [
       "Supervision et alertes de chaque workflow",
       "Correctifs et mises à jour",
       "Journal des interventions",
-      "Rapport mensuel des gains (palier Standard)",
+      "Bilan trimestriel des gains (palier Standard)",
+      "Rapport mensuel des gains et revue technique trimestrielle (palier Premium)",
     ],
     showCases: false,
     faq: [
@@ -424,8 +430,12 @@ const offerSources: OfferSource[] = [
         a: "Par workflow en production et par mois, selon le palier choisi. L'hébergement et la consommation des modèles d'IA dépendent de vos volumes : ils sont chiffrés à part, dans la proposition.",
       },
       {
+        q: "Que contient la revue technique trimestrielle ?",
+        a: "Les modèles d'IA progressent vite. Chaque trimestre, nous testons les nouvelles versions pertinentes sur un échantillon de vos documents et vous présentons le résultat : qualité, coût, délai de traitement. Si un changement en vaut la peine, nous le planifions avec vous.",
+      },
+      {
         q: "Les évolutions sont-elles incluses ?",
-        a: "Les ajustements de règles et de consignes sont inclus à partir du palier Standard. Le palier Premium inclut aussi de petites évolutions, dans la limite d'un temps mensuel fixé au contrat. Une nouvelle fonctionnalité ou un nouveau processus fait l'objet d'un devis, comme un [sprint d'intégration](/offres/sprint-integration-ia).",
+        a: "Les ajustements de règles et de consignes sont inclus à partir du palier Standard. Une nouvelle fonctionnalité ou un nouveau processus fait l'objet d'un devis, comme un [sprint d'intégration](/offres/sprint-integration-ia).",
       },
     ],
   },
