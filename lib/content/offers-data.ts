@@ -326,8 +326,8 @@ const offerSources: OfferSource[] = [
   },
   /**
    * Maintenance et suivi (MCO). Offre de suite, vendue par workflow en production.
-   * Prix décidés le 25/10/2026 (étude tarifaire) : Essentiel 150 € et Standard 350 € HT par mois et par workflow.
-   * Le palier Premium (750 €, prise en charge en 4 heures ouvrées) sera ajouté à la fin de l'alternance des fondateurs.
+   * Prix décidés le 25/10/2026 (étude tarifaire) : Essentiel 150 €, Standard 350 € et Premium 750 € HT par mois et par workflow.
+   * Premium promet une prise en charge prioritaire, sans délai chiffré tant que les fondateurs sont en alternance.
    * Hébergement et consommation des modèles d'IA : sur devis, dans la proposition.
    */
   {
@@ -372,6 +372,16 @@ const offerSources: OfferSource[] = [
           "Point de suivi trimestriel",
         ],
       },
+      {
+        name: "Premium",
+        amount: 750,
+        tagline: "Pour les processus critiques.",
+        items: [
+          "Tout le palier Standard",
+          "Prise en charge prioritaire des incidents",
+          "Petites évolutions incluses chaque mois",
+        ],
+      },
     ],
     forWho: [
       "Un workflow d'IA tourne en production et vos équipes en dépendent au quotidien.",
@@ -390,7 +400,7 @@ const offerSources: OfferSource[] = [
       },
       {
         title: "Correction et mises à jour",
-        text: "Anomalies corrigées, connecteurs adaptés quand vos logiciels changent, modèles d'IA mis à jour quand une version évolue.",
+        text: "Anomalies corrigées, connecteurs adaptés quand vos logiciels changent, modèles d'IA mis à jour quand une version évolue. Avec le palier Premium, vos demandes passent en priorité.",
       },
       {
         title: "Suivi des gains",
@@ -415,7 +425,7 @@ const offerSources: OfferSource[] = [
       },
       {
         q: "Les évolutions sont-elles incluses ?",
-        a: "Les ajustements de règles et de consignes sont inclus dans le palier Standard. Une nouvelle fonctionnalité ou un nouveau processus fait l'objet d'un devis, comme un [sprint d'intégration](/offres/sprint-integration-ia).",
+        a: "Les ajustements de règles et de consignes sont inclus à partir du palier Standard. Le palier Premium inclut aussi de petites évolutions, dans la limite d'un temps mensuel fixé au contrat. Une nouvelle fonctionnalité ou un nouveau processus fait l'objet d'un devis, comme un [sprint d'intégration](/offres/sprint-integration-ia).",
       },
     ],
   },

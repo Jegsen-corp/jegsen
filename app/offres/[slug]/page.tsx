@@ -96,10 +96,11 @@ async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["p
           <div className="container-site">
             <SectionHead
               eyebrow="Paliers"
-              title={offer.tiers.length === 2 ? "Deux niveaux de service." : "Nos niveaux de service."}
+              title={offer.tiers.length === 3 ? "Trois niveaux de service." : "Nos niveaux de service."}
               lead={offer.deliverablesLead}
             />
-            <div className="grid gap-[18px] md:grid-cols-2">
+            {/* Trois paliers côte à côte à partir de 1 024 px, empilés en dessous (pas de carte orpheline). */}
+            <div className="grid gap-[18px] lg:grid-cols-3">
               {offer.tiers.map((t, i) => (
                 <SiteCard key={t.name} as="article" delay={i * 0.08} className="flex min-h-full flex-col">
                   <OfferKicker>{t.name}</OfferKicker>
@@ -110,7 +111,7 @@ async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["p
                     <span className="text-sm text-ink-3">par mois et par {tierUnit}</span>
                   </div>
                   <p>{t.tagline}</p>
-                  <Checklist items={t.items} className="mt-auto" />
+                  <Checklist items={t.items} />
                 </SiteCard>
               ))}
             </div>
