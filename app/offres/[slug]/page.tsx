@@ -4,12 +4,13 @@ import { Suspense } from "react"
 import { Reveal } from "@/components/motion/reveal"
 import { CtaBlock, Checklist, Eyebrow, Facts, PageFallback, PageHero, SectionHead } from "@/components/site/blocks"
 import { Icon } from "@/components/site/icon"
-import { JsonLd } from "@/components/site/json-ld"
+import { JsonLd, priceSpecification } from "@/components/site/json-ld"
 import { ButtonRow, LinkButton } from "@/components/site/links"
-import { OfferCardCompact } from "@/components/site/offer-card"
+import { OfferCardCompact, OfferKicker } from "@/components/site/offer-card"
 import { CaseLinks, FaqSection, MethodSection, SplitSection } from "@/components/site/sections"
 import { CardIcon, SiteCard } from "@/components/site/site-card"
 import { getOffer, offerDetails, offers } from "@/lib/content/offers"
+import { formatEuros } from "@/lib/content/offers-data"
 import { pageMeta } from "@/lib/metadata"
 import { site } from "@/lib/site"
 
@@ -39,6 +40,8 @@ async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["p
   if (!offer) notFound()
 
   const others = offers.filter((o) => o.slug !== slug)
+  // Abonnement à paliers (maintenance) : unité de facturation affichée sous chaque prix.
+  const tierUnit = offer.pricing.kind === "perMonth" ? offer.pricing.unit : null
 
   return (
     <>
@@ -52,6 +55,16 @@ async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["p
           url: `${site.url}/offres/${slug}`,
           provider: { "@id": `${site.url}/#organisation` },
           areaServed: { "@type": "Country", name: "France" },
+          ...(offer.tiers && tierUnit
+            ? {
+                offers: offer.tiers.map((t) => ({
+                  "@type": "Offer",
+                  name: `${offer.title}, palier ${t.name}`,
+                  description: t.tagline,
+                  priceSpecification: priceSpecification({ ...offer.pricing, amount: t.amount }, true),
+                })),
+              }
+            : {}),
         }}
       />
       <PageHero blobs={[1]} crumbs={[{ label: offer.crumb }]}>
@@ -78,6 +91,33 @@ async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["p
         <Checklist items={offer.forWho} />
       </SplitSection>
 
+      {offer.tiers && tierUnit && (
+        <section className="section-tight">
+          <div className="container-site">
+            <SectionHead
+              eyebrow="Paliers"
+              title={offer.tiers.length === 2 ? "Deux niveaux de service." : "Nos niveaux de service."}
+              lead={offer.deliverablesLead}
+            />
+            <div className="grid gap-[18px] md:grid-cols-2">
+              {offer.tiers.map((t, i) => (
+                <SiteCard key={t.name} as="article" delay={i * 0.08} className="flex min-h-full flex-col">
+                  <OfferKicker>{t.name}</OfferKicker>
+                  <div className="mb-3 flex flex-wrap items-baseline gap-x-2">
+                    <strong className="font-display text-[clamp(2rem,3.4vw,2.6rem)] leading-none tracking-[-0.04em]">
+                      {formatEuros(t.amount)}&nbsp;HT
+                    </strong>
+                    <span className="text-sm text-ink-3">par mois et par {tierUnit}</span>
+                  </div>
+                  <p>{t.tagline}</p>
+                  <Checklist items={t.items} className="mt-auto" />
+                </SiteCard>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {offer.examples && (
         <section className="section-tight">
           <div className="container-site">
@@ -99,7 +139,8 @@ async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["p
 
       <MethodSection eyebrow="Déroulé" title="Comment nous travaillons." lead={offer.stepsLead} steps={offer.steps} />
 
-      <SplitSection eyebrow="Livrables" title="Ce que vous obtenez." lead={offer.deliverablesLead}>
+      {/* Avec des paliers, la note de prix est déjà affichée au-dessus des paliers. */}
+      <SplitSection eyebrow="Livrables" title="Ce que vous obtenez." lead={offer.tiers ? undefined : offer.deliverablesLead}>
         <Checklist items={offer.deliverables} />
       </SplitSection>
 
@@ -114,7 +155,7 @@ async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["p
       <section className="section-tight">
         <div className="container-site">
           <SectionHead eyebrow="Aller plus loin" title="Nos autres offres." />
-          <div className="grid gap-[18px] sm:grid-cols-2">
+          <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
             {others.map((o) => (
               <OfferCardCompact key={o.slug} offer={o} />
             ))}

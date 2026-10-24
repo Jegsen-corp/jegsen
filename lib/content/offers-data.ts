@@ -32,6 +32,13 @@ export function priceLabels(pricing: OfferPricing) {
         card: `${amount} / jour`,
         compact: `dès ${amount} / jour`,
       }
+    case "perMonth":
+      return {
+        fact: `À partir de ${amount} par mois et par ${pricing.unit}`,
+        cardLabel: "À partir de",
+        card: `${amount} / mois`,
+        compact: `dès ${amount} / mois`,
+      }
   }
 }
 
@@ -247,6 +254,10 @@ const offerSources: OfferSource[] = [
         q: "Où sont traitées nos données ?",
         a: "Le choix des modèles et de l'hébergement fait partie du cadrage, en fonction de la sensibilité de vos données et de vos obligations (RGPD, secret professionnel, contrats clients).",
       },
+      {
+        q: "Et après la mise en production ?",
+        a: "Le workflow vous appartient. Pour qu'il reste fiable quand vos logiciels, vos documents ou les modèles d'IA évoluent, nous proposons une [maintenance et un suivi des gains](/offres/maintenance-suivi-ia), à partir de 150 € HT par mois et par workflow.",
+      },
     ],
   },
   {
@@ -310,6 +321,101 @@ const offerSources: OfferSource[] = [
       {
         q: "Est-ce que cela répond à l'obligation de maîtrise de l'IA ?",
         a: "Le programme constitue une mesure concrète de développement de la maîtrise de l'IA et produit des traces écrites (charte, supports, participation). L'appréciation de votre conformité reste de votre ressort ou de celui de votre conseil juridique.",
+      },
+    ],
+  },
+  /**
+   * Maintenance et suivi (MCO). Offre de suite, vendue par workflow en production.
+   * Prix décidés le 25/10/2026 (étude tarifaire) : Essentiel 150 € et Standard 350 € HT par mois et par workflow.
+   * Le palier Premium (750 €, prise en charge en 4 heures ouvrées) sera ajouté à la fin de l'alternance des fondateurs.
+   * Hébergement et consommation des modèles d'IA : sur devis, dans la proposition.
+   */
+  {
+    slug: "maintenance-suivi-ia",
+    metaTitle: "Maintenance et suivi des automatisations IA (MCO) | Jegsen IA",
+    metaDescription: "Maintenance de vos workflows IA en production : supervision, correctifs, mises à jour des connecteurs et des modèles, suivi des gains. Dès 150 € HT par mois.",
+    kicker: "Après la mise en production",
+    title: "Maintenance et suivi",
+    crumb: "Maintenance IA",
+    lead: "Une automatisation doit rester fiable dans la durée. Nous surveillons vos workflows, corrigeons ce qui casse et suivons les gains, mois après mois.",
+    duration: "Abonnement mensuel",
+    pricing: {
+      kind: "perMonth",
+      amount: 150,
+      unit: "workflow",
+      note: "À partir de 150 € HT par mois et par workflow en production, selon le palier. L'hébergement et la consommation des modèles d'IA dépendent de vos volumes : ils sont chiffrés à part, dans la proposition.",
+    },
+    ctaLabel: "Parler de la maintenance",
+    cardDeliverable: "Workflows supervisés, corrigés et mis à jour, avec suivi des gains",
+    factDeliverable: "Workflows fiables",
+    followUp: true,
+    tiers: [
+      {
+        name: "Essentiel",
+        amount: 150,
+        tagline: "Pour garder un workflow fiable.",
+        items: [
+          "Supervision et alertes",
+          "Correction des anomalies",
+          "Mises à jour des connecteurs et des modèles d'IA",
+          "Prise en charge le jour ouvré suivant",
+        ],
+      },
+      {
+        name: "Standard",
+        amount: 350,
+        tagline: "Pour l'améliorer et suivre les gains.",
+        items: [
+          "Tout le palier Essentiel",
+          "Ajustement des règles et des consignes",
+          "Rapport mensuel des gains",
+          "Point de suivi trimestriel",
+        ],
+      },
+    ],
+    forWho: [
+      "Un workflow d'IA tourne en production et vos équipes en dépendent au quotidien.",
+      "Vos logiciels, vos documents et les modèles d'IA évoluent, et le workflow doit suivre.",
+      "Vous voulez continuer à mesurer les gains après la mise en production.",
+    ],
+    stepsLead: "Un abonnement par workflow, qui démarre à la mise en production.",
+    steps: [
+      {
+        title: "Mise sous supervision",
+        text: "Dès la mise en production : indicateurs, alertes et journal des exceptions pour chaque workflow.",
+      },
+      {
+        title: "Surveillance",
+        text: "Erreurs, lenteurs et qualité des résultats suivies en continu. Une anomalie déclenche une alerte.",
+      },
+      {
+        title: "Correction et mises à jour",
+        text: "Anomalies corrigées, connecteurs adaptés quand vos logiciels changent, modèles d'IA mis à jour quand une version évolue.",
+      },
+      {
+        title: "Suivi des gains",
+        text: "Avec le palier Standard, un rapport mensuel compare les indicateurs à ceux d'avant l'automatisation, et un point trimestriel décide des ajustements.",
+      },
+    ],
+    deliverables: [
+      "Supervision et alertes de chaque workflow",
+      "Correctifs et mises à jour",
+      "Journal des interventions",
+      "Rapport mensuel des gains (palier Standard)",
+    ],
+    showCases: false,
+    faq: [
+      {
+        q: "Pourquoi maintenir un workflow d'IA ?",
+        a: "Parce que tout ce qui l'entoure évolue : vos logiciels changent, les modèles d'IA sont mis à jour ou retirés, vos documents changent de format. Sans suivi, un workflow fiable au départ se dégrade sans bruit.",
+      },
+      {
+        q: "Comment le prix est-il calculé ?",
+        a: "Par workflow en production et par mois, selon le palier choisi. L'hébergement et la consommation des modèles d'IA dépendent de vos volumes : ils sont chiffrés à part, dans la proposition.",
+      },
+      {
+        q: "Les évolutions sont-elles incluses ?",
+        a: "Les ajustements de règles et de consignes sont inclus dans le palier Standard. Une nouvelle fonctionnalité ou un nouveau processus fait l'objet d'un devis, comme un [sprint d'intégration](/offres/sprint-integration-ia).",
       },
     ],
   },

@@ -6,7 +6,7 @@ import { CtaBlock, PageHero, SectionHead } from "@/components/site/blocks"
 import { ButtonRow, LinkButton } from "@/components/site/links"
 import { OfferCardCompact } from "@/components/site/offer-card"
 import { CaseLinks, FaqSection, SplitSection } from "@/components/site/sections"
-import { offers } from "@/lib/content/offers"
+import { entryOffers } from "@/lib/content/offers"
 import { pageMeta } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMeta({
@@ -87,7 +87,7 @@ export default function NantesPage() {
         <div className="container-site">
           <SectionHead eyebrow="Nos offres à Nantes" title="Trois façons de démarrer." />
           <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
-            {offers.map((o, i) => (
+            {entryOffers.map((o, i) => (
               <OfferCardCompact key={o.slug} offer={o} delay={i * 0.08} />
             ))}
           </div>

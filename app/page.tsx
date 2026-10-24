@@ -13,9 +13,9 @@ import { CtaBlock, Eyebrow, SectionHead } from "@/components/site/blocks"
 import { Faq } from "@/components/site/faq"
 import { Icon, icons } from "@/components/site/icon"
 import { ButtonRow, LinkButton } from "@/components/site/links"
-import { OfferCard } from "@/components/site/offer-card"
+import { OfferBand, OfferCard } from "@/components/site/offer-card"
 import { CardIcon, SiteCard } from "@/components/site/site-card"
-import { offers } from "@/lib/content/offers"
+import { entryOffers, followUpOffers } from "@/lib/content/offers"
 import { pageMeta } from "@/lib/metadata"
 import { site } from "@/lib/site"
 
@@ -216,10 +216,13 @@ export default function HomePage() {
             lead="Commencez petit, mesurez, puis étendez ce qui fonctionne."
           />
           <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
-            {offers.map((o, i) => (
+            {entryOffers.map((o, i) => (
               <OfferCard key={o.slug} offer={o} delay={i * 0.1} />
             ))}
           </div>
+          {followUpOffers.map((o) => (
+            <OfferBand key={o.slug} offer={o} />
+          ))}
           <Reveal className="mt-8 flex justify-center">
             <LinkButton href="/cas-usage" variant="line" arrow>
               Voir les cas d'usage

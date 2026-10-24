@@ -26,6 +26,11 @@ export type OfferPricing =
   | { kind: "forfait"; amount: number; note: string }
   | { kind: "from"; amount: number; note: string }
   | { kind: "perDay"; amount: number; groupMax: number; note: string }
+  /** Abonnement mensuel, prix d'entrée par unité (par exemple par workflow en production). */
+  | { kind: "perMonth"; amount: number; unit: string; note: string }
+
+/** Palier d'un abonnement (maintenance) : nom, prix mensuel, promesse et contenu. */
+export type OfferTier = { name: string; amount: number; tagline: string; items: string[] }
 
 export type OfferDetail = {
   slug: string
@@ -43,6 +48,10 @@ export type OfferDetail = {
   /** Phrase de livrable sur les cartes (plus longue que la puce d'en-tête). */
   cardDeliverable: string
   featured?: boolean
+  /** Offre de suite (après une mise en production) : absente des grilles « Trois façons de commencer ». */
+  followUp?: boolean
+  /** Paliers de l'abonnement, affichés sur la page de l'offre. */
+  tiers?: OfferTier[]
   facts: { label: string; value: string }[]
   forWho: string[]
   examples?: { title: string; text: string; icon: IconShape[] }[]

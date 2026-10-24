@@ -16,6 +16,7 @@ const subjects = [
   { value: "diagnostic-rentabilite-ia", label: "Diagnostic de rentabilité IA" },
   { value: "sprint-integration-ia", label: "Sprint d'intégration IA" },
   { value: "programme-formation-ia", label: "Programme IA et adoption" },
+  { value: "maintenance-suivi-ia", label: "Maintenance et suivi (MCO)" },
   { value: "pilote", label: "Programme pilote (automatisation documentaire)" },
   { value: "autre", label: "Autre demande" },
 ]

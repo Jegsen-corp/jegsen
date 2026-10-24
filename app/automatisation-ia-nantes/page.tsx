@@ -9,7 +9,7 @@ import { OfferCardCompact } from "@/components/site/offer-card"
 import { FaqSection, MethodSection, SplitSection } from "@/components/site/sections"
 import { SiteCard } from "@/components/site/site-card"
 import { caseHref, processCases } from "@/lib/content/cases"
-import { offers } from "@/lib/content/offers"
+import { entryOffers } from "@/lib/content/offers"
 import { pageMeta } from "@/lib/metadata"
 import { site } from "@/lib/site"
 
@@ -194,7 +194,7 @@ export default function AutomatisationNantesPage() {
         <div className="container-site">
           <SectionHead eyebrow="Démarrer" title="Trois façons de commencer." />
           <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
-            {offers.map((o, i) => (
+            {entryOffers.map((o, i) => (
               <OfferCardCompact key={o.slug} offer={o} delay={i * 0.08} />
             ))}
           </div>

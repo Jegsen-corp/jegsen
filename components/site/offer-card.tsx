@@ -68,14 +68,39 @@ export function OfferCardCompact({ offer, delay }: { offer: OfferSummary; delay?
       <OfferFooter>
         <div>
           <small className="text-[13px] text-ink-3">{offer.duration}</small>
-          <strong className="block font-display text-2xl tracking-[-0.03em]">
-            {offer.compactPrice}
-          </strong>
+          {/* 20 px : « dès 1 950 € HT / jour » tient sur une ligne dans une grille de trois cartes. */}
+          <strong className="block font-display text-xl tracking-[-0.03em] whitespace-nowrap">{offer.compactPrice}</strong>
         </div>
         <ArrowLink href={offerHref(offer.slug)} stretched>
           Détails
         </ArrowLink>
       </OfferFooter>
+    </SiteCard>
+  )
+}
+
+/** Offre de suite en bandeau horizontal, sous la grille des offres pour démarrer (accueil). */
+export function OfferBand({ offer, delay }: { offer: OfferSummary; delay?: number }) {
+  return (
+    <SiteCard
+      as="article"
+      delay={delay}
+      className="mt-[18px] flex flex-col gap-5 md:flex-row md:items-center md:justify-between md:gap-10"
+    >
+      <div className="max-w-[62ch]">
+        <OfferKicker className="mb-2">{offer.kicker}</OfferKicker>
+        <h3 className="mb-2">{offer.title}</h3>
+        <p className="m-0">{offer.description}</p>
+      </div>
+      <div className="flex flex-none items-end justify-between gap-8 border-t border-line pt-[22px] md:border-t-0 md:border-l md:pt-0 md:pl-10">
+        <div>
+          <small className="text-[13px] text-ink-3">{offer.priceLabel}</small>
+          <strong className="block font-display text-2xl tracking-[-0.03em] whitespace-nowrap">{offer.price}</strong>
+        </div>
+        <ArrowLink href={offerHref(offer.slug)} stretched aria-label={`En savoir plus : ${offer.title}`}>
+          Détails
+        </ArrowLink>
+      </div>
     </SiteCard>
   )
 }

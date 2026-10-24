@@ -2,8 +2,8 @@ import { offerDetails } from "@/lib/content/offers"
 import type { FaqItem, OfferPricing } from "@/lib/content/types"
 import { founders, site } from "@/lib/site"
 
-/** Prix au format schema.org : forfait (price), à partir de (minPrice) ou prix à la journée. */
-function priceSpecification(p: OfferPricing) {
+/** Prix au format schema.org : forfait (price), à partir de (minPrice), prix à la journée ou au mois. */
+export function priceSpecification(p: OfferPricing, exact = false) {
   const base = { priceCurrency: "EUR", valueAddedTaxIncluded: false }
   if (p.kind === "from") return { "@type": "PriceSpecification", minPrice: p.amount, ...base }
   if (p.kind === "perDay")
@@ -11,6 +11,15 @@ function priceSpecification(p: OfferPricing) {
       "@type": "UnitPriceSpecification",
       price: p.amount,
       referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "DAY" },
+      ...base,
+    }
+  if (p.kind === "perMonth")
+    return {
+      "@type": "UnitPriceSpecification",
+      // Catalogue : prix d'entrée (minPrice). Palier précis : prix exact.
+      ...(exact ? { price: p.amount } : { minPrice: p.amount }),
+      referenceQuantity: { "@type": "QuantitativeValue", value: 1, unitCode: "MON" },
+      unitText: `par mois et par ${p.unit}`,
       ...base,
     }
   return { "@type": "PriceSpecification", price: p.amount, ...base }
