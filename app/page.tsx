@@ -214,7 +214,7 @@ export default function HomePage() {
             center
             eyebrow="Nos offres"
             title="Quatre offres, un seul cap : des gains mesurés."
-            lead="Commencez par une semaine de diagnostic. Le reste s'enchaîne, prix publiés et gains suivis."
+            lead="Commencez petit, mesurez, puis étendez ce qui fonctionne."
           />
           <OffersHub offers={offers} />
           <Reveal className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[14px] text-ink-2">
