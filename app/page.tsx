@@ -13,9 +13,9 @@ import { CtaBlock, Eyebrow, SectionHead } from "@/components/site/blocks"
 import { Faq } from "@/components/site/faq"
 import { Icon, icons } from "@/components/site/icon"
 import { ButtonRow, LinkButton } from "@/components/site/links"
-import { OfferBand, OfferCard } from "@/components/site/offer-card"
+import { OffersHub } from "@/components/home/offers-hub"
 import { CardIcon, SiteCard } from "@/components/site/site-card"
-import { entryOffers, followUpOffers } from "@/lib/content/offers"
+import { offers } from "@/lib/content/offers"
 import { pageMeta } from "@/lib/metadata"
 import { site } from "@/lib/site"
 
@@ -208,25 +208,31 @@ export default function HomePage() {
       </section>
 
       {/* Offres */}
-      <section id="offres" className="section scroll-mt-20 pt-0">
+      <section id="offres" className="section scroll-mt-20 overflow-hidden pt-0">
         <div className="container-site">
           <SectionHead
+            center
             eyebrow="Nos offres"
-            title="Trois façons de transformer l'IA en résultats."
-            lead="Commencez petit, mesurez, puis étendez ce qui fonctionne."
+            title="Quatre offres, un seul cap : des gains mesurés."
+            lead="Commencez par une semaine de diagnostic. Le reste s'enchaîne, prix publiés et gains suivis."
           />
-          <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
-            {entryOffers.map((o, i) => (
-              <OfferCard key={o.slug} offer={o} delay={i * 0.1} />
-            ))}
-          </div>
-          {followUpOffers.map((o) => (
-            <OfferBand key={o.slug} offer={o} />
-          ))}
-          <Reveal className="mt-8 flex justify-center">
-            <LinkButton href="/cas-usage" variant="line" arrow>
-              Voir les cas d'usage
-            </LinkButton>
+          <OffersHub offers={offers} />
+          <Reveal className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[14px] text-ink-2">
+            <span>Prix de départ publiés</span>
+            <span aria-hidden="true" className="text-ink-3">·</span>
+            <span>Diagnostic déduit du sprint</span>
+            <span aria-hidden="true" className="text-ink-3">·</span>
+            <span>Gains mesurés en production</span>
+          </Reveal>
+          <Reveal className="mt-7 flex justify-center">
+            <ButtonRow className="justify-center">
+              <LinkButton href="/offres/diagnostic-rentabilite-ia" arrow>
+                Réserver un diagnostic
+              </LinkButton>
+              <LinkButton href="/cas-usage" variant="line" arrow>
+                Voir les cas d'usage
+              </LinkButton>
+            </ButtonRow>
           </Reveal>
         </div>
       </section>

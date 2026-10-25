@@ -1,6 +1,5 @@
 import { offerHref, type OfferSummary } from "@/lib/content/offers"
 import { cn } from "@/lib/utils"
-import { Icon, icons } from "./icon"
 import { ArrowLink } from "./links"
 import { SiteCard } from "./site-card"
 
@@ -29,35 +28,6 @@ export function Tag({ children, tone = "neutral" }: { children: React.ReactNode;
   )
 }
 
-/** Carte d'offre complète (accueil). */
-export function OfferCard({ offer, delay }: { offer: OfferSummary; delay?: number }) {
-  return (
-    <SiteCard as="article" delay={delay} className={cn("flex min-h-full flex-col", offer.featured && "border-gradient border-[1.5px] border-transparent hover:border-transparent")}>
-      <OfferKicker>{offer.kicker}</OfferKicker>
-      <h3>{offer.title}</h3>
-      <div className="mt-1.5 mb-5 flex flex-wrap gap-2">
-        <Tag>
-          <Icon shapes={icons.clock} />
-          {offer.duration}
-        </Tag>
-      </div>
-      <p>{offer.description}</p>
-      <p className="text-sm! text-ink-3!">
-        <strong className="text-ink">Livrable :</strong> {offer.deliverable}.
-      </p>
-      <OfferFooter>
-        <div>
-          <small className="text-[13px] text-ink-3">{offer.priceLabel}</small>
-          <strong className="block font-display text-2xl tracking-[-0.03em]">{offer.price}</strong>
-        </div>
-        <ArrowLink href={offerHref(offer.slug)} stretched aria-label={`En savoir plus : ${offer.title}`}>
-          Détails
-        </ArrowLink>
-      </OfferFooter>
-    </SiteCard>
-  )
-}
-
 /** Carte d'offre compacte (pages offres, IA à Nantes). */
 export function OfferCardCompact({ offer, delay }: { offer: OfferSummary; delay?: number }) {
   return (
@@ -75,32 +45,6 @@ export function OfferCardCompact({ offer, delay }: { offer: OfferSummary; delay?
           Détails
         </ArrowLink>
       </OfferFooter>
-    </SiteCard>
-  )
-}
-
-/** Offre de suite en bandeau horizontal, sous la grille des offres pour démarrer (accueil). */
-export function OfferBand({ offer, delay }: { offer: OfferSummary; delay?: number }) {
-  return (
-    <SiteCard
-      as="article"
-      delay={delay}
-      className="mt-[18px] flex flex-col gap-5 md:flex-row md:items-center md:justify-between md:gap-10"
-    >
-      <div className="max-w-[62ch]">
-        <OfferKicker className="mb-2">{offer.kicker}</OfferKicker>
-        <h3 className="mb-2">{offer.title}</h3>
-        <p className="m-0">{offer.description}</p>
-      </div>
-      <div className="flex flex-none items-end justify-between gap-8 border-t border-line pt-[22px] md:border-t-0 md:border-l md:pt-0 md:pl-10">
-        <div>
-          <small className="text-[13px] text-ink-3">{offer.priceLabel}</small>
-          <strong className="block font-display text-2xl tracking-[-0.03em] whitespace-nowrap">{offer.price}</strong>
-        </div>
-        <ArrowLink href={offerHref(offer.slug)} stretched aria-label={`En savoir plus : ${offer.title}`}>
-          Détails
-        </ArrowLink>
-      </div>
     </SiteCard>
   )
 }
