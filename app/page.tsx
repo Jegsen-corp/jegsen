@@ -13,7 +13,7 @@ import { CtaBlock, Eyebrow, SectionHead } from "@/components/site/blocks"
 import { Faq } from "@/components/site/faq"
 import { Icon, icons } from "@/components/site/icon"
 import { ButtonRow, LinkButton } from "@/components/site/links"
-import { OffersHub } from "@/components/home/offers-hub"
+import { OffersJourney } from "@/components/home/offers-journey"
 import { CardIcon, SiteCard } from "@/components/site/site-card"
 import { offers } from "@/lib/content/offers"
 import { pageMeta } from "@/lib/metadata"
@@ -216,12 +216,12 @@ export default function HomePage() {
             title="Quatre offres, un seul cap : des gains mesurés."
             lead="Commencez petit, mesurez, puis étendez ce qui fonctionne."
           />
-          <OffersHub offers={offers} />
+          <OffersJourney offers={offers} />
           <Reveal className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-[14px] text-ink-2">
             <span>Prix de départ publiés</span>
-            <span aria-hidden="true" className="text-ink-3">·</span>
+            <span aria-hidden="true" className="hidden text-ink-3 sm:inline">·</span>
             <span>Diagnostic déduit du sprint</span>
-            <span aria-hidden="true" className="text-ink-3">·</span>
+            <span aria-hidden="true" className="hidden text-ink-3 sm:inline">·</span>
             <span>Gains mesurés en production</span>
           </Reveal>
           <Reveal className="mt-7 flex justify-center">
