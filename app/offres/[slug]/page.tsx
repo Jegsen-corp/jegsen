@@ -123,7 +123,7 @@ async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["p
         <section className="section-tight">
           <div className="container-site">
             <SectionHead eyebrow="Exemples de processus" title="Ce que nous mettons en production." />
-            <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid-balance grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
               {offer.examples.map((ex, i) => (
                 <SiteCard key={ex.title} delay={(i % 3) * 0.08}>
                   <CardIcon>
@@ -156,7 +156,7 @@ async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["p
       <section className="section-tight">
         <div className="container-site">
           <SectionHead eyebrow="Aller plus loin" title="Nos autres offres." />
-          <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid-balance grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
             {others.map((o) => (
               <OfferCardCompact key={o.slug} offer={o} />
             ))}

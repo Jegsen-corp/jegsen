@@ -16,14 +16,14 @@ import { site } from "@/lib/site"
 const path = "/automatisation-ia-nantes"
 const title = "Automatisation IA à Nantes pour PME et ETI | Jegsen IA"
 const description =
-  "Automatisation des processus par l'IA à Nantes : factures, e-mails, bons de livraison, demandes clients. Branchée sur vos outils, avec validation humaine des exceptions."
+  "Automatisation des processus par l'IA à Nantes : factures, e-mails, bons de livraison, demandes clients. Branchée sur vos outils, avec validation humaine des exceptions."
 
 export const metadata: Metadata = pageMeta({ title, description, path })
 
 const steps = [
   {
     title: "Un échange sur un processus précis",
-    text: "30 minutes, dans vos locaux à Nantes ou en visio. Nous regardons comment le travail se fait aujourd'hui : qui reçoit quoi, combien de fois, et où se perd le temps.",
+    text: "30 minutes, dans vos locaux à Nantes ou en visio. Nous regardons comment le travail se fait aujourd'hui : qui reçoit quoi, combien de fois, et où se perd le temps.",
   },
   {
     title: "Un chiffrage avant de construire",
@@ -41,27 +41,27 @@ const steps = [
 
 const faq = [
   {
-    q: "Quels processus peut-on automatiser avec l'IA ?",
-    a: "Ceux qui reposent sur la lecture, le tri, la vérification et la ressaisie d'informations : factures fournisseurs, bons de livraison, e-mails entrants, demandes de devis, comptes rendus. Plus le volume est régulier et les règles claires, plus le gain est net.",
+    q: "Quels processus peut-on automatiser avec l'IA ?",
+    a: "Ceux qui reposent sur la lecture, le tri, la vérification et la ressaisie d'informations : factures fournisseurs, bons de livraison, e-mails entrants, demandes de devis, comptes rendus. Plus le volume est régulier et les règles claires, plus le gain est net.",
   },
   {
-    q: "Quelle différence avec une automatisation classique ?",
-    a: "Une automatisation classique suit des règles fixes et bute sur les documents ou les messages qui varient. L'IA sait lire un document non standard ou comprendre une demande formulée librement. Nous combinons les deux : des règles là où elles suffisent, l'IA là où le contenu varie.",
+    q: "Quelle différence avec une automatisation classique ?",
+    a: "Une automatisation classique suit des règles fixes et bute sur les documents ou les messages qui varient. L'IA sait lire un document non standard ou comprendre une demande formulée librement. Nous combinons les deux : des règles là où elles suffisent, l'IA là où le contenu varie.",
   },
   {
-    q: "Combien coûte une automatisation par l'IA ?",
-    a: "Un sprint d'intégration est établi sur devis, à partir de 5 000 € HT selon le processus et les outils à connecter. Le diagnostic de rentabilité, forfait de 1 900 € HT déduit du sprint si vous l'enchaînez, permet de chiffrer le gain avant d'engager ce budget.",
+    q: "Combien coûte une automatisation par l'IA ?",
+    a: "Un sprint d'intégration est établi sur devis, à partir de 5 000 € HT selon le processus et les outils à connecter. Le diagnostic de rentabilité, forfait de 1 900 € HT déduit du sprint si vous l'enchaînez, permet de chiffrer le gain avant d'engager ce budget.",
   },
   {
-    q: "Faut-il changer de logiciels ?",
+    q: "Faut-il changer de logiciels ?",
     a: "Non. L'automatisation se branche sur les outils que vos équipes utilisent déjà. Si un logiciel ne permet aucun échange de données, nous le signalons au moment du chiffrage.",
   },
   {
-    q: "Que se passe-t-il quand l'IA se trompe ?",
+    q: "Que se passe-t-il quand l'IA se trompe ?",
     a: "Chaque workflow comporte des contrôles de cohérence. Ce qui ne passe pas les contrôles, ou ce qui engage l'entreprise (paiement, envoi à un client), est soumis à une validation humaine avant toute action.",
   },
   {
-    q: "Intervenez-vous autour de Nantes ?",
+    q: "Intervenez-vous autour de Nantes ?",
     a: "Oui, dans toute la Loire-Atlantique et les Pays de la Loire, de Saint-Nazaire à Ancenis, sur site aux étapes qui le demandent. Ailleurs en France, le travail se fait à distance avec des déplacements ponctuels.",
   },
 ]
@@ -99,7 +99,7 @@ export default function AutomatisationNantesPage() {
           Automatisation IA à Nantes, branchée sur vos outils.
         </Reveal>
         <Reveal as="p" className="lead">
-          Jegsen automatise les tâches de lecture, de tri et de ressaisie des PME et ETI nantaises : factures, bons de
+          Jegsen automatise les tâches de lecture, de tri et de ressaisie des PME et ETI nantaises : factures, bons de
           livraison, e-mails, demandes clients. L'IA traite le volume, vos équipes gardent les décisions.
         </Reveal>
         <Reveal className="mt-7">
@@ -121,7 +121,7 @@ export default function AutomatisationNantesPage() {
             title="Les processus qui coûtent le plus de temps."
             lead="Des tâches présentes dans la plupart des entreprises, quel que soit le secteur. Chaque fiche détaille le fonctionnement et les contrôles."
           />
-          <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid-balance grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
             {processCases.map((c, i) => (
               <SiteCard key={c.slug} as="article" delay={i * 0.06} className="flex min-h-full flex-col">
                 <h3>{c.shortTitle}</h3>
@@ -155,7 +155,7 @@ export default function AutomatisationNantesPage() {
             client formule sa demande autrement, elle s'arrête.
           </p>
           <p>
-            L'IA lève ce blocage : elle lit un document non standard, comprend une demande écrite librement, et en
+            L'IA lève ce blocage : elle lit un document non standard, comprend une demande écrite librement, et en
             extrait les informations utiles. Nous la réservons aux étapes qui en ont besoin, et gardons des règles simples
             partout ailleurs, plus prévisibles et moins coûteuses.
           </p>
@@ -175,7 +175,7 @@ export default function AutomatisationNantesPage() {
       >
         <div className="prose-site">
           <p>
-            Les meilleures automatisations partent du travail réel : la boîte e-mail partagée, le dossier de factures, le
+            Les meilleures automatisations partent du travail réel : la boîte e-mail partagée, le dossier de factures, le
             tableur qui sert de relais. Ce repérage se fait mieux sur place, avec les personnes qui traitent ces tâches
             chaque jour.
           </p>
@@ -193,7 +193,7 @@ export default function AutomatisationNantesPage() {
       <section className="section">
         <div className="container-site">
           <SectionHead eyebrow="Démarrer" title="Trois façons de commencer." />
-          <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid-balance grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
             {entryOffers.map((o, i) => (
               <OfferCardCompact key={o.slug} offer={o} delay={i * 0.08} />
             ))}
@@ -201,11 +201,11 @@ export default function AutomatisationNantesPage() {
         </div>
       </section>
 
-      <FaqSection title="Automatisation IA : les questions fréquentes." items={faq} />
+      <FaqSection title="Automatisation IA : les questions fréquentes." items={faq} />
 
       <CtaBlock
-        title="Un processus à automatiser ?"
-        lead="Décrivez-le en quelques lignes. Nous revenons vers vous pour un échange de 30 minutes, à Nantes ou en visio."
+        title="Un processus à automatiser ?"
+        lead="Décrivez-le en quelques lignes. Nous revenons vers vous pour un échange de 30 minutes, à Nantes ou en visio."
       />
     </>
   )

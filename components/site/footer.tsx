@@ -13,14 +13,15 @@ function Column({ title, children }: { title: string; children: React.ReactNode 
   )
 }
 
-const linkClass = "text-[15px] text-ink-2 transition-colors hover:text-ink"
+// Marge interne compensée : la zone tactile atteint 33 px sans changer l'espacement visible.
+const linkClass = "-my-1.5 inline-block py-1.5 text-[15px] text-ink-2 transition-colors hover:text-ink"
 
 export function Footer() {
   return (
     <footer className="mt-10 pt-20 pb-10">
       <div className="container-site">
-        <div className="grid grid-cols-2 gap-8 border-b border-line pb-12 lg:grid-cols-[1.3fr_repeat(4,1fr)]">
-          <div>
+        <div className="grid grid-cols-2 gap-x-8 gap-y-10 border-b border-line pb-12 md:grid-cols-4 lg:grid-cols-[1.3fr_repeat(4,1fr)] lg:gap-8">
+          <div className="col-span-2 md:col-span-4 lg:col-span-1">
             <Logo />
             <p className="mt-4 max-w-[34ch] text-sm text-ink-3">
               L'IA comme levier de rentabilité pour les PME et ETI françaises. Formation, conseil et automatisation des
@@ -72,7 +73,7 @@ export function Footer() {
         </div>
         <div className="flex flex-wrap justify-between gap-3 pt-7 text-sm text-ink-3">
           <span>© 2026 Jegsen. Tous droits réservés.</span>
-          <span className="flex gap-[18px]">
+          <span className="flex flex-wrap gap-x-[18px]">
             <Link href="/mentions-legales" className={linkClass}>
               Mentions légales
             </Link>

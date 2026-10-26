@@ -12,26 +12,26 @@ import { pageMeta } from "@/lib/metadata"
 export const metadata: Metadata = pageMeta({
   title: "Intégration et formation IA à Nantes pour PME et ETI | Jegsen IA",
   description:
-    "Accompagnement IA à Nantes et en Loire-Atlantique : diagnostic de rentabilité, automatisation des processus intégrée à votre SI et formation des équipes, sur site.",
+    "Accompagnement IA à Nantes et en Loire-Atlantique : diagnostic de rentabilité, automatisation des processus intégrée à votre SI et formation des équipes, sur site.",
   path: "/intelligence-artificielle-nantes",
 })
 
 const faq = [
   {
-    q: "Vous déplacez-vous dans nos locaux ?",
+    q: "Vous déplacez-vous dans nos locaux ?",
     a: "Oui. À Nantes et dans la région, les entretiens du diagnostic, les ateliers de formation et la mise en production se font de préférence sur site, au plus près des équipes qui font le travail.",
   },
   {
-    q: "Travaillez-vous avec des entreprises hors de Loire-Atlantique ?",
-    a: "Oui, partout en France. Le travail se fait alors à distance, avec des déplacements aux étapes où la présence compte : lancement, ateliers, mise en production.",
+    q: "Travaillez-vous avec des entreprises hors de Loire-Atlantique ?",
+    a: "Oui, partout en France. Le travail se fait alors à distance, avec des déplacements aux étapes où la présence compte : lancement, ateliers, mise en production.",
   },
   {
-    q: "Faut-il un service informatique en interne ?",
+    q: "Faut-il un service informatique en interne ?",
     a: "Non. Nous travaillons avec votre prestataire informatique s'il y en a un, ou directement avec vous. Nous avons besoin d'accès aux outils concernés, pas d'une équipe technique.",
   },
   {
-    q: "Par quoi commencer ?",
-    a: "Par un échange de 30 minutes sur un processus précis. S'il se prête à l'automatisation, nous proposons un diagnostic chiffré ou, si le besoin est déjà clair, un sprint d'intégration.",
+    q: "Par quoi commencer ?",
+    a: "Par un échange de 30 minutes sur un processus précis. S'il se prête à l'automatisation, nous proposons un diagnostic chiffré ou, si le besoin est déjà clair, un sprint d'intégration.",
   },
 ]
 
@@ -68,12 +68,12 @@ export default function NantesPage() {
       >
         <div className="prose-site">
           <p>
-            Un projet d'automatisation réussit quand il part du travail réel : observer comment une facture est traitée,
+            Un projet d'automatisation réussit quand il part du travail réel : observer comment une facture est traitée,
             comment une demande est triée, où se perdent les minutes. Ce travail se fait mieux dans vos locaux, avec les
             personnes concernées.
           </p>
           <p>
-            Même logique pour la formation : des ateliers en présentiel, sur les tâches de chaque métier, ancrent les
+            Même logique pour la formation : des ateliers en présentiel, sur les tâches de chaque métier, ancrent les
             nouveaux usages bien plus sûrement qu'un module en ligne générique.
           </p>
           <p>
@@ -86,7 +86,7 @@ export default function NantesPage() {
       <section className="section">
         <div className="container-site">
           <SectionHead eyebrow="Nos offres à Nantes" title="Trois façons de démarrer." />
-          <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid-balance grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
             {entryOffers.map((o, i) => (
               <OfferCardCompact key={o.slug} offer={o} delay={i * 0.08} />
             ))}
@@ -101,7 +101,7 @@ export default function NantesPage() {
       >
         <CaseLinks />
         <p className="mt-6 text-ink-2">
-          Méthode, contrôles et budget :{" "}
+          Méthode, contrôles et budget :{" "}
           <Link href="/automatisation-ia-nantes" className="underline underline-offset-3">
             notre offre d'automatisation IA à Nantes
           </Link>
@@ -112,8 +112,8 @@ export default function NantesPage() {
       <FaqSection title="Travailler avec nous depuis Nantes." items={faq} />
 
       <CtaBlock
-        title="Un projet IA à Nantes ?"
-        lead="Un premier échange de 30 minutes, dans vos locaux ou en visio, pour regarder un de vos processus et estimer le gain."
+        title="Un projet IA à Nantes ?"
+        lead="Un premier échange de 30 minutes, dans vos locaux ou en visio, pour regarder un de vos processus et estimer le gain."
       />
     </>
   )

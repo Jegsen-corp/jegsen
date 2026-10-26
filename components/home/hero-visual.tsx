@@ -641,7 +641,7 @@ export function HeroVisual() {
     <div
       ref={containerRef}
       role="img"
-      aria-label="Illustration animée : un réseau neuronal, symbole de l'intelligence artificielle, alimente une horloge dont l'arc de temps gagné se remplit."
+      aria-label="Illustration animée : un réseau neuronal, symbole de l'intelligence artificielle, alimente une horloge dont l'arc de temps gagné se remplit."
       className="relative aspect-[1/0.92] w-full"
     >
       <motion.div

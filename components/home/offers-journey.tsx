@@ -62,7 +62,7 @@ function OfferTile({ o, k, total }: { o: OfferSummary; k: number; total: number 
           <svg viewBox="0 0 16 16" className="size-4"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" /></svg>
         </span>
       </div>
-      <span className="sr-only">En savoir plus : {o.title}</span>
+      <span className="sr-only">En savoir plus : {o.title}</span>
     </Link>
     </div>
   )
@@ -90,7 +90,7 @@ function TrainingBand({ o }: { o: OfferSummary }) {
         <h3 className="mb-1 font-display text-[clamp(1.7rem,2.6vw,2.2rem)] leading-none font-semibold tracking-[-0.045em]">Formation</h3>
         <p className="mb-4 text-[16px] font-medium">Faire adopter l&apos;IA par vos équipes.</p>
         <p className="m-0 max-w-[46ch] text-[14.5px] leading-relaxed text-ink-3">
-          Vos salariés utilisent déjà des outils d&apos;IA, sans règles communes ? Nous posons le cadre et formons chaque équipe sur son métier. Indépendante de nos intégrations, la formation se commande seule.
+          Vos salariés utilisent déjà des outils d&apos;IA, sans règles communes ? Nous posons le cadre et formons chaque équipe sur son métier. Indépendante de nos intégrations, la formation se commande seule.
         </p>
       </div>
       <div className="mt-8 flex flex-col lg:mt-0">
@@ -115,7 +115,7 @@ function TrainingBand({ o }: { o: OfferSummary }) {
           </span>
         </div>
       </div>
-      <span className="sr-only">En savoir plus : {o.title}</span>
+      <span className="sr-only">En savoir plus : {o.title}</span>
     </Link>
   )
 }

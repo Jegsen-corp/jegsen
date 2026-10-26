@@ -35,10 +35,10 @@ const tasks = [
 ]
 
 const stats = [
-  { value: 18, text: "des entreprises de 10 salariés ou plus utilisent au moins une technologie d'IA en 2025." },
-  { value: 15, text: "seulement parmi celles de 10 à 49 salariés, contre 58 % au-delà de 250 salariés." },
+  { value: 18, text: "des entreprises de 10 salariés ou plus utilisent au moins une technologie d'IA en 2025." },
+  { value: 15, text: "seulement parmi celles de 10 à 49 salariés, contre 58 % au-delà de 250 salariés." },
   { value: 53, text: "des entreprises qui utilisent l'IA disent être freinées par un manque d'expertise." },
-  { value: 73, text: "de ces utilisatrices s'en servent pour optimiser leurs coûts : temps, tâches répétitives." },
+  { value: 73, text: "de ces utilisatrices s'en servent pour optimiser leurs coûts : temps, tâches répétitives." },
 ]
 
 const method = [
@@ -56,7 +56,7 @@ const method = [
   },
   {
     title: "Mesurer",
-    text: "Temps de traitement, erreurs, délais : nous comparons les indicateurs avant et après. Ce qui ne rapporte pas est arrêté.",
+    text: "Temps de traitement, erreurs, délais : nous comparons les indicateurs avant et après. Ce qui ne rapporte pas est arrêté.",
   },
 ]
 
@@ -70,7 +70,7 @@ const commitments = [
   {
     icon: icons.euro,
     title: "Le ROI avant la technique",
-    text: "Chaque projet part d'un chiffrage : gain attendu, coût, hypothèses. Si l'IA n'est pas rentable sur un processus, nous vous le disons.",
+    text: "Chaque projet part d'un chiffrage : gain attendu, coût, hypothèses. Si l'IA n'est pas rentable sur un processus, nous vous le disons.",
   },
   {
     icon: icons.plug,
@@ -91,27 +91,27 @@ const commitments = [
 
 const faq = [
   {
-    q: "Par quoi commencer ?",
-    a: "Par le diagnostic de rentabilité : une semaine, en forfait, pour identifier deux à trois cas d'usage chiffrés. Si vous avez déjà un processus précis en tête, nous pouvons démarrer directement par un sprint d'intégration.",
+    q: "Par quoi commencer ?",
+    a: "Par le diagnostic de rentabilité : une semaine, en forfait, pour identifier deux à trois cas d'usage chiffrés. Si vous avez déjà un processus précis en tête, nous pouvons démarrer directement par un sprint d'intégration.",
   },
   {
-    q: "Quelle taille d'entreprise accompagnez-vous ?",
-    a: "Les PME et ETI, quel que soit le secteur. Les cas les plus rentables se trouvent souvent là où des documents et des e-mails sont traités à la main en volume : transport, distribution, maintenance, services, industrie.",
+    q: "Quelle taille d'entreprise accompagnez-vous ?",
+    a: "Les PME et ETI, quel que soit le secteur. Les cas les plus rentables se trouvent souvent là où des documents et des e-mails sont traités à la main en volume : transport, distribution, maintenance, services, industrie.",
   },
   {
-    q: "Combien de temps avant de voir des résultats ?",
+    q: "Combien de temps avant de voir des résultats ?",
     a: "Un sprint d'intégration met un processus en production en deux à six semaines. La mesure des gains commence dès la mise en production, par comparaison avec les indicateurs relevés au cadrage.",
   },
   {
-    q: "Nos données sont-elles en sécurité ?",
+    q: "Nos données sont-elles en sécurité ?",
     a: "Le choix des modèles, de l'hébergement et des accès fait partie du cadrage, en fonction de la sensibilité des données et de vos obligations (RGPD, secret professionnel, engagements contractuels).",
   },
   {
-    q: "Qu'est-ce qu'un workflow agentique ?",
-    a: "Un enchaînement d'étapes confié à un agent IA : comprendre une demande, chercher l'information, agir dans vos logiciels, puis rendre la main à une personne quand une décision l'exige. Nous le réservons aux processus où les demandes sont trop variées pour une automatisation classique.",
+    q: "Qu'est-ce qu'un workflow agentique ?",
+    a: "Un enchaînement d'étapes confié à un agent IA : comprendre une demande, chercher l'information, agir dans vos logiciels, puis rendre la main à une personne quand une décision l'exige. Nous le réservons aux processus où les demandes sont trop variées pour une automatisation classique.",
   },
   {
-    q: "Intervenez-vous hors de Nantes ?",
+    q: "Intervenez-vous hors de Nantes ?",
     a: "Oui. Nous sommes basés à Nantes et intervenons partout en France, sur site ou à distance selon les étapes.",
   },
 ]
@@ -123,13 +123,13 @@ export default function HomePage() {
       <section className="relative isolate flex min-h-[min(100svh,980px)] items-center overflow-hidden pt-[112px] pb-[70px] lg:pt-[140px]">
         <HeroBackdrop blobs={[1, 2, 3]} />
         <AboveFold>
-          <div className="container-site grid items-center gap-[clamp(24px,4vw,64px)] lg:grid-cols-[1fr_1.08fr]">
+          <div className="container-site grid items-center gap-[clamp(24px,4vw,64px)] lg:grid-cols-[1.12fr_1fr] xl:grid-cols-[1fr_1.08fr]">
             <div>
               <Reveal as="p" className="mb-7 flex flex-wrap items-center gap-x-3 gap-y-2.5 text-[13px] text-ink-3 tabular-nums">
                 <Ping />
                 <Link
                   href="/intelligence-artificielle-nantes"
-                  className="border-b border-transparent text-[12.5px] font-bold tracking-[0.16em] text-ink uppercase transition-colors hover:border-current"
+                  className="-my-1.5 inline-block border-b border-transparent py-1.5 text-[12.5px] font-bold tracking-[0.16em] text-ink uppercase transition-colors hover:border-current"
                 >
                   Nantes
                 </Link>
@@ -183,7 +183,7 @@ export default function HomePage() {
           <SectionHead
             eyebrow="Le constat"
             title="L'IA progresse vite. Les PME restent à la traîne."
-            lead="L'usage de l'IA a triplé en deux ans dans les entreprises françaises, mais l'écart se creuse selon la taille. Le principal frein n'est pas la technologie : c'est l'expertise pour la mettre en œuvre."
+            lead="L'usage de l'IA a triplé en deux ans dans les entreprises françaises, mais l'écart se creuse selon la taille. Le principal frein n'est pas la technologie : c'est l'expertise pour la mettre en œuvre."
           />
           <Reveal className="grid overflow-hidden rounded-[22px] border border-line bg-surface sm:grid-cols-2 lg:grid-cols-4">
             {stats.map((s, i) => (
@@ -213,7 +213,7 @@ export default function HomePage() {
           <SectionHead
             center
             eyebrow="Nos offres"
-            title="Quatre offres, un seul cap : des gains mesurés."
+            title="Quatre offres, un seul cap : des gains mesurés."
             lead="Commencez petit, mesurez, puis étendez ce qui fonctionne."
           />
           <OffersJourney offers={offers} />
@@ -244,7 +244,7 @@ export default function HomePage() {
             <Eyebrow>Cerveau d'entreprise</Eyebrow>
             <h2>Vos données deviennent le cerveau de votre entreprise.</h2>
             <p className="lead">
-              Procédures, contrats, fiches produits, historique des échanges : nous rassemblons ce savoir dispersé dans
+              Procédures, contrats, fiches produits, historique des échanges : nous rassemblons ce savoir dispersé dans
               un cerveau d'entreprise que vos équipes interrogent en langage courant, et sur lequel s'appuient toutes vos
               automatisations.
             </p>
@@ -265,7 +265,7 @@ export default function HomePage() {
             <Eyebrow>Notre méthode</Eyebrow>
             <h2>Identifier. Intégrer. Former. Mesurer.</h2>
             <p className="lead">
-              Pas de cahier des charges de cent pages ni de démonstration sans lendemain : un processus, des
+              Pas de cahier des charges de cent pages ni de démonstration sans lendemain : un processus, des
               indicateurs, une mise en production.
             </p>
             <ButtonRow className="mt-7">
@@ -290,7 +290,7 @@ export default function HomePage() {
             lead="Nous développons, à partir de projets réels, un outil qui récupère vos documents et e-mails, en extrait les données, vérifie leur cohérence, met à jour vos logiciels métiers et signale les exceptions à une personne. Un programme pilote est ouvert à quelques entreprises."
           />
           <Pipeline />
-          <div className="mt-12 grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 grid-balance grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
             {benefits.map((b, i) => (
               <SiteCard key={b.title} delay={i * 0.1}>
                 <h3>{b.title}</h3>
@@ -331,7 +331,7 @@ export default function HomePage() {
             <Eyebrow>Questions fréquentes</Eyebrow>
             <h2>Ce que l'on nous demande le plus.</h2>
             <p className="lead">
-              Une autre question ?{" "}
+              Une autre question ?{" "}
               <Link href="/contact" className="underline underline-offset-4">
                 Écrivez-nous
               </Link>

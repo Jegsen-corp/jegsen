@@ -6,7 +6,7 @@ import { legal, site } from "@/lib/site"
 export const metadata: Metadata = pageMeta({
   title: "Mentions légales | Jegsen IA",
   description:
-    "Mentions légales du site Jegsen : éditeur, directeur de la publication, hébergeur, propriété intellectuelle.",
+    "Mentions légales du site Jegsen : éditeur, directeur de la publication, hébergeur, propriété intellectuelle.",
   path: "/mentions-legales",
 })
 
@@ -19,7 +19,7 @@ const missing = [
   !legal.director && "directeur de la publication",
   !legal.host.name && "hébergeur",
 ].filter(Boolean)
-if (missing.length) console.warn(`[mentions légales] À renseigner dans lib/site.ts (legal) : ${missing.join(", ")}`)
+if (missing.length) console.warn(`[mentions légales] À renseigner dans lib/site.ts (legal) : ${missing.join(", ")}`)
 
 const updated = "13 octobre 2026"
 
@@ -32,7 +32,7 @@ export default function LegalNoticePage() {
     <section className="pt-[150px] pb-[60px]">
       <div className="container-site prose-site">
         <h1 className="text-[clamp(2.2rem,4.6vw,3.4rem)]">Mentions légales</h1>
-        <p className="text-sm text-ink-3">Dernière mise à jour : {updated}</p>
+        <p className="text-sm text-ink-3">Dernière mise à jour : {updated}</p>
 
         <h2>Éditeur du site</h2>
         <p>
@@ -40,7 +40,7 @@ export default function LegalNoticePage() {
           {legal.address && (
             <>
               <br />
-              Siège social : {legal.address}
+              Siège social : {legal.address}
             </>
           )}
           {legal.registration && (
@@ -52,11 +52,11 @@ export default function LegalNoticePage() {
           {legal.vat && (
             <>
               <br />
-              TVA intracommunautaire : {legal.vat}
+              TVA intracommunautaire : {legal.vat}
             </>
           )}
           <br />
-          E-mail : <a href={`mailto:${site.email}`}>{site.email}</a>
+          E-mail : <a href={`mailto:${site.email}`}>{site.email}</a>
         </p>
 
         {legal.director && (

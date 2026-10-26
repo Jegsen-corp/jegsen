@@ -6,6 +6,7 @@ import { caseHref, useCases } from "@/lib/content/cases"
 import type { FaqItem, Step } from "@/lib/content/types"
 import { Checklist, Eyebrow, Split } from "./blocks"
 import { Faq } from "./faq"
+import { keepHyphenated } from "./typo"
 
 /** Titre collant à gauche, étapes numérotées à droite. */
 export function MethodSection({
@@ -26,7 +27,7 @@ export function MethodSection({
       <div className="container-site grid items-start gap-[clamp(32px,6vw,96px)] md:grid-cols-[0.9fr_1.1fr]">
         <Reveal className="md:sticky md:top-[120px]">
           <Eyebrow>{eyebrow}</Eyebrow>
-          <h2>{title}</h2>
+          <h2>{keepHyphenated(title)}</h2>
           {lead && <p className="lead">{lead}</p>}
         </Reveal>
         <Steps steps={steps} />
@@ -54,7 +55,7 @@ export function SplitSection({
       <Split>
         <Reveal>
           <Eyebrow>{eyebrow}</Eyebrow>
-          <h2>{title}</h2>
+          <h2>{keepHyphenated(title)}</h2>
           {lead && <p className="lead">{lead}</p>}
         </Reveal>
         <Reveal>{children}</Reveal>

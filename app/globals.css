@@ -162,11 +162,12 @@
     text-wrap: balance;
     margin: 0 0 0.5em;
   }
+  /* Minimums abaissés pour les téléphones : un titre long tient sur moins de lignes. Inchangé au-delà de 650 px. */
   h1 {
-    font-size: clamp(2.6rem, 6.4vw, 5.2rem);
+    font-size: clamp(2.25rem, 6.4vw, 5.2rem);
   }
   h2 {
-    font-size: clamp(2rem, 4.2vw, 3.4rem);
+    font-size: clamp(1.875rem, 4.2vw, 3.4rem);
   }
   h3 {
     font-size: clamp(1.25rem, 2vw, 1.5rem);
@@ -204,7 +205,19 @@
   }
   .section {
     position: relative;
-    padding-block: clamp(80px, 11vw, 150px);
+    padding-block: clamp(64px, 11vw, 150px);
+  }
+  /* Grilles 2 puis 3 colonnes : pas de carte orpheline.
+     En 2 colonnes, une dernière carte seule prend toute la largeur ; en 3 colonnes, elle se centre. */
+  @media (min-width: 640px) and (max-width: 1023.98px) {
+    .grid-balance > :last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (min-width: 1024px) {
+    .grid-balance > :last-child:nth-child(3n + 1) {
+      grid-column: 2;
+    }
   }
   .section-tight {
     padding-block: clamp(56px, 7vw, 90px);

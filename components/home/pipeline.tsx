@@ -66,7 +66,7 @@ export function Pipeline() {
       <svg
         viewBox="-10 0 1110 270"
         role="img"
-        aria-label="Flux : documents et e-mails, extraction des données, contrôle de cohérence, mise à jour du logiciel métier. Les exceptions sont transmises à une personne pour validation."
+        aria-label="Flux : documents et e-mails, extraction des données, contrôle de cohérence, mise à jour du logiciel métier. Les exceptions sont transmises à une personne pour validation."
         className="hidden h-auto w-full overflow-visible md:block"
       >
         <defs>

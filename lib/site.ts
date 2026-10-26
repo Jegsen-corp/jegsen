@@ -7,7 +7,7 @@ export const site = {
   url: "https://jegsen.fr",
   title: "Automatisation et intégration IA pour PME à Nantes | Jegsen",
   description:
-    "Automatisation IA pour PME et ETI à Nantes : diagnostic chiffré, intégration à votre SI, formation des équipes et gains mesurés.",
+    "Automatisation IA pour PME et ETI à Nantes : diagnostic chiffré, intégration à votre SI, formation des équipes et gains mesurés.",
   email: "contact@jegsen.fr",
   /** Page entreprise LinkedIn : pied de page, page contact et données structurées (sameAs). */
   linkedin: "https://www.linkedin.com/company/jegsen",

@@ -13,6 +13,7 @@ import {
 import { cn } from "@/lib/utils"
 import { ButtonRow, LinkButton } from "./links"
 import { JsonLd, breadcrumbLd } from "./json-ld"
+import { keepHyphenated } from "./typo"
 
 export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
   return <span className={cn("eyebrow", className)}>{children}</span>
@@ -40,7 +41,7 @@ export function SectionHead({
       )}
     >
       <Eyebrow>{eyebrow}</Eyebrow>
-      {title && <h2>{title}</h2>}
+      {title && <h2>{keepHyphenated(title)}</h2>}
       {lead && <p className="lead">{lead}</p>}
     </Reveal>
   )
@@ -59,7 +60,7 @@ export function Crumbs({ items }: { items: Crumb[] }) {
             <Fragment key={c.label}>
               <BreadcrumbItem>
                 {c.href && i < all.length - 1 ? (
-                  <BreadcrumbLink asChild className="hover:text-ink">
+                  <BreadcrumbLink asChild className="-my-1 inline-block py-1 hover:text-ink">
                     <Link href={c.href}>{c.label}</Link>
                   </BreadcrumbLink>
                 ) : (
@@ -88,7 +89,7 @@ export function PageHero({
   children: ReactNode
 }) {
   return (
-    <section className={cn("relative isolate overflow-hidden pt-[150px] pb-[60px]", className)}>
+    <section className={cn("relative isolate overflow-hidden pt-[clamp(112px,14vw,150px)] pb-[60px]", className)}>
       {blobs && <HeroBackdrop blobs={blobs} />}
       <div className="container-site">
         {crumbs && <Crumbs items={crumbs} />}
@@ -100,9 +101,10 @@ export function PageHero({
 
 export function Facts({ facts, delay }: { facts: { label: string; value: string }[]; delay?: number }) {
   return (
-    <Reveal delay={delay} className="mt-[30px] flex flex-wrap gap-2.5">
+    // Téléphone : grille de deux colonnes alignées (la dernière case seule prend la largeur) ; au-delà, pastilles en ligne.
+    <Reveal delay={delay} className="mt-[30px] grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap [&>:last-child:nth-child(odd)]:col-span-2">
       {facts.map((f) => (
-        <div key={f.value} className="min-w-[180px] rounded-2xl border border-line bg-surface px-[18px] py-3.5">
+        <div key={f.value} className="rounded-2xl border border-line bg-surface px-[18px] py-3.5 sm:min-w-[180px]">
           <small className="block text-xs font-semibold tracking-[0.06em] text-ink-3 uppercase">{f.label}</small>
           <strong className="font-display text-[19px] tracking-[-0.02em]">{f.value}</strong>
         </div>
@@ -131,8 +133,8 @@ export function Split({ className, children }: { className?: string; children: R
 }
 
 export function CtaBlock({
-  title = "Combien l'IA peut-elle vous faire gagner ?",
-  lead = "Un premier échange de 30 minutes pour regarder un de vos processus et vous dire, chiffres à l'appui, si l'automatisation en vaut la peine.",
+  title = "Combien l'IA peut-elle vous faire gagner ?",
+  lead = "Un premier échange de 30 minutes pour regarder un de vos processus et vous dire, chiffres à l'appui, si l'automatisation en vaut la peine.",
 }: {
   title?: string
   lead?: string
@@ -146,7 +148,7 @@ export function CtaBlock({
         >
           <SpinGlow />
           <Eyebrow>Premier échange offert</Eyebrow>
-          <h2 className="mx-auto max-w-[16ch]">{title}</h2>
+          <h2 className="mx-auto max-w-[16ch]">{keepHyphenated(title)}</h2>
           <p className="lead mx-auto mb-8">{lead}</p>
           <ButtonRow className="justify-center">
             <LinkButton href="/contact" arrow>

@@ -30,6 +30,31 @@ function NavLinks({ pathname }: { pathname?: string }) {
   )
 }
 
+/** Liens du menu mobile : grands, avec flèche, page en cours en bleu. */
+function MobileNavLinks({ pathname }: { pathname?: string }) {
+  return (
+    <>
+      {mainNav.map((item) => (
+        <Link
+          key={item.href}
+          href={item.href}
+          aria-current={pathname === item.href || pathname?.startsWith(`${item.href}/`) ? "page" : undefined}
+          className="flex items-center justify-between border-b border-line px-1 py-3.5 text-xl font-semibold tracking-[-0.02em] aria-[current=page]:text-brand"
+        >
+          {item.label}
+          <span aria-hidden="true" className="text-base text-ink-3">
+            →
+          </span>
+        </Link>
+      ))}
+    </>
+  )
+}
+
+function ActiveMobileNavLinks() {
+  return <MobileNavLinks pathname={usePathname()} />
+}
+
 function ActiveNavLinks() {
   return <NavLinks pathname={usePathname()} />
 }
@@ -51,13 +76,13 @@ export function Header() {
     >
       <div className="container-site flex h-[72px] items-center justify-between gap-6">
         <Logo />
-        <nav aria-label="Navigation principale" className="hidden items-center gap-1 xl:flex">
+        <nav aria-label="Navigation principale" className="hidden items-center gap-1 lg:flex">
           <Suspense fallback={<NavLinks />}>
             <ActiveNavLinks />
           </Suspense>
         </nav>
         <div className="flex items-center gap-2.5">
-          <LinkButton href="/contact" size="md" arrow className="hidden xl:inline-flex">
+          <LinkButton href="/contact" size="md" arrow className="hidden lg:inline-flex">
             Parlons-en
           </LinkButton>
           <button
@@ -66,7 +91,7 @@ export function Header() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             onClick={() => setOpen((o) => !o)}
-            className="block size-11 rounded-xl border border-line-strong bg-surface text-ink xl:hidden"
+            className="block size-11 rounded-xl border border-line-strong bg-surface text-ink lg:hidden"
           >
             {[0, 1, 2].map((i) => (
               <span
@@ -83,6 +108,15 @@ export function Header() {
         </div>
       </div>
 
+      {/* Voile sous le menu mobile : la page derrière passe au second plan, un toucher referme le menu. */}
+      <div
+        aria-hidden="true"
+        onClick={() => setOpen(false)}
+        className={cn(
+          "fixed inset-x-0 top-[72px] bottom-0 z-[50] bg-ink/25 backdrop-blur-[2px] transition-opacity duration-300 lg:hidden",
+          open ? "opacity-100" : "pointer-events-none opacity-0"
+        )}
+      />
       <Sheet open={open} onOpenChange={setOpen} modal={false}>
         <SheetContent
           id="mobile-nav"
@@ -93,7 +127,7 @@ export function Header() {
             // Le bouton burger gère lui-même l'ouverture et la fermeture.
             if ((e.target as Element | null)?.closest("header")) e.preventDefault()
           }}
-          className="z-[55] gap-0 data-[side=top]:top-[72px] rounded-none border-b border-line bg-bg px-(--gutter) pt-3 pb-7 shadow-none xl:hidden"
+          className="z-[65] max-h-[calc(100dvh-72px)] gap-0 overflow-y-auto overscroll-contain data-[side=top]:top-[72px] rounded-none border-b border-line bg-bg px-(--gutter) pt-3 pb-7 shadow-none lg:hidden"
         >
           <SheetTitle className="sr-only">Navigation mobile</SheetTitle>
           <nav
@@ -101,15 +135,9 @@ export function Header() {
             className="grid"
             onClick={(e) => (e.target as Element).closest("a") && setOpen(false)}
           >
-            {mainNav.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="border-b border-line px-1 py-3.5 text-xl font-semibold tracking-[-0.02em]"
-              >
-                {item.label}
-              </Link>
-            ))}
+            <Suspense fallback={<MobileNavLinks />}>
+              <ActiveMobileNavLinks />
+            </Suspense>
             <LinkButton href="/contact" arrow className="mt-[18px] justify-center">
               Réserver un échange
             </LinkButton>

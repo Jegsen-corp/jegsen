@@ -5,12 +5,12 @@ export const useCases: UseCase[] = [
   {
     slug: "cerveau-entreprise",
     technical: true,
-    metaTitle: "Cerveau d'entreprise : une IA nourrie de vos données | Jegsen IA",
-    metaDescription: "Procédures, contrats, fiches produits, historique : nous rassemblons le savoir de votre entreprise dans un cerveau d'entreprise interrogeable, qui cite ses sources et respecte vos droits d'accès.",
+    metaTitle: "Cerveau d'entreprise : une IA nourrie de vos données | Jegsen IA",
+    metaDescription: "Procédures, contrats, fiches produits, historique : nous rassemblons le savoir de votre entreprise dans un cerveau d'entreprise interrogeable, qui cite ses sources et respecte vos droits d'accès.",
     title: "Construire le cerveau de votre entreprise à partir de vos données",
     shortTitle: "Cerveau d'entreprise",
-    lead: "Procédures, contrats, fiches produits, historique des échanges : le savoir de votre entreprise est dispersé. Nous le rassemblons dans un cerveau d'entreprise que vos équipes interrogent en langage courant, et sur lequel s'appuient vos automatisations.",
-    summary: "Procédures, contrats, fiches produits, historique des échanges : le savoir de votre entreprise est dispersé. Nous le rassemblons dans un cerveau d'entreprise que vos équipes interrogent en langage courant, et sur lequel s'appuient vos automatisations.",
+    lead: "Procédures, contrats, fiches produits, historique des échanges : le savoir de votre entreprise est dispersé. Nous le rassemblons dans un cerveau d'entreprise que vos équipes interrogent en langage courant, et sur lequel s'appuient vos automatisations.",
+    summary: "Procédures, contrats, fiches produits, historique des échanges : le savoir de votre entreprise est dispersé. Nous le rassemblons dans un cerveau d'entreprise que vos équipes interrogent en langage courant, et sur lequel s'appuient vos automatisations.",
     audiences: [
       "Directions et managers",
       "Équipes support et ADV",
@@ -20,13 +20,13 @@ export const useCases: UseCase[] = [
     today: [
       "Le savoir d'une entreprise vit dans des dossiers partagés, des boîtes e-mail, des logiciels métiers et la mémoire de quelques personnes. Retrouver la bonne procédure ou le bon contrat prend du temps, et la réponse dépend souvent de qui est présent.",
       "Quand une personne expérimentée part, une partie de ce savoir part avec elle. Quand une personne arrive, il lui faut des semaines pour savoir où chercher.",
-      "Un assistant d'IA générique ne connaît pas vos données. Pour qu'il réponde juste, il faut lui donner accès à vos documents, de façon organisée, sécurisée et à jour : c'est le rôle du cerveau d'entreprise.",
+      "Un assistant d'IA générique ne connaît pas vos données. Pour qu'il réponde juste, il faut lui donner accès à vos documents, de façon organisée, sécurisée et à jour : c'est le rôle du cerveau d'entreprise.",
     ],
     howTitle: "Comment nous le construisons.",
     steps: [
       {
         title: "Inventaire des sources",
-        text: "GED, SharePoint ou serveur de fichiers, CRM, ERP, messagerie, intranet : nous recensons ce qui contient le savoir utile, et qui en est responsable.",
+        text: "GED, SharePoint ou serveur de fichiers, CRM, ERP, messagerie, intranet : nous recensons ce qui contient le savoir utile, et qui en est responsable.",
       },
       {
         title: "Préparation",
@@ -42,11 +42,11 @@ export const useCases: UseCase[] = [
       },
       {
         title: "Mise à jour continue",
-        text: "Les sources sont synchronisées : un document modifié ou supprimé l'est aussi dans le cerveau d'entreprise.",
+        text: "Les sources sont synchronisées : un document modifié ou supprimé l'est aussi dans le cerveau d'entreprise.",
       },
       {
         title: "Socle des automatisations",
-        text: "Le même cerveau alimente vos autres automatisations : tri des e-mails, qualification des demandes, brouillons de réponse.",
+        text: "Le même cerveau alimente vos autres automatisations : tri des e-mails, qualification des demandes, brouillons de réponse.",
       },
     ],
     cards: [
@@ -61,9 +61,9 @@ export const useCases: UseCase[] = [
           },
         ],
         items: [
-          "Respect des droits existants : chacun n'accède qu'à ce qu'il pouvait déjà consulter",
+          "Respect des droits existants : chacun n'accède qu'à ce qu'il pouvait déjà consulter",
           "Réponses accompagnées de leurs sources, vérifiables en un clic",
-          "Réponse « je ne sais pas » quand l'information n'est pas dans vos documents",
+          "Réponse « je ne sais pas » quand l'information n'est pas dans vos documents",
           "Modèles et hébergement choisis selon la sensibilité des données",
           "Journal des questions et des documents consultés",
         ],
@@ -101,16 +101,16 @@ export const useCases: UseCase[] = [
     ],
     faq: [
       {
-        q: "Quelle différence avec ChatGPT ou Copilot ?",
+        q: "Quelle différence avec ChatGPT ou Copilot ?",
         a: "Un assistant générique ne connaît pas vos documents. Le cerveau d'entreprise est relié à vos sources, respecte vos droits d'accès et cite les documents sur lesquels repose chaque réponse.",
       },
       {
-        q: "Nos données servent-elles à entraîner des modèles ?",
+        q: "Nos données servent-elles à entraîner des modèles ?",
         a: "Nous retenons des modèles et des conditions d'utilisation qui excluent la réutilisation de vos données pour l'entraînement, ou des modèles hébergés dans un environnement que vous maîtrisez. Ce choix est fait au cadrage.",
       },
       {
-        q: "Et si un document est faux ou obsolète ?",
-        a: "La réponse cite sa source : l'erreur se voit et se corrige à la source. Le cadrage prévoit aussi d'écarter les versions périmées.",
+        q: "Et si un document est faux ou obsolète ?",
+        a: "La réponse cite sa source : l'erreur se voit et se corrige à la source. Le cadrage prévoit aussi d'écarter les versions périmées.",
       },
     ],
   },
@@ -118,11 +118,11 @@ export const useCases: UseCase[] = [
     slug: "workflows-agentiques",
     technical: true,
     metaTitle: "Workflows agentiques (agentic workflows) pour PME | Jegsen IA",
-    metaDescription: "Des agents IA qui enchaînent les étapes d'un processus dans vos outils : lire, décider, agir, avec des règles claires et une validation humaine aux points sensibles.",
+    metaDescription: "Des agents IA qui enchaînent les étapes d'un processus dans vos outils : lire, décider, agir, avec des règles claires et une validation humaine aux points sensibles.",
     title: "Mettre en place des workflows agentiques dans vos outils",
     shortTitle: "Workflows agentiques",
-    lead: "Un workflow agentique (agentic workflow) confie à un agent IA un enchaînement d'étapes : comprendre une demande, chercher l'information, agir dans vos logiciels, puis rendre la main à une personne quand une décision l'exige. Nous les concevons pour des processus précis, avec des règles et des garde-fous.",
-    summary: "Un workflow agentique (agentic workflow) confie à un agent IA un enchaînement d'étapes : comprendre une demande, chercher l'information, agir dans vos logiciels, puis rendre la main à une personne quand une décision l'exige. Nous les concevons pour des processus précis, avec des règles et des garde-fous.",
+    lead: "Un workflow agentique (agentic workflow) confie à un agent IA un enchaînement d'étapes : comprendre une demande, chercher l'information, agir dans vos logiciels, puis rendre la main à une personne quand une décision l'exige. Nous les concevons pour des processus précis, avec des règles et des garde-fous.",
+    summary: "Un workflow agentique (agentic workflow) confie à un agent IA un enchaînement d'étapes : comprendre une demande, chercher l'information, agir dans vos logiciels, puis rendre la main à une personne quand une décision l'exige. Nous les concevons pour des processus précis, avec des règles et des garde-fous.",
     audiences: [
       "ADV et service client",
       "Support et exploitation",
@@ -137,7 +137,7 @@ export const useCases: UseCase[] = [
     steps: [
       {
         title: "Cartographie du processus",
-        text: "Étapes, décisions, logiciels concernés, volumes et exceptions : nous décrivons le processus tel qu'il se déroule vraiment.",
+        text: "Étapes, décisions, logiciels concernés, volumes et exceptions : nous décrivons le processus tel qu'il se déroule vraiment.",
       },
       {
         title: "Périmètre de l'agent",
@@ -157,7 +157,7 @@ export const useCases: UseCase[] = [
       },
       {
         title: "Mesure et ajustement",
-        text: "Actions validées sans correction, exceptions, délais : le périmètre de l'agent ne s'élargit que lorsque les chiffres le justifient.",
+        text: "Actions validées sans correction, exceptions, délais : le périmètre de l'agent ne s'élargit que lorsque les chiffres le justifient.",
       },
     ],
     cards: [
@@ -212,15 +212,15 @@ export const useCases: UseCase[] = [
     ],
     faq: [
       {
-        q: "Quelle différence avec une automatisation classique ?",
+        q: "Quelle différence avec une automatisation classique ?",
         a: "Une automatisation classique suit un chemin fixé à l'avance. Un workflow agentique interprète la demande et choisit les étapes à suivre parmi celles qu'on lui autorise. Il est utile quand les demandes sont variées. Pour un flux parfaitement régulier, une automatisation classique reste souvent plus simple et moins coûteuse.",
       },
       {
-        q: "L'agent peut-il agir sans contrôle ?",
+        q: "L'agent peut-il agir sans contrôle ?",
         a: "Seulement pour les actions que vous avez explicitement autorisées. Tout ce qui est irréversible, engageant ou incertain passe par une validation humaine.",
       },
       {
-        q: "Faut-il un cerveau d'entreprise au préalable ?",
+        q: "Faut-il un cerveau d'entreprise au préalable ?",
         a: "Pas toujours. Il devient utile dès que l'agent doit s'appuyer sur vos procédures, vos contrats ou votre historique pour décider.",
       },
     ],
@@ -232,8 +232,8 @@ export const useCases: UseCase[] = [
     metaDescription: "Lecture des factures, rapprochement avec les commandes et livraisons, imputation comptable et détection d'anomalies par l'IA, avec validation humaine des exceptions.",
     title: "Automatiser le traitement des factures fournisseurs avec l'IA",
     shortTitle: "Factures fournisseurs",
-    lead: "Lire chaque facture, retrouver la commande, vérifier les montants, imputer, relancer en cas d'écart : nous automatisons ce circuit et ne laissons à vos équipes que les cas qui demandent un jugement.",
-    summary: "Lire chaque facture, retrouver la commande, vérifier les montants, imputer, relancer en cas d'écart : nous automatisons ce circuit et ne laissons à vos équipes que les cas qui demandent un jugement.",
+    lead: "Lire chaque facture, retrouver la commande, vérifier les montants, imputer, relancer en cas d'écart : nous automatisons ce circuit et ne laissons à vos équipes que les cas qui demandent un jugement.",
+    summary: "Lire chaque facture, retrouver la commande, vérifier les montants, imputer, relancer en cas d'écart : nous automatisons ce circuit et ne laissons à vos équipes que les cas qui demandent un jugement.",
     audiences: [
       "Services comptables et financiers",
       "Distributeurs et négoces",
@@ -241,15 +241,15 @@ export const useCases: UseCase[] = [
       "Sociétés de services multi-sites",
     ],
     today: [
-      "Le traitement d'une facture fournisseur enchaîne des gestes simples mais nombreux : ouvrir la pièce, identifier le fournisseur, retrouver le bon de commande et le bon de livraison, contrôler quantités, prix et TVA, saisir ou imputer, puis transmettre pour validation.",
-      "Chaque étape manuelle ajoute du délai et des risques d'erreur : double saisie, facture payée deux fois, écart de prix non vu, coordonnées bancaires modifiées sans contrôle.",
+      "Le traitement d'une facture fournisseur enchaîne des gestes simples mais nombreux : ouvrir la pièce, identifier le fournisseur, retrouver le bon de commande et le bon de livraison, contrôler quantités, prix et TVA, saisir ou imputer, puis transmettre pour validation.",
+      "Chaque étape manuelle ajoute du délai et des risques d'erreur : double saisie, facture payée deux fois, écart de prix non vu, coordonnées bancaires modifiées sans contrôle.",
       "Depuis le 1er septembre 2026, toutes les entreprises doivent pouvoir recevoir des factures électroniques. Les factures structurées réduisent la lecture de documents, mais le rapprochement, l'imputation et la gestion des écarts restent à faire.",
     ],
     howTitle: "Comment l'automatisation fonctionne.",
     steps: [
       {
         title: "Réception",
-        text: "Factures électroniques de votre plateforme agréée, PDF reçus par e-mail ou scans : tout arrive dans un seul flux.",
+        text: "Factures électroniques de votre plateforme agréée, PDF reçus par e-mail ou scans : tout arrive dans un seul flux.",
       },
       {
         title: "Lecture et extraction",
@@ -257,7 +257,7 @@ export const useCases: UseCase[] = [
       },
       {
         title: "Rapprochement",
-        text: "Chaque facture est comparée à la commande et à la réception correspondantes : quantités, prix unitaires, remises.",
+        text: "Chaque facture est comparée à la commande et à la réception correspondantes : quantités, prix unitaires, remises.",
       },
       {
         title: "Imputation proposée",
@@ -265,7 +265,7 @@ export const useCases: UseCase[] = [
       },
       {
         title: "Exceptions",
-        text: "Écart, doublon, fournisseur inconnu ou coordonnées bancaires modifiées : la facture est mise de côté avec le motif, pour décision humaine.",
+        text: "Écart, doublon, fournisseur inconnu ou coordonnées bancaires modifiées : la facture est mise de côté avec le motif, pour décision humaine.",
       },
     ],
     cards: [
@@ -313,21 +313,21 @@ export const useCases: UseCase[] = [
         items: [
           "Un volume mensuel de factures suffisant pour justifier l'automatisation (chiffré lors du diagnostic)",
           "Un accès à vos commandes et réceptions (ERP, logiciel de gestion ou exports)",
-          "Un moyen d'intégrer les écritures : API, import de fichier ou connecteur de votre logiciel comptable",
+          "Un moyen d'intégrer les écritures : API, import de fichier ou connecteur de votre logiciel comptable",
         ],
       },
     ],
     faq: [
       {
-        q: "La facture électronique rend-elle l'IA inutile ?",
+        q: "La facture électronique rend-elle l'IA inutile ?",
         a: "Non. Les factures structurées facilitent la lecture, mais le rapprochement avec les commandes, l'imputation, le contrôle des écarts et le traitement des factures hors réforme (fournisseurs étrangers, pièces annexes) restent des tâches à automatiser.",
       },
       {
-        q: "Faut-il changer de logiciel comptable ?",
+        q: "Faut-il changer de logiciel comptable ?",
         a: "Non. Nous nous branchons sur votre logiciel existant. Si aucun moyen d'intégration n'existe, nous le signalons avant tout développement.",
       },
       {
-        q: "Qui valide les factures ?",
+        q: "Qui valide les factures ?",
         a: "Vos règles de validation restent les mêmes. L'automatisation prépare le travail et signale les anomalies. La décision de payer reste humaine.",
       },
     ],
@@ -336,11 +336,11 @@ export const useCases: UseCase[] = [
     slug: "bons-de-livraison",
     technical: false,
     metaTitle: "Extraction des bons de livraison par IA | Jegsen IA",
-    metaDescription: "Bons de livraison, lettres de voiture, preuves de livraison : extraction automatique des données, contrôle des réserves et mise à jour du TMS ou de l'ERP.",
+    metaDescription: "Bons de livraison, lettres de voiture, preuves de livraison : extraction automatique des données, contrôle des réserves et mise à jour du TMS ou de l'ERP.",
     title: "Extraire automatiquement les données des bons de livraison et lettres de voiture",
     shortTitle: "Bons de livraison",
-    lead: "Signés, tamponnés, photographiés au smartphone : vos documents de transport arrivent sous toutes les formes. Nous en extrayons les données utiles et mettons à jour vos outils, réserves comprises.",
-    summary: "Signés, tamponnés, photographiés au smartphone : vos documents de transport arrivent sous toutes les formes.",
+    lead: "Signés, tamponnés, photographiés au smartphone : vos documents de transport arrivent sous toutes les formes. Nous en extrayons les données utiles et mettons à jour vos outils, réserves comprises.",
+    summary: "Signés, tamponnés, photographiés au smartphone : vos documents de transport arrivent sous toutes les formes.",
     audiences: [
       "Transporteurs et logisticiens",
       "Distributeurs",
@@ -349,13 +349,13 @@ export const useCases: UseCase[] = [
     ],
     today: [
       "Les preuves de livraison conditionnent la facturation. Tant qu'elles ne sont pas saisies, la facture attend, et le délai de paiement s'allonge.",
-      "Les documents sont souvent hétérogènes : modèles différents selon les donneurs d'ordre, annotations manuscrites, photos de qualité variable. La ressaisie est lente et les réserves notées à la main passent facilement inaperçues.",
+      "Les documents sont souvent hétérogènes : modèles différents selon les donneurs d'ordre, annotations manuscrites, photos de qualité variable. La ressaisie est lente et les réserves notées à la main passent facilement inaperçues.",
     ],
     howTitle: "Comment l'automatisation fonctionne.",
     steps: [
       {
         title: "Collecte",
-        text: "Photos des chauffeurs, scans d'agence, e-mails de partenaires : les documents sont centralisés automatiquement.",
+        text: "Photos des chauffeurs, scans d'agence, e-mails de partenaires : les documents sont centralisés automatiquement.",
       },
       {
         title: "Lecture",
@@ -371,7 +371,7 @@ export const useCases: UseCase[] = [
       },
       {
         title: "Exceptions",
-        text: "Document illisible, numéro introuvable ou écart de quantité : le dossier est transmis à une personne avec l'image et le motif.",
+        text: "Document illisible, numéro introuvable ou écart de quantité : le dossier est transmis à une personne avec l'image et le motif.",
       },
     ],
     cards: [
@@ -425,15 +425,15 @@ export const useCases: UseCase[] = [
     ],
     faq: [
       {
-        q: "Les photos prises au smartphone sont-elles exploitables ?",
+        q: "Les photos prises au smartphone sont-elles exploitables ?",
         a: "Généralement oui, si le document est entier et lisible à l'œil. Les cas illisibles sont classés en exception plutôt que devinés.",
       },
       {
-        q: "Et les annotations manuscrites ?",
+        q: "Et les annotations manuscrites ?",
         a: "Elles sont lues et, quand elles signalent une réserve, remontées en priorité. En cas de doute, le document est soumis à une personne.",
       },
       {
-        q: "Combien de temps pour démarrer ?",
+        q: "Combien de temps pour démarrer ?",
         a: "Un sprint d'intégration dure de deux à six semaines selon le nombre de modèles de documents et d'outils à connecter.",
       },
     ],
@@ -442,11 +442,11 @@ export const useCases: UseCase[] = [
     slug: "tri-emails",
     technical: false,
     metaTitle: "Tri automatique des e-mails par IA | Jegsen IA",
-    metaDescription: "Classement, extraction des informations, routage vers la bonne personne et brouillons de réponse : l'IA traite vos boîtes partagées (contact@, commandes@, sav@).",
+    metaDescription: "Classement, extraction des informations, routage vers la bonne personne et brouillons de réponse : l'IA traite vos boîtes partagées (contact@, commandes@, sav@).",
     title: "Trier et traiter automatiquement les e-mails de vos boîtes partagées",
     shortTitle: "Tri des e-mails",
-    lead: "contact@, commandes@, sav@ : chaque matin, quelqu'un lit, classe et transfère. Nous automatisons ce tri, extrayons les informations utiles et préparons les réponses courantes.",
-    summary: "contact@, commandes@, sav@ : chaque matin, quelqu'un lit, classe et transfère.",
+    lead: "contact@, commandes@, sav@ : chaque matin, quelqu'un lit, classe et transfère. Nous automatisons ce tri, extrayons les informations utiles et préparons les réponses courantes.",
+    summary: "contact@, commandes@, sav@ : chaque matin, quelqu'un lit, classe et transfère.",
     audiences: [
       "Services clients et SAV",
       "Administration des ventes",
@@ -461,11 +461,11 @@ export const useCases: UseCase[] = [
     steps: [
       {
         title: "Classement",
-        text: "Chaque message est rangé par type de demande selon vos catégories : devis, commande, réclamation, facture, autre.",
+        text: "Chaque message est rangé par type de demande selon vos catégories : devis, commande, réclamation, facture, autre.",
       },
       {
         title: "Extraction",
-        text: "Numéro de commande, référence client, produit, urgence : les informations utiles sont extraites des messages et des pièces jointes.",
+        text: "Numéro de commande, référence client, produit, urgence : les informations utiles sont extraites des messages et des pièces jointes.",
       },
       {
         title: "Routage",
@@ -493,7 +493,7 @@ export const useCases: UseCase[] = [
         ],
         items: [
           "Aucun envoi automatique sans validation, sauf règle explicite décidée avec vous (accusé de réception, par exemple)",
-          "Seuil de confiance : en dessous, le message reste en tri manuel",
+          "Seuil de confiance : en dessous, le message reste en tri manuel",
           "Traitement limité aux boîtes et aux dossiers autorisés",
           "Traçabilité du classement et des modifications",
         ],
@@ -531,15 +531,15 @@ export const useCases: UseCase[] = [
     ],
     faq: [
       {
-        q: "L'IA répond-elle seule aux clients ?",
-        a: "Par défaut, non : elle prépare un brouillon qu'une personne relit. Des réponses automatiques peuvent être activées pour des cas simples, sur décision explicite.",
+        q: "L'IA répond-elle seule aux clients ?",
+        a: "Par défaut, non : elle prépare un brouillon qu'une personne relit. Des réponses automatiques peuvent être activées pour des cas simples, sur décision explicite.",
       },
       {
-        q: "Nos e-mails contiennent des données personnelles. Est-ce un problème ?",
-        a: "Cela impose des précautions : choix du modèle et de l'hébergement, limitation des données traitées, durée de conservation, information des personnes. Ces points sont traités au cadrage.",
+        q: "Nos e-mails contiennent des données personnelles. Est-ce un problème ?",
+        a: "Cela impose des précautions : choix du modèle et de l'hébergement, limitation des données traitées, durée de conservation, information des personnes. Ces points sont traités au cadrage.",
       },
       {
-        q: "Fonctionne-t-il avec Outlook ?",
+        q: "Fonctionne-t-il avec Outlook ?",
         a: "Oui, via Microsoft 365. Gmail et Google Workspace sont également compatibles.",
       },
     ],
@@ -560,7 +560,7 @@ export const useCases: UseCase[] = [
       "Comités de direction",
     ],
     today: [
-      "Rédiger un compte rendu prend souvent autant de temps que la réunion ou l'intervention elle-même. Résultat : il est rédigé tard, de façon inégale, ou pas du tout.",
+      "Rédiger un compte rendu prend souvent autant de temps que la réunion ou l'intervention elle-même. Résultat : il est rédigé tard, de façon inégale, ou pas du tout.",
       "Les informations utiles (pièces changées, actions décidées, prochaines étapes) restent dans les notes de chacun au lieu d'arriver dans vos outils.",
     ],
     howTitle: "Comment l'automatisation fonctionne.",
@@ -575,7 +575,7 @@ export const useCases: UseCase[] = [
       },
       {
         title: "Structuration",
-        text: "Le compte rendu suit votre modèle : contexte, constats, décisions, actions avec responsables et échéances.",
+        text: "Le compte rendu suit votre modèle : contexte, constats, décisions, actions avec responsables et échéances.",
       },
       {
         title: "Relecture",
@@ -636,16 +636,16 @@ export const useCases: UseCase[] = [
     ],
     faq: [
       {
-        q: "Faut-il enregistrer les réunions ?",
+        q: "Faut-il enregistrer les réunions ?",
         a: "Non. Des notes rapides ou une dictée après coup suffisent souvent. Si vous enregistrez, les participants doivent en être informés.",
       },
       {
-        q: "Le résultat est-il fiable ?",
-        a: "Le compte rendu est un premier jet de bonne qualité, mais il doit être relu : l'IA peut mal attribuer une décision ou mal comprendre un terme technique.",
+        q: "Le résultat est-il fiable ?",
+        a: "Le compte rendu est un premier jet de bonne qualité, mais il doit être relu : l'IA peut mal attribuer une décision ou mal comprendre un terme technique.",
       },
       {
-        q: "Peut-on l'utiliser pour des rapports d'intervention ?",
-        a: "Oui, c'est un cas fréquent en maintenance : le technicien dicte, le rapport est structuré et enregistré dans la GMAO.",
+        q: "Peut-on l'utiliser pour des rapports d'intervention ?",
+        a: "Oui, c'est un cas fréquent en maintenance : le technicien dicte, le rapport est structuré et enregistré dans la GMAO.",
       },
     ],
   },
@@ -653,11 +653,11 @@ export const useCases: UseCase[] = [
     slug: "qualification-demandes",
     technical: false,
     metaTitle: "Qualifier et router les demandes entrantes avec l'IA | Jegsen IA",
-    metaDescription: "Formulaires, e-mails, appels retranscrits : l'IA analyse chaque demande entrante, la qualifie, la priorise et la transmet à la bonne personne dans votre CRM.",
+    metaDescription: "Formulaires, e-mails, appels retranscrits : l'IA analyse chaque demande entrante, la qualifie, la priorise et la transmet à la bonne personne dans votre CRM.",
     title: "Qualifier et router automatiquement les demandes entrantes",
     shortTitle: "Qualification des demandes",
-    lead: "Demandes de devis, prises de contact, demandes d'intervention : chaque demande est analysée, complétée, priorisée et transmise à la bonne personne, avec les informations nécessaires pour répondre vite.",
-    summary: "Demandes de devis, prises de contact, demandes d'intervention : chaque demande est analysée, complétée, priorisée et transmise à la bonne personne, avec les informations nécessaires pour répondre vite.",
+    lead: "Demandes de devis, prises de contact, demandes d'intervention : chaque demande est analysée, complétée, priorisée et transmise à la bonne personne, avec les informations nécessaires pour répondre vite.",
+    summary: "Demandes de devis, prises de contact, demandes d'intervention : chaque demande est analysée, complétée, priorisée et transmise à la bonne personne, avec les informations nécessaires pour répondre vite.",
     audiences: [
       "Équipes commerciales",
       "Services techniques et SAV",
@@ -680,7 +680,7 @@ export const useCases: UseCase[] = [
       },
       {
         title: "Enrichissement",
-        text: "La demande est rapprochée de votre CRM : client existant, historique, interlocuteur habituel.",
+        text: "La demande est rapprochée de votre CRM : client existant, historique, interlocuteur habituel.",
       },
       {
         title: "Priorisation et routage",
@@ -705,7 +705,7 @@ export const useCases: UseCase[] = [
         items: [
           "Règles d'attribution définies et modifiables par vous",
           "Demandes ambiguës laissées en file manuelle",
-          "Aucune décision commerciale automatique : la qualification aide, elle ne refuse pas",
+          "Aucune décision commerciale automatique : la qualification aide, elle ne refuse pas",
           "Journal de chaque attribution",
         ],
       },
@@ -741,15 +741,15 @@ export const useCases: UseCase[] = [
     ],
     faq: [
       {
-        q: "Faut-il un CRM ?",
-        a: "C'est préférable mais pas indispensable : un tableur partagé ou un outil de tickets peut suffire pour démarrer.",
+        q: "Faut-il un CRM ?",
+        a: "C'est préférable mais pas indispensable : un tableur partagé ou un outil de tickets peut suffire pour démarrer.",
       },
       {
-        q: "L'IA peut-elle refuser une demande ?",
+        q: "L'IA peut-elle refuser une demande ?",
         a: "Non. Elle classe et priorise. Toute décision commerciale reste humaine.",
       },
       {
-        q: "Et les demandes par téléphone ?",
+        q: "Et les demandes par téléphone ?",
         a: "Si vos appels sont retranscrits (ou résumés par l'accueil), ils entrent dans le même flux.",
       },
     ],

@@ -5,7 +5,7 @@ import { legal, site } from "@/lib/site"
 export const metadata: Metadata = pageMeta({
   title: "Politique de confidentialité | Jegsen IA",
   description:
-    "Comment Jegsen traite les données personnelles transmises via le site : finalités, base légale, destinataires, durée de conservation, droits.",
+    "Comment Jegsen traite les données personnelles transmises via le site : finalités, base légale, destinataires, durée de conservation, droits.",
   path: "/confidentialite",
 })
 
@@ -17,17 +17,17 @@ export default function PrivacyPage() {
     <section className="pt-[150px] pb-[60px]">
       <div className="container-site prose-site">
         <h1 className="text-[clamp(2.2rem,4.6vw,3.4rem)]">Politique de confidentialité</h1>
-        <p className="text-sm text-ink-3">Dernière mise à jour : {updated}</p>
+        <p className="text-sm text-ink-3">Dernière mise à jour : {updated}</p>
 
         <h2>Responsable du traitement</h2>
         <p>
           {legal.company}
-          {legal.address && `, ${legal.address}`}. Pour toute question sur vos données : {mail}.
+          {legal.address && `, ${legal.address}`}. Pour toute question sur vos données : {mail}.
         </p>
 
         <h2>Données collectées</h2>
         <p>
-          Par le formulaire de contact : nom et prénom, entreprise, adresse e-mail, téléphone (facultatif), effectif de
+          Par le formulaire de contact : nom et prénom, entreprise, adresse e-mail, téléphone (facultatif), effectif de
           l'entreprise, sujet et contenu de votre message.
         </p>
         <p>
@@ -48,7 +48,7 @@ export default function PrivacyPage() {
         <h2>Destinataires</h2>
         <p>
           Vos données sont lues uniquement par les personnes de {legal.company} chargées de traiter votre demande. Pour
-          l'acheminer, nous faisons appel à deux prestataires techniques :
+          l'acheminer, nous faisons appel à deux prestataires techniques :
         </p>
         <ul>
           <li>

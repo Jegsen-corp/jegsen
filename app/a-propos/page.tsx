@@ -8,9 +8,9 @@ import { pageMeta } from "@/lib/metadata"
 import { team } from "@/lib/site"
 
 export const metadata: Metadata = pageMeta({
-  title: "À propos : notre mission, rendre l'IA rentable | Jegsen IA",
+  title: "À propos : notre mission, rendre l'IA rentable | Jegsen IA",
   description:
-    "Notre mission : transformer l'IA en levier de rentabilité pour les PME et ETI françaises, par la formation, le conseil et l'automatisation. Basé à Nantes.",
+    "Notre mission : transformer l'IA en levier de rentabilité pour les PME et ETI françaises, par la formation, le conseil et l'automatisation. Basé à Nantes.",
   path: "/a-propos",
 })
 
@@ -44,7 +44,7 @@ export default function AboutPage() {
         </Reveal>
         <Reveal as="p" className="lead">
           Nous accompagnons les PME et ETI françaises dans leur adoption de l'IA, par la formation, le conseil et
-          l'automatisation de leurs processus métiers, avec un objectif : réduire les coûts, améliorer la productivité et
+          l'automatisation de leurs processus métiers, avec un objectif : réduire les coûts, améliorer la productivité et
           créer de la valeur mesurable.
         </Reveal>
       </PageHero>
@@ -52,13 +52,13 @@ export default function AboutPage() {
       <SplitSection eyebrow="Notre vision" title="Rendre l'IA concrètement utile, accessible et rentable.">
         <div className="prose-site">
           <p>
-            Notre conviction : chaque entreprise possède déjà, dans ses documents et ses données, la matière d'un
+            Notre conviction : chaque entreprise possède déjà, dans ses documents et ses données, la matière d'un
             véritable cerveau d'entreprise. Notre travail consiste à l'organiser et à le brancher sur les processus qui
             comptent.
           </p>
           <p>
             En parallèle de nos missions, nous développons nos propres solutions logicielles à partir des besoins
-            concrets du terrain. Notre ambition : une entreprise qui allie expertise technique, accompagnement humain et
+            concrets du terrain. Notre ambition : une entreprise qui allie expertise technique, accompagnement humain et
             produits évolutifs.
           </p>
           <p>Nous sommes basés à Nantes et intervenons partout en France.</p>
@@ -70,7 +70,7 @@ export default function AboutPage() {
           <div className="container-site">
             <Eyebrow>L'équipe</Eyebrow>
             <h2 className="mb-8">Les personnes derrière Jegsen.</h2>
-            <div className="grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid-balance grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
               {team.map((m, i) => (
                 <SiteCard key={m.name} delay={i * 0.08}>
                   <h3>{m.name}</h3>
@@ -84,7 +84,7 @@ export default function AboutPage() {
       )}
 
       <section className="section">
-        <div className="container-site grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
+        <div className="container-site grid-balance grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
           {values.map((v, i) => (
             <SiteCard key={v.title} delay={i * 0.08}>
               <CardIcon>

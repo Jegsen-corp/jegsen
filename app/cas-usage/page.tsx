@@ -11,7 +11,7 @@ import { pageMeta } from "@/lib/metadata"
 export const metadata: Metadata = pageMeta({
   title: "Cas d'usage de l'IA en entreprise | Jegsen IA",
   description:
-    "Factures, bons de livraison, e-mails, comptes rendus, demandes entrantes, cerveau d'entreprise, workflows agentiques : les processus et usages techniques que nous mettons en production.",
+    "Factures, bons de livraison, e-mails, comptes rendus, demandes entrantes, cerveau d'entreprise, workflows agentiques : les processus et usages techniques que nous mettons en production.",
   path: "/cas-usage",
 })
 
@@ -48,7 +48,7 @@ const techUses: { title: string; href?: string; text: string }[] = [
   },
   {
     title: "Choix et hébergement des modèles",
-    text: "Sélection des modèles selon la tâche, le coût et la sensibilité des données : services cloud, hébergement européen ou installation dans votre environnement.",
+    text: "Sélection des modèles selon la tâche, le coût et la sensibilité des données : services cloud, hébergement européen ou installation dans votre environnement.",
   },
 ]
 
@@ -64,7 +64,7 @@ export default function UseCasesPage() {
         </Reveal>
         <Reveal as="p" className="lead">
           Les gains les plus nets viennent des tâches répétitives, à fort volume, qui consistent à lire, vérifier et
-          ressaisir. Ils reposent sur un socle technique : vos données, organisées en un cerveau d'entreprise et reliées
+          ressaisir. Ils reposent sur un socle technique : vos données, organisées en un cerveau d'entreprise et reliées
           à vos outils.
         </Reveal>
       </PageHero>
@@ -95,13 +95,13 @@ export default function UseCasesPage() {
               style={{ background: "#0b0d12" }}
             >
               <OfferKicker className="text-ink-2">Sur mesure</OfferKicker>
-              <h3 className="text-[1.45rem]">Votre processus n'est pas dans la liste ?</h3>
+              <h3 className="text-[1.45rem]">Votre processus n'est pas dans la liste ?</h3>
               <p>
-                Décrivez-nous la tâche qui mobilise le plus vos équipes : nous vous dirons si elle se prête à
+                Décrivez-nous la tâche qui mobilise le plus vos équipes : nous vous dirons si elle se prête à
                 l'automatisation.
               </p>
               <OfferFooter className="border-line-strong">
-                <small className="text-[13px] text-ink-3">Premier échange de 30 minutes</small>
+                <small className="text-[13px] text-ink-3">Premier échange de 30 minutes</small>
                 <ArrowLink href="/contact" stretched>
                   Nous écrire
                 </ArrowLink>
@@ -115,9 +115,9 @@ export default function UseCasesPage() {
         <Split>
           <Reveal>
             <Eyebrow>Cas d'usage techniques</Eyebrow>
-            <h2>Le socle : vos données, organisées et branchées.</h2>
+            <h2>Le socle : vos données, organisées et branchées.</h2>
             <p className="lead">
-              Derrière chaque automatisation, la même base : un cerveau d'entreprise construit à partir de vos données,
+              Derrière chaque automatisation, la même base : un cerveau d'entreprise construit à partir de vos données,
               des connexions propres avec votre système d'information et, quand le processus le demande, des workflows
               agentiques sous contrôle humain.
             </p>
@@ -153,8 +153,8 @@ export default function UseCasesPage() {
       </section>
 
       <CtaBlock
-        title="Un processus vous coûte du temps ?"
-        lead="Un premier échange de 30 minutes pour estimer le gain sur vos volumes réels, et vous dire si l'automatisation est rentable."
+        title="Un processus vous coûte du temps ?"
+        lead="Un premier échange de 30 minutes pour estimer le gain sur vos volumes réels, et vous dire si l'automatisation est rentable."
       />
     </>
   )

@@ -15,6 +15,9 @@ export default tseslint.config(
     languageOptions: { globals: { ...globals.browser, ...globals.node } },
     rules: {
       "@typescript-eslint/no-unused-vars": ["warn", { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }],
+      // Typographie française : espaces insécables voulues dans les textes (avant « : ; ? ! », dans les nombres).
+      // Toujours interdites dans le code lui-même.
+      "no-irregular-whitespace": ["error", { skipStrings: true, skipTemplates: true, skipJSXText: true }],
     },
   },
 )

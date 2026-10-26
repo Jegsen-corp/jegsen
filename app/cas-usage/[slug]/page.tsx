@@ -95,7 +95,7 @@ async function UseCaseContent({ params }: { params: PageProps<"/cas-usage/[slug]
       />
 
       <section className="section-tight">
-        <div className="container-site grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
+        <div className="container-site grid-balance grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
           {c.cards.map((card, i) => (
             <SiteCard key={card.title} delay={i * 0.08}>
               <CardIcon>
@@ -128,8 +128,8 @@ async function UseCaseContent({ params }: { params: PageProps<"/cas-usage/[slug]
       </section>
 
       <CtaBlock
-        title="Ce processus vous coûte du temps ?"
-        lead="Un premier échange de 30 minutes pour estimer le gain sur vos volumes réels, et vous dire si l'automatisation est rentable."
+        title="Ce processus vous coûte du temps ?"
+        lead="Un premier échange de 30 minutes pour estimer le gain sur vos volumes réels, et vous dire si l'automatisation est rentable."
       />
     </>
   )

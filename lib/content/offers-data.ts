@@ -65,7 +65,7 @@ const offerSources: OfferSource[] = [
   {
     slug: "diagnostic-rentabilite-ia",
     metaTitle: "Diagnostic IA pour PME et ETI, ROI chiffré | Jegsen IA",
-    metaDescription: "Diagnostic IA en une semaine, forfait de 1 900 € HT : 2 à 3 cas d'usage chiffrés, hypothèses de ROI, risques et prochaines étapes. PME et ETI, Nantes et toute la France.",
+    metaDescription: "Diagnostic IA en une semaine, forfait de 1 900 € HT : 2 à 3 cas d'usage chiffrés, hypothèses de ROI, risques et prochaines étapes. PME et ETI, Nantes et toute la France.",
     kicker: "Pour commencer",
     title: "Diagnostic de rentabilité IA",
     crumb: "Diagnostic IA",
@@ -74,7 +74,7 @@ const offerSources: OfferSource[] = [
     pricing: {
       kind: "forfait",
       amount: 1900,
-      note: "Forfait de 1 900 € HT. Si vous enchaînez avec un sprint d'intégration, ce montant en est déduit.",
+      note: "Forfait de 1 900 € HT. Si vous enchaînez avec un sprint d'intégration, ce montant en est déduit.",
     },
     ctaLabel: "Réserver un diagnostic",
     cardDeliverable: "Plan d'action chiffré, avec hypothèses de ROI et risques",
@@ -84,15 +84,15 @@ const offerSources: OfferSource[] = [
       "Vous avez des équipes qui ressaisissent, trient, contrôlent ou reformulent toute la journée.",
       "Vous voulez un chiffrage avant d'engager un budget de développement.",
     ],
-    stepsLead: "Trois jours de travail répartis sur une semaine : une journée avec vos équipes, puis l'analyse et la restitution.",
+    stepsLead: "Trois jours de travail répartis sur une semaine : une journée avec vos équipes, puis l'analyse et la restitution.",
     steps: [
       {
         title: "Cartographie",
-        text: "Une journée avec les équipes concernées : entretiens, observation de deux ou trois processus, outils et flux de documents.",
+        text: "Une journée avec les équipes concernées : entretiens, observation de deux ou trois processus, outils et flux de documents.",
       },
       {
         title: "Mesure",
-        text: "Volumes, temps passés, coûts, taux d'erreur et délais : nous partons de vos chiffres, pas de moyennes de marché.",
+        text: "Volumes, temps passés, coûts, taux d'erreur et délais : nous partons de vos chiffres, pas de moyennes de marché.",
       },
       {
         title: "Sélection",
@@ -105,41 +105,41 @@ const offerSources: OfferSource[] = [
     ],
     deliverables: [
       "Cartographie des processus étudiés",
-      "2 à 3 cas d'usage détaillés et chiffrés",
+      "2 à 3 cas d'usage détaillés et chiffrés",
       "Hypothèses de ROI explicites et vérifiables",
-      "Analyse des risques : données, sécurité, conformité, adoption",
+      "Analyse des risques : données, sécurité, conformité, adoption",
       "Feuille de route priorisée",
       "Restitution orale à la direction",
     ],
     showCases: true,
     faq: [
       {
-        q: "Que se passe-t-il si aucun cas d'usage n'est rentable ?",
+        q: "Que se passe-t-il si aucun cas d'usage n'est rentable ?",
         a: "Nous vous le disons. Un diagnostic qui conclut qu'il ne faut pas investir maintenant vous évite une dépense inutile. C'est un résultat aussi utile qu'une feuille de route.",
       },
       {
-        q: "De quelles données avez-vous besoin ?",
-        a: "D'un accès aux personnes qui font le travail, d'exemples de documents et, si possible, de quelques indicateurs : volumes mensuels, temps de traitement, coûts. Nous travaillons avec ce qui existe.",
+        q: "De quelles données avez-vous besoin ?",
+        a: "D'un accès aux personnes qui font le travail, d'exemples de documents et, si possible, de quelques indicateurs : volumes mensuels, temps de traitement, coûts. Nous travaillons avec ce qui existe.",
       },
       {
-        q: "Le diagnostic engage-t-il la suite ?",
-        a: "Non. Le plan d'action vous appartient : vous pouvez le réaliser en interne, avec nous ou avec un autre prestataire.",
+        q: "Le diagnostic engage-t-il la suite ?",
+        a: "Non. Le plan d'action vous appartient : vous pouvez le réaliser en interne, avec nous ou avec un autre prestataire.",
       },
     ],
   },
   {
     slug: "sprint-integration-ia",
     metaTitle: "Intégration IA et automatisation des processus | Jegsen IA",
-    metaDescription: "Un processus automatisé par l'IA mis en production en 2 à 6 semaines : documents, e-mails, comptes rendus, demandes. Intégré à votre SI, gains mesurés.",
+    metaDescription: "Un processus automatisé par l'IA mis en production en 2 à 6 semaines : documents, e-mails, comptes rendus, demandes. Intégré à votre SI, gains mesurés.",
     kicker: "Automatisez un processus",
     title: "Sprint d'intégration IA",
     crumb: "Intégration IA",
     lead: "Nous prenons un processus précis et nous le mettons en production, branché sur vos outils, avec des gains mesurés.",
-    duration: "2 à 6 semaines",
+    duration: "2 à 6 semaines",
     pricing: {
       kind: "from",
       amount: 5000,
-      note: "Sur devis, à partir de 5 000 € HT selon le processus et les outils à connecter. Devis ferme après le diagnostic ou un premier échange.",
+      note: "Sur devis, à partir de 5 000 € HT selon le processus et les outils à connecter. Devis ferme après le diagnostic ou un premier échange.",
     },
     cardDeliverable: "Workflow opérationnel, tests, documentation, sécurisation et mesure des gains",
     factDeliverable: "Workflow opérationnel",
@@ -152,7 +152,7 @@ const offerSources: OfferSource[] = [
     examples: [
       {
         title: "Extraction de données",
-        text: "Factures, bons de livraison, commandes, contrats : les données utiles extraites et contrôlées.",
+        text: "Factures, bons de livraison, commandes, contrats : les données utiles extraites et contrôlées.",
         icon: [
           {
             d: "M13 3L5 13.5h6L10 21l8-10.5h-6L13 3z",
@@ -170,7 +170,7 @@ const offerSources: OfferSource[] = [
       },
       {
         title: "Comptes rendus",
-        text: "Réunions, visites, interventions : un compte rendu structuré à partir de notes ou d'enregistrements.",
+        text: "Réunions, visites, interventions : un compte rendu structuré à partir de notes ou d'enregistrements.",
         icon: [
           {
             d: "M13 3L5 13.5h6L10 21l8-10.5h-6L13 3z",
@@ -214,7 +214,7 @@ const offerSources: OfferSource[] = [
         ],
       },
     ],
-    stepsLead: "2 à 6 semaines, avec des points d'étape réguliers et des décisions prises sur la base de vos chiffres.",
+    stepsLead: "2 à 6 semaines, avec des points d'étape réguliers et des décisions prises sur la base de vos chiffres.",
     steps: [
       {
         title: "Cadrage",
@@ -222,7 +222,7 @@ const offerSources: OfferSource[] = [
       },
       {
         title: "Construction",
-        text: "Workflow branché sur vos outils existants : messagerie, GED, ERP, CRM, logiciels métiers.",
+        text: "Workflow branché sur vos outils existants : messagerie, GED, ERP, CRM, logiciels métiers.",
       },
       {
         title: "Tests & sécurisation",
@@ -237,25 +237,25 @@ const offerSources: OfferSource[] = [
       "Workflow opérationnel en production",
       "Jeux de tests et rapport de recette",
       "Documentation technique et guide d'utilisation",
-      "Sécurisation : accès, journalisation, gestion des données",
+      "Sécurisation : accès, journalisation, gestion des données",
       "Tableau de mesure des gains avant / après",
     ],
     showCases: true,
     faq: [
       {
-        q: "Faut-il changer nos logiciels ?",
+        q: "Faut-il changer nos logiciels ?",
         a: "Non. Nous nous branchons sur vos outils existants. Si un logiciel n'offre aucun moyen d'intégration, nous le signalons au cadrage, avant d'engager le développement.",
       },
       {
-        q: "Que se passe-t-il quand l'IA se trompe ?",
-        a: "Le workflow est conçu pour cela : contrôles de cohérence automatiques et, en cas de doute, transmission à un humain. Les exceptions sont tracées et mesurées.",
+        q: "Que se passe-t-il quand l'IA se trompe ?",
+        a: "Le workflow est conçu pour cela : contrôles de cohérence automatiques et, en cas de doute, transmission à un humain. Les exceptions sont tracées et mesurées.",
       },
       {
-        q: "Où sont traitées nos données ?",
+        q: "Où sont traitées nos données ?",
         a: "Le choix des modèles et de l'hébergement fait partie du cadrage, en fonction de la sensibilité de vos données et de vos obligations (RGPD, secret professionnel, contrats clients).",
       },
       {
-        q: "Et après la mise en production ?",
+        q: "Et après la mise en production ?",
         a: "Le workflow vous appartient. Pour qu'il reste fiable quand vos logiciels, vos documents ou les modèles d'IA évoluent, nous proposons une [maintenance et un suivi des gains](/offres/maintenance-suivi-ia), à partir de 150 € HT par mois et par workflow.",
       },
     ],
@@ -263,17 +263,17 @@ const offerSources: OfferSource[] = [
   {
     slug: "programme-formation-ia",
     metaTitle: "Formation IA en entreprise et adoption | Jegsen IA, Nantes",
-    metaDescription: "Formation IA des équipes, charte d'utilisation, ateliers par métier et accompagnement à l'adoption sur 1 à 3 semaines, avec indicateurs et bilan des gains.",
+    metaDescription: "Formation IA des équipes, charte d'utilisation, ateliers par métier et accompagnement à l'adoption sur 1 à 3 semaines, avec indicateurs et bilan des gains.",
     kicker: "Formez vos équipes",
     title: "Programme IA et adoption",
     crumb: "Formation IA",
     lead: "Un outil que personne n'utilise ne rapporte rien. Nous formons vos équipes et encadrons les usages pour que les gains se matérialisent.",
-    duration: "1 à 3 semaines",
+    duration: "1 à 3 semaines",
     pricing: {
       kind: "perDay",
       amount: 1950,
       groupMax: 10,
-      note: "À partir de 1 950 € HT la journée, pour un groupe de 10 personnes au plus. Devis selon le nombre de journées et de groupes.",
+      note: "À partir de 1 950 € HT la journée, pour un groupe de 10 personnes au plus. Devis selon le nombre de journées et de groupes.",
     },
     cardDeliverable: "Équipes formées, usages encadrés, indicateurs d'adoption et bilan de gains",
     factDeliverable: "Équipes formées",
@@ -282,7 +282,7 @@ const offerSources: OfferSource[] = [
       "Vous avez déployé une solution et voulez qu'elle soit réellement adoptée.",
       "Vous devez organiser la maîtrise de l'IA de vos équipes (article 4 du règlement européen sur l'IA).",
     ],
-    stepsLead: "1 à 3 semaines, avec des points d'étape réguliers et des décisions prises sur la base de vos chiffres.",
+    stepsLead: "1 à 3 semaines, avec des points d'étape réguliers et des décisions prises sur la base de vos chiffres.",
     steps: [
       {
         title: "État des lieux",
@@ -290,7 +290,7 @@ const offerSources: OfferSource[] = [
       },
       {
         title: "Règles d'utilisation",
-        text: "Charte d'usage claire : données autorisées, outils validés, vérification des résultats, responsabilités.",
+        text: "Charte d'usage claire : données autorisées, outils validés, vérification des résultats, responsabilités.",
       },
       {
         title: "Ateliers par métier",
@@ -311,15 +311,15 @@ const offerSources: OfferSource[] = [
     showCases: false,
     faq: [
       {
-        q: "La formation peut-elle être financée par notre OPCO ?",
+        q: "La formation peut-elle être financée par notre OPCO ?",
         a: "Une prise en charge par un OPCO suppose que l'organisme de formation soit certifié Qualiopi pour la catégorie d'actions concernée. Nous indiquons au devis si l'action est éligible.",
       },
       {
-        q: "Faut-il des connaissances techniques ?",
+        q: "Faut-il des connaissances techniques ?",
         a: "Non. Les ateliers partent des tâches quotidiennes de chaque équipe, pas de la technologie.",
       },
       {
-        q: "Est-ce que cela répond à l'obligation de maîtrise de l'IA ?",
+        q: "Est-ce que cela répond à l'obligation de maîtrise de l'IA ?",
         a: "Le programme constitue une mesure concrète de développement de la maîtrise de l'IA et produit des traces écrites (charte, supports, participation). L'appréciation de votre conformité reste de votre ressort ou de celui de votre conseil juridique.",
       },
     ],
@@ -334,7 +334,7 @@ const offerSources: OfferSource[] = [
   {
     slug: "maintenance-suivi-ia",
     metaTitle: "Maintenance et suivi des automatisations IA (MCO) | Jegsen IA",
-    metaDescription: "Maintenance de vos workflows IA en production : supervision, correctifs, mises à jour des connecteurs et des modèles, suivi des gains. Dès 150 € HT par mois.",
+    metaDescription: "Maintenance de vos workflows IA en production : supervision, correctifs, mises à jour des connecteurs et des modèles, suivi des gains. Dès 150 € HT par mois.",
     kicker: "Après la mise en production",
     title: "Maintenance et suivi",
     crumb: "Maintenance IA",
@@ -344,7 +344,7 @@ const offerSources: OfferSource[] = [
       kind: "perMonth",
       amount: 150,
       unit: "workflow",
-      note: "À partir de 150 € HT par mois et par workflow en production, selon le palier. L'hébergement et la consommation des modèles d'IA dépendent de vos volumes : ils sont chiffrés à part, dans la proposition.",
+      note: "À partir de 150 € HT par mois et par workflow en production, selon le palier. L'hébergement et la consommation des modèles d'IA dépendent de vos volumes : ils sont chiffrés à part, dans la proposition.",
     },
     ctaLabel: "Parler de la maintenance",
     cardDeliverable: "Workflows supervisés, corrigés et mis à jour, avec suivi des gains",
@@ -380,7 +380,7 @@ const offerSources: OfferSource[] = [
           "Tout le palier Standard",
           "Prise en charge prioritaire des incidents",
           "Rapport mensuel des gains",
-          "Revue technique trimestrielle : nouveaux modèles testés sur vos données",
+          "Revue technique trimestrielle : nouveaux modèles testés sur vos données",
         ],
       },
     ],
@@ -393,7 +393,7 @@ const offerSources: OfferSource[] = [
     steps: [
       {
         title: "Mise sous supervision",
-        text: "Dès la mise en production : indicateurs, alertes et journal des exceptions pour chaque workflow.",
+        text: "Dès la mise en production : indicateurs, alertes et journal des exceptions pour chaque workflow.",
       },
       {
         title: "Surveillance",
@@ -422,19 +422,19 @@ const offerSources: OfferSource[] = [
     showCases: false,
     faq: [
       {
-        q: "Pourquoi maintenir un workflow d'IA ?",
-        a: "Parce que tout ce qui l'entoure évolue : vos logiciels changent, les modèles d'IA sont mis à jour ou retirés, vos documents changent de format. Sans suivi, un workflow fiable au départ se dégrade sans bruit.",
+        q: "Pourquoi maintenir un workflow d'IA ?",
+        a: "Parce que tout ce qui l'entoure évolue : vos logiciels changent, les modèles d'IA sont mis à jour ou retirés, vos documents changent de format. Sans suivi, un workflow fiable au départ se dégrade sans bruit.",
       },
       {
-        q: "Comment le prix est-il calculé ?",
-        a: "Par workflow en production et par mois, selon le palier choisi. L'hébergement et la consommation des modèles d'IA dépendent de vos volumes : ils sont chiffrés à part, dans la proposition.",
+        q: "Comment le prix est-il calculé ?",
+        a: "Par workflow en production et par mois, selon le palier choisi. L'hébergement et la consommation des modèles d'IA dépendent de vos volumes : ils sont chiffrés à part, dans la proposition.",
       },
       {
-        q: "Que contient la revue technique trimestrielle ?",
-        a: "Les modèles d'IA progressent vite. Chaque trimestre, nous testons les nouvelles versions pertinentes sur un échantillon de vos documents et vous présentons le résultat : qualité, coût, délai de traitement. Si un changement en vaut la peine, nous le planifions avec vous.",
+        q: "Que contient la revue technique trimestrielle ?",
+        a: "Les modèles d'IA progressent vite. Chaque trimestre, nous testons les nouvelles versions pertinentes sur un échantillon de vos documents et vous présentons le résultat : qualité, coût, délai de traitement. Si un changement en vaut la peine, nous le planifions avec vous.",
       },
       {
-        q: "Les évolutions sont-elles incluses ?",
+        q: "Les évolutions sont-elles incluses ?",
         a: "Les ajustements de règles et de consignes sont inclus à partir du palier Standard. Une nouvelle fonctionnalité ou un nouveau processus fait l'objet d'un devis, comme un [sprint d'intégration](/offres/sprint-integration-ia).",
       },
     ],

@@ -22,11 +22,11 @@ const subjects = [
 ]
 
 const sizes = [
-  { value: "1-9", label: "1 à 9 salariés" },
-  { value: "10-49", label: "10 à 49 salariés" },
-  { value: "50-249", label: "50 à 249 salariés" },
-  { value: "250-4999", label: "250 à 4 999 salariés" },
-  { value: "5000+", label: "5 000 salariés et plus" },
+  { value: "1-9", label: "1 à 9 salariés" },
+  { value: "10-49", label: "10 à 49 salariés" },
+  { value: "50-249", label: "50 à 249 salariés" },
+  { value: "250-4999", label: "250 à 4 999 salariés" },
+  { value: "5000+", label: "5 000 salariés et plus" },
 ]
 
 const fieldClass =
@@ -44,7 +44,8 @@ function Field({ id, label, children, className }: { id: string; label: string; 
 }
 
 function Row({ children }: { children: ReactNode }) {
-  return <div className="grid gap-4 sm:grid-cols-2">{children}</div>
+  // Requête de conteneur : deux colonnes seulement si le formulaire lui-même est assez large (pas l'écran).
+  return <div className="grid gap-4 @md:grid-cols-2">{children}</div>
 }
 
 /** Formulaire relié au paramètre `?offre=` de l'URL (à placer sous un Suspense). */
@@ -71,11 +72,11 @@ export function ContactFormFields() {
 
     if (!site.formEndpoint) {
       const body = [
-        `Nom : ${data.get("name")}`,
-        `Entreprise : ${data.get("company")}`,
-        `Taille : ${sizeLabel}`,
-        `E-mail : ${data.get("email")}`,
-        `Téléphone : ${data.get("phone") || "non renseigné"}`,
+        `Nom : ${data.get("name")}`,
+        `Entreprise : ${data.get("company")}`,
+        `Taille : ${sizeLabel}`,
+        `E-mail : ${data.get("email")}`,
+        `Téléphone : ${data.get("phone") || "non renseigné"}`,
         "",
         String(data.get("message") || ""),
       ].join("\n")
@@ -107,7 +108,7 @@ export function ContactFormFields() {
   }
 
   return (
-    <form className="grid gap-4" onSubmit={onSubmit}>
+    <form className="@container grid gap-4" onSubmit={onSubmit}>
       <Row>
         <Field id="name" label="Nom et prénom">
           <Input id="name" name="name" required autoComplete="name" className={fieldClass} />
@@ -127,7 +128,7 @@ export function ContactFormFields() {
       <Row>
         <Field id="subject" label="Sujet">
           <Select value={subject} onValueChange={setSubject}>
-            <SelectTrigger id="subject" className={cn(fieldClass, "data-[size=default]:h-auto")}>
+            <SelectTrigger id="subject" className={cn(fieldClass, "data-[size=default]:h-auto [&_[data-slot=select-value]]:block! [&_[data-slot=select-value]]:truncate")}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent position="popper" className="rounded-[14px]">
@@ -141,7 +142,7 @@ export function ContactFormFields() {
         </Field>
         <Field id="size" label="Effectif">
           <Select value={size} onValueChange={setSize}>
-            <SelectTrigger id="size" className={cn(fieldClass, "data-[size=default]:h-auto")}>
+            <SelectTrigger id="size" className={cn(fieldClass, "data-[size=default]:h-auto [&_[data-slot=select-value]]:block! [&_[data-slot=select-value]]:truncate")}>
               <SelectValue />
             </SelectTrigger>
             <SelectContent position="popper" className="rounded-[14px]">
@@ -159,7 +160,7 @@ export function ContactFormFields() {
           id="message"
           name="message"
           required
-          placeholder="Quel processus vous prend le plus de temps ? Quels outils utilisez-vous ? Quels volumes (documents, e-mails, demandes) par mois ?"
+          placeholder="Quel processus vous prend le plus de temps ? Quels outils utilisez-vous ? Quels volumes (documents, e-mails, demandes) par mois ?"
           className={cn(fieldClass, "min-h-[150px] resize-y")}
         />
       </Field>
@@ -179,7 +180,8 @@ export function ContactFormFields() {
           required
           checked={consent}
           onCheckedChange={(v) => setConsent(v === true)}
-          className="mt-0.5 border-line-strong data-[state=checked]:border-brand data-[state=checked]:bg-brand"
+          // 20 px visibles, zone tactile élargie à 40 px par un pseudo-élément.
+          className="mt-0.5 size-5 border-line-strong after:absolute after:-inset-[10px] after:content-[''] data-[state=checked]:border-brand data-[state=checked]:bg-brand"
         />
         <label htmlFor="consent">
           J'accepte que mes données soient utilisées pour répondre à ma demande, conformément à la{" "}

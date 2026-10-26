@@ -5,9 +5,9 @@ import { articles } from "@/lib/content/articles"
 import { pageMeta } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMeta({
-  title: "Ressources : l'IA en entreprise, sourcée et datée | Jegsen IA",
+  title: "Ressources : l'IA en entreprise, sourcée et datée | Jegsen IA",
   description:
-    "Articles sourcés sur l'IA en PME et ETI : réglementation (règlement européen sur l'IA), automatisation des processus, formation et mesure des gains.",
+    "Articles sourcés sur l'IA en PME et ETI : réglementation (règlement européen sur l'IA), automatisation des processus, formation et mesure des gains.",
   path: "/ressources",
 })
 
