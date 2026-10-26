@@ -6,6 +6,7 @@ import { SplitSection } from "@/components/site/sections"
 import { CardIcon, SiteCard } from "@/components/site/site-card"
 import { pageMeta } from "@/lib/metadata"
 import { team } from "@/lib/site"
+import { product } from "@/lib/content/product"
 
 export const metadata: Metadata = pageMeta({
   title: "À propos : notre mission, rendre l'IA rentable | Jegsen IA",
@@ -28,7 +29,7 @@ const values = [
   {
     icon: icons.bolt,
     title: "Construire des produits",
-    text: "Les besoins récurrents que nous rencontrons sur le terrain deviennent des logiciels, pour aller plus vite chez les clients suivants.",
+    text: `Ce que nous voyons sur le terrain devient du logiciel. Notre premier produit, ${product.name}, aide les comités de direction à préparer leurs décisions.`,
   },
 ]
 
@@ -57,9 +58,9 @@ export default function AboutPage() {
             comptent.
           </p>
           <p>
-            En parallèle de nos missions, nous développons nos propres solutions logicielles à partir des besoins
-            concrets du terrain. Notre ambition : une entreprise qui allie expertise technique, accompagnement humain et
-            produits évolutifs.
+            En parallèle de nos missions, nous développons {product.name}, l&apos;aide à la décision des comités de
+            direction, à partir de ce que nous voyons chez nos clients. Notre ambition : une entreprise qui allie
+            expertise technique, accompagnement humain et produits évolutifs.
           </p>
           <p>Nous sommes basés à Nantes et intervenons partout en France.</p>
         </div>

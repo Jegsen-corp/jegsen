@@ -18,7 +18,7 @@ const subjects = [
   { value: "sprint-integration-ia", label: "Sprint d'intégration IA" },
   { value: "programme-formation-ia", label: "Programme IA et adoption" },
   { value: "maintenance-suivi-ia", label: "Maintenance et suivi (MCO)" },
-  { value: "pilote", label: `Programme pilote (${product.name}, aide à la décision du CODIR)` },
+  { value: "pilote", label: `Programme pilote ${product.name}` },
   { value: "autre", label: "Autre demande" },
 ]
 
