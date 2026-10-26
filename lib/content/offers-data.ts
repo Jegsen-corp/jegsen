@@ -271,9 +271,9 @@ const offerSources: OfferSource[] = [
     duration: "1 à 3 semaines",
     pricing: {
       kind: "perDay",
-      amount: 1950,
+      amount: 1500,
       groupMax: 10,
-      note: "À partir de 1 950 € HT la journée, pour un groupe de 10 personnes au plus. Devis selon le nombre de journées et de groupes.",
+      note: "À partir de 1 500 € HT la journée, pour un groupe de 10 personnes au plus. Devis selon le nombre de journées et de groupes.",
     },
     cardDeliverable: "Équipes formées, usages encadrés, indicateurs d'adoption et bilan de gains",
     factDeliverable: "Équipes formées",

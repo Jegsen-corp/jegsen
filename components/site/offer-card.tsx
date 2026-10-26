@@ -38,7 +38,7 @@ export function OfferCardCompact({ offer, delay }: { offer: OfferSummary; delay?
       <OfferFooter>
         <div>
           <small className="text-[13px] text-ink-3">{offer.duration}</small>
-          {/* 20 px : « dès 1 950 € HT / jour » tient sur une ligne dans une grille de trois cartes. */}
+          {/* 20 px : « dès 1 500 € HT / jour » tient sur une ligne dans une grille de trois cartes. */}
           <strong className="block font-display text-xl tracking-[-0.03em] whitespace-nowrap">{offer.compactPrice}</strong>
         </div>
         <ArrowLink href={offerHref(offer.slug)} stretched>
