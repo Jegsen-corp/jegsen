@@ -8,7 +8,8 @@ import { SplitWords } from "@/components/motion/split-words"
 import { Steps } from "@/components/motion/steps"
 import { BrainDiagram } from "@/components/home/brain-diagram"
 import { HeroVisual } from "@/components/home/hero-visual"
-import { Pipeline } from "@/components/home/pipeline"
+import { BrainMotif } from "@/components/home/brain-motifs"
+import { BrainWorkspace } from "@/components/home/brain-workspace"
 import { CtaBlock, Eyebrow, SectionHead } from "@/components/site/blocks"
 import { Faq } from "@/components/site/faq"
 import { Icon, icons } from "@/components/site/icon"
@@ -16,6 +17,7 @@ import { ButtonRow, LinkButton } from "@/components/site/links"
 import { OffersJourney } from "@/components/home/offers-journey"
 import { CardIcon, SiteCard } from "@/components/site/site-card"
 import { offers } from "@/lib/content/offers"
+import { product } from "@/lib/content/product"
 import { pageMeta } from "@/lib/metadata"
 import { site } from "@/lib/site"
 
@@ -58,12 +60,6 @@ const method = [
     title: "Mesurer",
     text: "Temps de traitement, erreurs, délais : nous comparons les indicateurs avant et après. Ce qui ne rapporte pas est arrêté.",
   },
-]
-
-const benefits = [
-  { title: "Moins de saisie", text: "Les données arrivent déjà structurées dans vos outils." },
-  { title: "Moins d'erreurs", text: "Chaque document est contrôlé selon vos règles métier." },
-  { title: "Des délais plus courts", text: "Les dossiers avancent sans attendre une ressaisie." },
 ]
 
 const commitments = [
@@ -286,21 +282,24 @@ export default function HomePage() {
         <div className="container-site relative">
           <SectionHead
             eyebrow="Notre produit · en développement"
-            title="L'automatisation documentaire, de bout en bout."
-            lead="Nous développons, à partir de projets réels, un outil qui récupère vos documents et e-mails, en extrait les données, vérifie leur cohérence, met à jour vos logiciels métiers et signale les exceptions à une personne. Un programme pilote est ouvert à quelques entreprises."
+            title={`${product.name}. ${product.tagline}`}
+            lead={product.lead}
           />
-          <Pipeline />
-          <div className="mt-12 grid-balance grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
-            {benefits.map((b, i) => (
-              <SiteCard key={b.title} delay={i * 0.1}>
-                <h3>{b.title}</h3>
-                <p className="m-0">{b.text}</p>
-              </SiteCard>
+          <BrainWorkspace />
+          <ul className="m-0 mt-12 grid list-none gap-px overflow-hidden rounded-[22px] border border-line bg-line p-0 sm:grid-cols-2 lg:grid-cols-4">
+            {product.benefits.map((b) => (
+              <li key={b.title} className="grid content-start gap-4 bg-[#06070a] p-6 lg:p-7">
+                <BrainMotif motif={b.motif} />
+                <div>
+                  <h3>{b.title}</h3>
+                  <p className="m-0 text-ink-2">{b.text}</p>
+                </div>
+              </li>
             ))}
-          </div>
+          </ul>
           <Reveal className="mt-10">
             <LinkButton href="/contact?offre=pilote" variant="inverse" arrow>
-              Candidater au programme pilote
+              {product.pilotLabel}
             </LinkButton>
           </Reveal>
         </div>

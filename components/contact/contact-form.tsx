@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { product } from "@/lib/content/product"
 import { site } from "@/lib/site"
 import { cn } from "@/lib/utils"
 
@@ -17,7 +18,7 @@ const subjects = [
   { value: "sprint-integration-ia", label: "Sprint d'intégration IA" },
   { value: "programme-formation-ia", label: "Programme IA et adoption" },
   { value: "maintenance-suivi-ia", label: "Maintenance et suivi (MCO)" },
-  { value: "pilote", label: "Programme pilote (automatisation documentaire)" },
+  { value: "pilote", label: `Programme pilote (${product.name}, aide à la décision du CODIR)` },
   { value: "autre", label: "Autre demande" },
 ]
 
