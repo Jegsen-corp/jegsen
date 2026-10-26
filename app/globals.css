@@ -453,3 +453,41 @@
     animation: none;
   }
 }
+
+/* Contour brillant des cartes d'offres : un liseré fin dont un reflet fait lentement le tour. */
+@property --shine {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.shine-border {
+  border: 1.6px solid transparent;
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    conic-gradient(
+        from var(--shine),
+        var(--line-strong) 0deg,
+        var(--line-strong) 185deg,
+        color-mix(in srgb, var(--brand) 55%, var(--line-strong)) 240deg,
+        var(--brand) 295deg,
+        var(--brand-2) 325deg,
+        var(--line-strong) 360deg
+      )
+      border-box;
+  animation: shine-turn 6.4s linear infinite;
+}
+.group:hover .shine-border {
+  animation-duration: 2.4s;
+}
+@keyframes shine-turn {
+  to {
+    --shine: 360deg;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shine-border {
+    animation: none;
+    --shine: 300deg;
+  }
+}
+

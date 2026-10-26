@@ -22,13 +22,16 @@ const PITCH: Record<string, Pitch> = {
 const PLACE = ["lg:col-start-1 lg:row-start-1", "lg:col-start-3 lg:row-start-1", "lg:col-start-1 lg:row-start-2", "lg:col-start-3 lg:row-start-2"]
 
 function OfferTile({ o, k }: { o: OfferSummary; k: number }) {
+  const delay = `${-k * 1.6}s`
   const p = PITCH[o.slug]
   const [amount, unit] = o.price.split(" / ")
   const from = o.compactPrice.startsWith("dès")
   return (
+    <div className="group relative isolate h-full transition-[translate] duration-500 ease-brand hover:-translate-y-1 has-[:focus-visible]:-translate-y-1">
     <Link
       href={offerHref(o.slug)}
-      className="group relative flex min-h-full flex-col rounded-[24px] border border-line bg-surface/85 p-[clamp(22px,2.4vw,30px)] backdrop-blur-sm transition-[border-color,box-shadow,translate] duration-500 ease-brand hover:-translate-y-1 hover:border-ink/70 hover:shadow-[0_2px_6px_#0b0d120d,0_24px_60px_#0b0d121a] focus-visible:border-ink/70"
+      style={{ animationDelay: delay }}
+      className="shine-border relative flex h-full flex-col rounded-[24px] p-[clamp(22px,2.4vw,30px)]"
     >
       <div className="mb-5 flex min-h-7 items-center justify-between gap-3">
         <span className="font-display text-[13px] font-semibold tracking-[0.08em] text-ink-3 transition-colors group-hover:text-brand">{String(k + 1).padStart(2, "0")} / 04</span>
@@ -51,6 +54,7 @@ function OfferTile({ o, k }: { o: OfferSummary; k: number }) {
       </div>
       <span className="sr-only">En savoir plus : {o.title}</span>
     </Link>
+    </div>
   )
 }
 
