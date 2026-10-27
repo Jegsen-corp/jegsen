@@ -19,7 +19,7 @@ const CX = 340
 const S = 100 // demi-côté d'un plateau
 const T = 12 // épaisseur d'un plateau
 const Y = { uses: 108, brain: 330, data: 526 } // centre écran de chaque plateau
-const MASCOT_UNIT = 2.25 // taille d'un pixel de la mascotte, en unités du dessin
+const MASCOT_UNIT = 3.2 // taille d'un pixel de la mascotte, en unités du dessin
 
 type Pt = [number, number]
 const iso = (cy: number, u: number, v: number, z = 0): Pt => [CX + (u - v) * K, cy + (u + v) * 0.5 - z]

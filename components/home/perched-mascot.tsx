@@ -79,7 +79,7 @@ export function PerchedMascot({ className = "" }: { className?: string }) {
   return (
     <motion.div
       aria-hidden
-      className={"pointer-events-none absolute [--u:2px] sm:[--u:3px] " + className}
+      className={"pointer-events-none absolute [--u:3px] sm:[--u:4px] " + className}
       style={{ width: px(SW), height: px(SH) }}
       initial={reduce ? false : "away"}
       whileInView="perched"
