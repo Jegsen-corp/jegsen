@@ -114,6 +114,7 @@ export const organizationLd = {
       "@id": `${site.url}/#site`,
       url: site.url,
       name: site.name,
+      alternateName: "Jegsen",
       inLanguage: "fr-FR",
       publisher: { "@id": `${site.url}/#organisation` },
     },
