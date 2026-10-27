@@ -3,7 +3,7 @@
 import { motion, type Variants } from "framer-motion"
 import { EASE } from "@/components/motion/reveal"
 import { useReducedMotion } from "@/components/motion/use-reduced-motion"
-import { PerchedRaven } from "@/components/home/perched-raven"
+import { PerchedMascot } from "@/components/home/perched-mascot"
 import { product } from "@/lib/content/product"
 
 /*
@@ -96,8 +96,8 @@ export function BrainWorkspace() {
       />
 
       <div className="relative mx-auto max-w-[1000px]">
-        {/* Le corbeau de Jegsen se pose sur le bord haut de la fenêtre */}
-        <PerchedRaven className="right-[9%] bottom-[calc(100%-2px)] z-10" />
+        {/* La mésange de Jegsen se pose sur le bord haut de la fenêtre */}
+        <PerchedMascot className="right-[9%] bottom-[calc(100%-2px)] z-10" />
         <motion.div
           aria-hidden
           initial={reduce ? false : "hidden"}

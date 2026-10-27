@@ -2,27 +2,23 @@
 
 import { motion } from "framer-motion"
 import { useEffect, useRef, useState } from "react"
-import { RavenPixels } from "@/components/home/raven-pixels"
+import { MascotPixels } from "@/components/home/mascot-pixels"
 import { useReducedMotion } from "@/components/motion/use-reduced-motion"
-import { RAVEN_FLIGHT, RAVEN_STANDING } from "@/lib/raven-sprite"
+import { MASCOT_BLINK as BLINK, MASCOT_FLIGHT, MASCOT_POINTS, MASCOT_STANDING } from "@/lib/mascot-sprite"
 
 /*
- * Le corbeau arrive en vol depuis la droite et se pose sur le bord haut de la fenêtre brAIn.
- * Une fois posé, il cligne de l'œil de temps en temps. Sans animation (préférence du système), il est déjà posé.
- * Les deux dessins sont alignés sur la pointe du bec : rangée 8 debout, rangée 14 en vol.
+ * La mésange arrive en vol depuis la droite et se pose sur le bord haut de la fenêtre brAIn.
+ * Une fois posée, elle cligne de l'œil de temps en temps. Sans animation (préférence du système), elle est déjà posée.
+ * Les deux dessins sont alignés sur la pointe du bec.
  */
 
-const FLIGHT = [RAVEN_FLIGHT.up, RAVEN_FLIGHT.mid, RAVEN_FLIGHT.down, RAVEN_FLIGHT.mid]
-/** Œil fermé : le blanc et l'iris laissent place à une paupière. */
-const BLINK = RAVEN_STANDING.map((row, y) =>
-  y === 5 ? row.slice(0, 11) + "ll" + row.slice(13) : y === 6 ? row.slice(0, 11) + "KK" + row.slice(13) : row
-)
+const FLIGHT = [MASCOT_FLIGHT.up, MASCOT_FLIGHT.mid, MASCOT_FLIGHT.down, MASCOT_FLIGHT.mid]
 
-const SW = RAVEN_STANDING[0].length
-const SH = RAVEN_STANDING.length
-const FW = RAVEN_FLIGHT.mid[0].length
-const FH = RAVEN_FLIGHT.mid.length
-const BEAK_SHIFT = 14 - 8
+const SW = MASCOT_STANDING[0].length
+const SH = MASCOT_STANDING.length
+const FW = MASCOT_FLIGHT.mid[0].length
+const FH = MASCOT_FLIGHT.mid.length
+const BEAK_SHIFT = MASCOT_POINTS.flightBeak.y - MASCOT_POINTS.standingBeak.y
 
 const FLY = 1.9 // durée du vol (s)
 const BRAKE = 0.32 // ailes levées pour freiner, juste avant de se poser (s)
@@ -34,12 +30,12 @@ const px = (n: number) => `calc(var(--u) * ${n})`
 function Sprite({ rows, w, h }: { rows: readonly string[]; w: number; h: number }) {
   return (
     <svg viewBox={`-1 -1 ${w + 2} ${h + 2}`} style={{ width: px(w + 2), height: px(h + 2) }} className="block overflow-visible">
-      <RavenPixels rows={rows} rim="#3a4466" />
+      <MascotPixels rows={rows} />
     </svg>
   )
 }
 
-export function PerchedRaven({ className = "" }: { className?: string }) {
+export function PerchedMascot({ className = "" }: { className?: string }) {
   const reduce = useReducedMotion()
   const [phase, setPhase] = useState<Phase>("away")
   const [flap, setFlap] = useState(0)
@@ -77,7 +73,7 @@ export function PerchedRaven({ className = "" }: { className?: string }) {
   }
 
   const flying = shown === "flying" || shown === "landing"
-  const rows = shown === "landing" ? RAVEN_FLIGHT.up : FLIGHT[flap]
+  const rows = shown === "landing" ? MASCOT_FLIGHT.up : FLIGHT[flap]
 
   // Le déclencheur reste immobile à l'endroit du perchoir : l'oiseau, lui, part de hors champ
   return (
@@ -115,7 +111,7 @@ export function PerchedRaven({ className = "" }: { className?: string }) {
           </div>
         ) : (
           <div className="absolute" style={{ left: px(-1), top: px(-1) }}>
-            <Sprite rows={blink ? BLINK : RAVEN_STANDING} w={SW} h={SH} />
+            <Sprite rows={blink ? BLINK : MASCOT_STANDING} w={SW} h={SH} />
           </div>
         )}
       </motion.div>
