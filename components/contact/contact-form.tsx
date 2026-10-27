@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { useSearchParams } from "next/navigation"
 import { useState, type FormEvent, type ReactNode } from "react"
+import { MascotSend } from "@/components/contact/mascot-send"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
@@ -60,6 +61,7 @@ export function ContactFormFields() {
   const [consent, setConsent] = useState(false)
   const [status, setStatus] = useState("")
   const [sending, setSending] = useState(false)
+  const [sentAt, setSentAt] = useState(0) // dernier envoi réussi : la mésange s'envole avec le message
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -101,6 +103,7 @@ export function ContactFormFields() {
       form.reset()
       setConsent(false)
       setStatus("Merci, votre message est bien parti.")
+      setSentAt(Date.now())
     } catch {
       setStatus(`L'envoi a échoué. Écrivez-nous directement à ${site.email}.`)
     } finally {
@@ -192,13 +195,14 @@ export function ContactFormFields() {
           .
         </label>
       </div>
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap items-center gap-3">
         <Button type="submit" variant="ink" size="xl" disabled={sending} className="group">
           Envoyer
           <span aria-hidden="true" className="transition-transform duration-350 ease-brand group-hover:translate-x-1">
             →
           </span>
         </Button>
+        {sentAt > 0 && <MascotSend key={sentAt} />}
       </div>
       <p role="status" className="m-0 min-h-[1.4em] text-[15px] text-ink-2">
         {status}
