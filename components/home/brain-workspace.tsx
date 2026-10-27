@@ -3,6 +3,7 @@
 import { motion, type Variants } from "framer-motion"
 import { EASE } from "@/components/motion/reveal"
 import { useReducedMotion } from "@/components/motion/use-reduced-motion"
+import { PerchedRaven } from "@/components/home/perched-raven"
 import { product } from "@/lib/content/product"
 
 /*
@@ -94,66 +95,70 @@ export function BrainWorkspace() {
         className="pointer-events-none absolute inset-x-[12%] -top-8 h-[70%] rounded-full bg-[radial-gradient(closest-side,#7d96ff2e,#0000)] blur-2xl"
       />
 
-      <motion.div
-        aria-hidden
-        initial={reduce ? false : "hidden"}
-        whileInView="show"
-        viewport={{ once: true, amount: 0.3 }}
-        className="relative mx-auto max-w-[1000px] overflow-hidden rounded-[22px] border border-line-strong bg-[linear-gradient(180deg,#10131b,#0b0d12)] shadow-[0_40px_120px_-40px_#000]"
-      >
-        <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-3 sm:px-6">
-          <div className="flex items-center gap-2.5 text-[13px]">
-            <Mark />
-            <b className="font-semibold tracking-tight text-ink">{product.name}</b>
-          </div>
-          <span className="text-[12px] text-ink-3">Exemple fictif</span>
-        </div>
-
-        <div className="grid gap-8 p-5 sm:p-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12 lg:p-10">
-          {/* La question et ce sur quoi elle s'appuie */}
-          <div className="grid content-start gap-6">
-            <motion.div variants={appear(T.question)} className="grid gap-2.5">
-              <span className="text-[12.5px] text-ink-3">Décision à prendre</span>
-              <p className="m-0 font-display text-[clamp(1.4rem,2.6vw,2rem)] leading-[1.15] font-semibold tracking-[-0.02em] text-ink">
-                Faut-il ouvrir une agence à Angers en 2027 ?
-              </p>
-            </motion.div>
-
-            <motion.ul variants={appear(T.sources)} className="m-0 flex list-none flex-wrap items-center gap-2 p-0">
-              <li className="pr-1 text-[12.5px] text-ink-3">Sources</li>
-              {sources.map((s) => (
-                <li key={s} className="rounded-full border border-line px-3 py-1 text-[12.5px] text-ink-3">
-                  {s}
-                </li>
-              ))}
-            </motion.ul>
-
-            <motion.p
-              variants={appear(T.counter)}
-              className="m-0 border-l-2 border-[color:var(--warn)] pl-4 text-[14px] leading-relaxed text-ink-2"
-            >
-              <span className="block text-[12.5px] text-[color:var(--warn)]">Contre-argument</span>
-              L&apos;agence de Rennes a mis 18 mois à être rentable, contre 12 prévus.
-            </motion.p>
+      <div className="relative mx-auto max-w-[1000px]">
+        {/* Le corbeau de Jegsen se pose sur le bord haut de la fenêtre */}
+        <PerchedRaven className="right-[9%] bottom-[calc(100%-2px)] z-10" />
+        <motion.div
+          aria-hidden
+          initial={reduce ? false : "hidden"}
+          whileInView="show"
+          viewport={{ once: true, amount: 0.3 }}
+          className="relative overflow-hidden rounded-[22px] border border-line-strong bg-[linear-gradient(180deg,#10131b,#0b0d12)] shadow-[0_40px_120px_-40px_#000]"
+        >
+          <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-3 sm:px-6">
+            <div className="flex items-center gap-2.5 text-[13px]">
+              <Mark />
+              <b className="font-semibold tracking-tight text-ink">{product.name}</b>
+            </div>
+            <span className="text-[12px] text-ink-3">Exemple fictif</span>
           </div>
 
-          {/* Les options, la recommandation, et la main au CODIR */}
-          <div className="grid content-start gap-4">
-            <ul className="m-0 grid list-none gap-2.5 p-0">
-              {options.map((o, i) => (
-                <Option key={o.key} o={o} i={i} />
-              ))}
-            </ul>
-            <motion.p variants={appear(T.codir)} className="m-0 flex items-center gap-2.5 pl-1 text-[13px] text-ink-3">
-              <svg viewBox="0 0 16 16" className="size-4 shrink-0" aria-hidden>
-                <circle cx="8" cy="8" r="7" fill="none" stroke="var(--line-strong)" strokeWidth="1.4" />
-                <path d="M5 8.2l2 2 4-4.4" fill="none" stroke="var(--ink-3)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-              {product.name} recommande. Le CODIR tranche.
-            </motion.p>
+          <div className="grid gap-8 p-5 sm:p-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12 lg:p-10">
+            {/* La question et ce sur quoi elle s'appuie */}
+            <div className="grid content-start gap-6">
+              <motion.div variants={appear(T.question)} className="grid gap-2.5">
+                <span className="text-[12.5px] text-ink-3">Décision à prendre</span>
+                <p className="m-0 font-display text-[clamp(1.4rem,2.6vw,2rem)] leading-[1.15] font-semibold tracking-[-0.02em] text-ink">
+                  Faut-il ouvrir une agence à Angers en 2027 ?
+                </p>
+              </motion.div>
+
+              <motion.ul variants={appear(T.sources)} className="m-0 flex list-none flex-wrap items-center gap-2 p-0">
+                <li className="pr-1 text-[12.5px] text-ink-3">Sources</li>
+                {sources.map((s) => (
+                  <li key={s} className="rounded-full border border-line px-3 py-1 text-[12.5px] text-ink-3">
+                    {s}
+                  </li>
+                ))}
+              </motion.ul>
+
+              <motion.p
+                variants={appear(T.counter)}
+                className="m-0 border-l-2 border-[color:var(--warn)] pl-4 text-[14px] leading-relaxed text-ink-2"
+              >
+                <span className="block text-[12.5px] text-[color:var(--warn)]">Contre-argument</span>
+                L&apos;agence de Rennes a mis 18 mois à être rentable, contre 12 prévus.
+              </motion.p>
+            </div>
+
+            {/* Les options, la recommandation, et la main au CODIR */}
+            <div className="grid content-start gap-4">
+              <ul className="m-0 grid list-none gap-2.5 p-0">
+                {options.map((o, i) => (
+                  <Option key={o.key} o={o} i={i} />
+                ))}
+              </ul>
+              <motion.p variants={appear(T.codir)} className="m-0 flex items-center gap-2.5 pl-1 text-[13px] text-ink-3">
+                <svg viewBox="0 0 16 16" className="size-4 shrink-0" aria-hidden>
+                  <circle cx="8" cy="8" r="7" fill="none" stroke="var(--line-strong)" strokeWidth="1.4" />
+                  <path d="M5 8.2l2 2 4-4.4" fill="none" stroke="var(--ink-3)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                {product.name} recommande. Le CODIR tranche.
+              </motion.p>
+            </div>
           </div>
-        </div>
-      </motion.div>
+        </motion.div>
+      </div>
     </figure>
   )
 }
