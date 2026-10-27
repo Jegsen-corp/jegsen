@@ -1,6 +1,7 @@
 /*
  * La mascotte de Jegsen : une mésange bleue en pixel art, volontairement simple pour rester nette à toutes
- * les tailles. Couleurs de la charte : bleu de la marque, blanc, bleus pâles, contour bleu nuit.
+ * les tailles. Couleurs de la charte : bleu de la marque, blanc, bleus pâles, contour bleu nuit. Bec et pattes
+ * en gris bleuté clair, pour rester visibles sur les fonds sombres.
  * Grilles de caractères : chaque lettre est un pixel, « . » est vide.
  */
 
@@ -13,6 +14,8 @@ export const MASCOT_PALETTE: Record<string, string> = {
   w: "#dfe5ff",
   K: "#0b0d12",
   s: "#ffffff",
+  A: "#8e98c4",
+  a: "#6a74a3",
 }
 
 /** Posée, de profil, tournée vers la gauche. */
@@ -23,10 +26,10 @@ export const MASCOT_STANDING = [
   "...NBBbBBBBBBBBBN...",
   "...NBBBBBBBBBBBBN...",
   "..NWWWWWWWWWWWBBBN..",
-  "..NWWWsKWWWWWWWBBN..",
-  "NNNWWWKKWWWWWWWBBN..",
-  ".NNWWWWWWWWWWWBBBBN.",
-  "...NWWWWWWWWWBBBBBBN",
+  ".NNWWWsKWWWWWWWBBN..",
+  "AAAWWWKKWWWWWWWBBN..",
+  "NaaWWWWWWWWWWWBBBBN.",
+  ".NNNWWWWWWWWWBBBBBBN",
   "...NWWWWWWWWBBBBBnnN",
   "...NWWWWWWWBWWWWBnN.",
   "...NWWWWWWWBBBBBnnN.",
@@ -34,9 +37,9 @@ export const MASCOT_STANDING = [
   "....NwWWWWWWWBBN....",
   ".....NwwwWWWWNN.....",
   "......NNwwwwN.......",
-  "........NNNN........",
-  "........N..N........",
-  ".......NN.NN........",
+  "........aNNa........",
+  "........a..a........",
+  ".......aa.aa........",
 ]
 
 /** Posée, œil fermé (clignement). */
@@ -47,10 +50,10 @@ export const MASCOT_BLINK = [
   "...NBBbBBBBBBBBBN...",
   "...NBBBBBBBBBBBBN...",
   "..NWWWWWWWWWWWBBBN..",
-  "..NWWWWWWWWWWWWBBN..",
-  "NNNWWWKKWWWWWWWBBN..",
-  ".NNWWWWWWWWWWWBBBBN.",
-  "...NWWWWWWWWWBBBBBBN",
+  ".NNWWWWWWWWWWWWBBN..",
+  "AAAWWWKKWWWWWWWBBN..",
+  "NaaWWWWWWWWWWWBBBBN.",
+  ".NNNWWWWWWWWWBBBBBBN",
   "...NWWWWWWWWBBBBBnnN",
   "...NWWWWWWWBWWWWBnN.",
   "...NWWWWWWWBBBBBnnN.",
@@ -58,9 +61,9 @@ export const MASCOT_BLINK = [
   "....NwWWWWWWWBBN....",
   ".....NwwwWWWWNN.....",
   "......NNwwwwN.......",
-  "........NNNN........",
-  "........N..N........",
-  ".......NN.NN........",
+  "........aNNa........",
+  "........a..a........",
+  ".......aa.aa........",
 ]
 
 /** En vol, tournée vers la gauche : ailes hautes, à l'horizontale, basses. */
@@ -72,10 +75,10 @@ export const MASCOT_FLIGHT = {
     "...NBBbBBBBBBBBBN..NBBBBBnN",
     "...NBBBBBBBBBBBBN.NBBBBBBN.",
     "..NWWWWWWWWWWWBBBNBBBBBBN..",
-    "..NWWWsKWWWWWWWBNWWWWWWN...",
-    "NNNWWWKKWWWWWWWNbbbbbbbN...",
-    ".NNWWWWWWWWWWWNbbbbbbbN....",
-    "...NWWWWWWWWWNNNNNNNNN.....",
+    ".NNWWWsKWWWWWWWBNWWWWWWN...",
+    "AAAWWWKKWWWWWWWNbbbbbbbN...",
+    "NaaWWWWWWWWWWWNbbbbbbbN....",
+    ".NNNWWWWWWWWWNNNNNNNNN.....",
     "...NWWWWWWWWWWWWBBBNNN.....",
     "...NWWWWWWWWWWWWBBBBBnN....",
     "...NWWWWWWWWWWWWWBBnnnN....",
@@ -93,10 +96,10 @@ export const MASCOT_FLIGHT = {
     "...NBBbBBBBBBBBBN..........",
     "...NBBBBBBBBBBBBN..........",
     "..NWWWWWWWWWWWBBBN.........",
-    "..NWWWsKWWWWWWWBBN.........",
-    "NNNWWWKKWWWWWWWBBN.........",
-    ".NNWWWWWWWNNNNNNNNNNN......",
-    "...NWWWWWWNbbbbbbbBBBNN....",
+    ".NNWWWsKWWWWWWWBBN.........",
+    "AAAWWWKKWWWWWWWBBN.........",
+    "NaaWWWWWWWNNNNNNNNNNN......",
+    ".NNNWWWWWWNbbbbbbbBBBNN....",
     "...NWWWWWWWNWWWWWWWWBBnN...",
     "...NWWWWWWWWNBBBBBBBBnnnN..",
     "...NWWWWWWWWWNNNNNNNNNNN...",
@@ -114,10 +117,10 @@ export const MASCOT_FLIGHT = {
     "...NBBbBBBBBBBBBN..........",
     "...NBBBBBBBBBBBBN..........",
     "..NWWWWWWWWWWWBBBN.........",
-    "..NWWWsKWWWWWWWBBN.........",
-    "NNNWWWKKWWWWWWWBBN.........",
-    ".NNWWWWWWWWWWWBBBBN........",
-    "...NWWWWWWNNNNNNNNBN.......",
+    ".NNWWWsKWWWWWWWBBN.........",
+    "AAAWWWKKWWWWWWWBBN.........",
+    "NaaWWWWWWWWWWWBBBBN........",
+    ".NNNWWWWWWNNNNNNNNBN.......",
     "...NWWWWWWNbbbbbbbNNNN.....",
     "...NWWWWWWWNWWWWWWWNBnN....",
     "...NWWWWWWWWNBBBBBBBNnN....",
