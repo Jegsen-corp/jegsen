@@ -235,7 +235,7 @@ export default function HomePage() {
 
       {/* Cerveau d'entreprise */}
       <section className="section pt-0">
-        <div className="container-site grid items-center gap-[clamp(32px,6vw,80px)] md:grid-cols-2">
+        <div className="container-site grid items-center gap-[clamp(32px,5vw,72px)] md:grid-cols-[0.85fr_1.15fr]">
           <Reveal>
             <Eyebrow>Cerveau d'entreprise</Eyebrow>
             <h2>Vos données deviennent le cerveau de votre entreprise.</h2>
