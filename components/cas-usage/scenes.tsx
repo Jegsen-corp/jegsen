@@ -322,6 +322,59 @@ export function RequestsScene() {
   )
 }
 
+/** Appel d'offres : un dossier épais et sa date limite, une grille d'exigences qui se coche, le mémoire prêt. */
+export function TenderScene() {
+  const rows = [0.7, 0.55, 0.65, 0.5, 0.6]
+  return (
+    <Scene label="Un dossier de consultation épais, avec sa date limite. Chaque exigence est relevée dans une grille qui se coche au fur et à mesure, le mémoire technique se prépare à partir de vos réponses passées, une personne relit et dépose.">
+      {({ still }) => (
+        <>
+          {/* Le dossier : plusieurs pièces, un onglet, la date limite */}
+          <motion.g variants={rise(10, 0)}>
+            <Sheet x={34} y={66} w={62} h={84} tone="soft" lines={[0.6, 0.7, 0.5]} rotate={-5} />
+            <Sheet x={46} y={60} w={62} h={84} tone="soft" lines={[0.7, 0.5, 0.6]} rotate={-2} />
+            <Sheet x={58} y={54} w={62} h={84} lines={[0.75, 0.55, 0.65, 0.45, 0.6]} />
+            <rect x={58} y={54} width={26} height={11} rx={3} fill={C.brand} />
+            <text x={71} y={62.5} textAnchor="middle" fontSize={7} fontWeight={700} fill="#fff" letterSpacing="0.06em">
+              DCE
+            </text>
+            {/* la date limite */}
+            <g transform="translate(30 150)">
+              <rect x={0} y={0} width={34} height={30} rx={6} fill={C.surface} stroke={C.line} filter="url(#cs-shadow)" />
+              <rect x={0} y={0} width={34} height={9} rx={6} fill={C.amber} />
+              <rect x={0} y={5} width={34} height={4} fill={C.amber} />
+              <text x={17} y={24} textAnchor="middle" fontSize={11} fontWeight={700} fill={C.ink}>
+                12
+              </text>
+            </g>
+          </motion.g>
+          <Pass x1={136} x2={196} y={100} still={still} />
+          {/* La grille des exigences, puis le mémoire */}
+          <motion.g variants={rise(10, 0.5)}>
+            <rect x={198} y={44} width={104} height={118} rx={8} fill={C.surface} stroke={C.line} filter="url(#cs-shadow)" />
+            <rect x={208} y={54} width={52} height={5} rx={2.5} fill={C.ink} opacity={0.8} />
+            {rows.map((w, i) => (
+              <g key={i}>
+                <rect x={208} y={68 + i * 17} width={9} height={9} rx={2.5} fill="none" stroke={C.brandLight} strokeWidth={1.2} />
+                <rect x={222} y={70.5 + i * 17} width={70 * w} height={4} rx={2} fill={C.lineSoft} />
+                <motion.g variants={fade(1 + i * 0.22, 0.25)}>
+                  <rect x={208} y={68 + i * 17} width={9} height={9} rx={2.5} fill={C.brand} />
+                  <path d={`M210.2 ${72.5 + i * 17}l2 2 3.8-4`} fill="none" stroke="#fff" strokeWidth={1.3} strokeLinecap="round" strokeLinejoin="round" />
+                </motion.g>
+              </g>
+            ))}
+            <motion.g variants={fade(2.3, 0.4)}>
+              <rect x={208} y={150} width={84} height={5} rx={2.5} fill={C.timeSoft} />
+              <rect x={208} y={150} width={84} height={5} rx={2.5} fill={C.time} opacity={0.85} />
+            </motion.g>
+          </motion.g>
+          <Human x={288} y={176} delay={2.5} />
+        </>
+      )}
+    </Scene>
+  )
+}
+
 /** Votre processus : une feuille encore vide, un tracé qui se dessine, la question posée. */
 export function CustomScene() {
   return (

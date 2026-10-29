@@ -1,6 +1,6 @@
 import Link from "next/link"
 import type { Metadata } from "next"
-import { AgentsScene, BrainScene, CustomScene, DeliveryScene, InvoicesScene, MailScene, MinutesScene, RequestsScene } from "@/components/cas-usage/scenes"
+import { AgentsScene, BrainScene, CustomScene, DeliveryScene, InvoicesScene, MailScene, MinutesScene, RequestsScene, TenderScene } from "@/components/cas-usage/scenes"
 import { Reveal } from "@/components/motion/reveal"
 import { CtaBlock, Eyebrow, PageHero, SectionHead } from "@/components/site/blocks"
 import { Icon } from "@/components/site/icon"
@@ -29,6 +29,7 @@ const ONE_LINERS: Record<string, { what: string; scene: React.ComponentType }> =
   "tri-emails": { what: "Classés, routés, réponses courantes préparées. Vous gardez la main.", scene: MailScene },
   "comptes-rendus": { what: "Notes et enregistrements, transformés en décisions et actions.", scene: MinutesScene },
   "qualification-demandes": { what: "Analysées, priorisées, remises à la bonne personne.", scene: RequestsScene },
+  "reponse-appel-offres": { what: "Le dossier lu, les exigences relevées, le mémoire préparé. Vous déposez.", scene: TenderScene },
 }
 
 type Tech = { title: string; icon: IconShape[] }
@@ -87,16 +88,16 @@ export default function UseCasesPage() {
               )
             })}
             {/* Votre processus */}
-            <li className="group relative">
-              <Reveal delay={0.16} className="theme-dark flex h-full flex-col overflow-hidden rounded-[24px]" style={{ background: "#0b0d12" }}>
-                <div className="px-5 pt-5 pb-1">
+            <li className="group relative sm:col-span-2 lg:col-span-3">
+              <Reveal delay={0.16} className="theme-dark grid items-center overflow-hidden rounded-[24px] md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]" style={{ background: "#0b0d12" }}>
+                <div className="mx-auto w-full max-w-[380px] px-5 pt-5 pb-1 md:py-6">
                   <CustomScene />
                 </div>
-                <div className="flex flex-1 flex-col px-6 pt-4 pb-6">
+                <div className="flex flex-col px-6 pt-4 pb-6 md:py-8 md:pr-10">
                   <p className="m-0 mb-1.5 text-[12.5px] font-semibold tracking-[0.02em] text-ink-2">Sur mesure</p>
                   <h2 className="mb-2 text-[1.3rem] leading-tight">Votre processus</h2>
-                  <p className="m-0 text-[14.5px] leading-relaxed text-ink-2">Décrivez la tâche qui mobilise le plus vos équipes. On vous dit si elle se prête à l'automatisation.</p>
-                  <div className="mt-auto pt-5">
+                  <p className="m-0 max-w-[48ch] text-[14.5px] leading-relaxed text-ink-2">Décrivez la tâche qui mobilise le plus vos équipes. On vous dit si elle se prête à l'automatisation.</p>
+                  <div className="pt-5">
                     <LinkButton href="/contact" variant="inverse" size="md" arrow>
                       Nous écrire
                     </LinkButton>

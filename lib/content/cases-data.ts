@@ -754,4 +754,115 @@ export const useCases: UseCase[] = [
       },
     ],
   },
+  {
+    slug: "reponse-appel-offres",
+    technical: false,
+    metaTitle: "Répondre aux appels d'offres avec l'IA | Jegsen IA",
+    metaDescription: "Lecture du dossier de consultation, grille des exigences, mémoire technique préparé à partir de vos réponses passées, contrôle des pièces : l'IA accélère la réponse, vous gardez la décision et le dépôt.",
+    title: "Répondre plus vite aux appels d'offres avec l'IA",
+    shortTitle: "Réponse à appel d'offres",
+    lead: "Lire le dossier de consultation, relever chaque exigence, retrouver vos réponses passées et préparer le mémoire technique : nous automatisons la préparation, vos équipes gardent la stratégie, les prix et le dépôt.",
+    summary: "Lire le dossier de consultation, relever chaque exigence, retrouver vos réponses passées et préparer le mémoire technique : nous automatisons la préparation, vos équipes gardent la stratégie, les prix et le dépôt.",
+    audiences: [
+      "Entreprises du BTP et de services",
+      "Bureaux d'études et cabinets",
+      "Équipes commerciales grands comptes",
+      "Prestataires des collectivités",
+    ],
+    today: [
+      "Un dossier de consultation fait souvent plusieurs dizaines de pages réparties entre le règlement, le cahier des charges et les annexes. Avant d'écrire une ligne, quelqu'un doit tout lire, relever les critères et les pièces demandées, puis vérifier la date et le mode de dépôt.",
+      "Le mémoire technique se reconstruit à chaque fois, en recopiant des réponses déjà écrites pour d'autres consultations, avec le risque d'oublier une exigence ou de laisser une référence qui ne correspond plus.",
+      "Résultat : des réponses décidées tard, des nuits avant la date limite, et des consultations auxquelles on renonce faute de temps.",
+    ],
+    howTitle: "Comment l'automatisation fonctionne.",
+    steps: [
+      {
+        title: "Lecture du dossier",
+        text: "Règlement de consultation, cahier des charges et annexes sont lus en entier : objet, lots, critères et leur pondération, pièces à fournir, date et mode de dépôt.",
+      },
+      {
+        title: "Grille des exigences",
+        text: "Chaque exigence devient une ligne d'une grille de conformité, avec sa source dans le dossier. Vous décidez en connaissance de cause de répondre ou non.",
+      },
+      {
+        title: "Préparation du mémoire",
+        text: "Pour chaque exigence, l'IA propose un paragraphe à partir de vos réponses passées et de vos documents (cerveau d'entreprise), en citant d'où il vient.",
+      },
+      {
+        title: "Contrôle des pièces",
+        text: "Pièces administratives, attestations et références demandées sont listées et vérifiées : présentes, à jour, au bon format.",
+      },
+      {
+        title: "Relecture et dépôt",
+        text: "Vos équipes relisent, fixent les prix, ajustent la stratégie et déposent. Rien ne part sans une personne.",
+      },
+    ],
+    cards: [
+      {
+        title: "Garde-fous",
+        icon: [
+          {
+            d: "M12 3l7.5 3v5.5c0 4.6-3.2 8.3-7.5 9.5-4.3-1.2-7.5-4.9-7.5-9.5V6L12 3z",
+          },
+          {
+            d: "M8.8 12l2.2 2.2 4.3-4.4",
+          },
+        ],
+        items: [
+          "Chaque paragraphe proposé cite le document interne dont il vient",
+          "Aucune référence, aucun chiffre inventé : ce qui manque est signalé, pas comblé",
+          "Les prix, la stratégie et la décision de répondre restent humains",
+          "Le dépôt est fait par vos équipes, jamais par l'automatisation",
+        ],
+      },
+      {
+        title: "Ce que nous mesurons",
+        icon: [
+          {
+            d: "M4 20V4M4 20h16",
+          },
+          {
+            d: "M8 15l3.5-4 3 2.5L20 7",
+          },
+        ],
+        items: [
+          "Temps entre la réception du dossier et la décision de répondre",
+          "Temps de préparation d'un mémoire technique",
+          "Part des exigences couvertes avant relecture",
+          "Nombre de consultations traitées à effectif constant",
+        ],
+      },
+      {
+        title: "Prérequis",
+        icon: [
+          {
+            d: "M9 3v5M15 3v5M6.5 8h11v3a5.5 5.5 0 01-11 0V8zM12 16.5V21",
+          },
+        ],
+        items: [
+          "Vos réponses passées et vos documents de présentation, même dispersés",
+          "Une personne référente qui tranche sur le contenu",
+          "L'accès aux dossiers de consultation (plateformes, e-mails)",
+        ],
+      },
+    ],
+    faq: [
+      {
+        q: "L'IA rédige-t-elle le mémoire à notre place ?",
+        a: "Elle prépare une première version, exigence par exigence, à partir de ce que vous avez déjà écrit. Vos équipes la relisent, la complètent et décident de ce qui est envoyé. Sans relecture, rien ne part.",
+      },
+      {
+        q: "Cela fonctionne-t-il pour les appels d'offres privés ?",
+        a: "Oui. La méthode est la même : un dossier à lire, des exigences à relever, des réponses à préparer. Seuls les formats et les pièces demandées changent.",
+      },
+      {
+        q: "Nos réponses passées sont confidentielles. Où sont-elles traitées ?",
+        a: "Le choix des modèles et de l'hébergement fait partie du cadrage, selon la sensibilité de vos documents. Vos réponses ne servent qu'à vous : elles ne sont ni partagées, ni utilisées pour entraîner un modèle.",
+      },
+      {
+        q: "Et si une exigence n'a pas de réponse dans nos documents ?",
+        a: "La grille le signale clairement, avec la ligne du dossier concernée. C'est à vos équipes d'y répondre, l'IA ne comble pas les trous.",
+      },
+    ],
+  },
 ]
