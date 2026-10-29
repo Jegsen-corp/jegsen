@@ -1,58 +1,39 @@
 "use client"
 
-import type { ReactNode } from "react"
 import { motion } from "framer-motion"
-import { C, ExampleNote, Frame, Legend, Mark, Note, fade, rise, useStill } from "./art-kit"
+import { C, CENTER, ExampleNote, Frame, Legend, Mark, Note, fade, pop, rise, useStill } from "./art-kit"
 
 /*
- * Formation : la salle, vue de dessus. En haut, la charte (les règles communes) tient lieu de scène.
- * En face, les sièges, rangés par métier. Atelier après atelier, une lumière part de la scène et chaque
- * section s'allume en bleu : l'équipe est formée sur ses propres tâches. À la fin, l'adoption se compte.
+ * Formation : un atelier, vu de dessus. Une table, huit personnes, la charte posée au milieu.
+ * Un groupe à la fois, sur ses propres tâches : les personnes passent au bleu une à une pendant l'atelier.
  * Chiffres d'exemple.
  */
 
-const SX = 320 // centre de la scène (et des arcs de sièges)
-const SY = 52
-const ROWS = [150, 188, 226, 264]
-const SECTIONS = [
-  { label: "Comptabilité", a0: 200, a1: 231, at: 1.5 },
-  { label: "Commerce", a0: 239, a1: 266, at: 2.05 },
-  { label: "RH", a0: 274, a1: 301, at: 2.6 },
-  { label: "Exploitation", a0: 309, a1: 340, at: 3.15 },
-] // angles en degrés, 270 = plein sud (face à la scène)
+const TX = 320
+const TY = 232
+const TW = 300
+const TH = 150
+/** Les places autour de la table : trois en haut, trois en bas, une à chaque bout. */
+const SEATS: { x: number; y: number; at: number }[] = [
+  { x: TX - 90, y: TY - TH / 2 - 34, at: 1.3 },
+  { x: TX, y: TY - TH / 2 - 34, at: 1.55 },
+  { x: TX + 90, y: TY - TH / 2 - 34, at: 1.8 },
+  { x: TX + TW / 2 + 34, y: TY, at: 2.05 },
+  { x: TX + 90, y: TY + TH / 2 + 34, at: 2.3 },
+  { x: TX, y: TY + TH / 2 + 34, at: 2.55 },
+  { x: TX - 90, y: TY + TH / 2 + 34, at: 2.8 },
+  { x: TX - TW / 2 - 34, y: TY, at: 3.05 },
+]
 const RULES = ["Données autorisées", "Outils validés", "Résultats vérifiés", "Responsabilités"]
-
-const rad = (deg: number) => (deg * Math.PI) / 180
-// Arrondi : même chaîne au rendu serveur et dans le navigateur
-const pt = (r: number, deg: number): [number, number] => [Math.round((SX + r * Math.cos(rad(deg))) * 100) / 100, Math.round((SY - r * Math.sin(rad(deg))) * 100) / 100]
-const f = (n: number) => n.toFixed(1)
-
-type Seat = { x: number; y: number; rot: number; section: number; row: number }
-function seats(): Seat[] {
-  const out: Seat[] = []
-  SECTIONS.forEach((s, si) => {
-    ROWS.forEach((r, ri) => {
-      const step = (16 / r) * (180 / Math.PI) * 1.0 // environ 16 px entre sièges
-      const n = Math.floor((s.a1 - s.a0) / step)
-      for (let k = 0; k <= n; k++) {
-        const a = s.a0 + ((s.a1 - s.a0) * k) / Math.max(n, 1)
-        const [x, y] = pt(r, a)
-        out.push({ x, y, rot: Math.round((90 - a) * 100) / 100, section: si, row: ri })
-      }
-    })
-  })
-  return out
-}
-const SEATS = seats()
 
 export function FormationArt() {
   return (
     <Frame
-      viewBox="0 0 640 450"
-      label="La salle de formation, vue de dessus. En haut, la charte d'utilisation de l'IA : données autorisées, outils validés, résultats vérifiés, responsabilités. En face, les sièges rangés par métier : comptabilité, commerce, RH, exploitation. Atelier après atelier, chaque section s'allume : l'équipe est formée sur ses propres tâches. Exemple d'adoption : 8 personnes sur 10 utilisent les outils validés."
+      viewBox="0 0 640 440"
+      label="Un atelier de formation vu de dessus : huit personnes autour d'une table, la charte d'utilisation de l'IA posée au milieu (données autorisées, outils validés, résultats vérifiés, responsabilités). Pendant l'atelier, chaque personne est formée sur ses propres tâches. Un groupe de dix personnes au plus, par métier."
       legends={[
-        { title: "La charte", sub: "Les règles communes, posées au cadrage", tone: "brand" },
-        { title: "Vos équipes", sub: "Formées sur leurs propres tâches" },
+        { title: "L'atelier", sub: "Une équipe, une journée, ses propres tâches", tone: "brand" },
+        { title: "La charte", sub: "Les règles communes, posées au cadrage" },
       ]}
     >
       <Scene />
@@ -64,113 +45,66 @@ function Scene() {
   const still = useStill()
   return (
     <>
-      {/* La scène : la charte */}
-      <motion.g variants={rise(-16, 0.1, 0.9)}>
-        <rect x={SX - 192} y={SY - 36} width={384} height={78} rx={20} fill="url(#art-dark)" stroke="#ffffff1f" filter="url(#art-shadow)" />
-        <ellipse cx={SX} cy={SY + 40} rx={190} ry={26} fill="url(#art-core)" opacity={0.8} />
-        <text x={SX - 150} y={SY - 8} fontSize={13} fontWeight={600} fill="#f3f4f6" style={{ fontFamily: "var(--font-display)" }}>
+      {/* La table */}
+      <motion.g variants={rise(12, 0.1, 0.9)}>
+        <rect x={TX - TW / 2} y={TY - TH / 2} width={TW} height={TH} rx={TH / 2} fill={C.surface} stroke={C.line} filter="url(#art-shadow)" />
+        <rect x={TX - TW / 2 + 10} y={TY - TH / 2 + 10} width={TW - 20} height={TH - 20} rx={(TH - 20) / 2} fill="none" stroke="#0b0d120a" />
+      </motion.g>
+
+      {/* La charte, posée au milieu de la table */}
+      <motion.g variants={rise(10, 0.4, 0.8)}>
+        <rect x={TX - 110} y={TY - 46} width={220} height={92} rx={12} fill="url(#art-dark)" stroke="#ffffff1f" filter="url(#art-shadow)" />
+        <ellipse cx={TX - 50} cy={TY - 30} rx={80} ry={30} fill="url(#art-core)" opacity={0.5} />
+        <text x={TX - 66} y={TY - 20} fontSize={11.5} fontWeight={600} fill="#f3f4f6" style={{ fontFamily: "var(--font-display)" }}>
           Charte d&apos;utilisation de l&apos;IA
         </text>
-        <text x={SX - 150} y={SY + 8} fontSize={10.5} fill="#aeb8e8">
-          Les règles communes, posées au cadrage
-        </text>
-        {RULES.reduce<{ x: number; nodes: ReactNode[] }>(
-          (acc, r, i) => {
-            const w = r.length * 4.6 + 12
-            acc.nodes.push(
-              <motion.g key={r} variants={fade(0.8 + i * 0.12, 0.4)}>
-                <rect x={acc.x} y={SY + 16} width={w} height={18} rx={9} fill="#ffffff14" stroke="#7d96ff55" />
-                <text x={acc.x + w / 2} y={SY + 28.5} textAnchor="middle" fontSize={8} fontWeight={600} fill="#dfe5ff">
-                  {r}
-                </text>
-              </motion.g>
-            )
-            acc.x += w + 6
-            return acc
-          },
-          { x: SX - 178, nodes: [] }
-        ).nodes}
+        {RULES.map((r, i) => (
+          <motion.g key={r} variants={fade(0.9 + i * 0.12, 0.4)}>
+            <circle cx={TX - 92 + (i % 2) * 108} cy={TY + 2 + Math.floor(i / 2) * 18} r={2.6} fill={C.brandLight} />
+            <text x={TX - 84 + (i % 2) * 108} y={TY + 5.5 + Math.floor(i / 2) * 18} fontSize={9.5} fill="#dfe5ff">
+              {r}
+            </text>
+          </motion.g>
+        ))}
       </motion.g>
-      <Mark x={SX - 172} y={SY - 4} size={26} delay={0.5} onDark />
+      <Mark x={TX - 88} y={TY - 24} size={22} delay={0.7} onDark />
 
-      {/* La lumière de chaque atelier, depuis la scène */}
-      {!still
-        ? SECTIONS.map((s) => {
-            const [x1, y1] = pt(290, s.a0 - 2)
-            const [x2, y2] = pt(290, s.a1 + 2)
-            return (
-              <motion.path
-                key={s.label}
-                d={`M${SX} ${SY + 36} L${f(x1)} ${f(y1)} A290 290 0 0 0 ${f(x2)} ${f(y2)} Z`}
-                fill={C.brand}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: [0, 0.14, 0.14, 0] }}
-                transition={{ duration: 1.1, delay: s.at - 0.2, times: [0, 0.2, 0.7, 1] }}
-              />
-            )
-          })
-        : null}
+      {/* Les personnes : grises, puis bleues une à une pendant l'atelier */}
+      {SEATS.map((s, i) => (
+        <g key={i}>
+          {!still ? (
+            <motion.circle cx={s.x} cy={s.y} r={16} fill="none" stroke={C.brand} strokeWidth={1.5} initial={{ opacity: 0, scale: 1 }} animate={{ opacity: [0, 0.7, 0], scale: [1, 1, 2.2] }} transition={{ duration: 0.8, delay: s.at, ease: "easeOut" }} style={CENTER} />
+          ) : null}
+          <motion.g variants={pop(0.5 + i * 0.07)} style={CENTER}>
+            <Person x={s.x} y={s.y} fill="#c3c6ce" />
+          </motion.g>
+          <motion.g variants={fade(s.at, 0.3)}>
+            <Person x={s.x} y={s.y} fill={C.brand} />
+          </motion.g>
+        </g>
+      ))}
 
-      {/* Les sièges */}
-      {SEATS.map((s, i) => {
-        const sec = SECTIONS[s.section]
-        const at = sec.at + s.row * 0.12
-        return (
-          <g key={i} transform={`translate(${f(s.x)} ${f(s.y)}) rotate(${f(s.rot)})`}>
-            <motion.g variants={fade(0.4 + s.row * 0.1, 0.5)}>
-              <rect x={-6} y={-5} width={12} height={10} rx={3} fill="#d9dbe0" />
-              <rect x={-6} y={-7} width={12} height={3} rx={1.5} fill="#c3c6ce" />
-            </motion.g>
-            <motion.g variants={fade(at, 0.3)}>
-              <rect x={-6} y={-5} width={12} height={10} rx={3} fill={C.brand} />
-              <rect x={-6} y={-7} width={12} height={3} rx={1.5} fill="#2a46d6" />
-            </motion.g>
-          </g>
-        )
-      })}
-
-      {/* Les métiers, et « formée » quand l'atelier est passé */}
-      {SECTIONS.map((s) => {
-        const mid = (s.a0 + s.a1) / 2
-        const [x, y] = pt(292, mid)
-        const anchor = mid < 250 ? "end" : mid > 290 ? "start" : "middle"
-        return (
-          <g key={s.label}>
-            <motion.g variants={fade(0.9)}>
-              <Note x={x} y={y} text={s.label} anchor={anchor} size={12} />
-            </motion.g>
-            <motion.g variants={fade(s.at + 0.6, 0.4)}>
-              <Check x={x + (anchor === "end" ? -8 : anchor === "start" ? 0 : -24)} y={y + 20} anchor={anchor} />
-            </motion.g>
-          </g>
-        )
-      })}
-
-      {/* L'adoption, comptée */}
-      <motion.g variants={fade(4.0)}>
-        <Note x={SX} y={SY + 356} text="8 personnes sur 10 utilisent les outils validés" tone="time" anchor="middle" size={12.5} />
-      </motion.g>
+      {/* Repères */}
       <motion.g variants={fade(0.9)}>
-        <Note x={0} y={SY + 318} text="1 à 3 semaines" sub="des ateliers par métier" tone="muted" />
+        <Note x={TX} y={TY + TH / 2 + 84} text="Atelier comptabilité, 10 personnes au plus" tone="brand" anchor="middle" size={12.5} />
+      </motion.g>
+      <motion.g variants={fade(3.4)}>
+        <Note x={TX} y={TY + TH / 2 + 106} text="Formés sur leurs propres tâches, avec des cas pratiques" tone="time" anchor="middle" size={12} />
       </motion.g>
 
-      <Legend x={0} y={SY + 4} title="La charte" sub="Les règles communes" tone="brand" />
-      <Legend x={0} y={SY + 250} title="Vos équipes" sub="Formées sur leurs tâches" />
-      <ExampleNote x={640} y={SY + 380} />
+      <Legend x={0} y={60} title="L'atelier" sub="Une équipe, une journée" tone="brand" />
+      <Legend x={640} y={60} title="La charte" sub="Les règles communes" anchor="end" />
+      <ExampleNote x={640} y={424} />
     </>
   )
 }
 
-/** « Formée » : une coche et le mot, sans capsule. */
-function Check({ x, y, anchor }: { x: number; y: number; anchor: "start" | "middle" | "end" }) {
-  const tx = anchor === "end" ? x - 10 : x + 14
+/** Une personne vue de dessus : la tête et les épaules. */
+function Person({ x, y, fill }: { x: number; y: number; fill: string }) {
   return (
     <g>
-      <circle cx={anchor === "end" ? x : x + 4} cy={y} r={6} fill={C.brand} />
-      <path d={`M${(anchor === "end" ? x : x + 4) - 2.6} ${y} l1.8 1.8 l3.6-3.8`} fill="none" stroke="#fff" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
-      <text x={anchor === "end" ? tx : tx} y={y + 4} textAnchor={anchor === "end" ? "end" : "start"} fontSize={11} fontWeight={600} fill="#2a46d6">
-        Formée
-      </text>
+      <ellipse cx={x} cy={y + 2} rx={16} ry={11} fill={fill} opacity={0.55} />
+      <circle cx={x} cy={y - 2} r={9} fill={fill} />
     </g>
   )
 }

@@ -260,32 +260,35 @@
     background-size: 64px 64px;
     mask-image: radial-gradient(70% 60% at 60% 45%, #000 20%, #0000 75%);
   }
+  /* Halos : couleur de fin en rgba (jamais « transparent », qui vire au gris dans certains navigateurs),
+     et masque circulaire pour qu'aucun bord de boîte ne reste visible. */
   .blob {
     position: absolute;
     border-radius: 50%;
     opacity: 0.7;
     will-change: transform;
+    mask-image: radial-gradient(closest-side, #000 40%, #0000 100%);
   }
   .blob-1 {
     width: 760px;
     height: 760px;
     top: -240px;
     right: -200px;
-    background: radial-gradient(closest-side, color-mix(in srgb, var(--brand) 34%, transparent) 15%, transparent);
+    background: radial-gradient(closest-side, rgba(51, 85, 255, 0.34) 15%, rgba(51, 85, 255, 0));
   }
   .blob-2 {
     width: 620px;
     height: 620px;
     bottom: -240px;
     right: 24%;
-    background: radial-gradient(closest-side, color-mix(in srgb, var(--brand-2) 26%, transparent) 15%, transparent);
+    background: radial-gradient(closest-side, rgba(122, 92, 255, 0.26) 15%, rgba(122, 92, 255, 0));
   }
   .blob-3 {
     width: 560px;
     height: 560px;
     top: 22%;
     left: -240px;
-    background: radial-gradient(closest-side, color-mix(in srgb, var(--time) 22%, transparent) 15%, transparent);
+    background: radial-gradient(closest-side, rgba(15, 165, 140, 0.22) 15%, rgba(15, 165, 140, 0));
   }
 
   /* Carte avec halo qui suit le pointeur */
