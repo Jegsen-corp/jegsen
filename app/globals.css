@@ -279,7 +279,7 @@
   .blob-2 {
     width: 620px;
     height: 620px;
-    bottom: -240px;
+    bottom: -120px;
     right: 24%;
     background: radial-gradient(closest-side, rgba(122, 92, 255, 0.26) 15%, rgba(122, 92, 255, 0));
   }

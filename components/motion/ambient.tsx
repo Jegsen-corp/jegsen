@@ -9,7 +9,8 @@ export function HeroBackdrop({ blobs = [1] }: { blobs?: (1 | 2 | 3)[] }) {
   const reduce = useReducedMotion()
   const delays: Record<number, number> = { 1: 0, 2: -6, 3: -12 }
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+    // Le fond s'estompe vers le bas : un halo qui dépasse de l'en-tête ne laisse jamais de bord net
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 [mask-image:linear-gradient(to_bottom,#000_55%,#0000_100%)]">
       <div className="hero-grid" />
       {blobs.map((b) => (
         <motion.div
