@@ -30,7 +30,7 @@ export function FormationArt() {
   return (
     <Frame
       viewBox="0 0 640 440"
-      label="Un atelier de formation vu de dessus : huit personnes autour d'une table, la charte d'utilisation de l'IA posée au milieu (données autorisées, outils validés, résultats vérifiés, responsabilités). Pendant l'atelier, chaque personne est formée sur ses propres tâches. Un groupe de dix personnes au plus, par métier."
+      label="Un atelier de formation vu de dessus : huit personnes autour d'une table, la charte d'utilisation de l'IA posée au milieu (données autorisées, outils validés, résultats vérifiés, responsabilités). Pendant l'atelier, chaque personne est formée sur ses propres tâches. Un groupe d'une dizaine de personnes, par métier."
       legends={[
         { title: "L'atelier", sub: "Une équipe, une journée, ses propres tâches", tone: "brand" },
         { title: "La charte", sub: "Les règles communes, posées au cadrage" },
@@ -86,7 +86,7 @@ function Scene() {
 
       {/* Repères */}
       <motion.g variants={fade(0.9)}>
-        <Note x={TX} y={TY + TH / 2 + 84} text="Atelier comptabilité, 10 personnes au plus" tone="brand" anchor="middle" size={12.5} />
+        <Note x={TX} y={TY + TH / 2 + 84} text="Atelier comptabilité, une dizaine de personnes" tone="brand" anchor="middle" size={12.5} />
       </motion.g>
       <motion.g variants={fade(3.4)}>
         <Note x={TX} y={TY + TH / 2 + 106} text="Formés sur leurs propres tâches, avec des cas pratiques" tone="time" anchor="middle" size={12} />
