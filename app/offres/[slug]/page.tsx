@@ -2,15 +2,21 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 import { Suspense } from "react"
 import { Reveal } from "@/components/motion/reveal"
-import { CtaBlock, Checklist, Eyebrow, Facts, PageFallback, PageHero, SectionHead } from "@/components/site/blocks"
-import { Icon } from "@/components/site/icon"
+import { DeliverablesSheet } from "@/components/offres/deliverables-sheet"
+import { ExamplesList } from "@/components/offres/examples-list"
+import { OfferArt } from "@/components/offres/offer-art"
+import { OfferFacts } from "@/components/offres/offer-facts"
+import { ProcessTrack } from "@/components/offres/process-track"
+import { TierCards } from "@/components/offres/tier-cards"
+import { YearTrack } from "@/components/offres/year-track"
+import { CtaBlock, Checklist, Eyebrow, PageFallback, PageHero, SectionHead } from "@/components/site/blocks"
 import { JsonLd, priceSpecification } from "@/components/site/json-ld"
 import { ButtonRow, LinkButton } from "@/components/site/links"
-import { OfferCardCompact, OfferKicker } from "@/components/site/offer-card"
-import { CaseLinks, FaqSection, MethodSection, SplitSection } from "@/components/site/sections"
-import { CardIcon, SiteCard } from "@/components/site/site-card"
+import { OfferCardCompact } from "@/components/site/offer-card"
+import { CaseLinks, FaqSection, SplitSection } from "@/components/site/sections"
+import { keepHyphenated } from "@/components/site/typo"
+import { offerVisual } from "@/lib/content/offer-visuals"
 import { getOffer, offerDetails, offers } from "@/lib/content/offers"
-import { formatEuros } from "@/lib/content/offers-data"
 import { pageMeta } from "@/lib/metadata"
 import { site } from "@/lib/site"
 
@@ -34,11 +40,17 @@ export default function OfferPage({ params }: PageProps<"/offres/[slug]">) {
   )
 }
 
+/*
+ * Page d'offre. Ordre de lecture : ce que c'est et ce que ça produit (en-tête illustré et fiche),
+ * pour qui, ce qui est inclus (paliers ou exemples), comment ça se déroule dans le temps,
+ * ce qui vous est remis, puis les questions et les autres offres.
+ */
 async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["params"] }) {
   const { slug } = await params
   const offer = getOffer(slug)
   if (!offer) notFound()
 
+  const visual = offerVisual(slug)
   const others = offers.filter((o) => o.slug !== slug)
   // Abonnement à paliers (maintenance) : unité de facturation affichée sous chaque prix.
   const tierUnit = offer.pricing.kind === "perMonth" ? offer.pricing.unit : null
@@ -67,28 +79,39 @@ async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["p
             : {}),
         }}
       />
+
       <PageHero blobs={[1]} crumbs={[{ label: offer.crumb }]}>
-        <Reveal>
-          <Eyebrow>{offer.kicker}</Eyebrow>
-        </Reveal>
-        <Reveal as="h1" className="max-w-[18ch] text-[clamp(2.4rem,5.4vw,4.4rem)]">
-          {offer.title}
-        </Reveal>
-        <Reveal as="p" delay={0.1} className="lead">
-          {offer.lead}
-        </Reveal>
-        <Facts facts={offer.facts} delay={0.2} />
-        <Reveal className="mt-8">
-          <ButtonRow>
-            <LinkButton href={`/contact?offre=${slug}`} arrow>
-              {offer.ctaLabel ?? "Demander un devis"}
-            </LinkButton>
-          </ButtonRow>
-        </Reveal>
+        <div className="grid items-center gap-x-[clamp(40px,5vw,80px)] gap-y-12 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)]">
+          <div>
+            <Reveal>
+              <Eyebrow>{offer.kicker}</Eyebrow>
+            </Reveal>
+            <Reveal as="h1" className="max-w-[16ch] text-[clamp(2.3rem,4.3vw,3.7rem)]">
+              {offer.title}
+            </Reveal>
+            <Reveal as="p" delay={0.1} className="lead max-w-[46ch]">
+              {offer.lead}
+            </Reveal>
+            <Reveal delay={0.15} className="mt-8">
+              <ButtonRow>
+                <LinkButton href={`/contact?offre=${slug}`} arrow>
+                  {offer.ctaLabel ?? "Demander un devis"}
+                </LinkButton>
+                <LinkButton href="#deroule" variant="line">
+                  Voir le déroulé
+                </LinkButton>
+              </ButtonRow>
+            </Reveal>
+          </div>
+          <Reveal delay={0.05} className="mx-auto w-full max-w-[620px] lg:-mr-4 lg:max-w-none xl:-mr-10">
+            <OfferArt kind={visual} />
+          </Reveal>
+        </div>
+        <OfferFacts facts={offer.facts} />
       </PageHero>
 
       <SplitSection eyebrow="Pour qui" title="Cette offre est faite pour vous si…">
-        <Checklist items={offer.forWho} />
+        <Checklist items={offer.forWho} className="[&_li]:text-[17px]" />
       </SplitSection>
 
       {offer.tiers && tierUnit && (
@@ -99,22 +122,7 @@ async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["p
               title={offer.tiers.length === 3 ? "Trois niveaux de service." : "Nos niveaux de service."}
               lead={offer.deliverablesLead}
             />
-            {/* Trois paliers côte à côte à partir de 1 024 px, empilés en dessous (pas de carte orpheline). */}
-            <div className="grid gap-[18px] lg:grid-cols-3">
-              {offer.tiers.map((t, i) => (
-                <SiteCard key={t.name} as="article" delay={i * 0.08} className="flex min-h-full flex-col">
-                  <OfferKicker>{t.name}</OfferKicker>
-                  <div className="mb-3 flex flex-wrap items-baseline gap-x-2">
-                    <strong className="font-display text-[clamp(2rem,3.4vw,2.6rem)] leading-none tracking-[-0.04em]">
-                      {formatEuros(t.amount)}&nbsp;HT
-                    </strong>
-                    <span className="text-sm text-ink-3">par mois et par {tierUnit}</span>
-                  </div>
-                  <p>{t.tagline}</p>
-                  <Checklist items={t.items} />
-                </SiteCard>
-              ))}
-            </div>
+            <TierCards tiers={offer.tiers} unit={tierUnit} />
           </div>
         </section>
       )}
@@ -123,27 +131,29 @@ async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["p
         <section className="section-tight">
           <div className="container-site">
             <SectionHead eyebrow="Exemples de processus" title="Ce que nous mettons en production." />
-            <div className="grid-balance grid gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
-              {offer.examples.map((ex, i) => (
-                <SiteCard key={ex.title} delay={(i % 3) * 0.08}>
-                  <CardIcon>
-                    <Icon shapes={ex.icon} />
-                  </CardIcon>
-                  <h3>{ex.title}</h3>
-                  <p className="m-0">{ex.text}</p>
-                </SiteCard>
-              ))}
-            </div>
+            <ExamplesList examples={offer.examples} />
           </div>
         </section>
       )}
 
-      <MethodSection eyebrow="Déroulé" title="Comment nous travaillons." lead={offer.stepsLead} steps={offer.steps} />
+      <section id="deroule" className="section scroll-mt-20">
+        <div className="container-site">
+          <SectionHead eyebrow="Déroulé" title="Comment nous travaillons." lead={offer.stepsLead} />
+          {visual === "maintenance" ? <YearTrack steps={offer.steps} /> : <ProcessTrack steps={offer.steps} duration={offer.duration} />}
+        </div>
+      </section>
 
       {/* Avec des paliers, la note de prix est déjà affichée au-dessus des paliers. */}
-      <SplitSection eyebrow="Livrables" title="Ce que vous obtenez." lead={offer.tiers ? undefined : offer.deliverablesLead}>
-        <Checklist items={offer.deliverables} />
-      </SplitSection>
+      <section className="section-tight">
+        <div className="container-site grid items-start gap-[clamp(36px,6vw,88px)] md:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)]">
+          <Reveal className="md:sticky md:top-[120px]">
+            <Eyebrow>Livrables</Eyebrow>
+            <h2>{keepHyphenated("Ce que vous obtenez.")}</h2>
+            {!offer.tiers ? <p className="lead">{offer.deliverablesLead}</p> : null}
+          </Reveal>
+          <DeliverablesSheet offerTitle={offer.title} items={offer.deliverables} />
+        </div>
+      </section>
 
       {offer.showCases && (
         <SplitSection eyebrow="Cas d'usage" title="Des exemples détaillés.">
