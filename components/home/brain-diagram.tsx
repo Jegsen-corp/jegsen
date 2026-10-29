@@ -4,12 +4,10 @@ import { motion } from "framer-motion"
 import { useSyncExternalStore } from "react"
 import { EASE } from "@/components/motion/reveal"
 import { useReducedMotion } from "@/components/motion/use-reduced-motion"
-import { MascotPixels } from "@/components/home/mascot-pixels"
-import { MASCOT_STANDING } from "@/lib/mascot-sprite"
 
 /*
  * Cerveau d'entreprise : vue éclatée isométrique en trois plateaux.
- * En bas, les données de l'entreprise. Au milieu, le cerveau (plateau sombre, mascotte de Jegsen).
+ * En bas, les données de l'entreprise. Au milieu, le cerveau (plateau sombre, symbole Jegsen).
  * En haut, ce que les équipes en font. Les flux montent en bleu (l'IA), ressortent en vert (le temps gagné).
  * Tout est dessiné en coordonnées locales de plateau (u, v), puis projeté en isométrie.
  */
@@ -19,7 +17,6 @@ const CX = 340
 const S = 100 // demi-côté d'un plateau
 const T = 12 // épaisseur d'un plateau
 const Y = { uses: 108, brain: 330, data: 526 } // centre écran de chaque plateau
-const MASCOT_UNIT = 3.2 // taille d'un pixel de la mascotte, en unités du dessin
 
 type Pt = [number, number]
 const iso = (cy: number, u: number, v: number, z = 0): Pt => [CX + (u - v) * K, cy + (u + v) * 0.5 - z]
@@ -356,11 +353,11 @@ export function BrainDiagram() {
             animate={still ? undefined : { y: [0, -5, 0] }}
             transition={{ duration: 4.5, ease: "easeInOut", repeat: Infinity }}
           >
-            <g
-              transform={`translate(${core[0] - (MASCOT_STANDING[0].length * MASCOT_UNIT) / 2} ${core[1] - (MASCOT_STANDING.length * MASCOT_UNIT) / 2 - 4}) scale(${MASCOT_UNIT})`}
-              style={{ filter: "drop-shadow(0 0 14px #3355ff99)" }}
-            >
-              <MascotPixels rows={MASCOT_STANDING} />
+            <circle cx={core[0]} cy={core[1]} r={30} fill="#0b0d12" stroke="#ffffff26" style={{ filter: "drop-shadow(0 0 22px #3355ff88)" }} />
+            <g transform={`translate(${core[0] - 32} ${core[1] - 32})`}>
+              <path d="M32 14A18 18 0 1 1 14 32" fill="none" stroke="#f3f4f6" strokeWidth={5.5} strokeLinecap="round" />
+              <circle cx="14" cy="32" r="5" fill="#7d96ff" />
+              <circle cx="32" cy="32" r="3.2" fill="#f3f4f6" />
             </g>
           </motion.g>
         </motion.g>
@@ -370,7 +367,7 @@ export function BrainDiagram() {
           {uses.map((u, i) => {
             const [x, y] = iso(Y.brain, u.u, u.v)
             const [, y2] = iso(Y.uses, u.u, u.v, USE_H)
-            const start = u.id === "flow" ? core[1] - (MASCOT_STANDING.length * MASCOT_UNIT) / 2 - 8 : y
+            const start = u.id === "flow" ? core[1] - 32 : y
             return <Beam key={u.id} x={x} y1={start} y2={y2} color="#0fa58c" delay={0.4 + i * 0.35} still={still} />
           })}
         </motion.g>
