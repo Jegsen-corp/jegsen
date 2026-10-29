@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { C, CENTER, Frame, Legend, Mark, Pill, draw, fade, pop, useStill } from "./art-kit"
+import { C, CENTER, ExampleNote, Frame, Legend, Mark, Note, draw, fade, pop, useStill } from "./art-kit"
 
 /*
  * Diagnostic : un cadran de mesure. Chaque processus est un arc, qui s'ouvre d'autant plus que l'équipe y
@@ -121,7 +121,7 @@ function Scene() {
           <motion.g key={p.label} variants={fade(litAt(p.hours) + 0.4, 0.5)}>
             <path d={`M${f(ex)} ${f(ey)} L${f(tx)} ${f(ty)}`} stroke={C.time} strokeWidth={1.5} strokeOpacity={0.7} />
             <circle cx={tx} cy={ty} r={2.5} fill={C.time} />
-            <Pill x={gx} y={gy + (anchor === "middle" ? 12 : 0)} text={p.gain ?? ""} tone="time" anchor={anchor} />
+            <Note x={gx} y={gy + (anchor === "middle" ? 10 : 0)} text={p.gain ?? ""} tone="time" anchor={anchor} size={12.5} />
           </motion.g>
         )
       })}
@@ -143,10 +143,10 @@ function Scene() {
 
       {/* Repères */}
       <motion.g variants={fade(SWEEP_AT + SWEEP_DUR + 0.6)}>
-        <Pill x={452} y={58} text="3 cas chiffrés et priorisés" tone="brand" anchor="start" small />
-        <Pill x={452} y={80} text="Gains estimés, exemple" anchor="start" small />
+        <Note x={470} y={58} text="3 cas retenus" sub="chiffrés et priorisés" tone="brand" dot />
       </motion.g>
       <Legend x={0} y={58} title="La mesure" sub="Vos chiffres, pas des moyennes" tone="brand" />
+      <ExampleNote x={640} y={500} />
       <Legend x={0} y={CY + 176} title="La semaine" sub="Trois jours, une restitution" />
     </>
   )

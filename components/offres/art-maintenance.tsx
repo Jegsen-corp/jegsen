@@ -2,7 +2,7 @@
 
 import { useId } from "react"
 import { motion } from "framer-motion"
-import { C, CENTER, Frame, Legend, Mark, Pill, fade, pop, rise, useStill } from "./art-kit"
+import { C, CENTER, ExampleNote, Frame, Legend, Mark, fade, pop, rise, useStill } from "./art-kit"
 
 /*
  * Maintenance : le moniteur de veille. Un écran sombre, trois workflows en production, chacun avec sa
@@ -42,7 +42,7 @@ const SPIKE = "M0 0 L8 -2 L14 -22 L20 10 L26 -6 L32 0"
 export function MaintenanceArt() {
   return (
     <Frame
-      viewBox="0 0 640 440"
+      viewBox="0 0 640 450"
       label="Moniteur de supervision. Trois workflows en production (factures fournisseurs, tri des e-mails, comptes rendus), chacun avec sa ligne de vie. Une anomalie sur le tri des e-mails déclenche une alerte, un correctif est appliqué et le workflow revient à la normale. En bas de l'écran, les heures gagnées chaque mois restent stables sur douze mois. Le journal note l'alerte, le correctif et le rétablissement (exemple)."
       legends={[
         { title: "La supervision", sub: "Ce qui veille, en continu", tone: "brand" },
@@ -105,7 +105,7 @@ function Scene() {
           </motion.g>
           <motion.path d={life(l.seed)} transform={`translate(${LANE_X0} ${l.y})`} fill="none" stroke={C.brandLight} strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" strokeOpacity={0.9} variants={fade(0.7 + i * 0.12, 0.5)} />
           {l.alert ? <Spike cx={LANE_X0 + LANE_W * 0.58} cy={l.y} /> : null}
-          <Status x={LANE_X1 + 52} y={l.y} alert={!!l.alert} />
+          <Status x={LANE_X1 + 16} y={l.y} alert={!!l.alert} />
         </g>
       ))}
 
@@ -116,7 +116,7 @@ function Scene() {
           Heures gagnées par mois
         </text>
         <text x={SCR.x + 30} y={SCR.y + 268} fontSize={9.5} fill="#8a93b8">
-          douze mois, exemple
+          les gains se maintiennent
         </text>
         <text x={LANE_X0} y={SCR.y + 288} fontSize={9.5} fill="#8a93b8">
           Mois 1
@@ -138,36 +138,36 @@ function Scene() {
 
       <Legend x={0} y={SCR.y - 26} title="La supervision" sub="Ce qui veille, en continu" tone="brand" anchor="start" />
       <Legend x={640} y={SCR.y - 26} title="Les gains" sub="Suivis mois après mois" tone="time" anchor="end" />
+      <ExampleNote x={640} y={SCR.y + SCR.h + 84} />
     </>
   )
 }
 
-/** Trois fiches du journal, alignées sous l'écran : alerte, correctif, rétabli. */
+/** Le journal des interventions, sous l'écran : trois lignes, dans l'ordre. */
 function Journal() {
   const items = [
-    { tone: C.amber, title: "Alerte", text: "Format de facture modifié", time: "09:12", at: ALERT_AT + 0.2 },
-    { tone: C.brand, title: "Correctif", text: "Règle d'extraction ajustée", time: "09:47", at: FIX_AT - 0.3 },
-    { tone: C.time, title: "Rétabli", text: "Contrôle sur 50 documents", time: "10:05", at: FIX_AT + 0.35 },
+    { tone: C.amber, title: "Alerte", text: "format de facture modifié", time: "09:12", at: ALERT_AT + 0.2 },
+    { tone: C.brand, title: "Correctif", text: "règle d'extraction ajustée", time: "09:47", at: FIX_AT - 0.3 },
+    { tone: C.time, title: "Rétabli", text: "contrôle sur 50 documents", time: "10:05", at: FIX_AT + 0.35 },
   ]
-  const w = 176
-  const gap = 16
-  const x0 = 320 - (items.length * w + (items.length - 1) * gap) / 2
+  const y0 = SCR.y + SCR.h + 30
   return (
     <g>
+      <text x={SCR.x + 12} y={y0 - 6} fontSize={10} fill={C.ink3} letterSpacing="0.04em">
+        JOURNAL DES INTERVENTIONS
+      </text>
       {items.map((j, i) => {
-        const x = x0 + i * (w + gap)
-        const y = SCR.y + SCR.h + 22
+        const y = y0 + 16 + i * 20
         return (
-          <motion.g key={j.title} variants={pop(j.at)} style={CENTER}>
-            <rect x={x} y={y} width={w} height={44} rx={13} fill={C.surface} stroke={C.line} filter="url(#art-shadow)" />
-            <circle cx={x + 16} cy={y + 22} r={5} fill={j.tone} />
-            <text x={x + 28} y={y + 18} fontSize={11} fontWeight={600} fill={C.ink}>
-              {j.title}
-            </text>
-            <text x={x + w - 12} y={y + 18} textAnchor="end" fontSize={10} fill={C.ink3}>
+          <motion.g key={j.title} variants={fade(j.at, 0.4)}>
+            <circle cx={SCR.x + 16} cy={y} r={3.5} fill={j.tone} />
+            <text x={SCR.x + 28} y={y + 4} fontSize={11} fill={C.ink3}>
               {j.time}
             </text>
-            <text x={x + 28} y={y + 33} fontSize={10} fill={C.ink2}>
+            <text x={SCR.x + 66} y={y + 4} fontSize={11.5} fontWeight={600} fill={C.ink}>
+              {j.title}
+            </text>
+            <text x={SCR.x + 66 + j.title.length * 7 + 8} y={y + 4} fontSize={11.5} fill={C.ink2}>
               {j.text}
             </text>
           </motion.g>
@@ -198,8 +198,8 @@ function Spike({ cx, cy }: { cx: number; cy: number }) {
 /** Pastille d'état : Normal, puis Alerte, puis Corrigé. */
 function Status({ x, y, alert }: { x: number; y: number; alert: boolean }) {
   const still = useStill()
-  if (!alert) return <Pill x={x} y={y} text="Normal" tone="time" small />
-  if (still) return <Pill x={x} y={y} text="Corrigé" tone="time" small />
+  if (!alert) return <Led x={x} y={y} text="Normal" color={C.timeLight} />
+  if (still) return <Led x={x} y={y} text="Corrigé" color={C.timeLight} />
   const seq = (values: number[], times: number[], end: number) => ({
     initial: { opacity: values[0] },
     animate: { opacity: values },
@@ -209,14 +209,26 @@ function Status({ x, y, alert }: { x: number; y: number; alert: boolean }) {
   return (
     <g>
       <motion.g {...seq([1, 1, 0], [0, ALERT_AT - e, ALERT_AT + e], ALERT_AT + e)}>
-        <Pill x={x} y={y} text="Normal" tone="time" small />
+        <Led x={x} y={y} text="Normal" color={C.timeLight} />
       </motion.g>
       <motion.g {...seq([0, 0, 1, 1, 0], [0, ALERT_AT - e, ALERT_AT + e, FIX_AT - e, FIX_AT + e], FIX_AT + e)}>
-        <Pill x={x} y={y} text="Alerte" tone="amber" small />
+        <Led x={x} y={y} text="Alerte" color={C.amber} />
       </motion.g>
       <motion.g {...seq([0, 0, 1], [0, FIX_AT - e, FIX_AT + e], FIX_AT + e)}>
-        <Pill x={x} y={y} text="Corrigé" tone="time" small />
+        <Led x={x} y={y} text="Corrigé" color={C.timeLight} />
       </motion.g>
+    </g>
+  )
+}
+
+/** État sur l'écran : un voyant et le mot, en clair sur le fond sombre. */
+function Led({ x, y, text, color }: { x: number; y: number; text: string; color: string }) {
+  return (
+    <g>
+      <circle cx={x} cy={y} r={3.5} fill={color} style={{ filter: `drop-shadow(0 0 5px ${color})` }} />
+      <text x={x + 10} y={y + 4} fontSize={10.5} fontWeight={600} fill={color}>
+        {text}
+      </text>
     </g>
   )
 }

@@ -2,7 +2,7 @@
 
 import type { ReactNode } from "react"
 import { motion } from "framer-motion"
-import { C, CENTER, Frame, Legend, Mark, Pill, fade, pop, rise, useStill } from "./art-kit"
+import { C, ExampleNote, Frame, Legend, Mark, Note, fade, rise, useStill } from "./art-kit"
 
 /*
  * Formation : la salle, vue de dessus. En haut, la charte (les règles communes) tient lieu de scène.
@@ -48,7 +48,7 @@ const SEATS = seats()
 export function FormationArt() {
   return (
     <Frame
-      viewBox="0 0 640 440"
+      viewBox="0 0 640 450"
       label="La salle de formation, vue de dessus. En haut, la charte d'utilisation de l'IA : données autorisées, outils validés, résultats vérifiés, responsabilités. En face, les sièges rangés par métier : comptabilité, commerce, RH, exploitation. Atelier après atelier, chaque section s'allume : l'équipe est formée sur ses propres tâches. Exemple d'adoption : 8 personnes sur 10 utilisent les outils validés."
       legends={[
         { title: "La charte", sub: "Les règles communes, posées au cadrage", tone: "brand" },
@@ -131,14 +131,16 @@ function Scene() {
 
       {/* Les métiers, et « formée » quand l'atelier est passé */}
       {SECTIONS.map((s) => {
-        const [x, y] = pt(296, (s.a0 + s.a1) / 2)
+        const mid = (s.a0 + s.a1) / 2
+        const [x, y] = pt(292, mid)
+        const anchor = mid < 250 ? "end" : mid > 290 ? "start" : "middle"
         return (
           <g key={s.label}>
             <motion.g variants={fade(0.9)}>
-              <Pill x={x} y={y} text={s.label} small />
+              <Note x={x} y={y} text={s.label} anchor={anchor} size={12} />
             </motion.g>
-            <motion.g variants={pop(s.at + 0.6)} style={CENTER}>
-              <Pill x={x} y={y + 22} text="Formée" tone="brand" small />
+            <motion.g variants={fade(s.at + 0.6, 0.4)}>
+              <Check x={x + (anchor === "end" ? -8 : anchor === "start" ? 0 : -24)} y={y + 20} anchor={anchor} />
             </motion.g>
           </g>
         )
@@ -146,14 +148,29 @@ function Scene() {
 
       {/* L'adoption, comptée */}
       <motion.g variants={fade(4.0)}>
-        <Pill x={SX} y={SY + 362} text="8 personnes sur 10 utilisent les outils validés, exemple" tone="time" small />
+        <Note x={SX} y={SY + 356} text="8 personnes sur 10 utilisent les outils validés" tone="time" anchor="middle" size={12.5} />
       </motion.g>
       <motion.g variants={fade(0.9)}>
-        <Pill x={0} y={SY + 60} text="1 à 3 semaines, ateliers par métier" anchor="start" small />
+        <Note x={0} y={SY + 318} text="1 à 3 semaines" sub="des ateliers par métier" tone="muted" />
       </motion.g>
 
       <Legend x={0} y={SY + 4} title="La charte" sub="Les règles communes" tone="brand" />
       <Legend x={0} y={SY + 250} title="Vos équipes" sub="Formées sur leurs tâches" />
+      <ExampleNote x={640} y={SY + 380} />
     </>
+  )
+}
+
+/** « Formée » : une coche et le mot, sans capsule. */
+function Check({ x, y, anchor }: { x: number; y: number; anchor: "start" | "middle" | "end" }) {
+  const tx = anchor === "end" ? x - 10 : x + 14
+  return (
+    <g>
+      <circle cx={anchor === "end" ? x : x + 4} cy={y} r={6} fill={C.brand} />
+      <path d={`M${(anchor === "end" ? x : x + 4) - 2.6} ${y} l1.8 1.8 l3.6-3.8`} fill="none" stroke="#fff" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" />
+      <text x={anchor === "end" ? tx : tx} y={y + 4} textAnchor={anchor === "end" ? "end" : "start"} fontSize={11} fontWeight={600} fill="#2a46d6">
+        Formée
+      </text>
+    </g>
   )
 }

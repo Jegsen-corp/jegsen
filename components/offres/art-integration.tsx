@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { C, CENTER, Frame, Legend, Mark, Pill, draw, fade, pop, rise, useStill } from "./art-kit"
+import { C, CENTER, ExampleNote, Frame, Legend, Mark, Note, draw, fade, pop, rise, useStill } from "./art-kit"
 
 /*
  * Intégration : un panneau de câblage. À gauche, vos documents arrivent par des câbles bleus dans le
@@ -187,18 +187,19 @@ function Scene() {
           Une personne décide des cas douteux
         </text>
         <text x={HUMAN.x - 14} y={HUMAN.y + 13} fontSize={10.5} fill={C.ink3}>
-          6 % d&apos;exceptions, tracées (exemple)
+          6 % d&apos;exceptions, toutes tracées
         </text>
       </motion.g>
 
       {/* Mesure */}
       <motion.g variants={fade(3)}>
-        <Pill x={TOOL_X + 90} y={TOOLS[3].y + 54} text="2 min par document, 9 avant" tone="time" anchor="end" small />
+        <Note x={TOOL_X - 26} y={TOOLS[3].y + 50} text="2 min par document" sub="au lieu de 9, avant" tone="time" />
       </motion.g>
 
       <Legend x={DOC_X} y={62} title="Vos documents" sub="Tels qu'ils arrivent" />
       <Legend x={TOOL_X - 26} y={62} title="Vos outils" sub="Mis à jour, sans ressaisie" tone="time" />
       <Legend x={DOC_X} y={372} title="Le workflow" sub="Branché, testé, mesuré" tone="brand" />
+      <ExampleNote x={DOC_X} y={444} anchor="start" />
     </>
   )
 }

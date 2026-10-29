@@ -83,22 +83,40 @@ export function Frame({ label, viewBox, legends = [], children, className = "" }
   )
 }
 
-/** Étiquette plate. */
-export function Pill({ x, y, text, tone = "light", small = false, anchor = "middle" }: { x: number; y: number; text: string; tone?: "light" | "brand" | "time" | "dark" | "amber"; small?: boolean; anchor?: "start" | "middle" | "end" }) {
-  const size = small ? 10.5 : 11.5
-  const w = text.length * (small ? 5.8 : 6.3) + (small ? 16 : 20)
-  const h = small ? 19 : 22
-  const fill = tone === "dark" ? C.ink : C.surface
-  const stroke = tone === "brand" ? "#3355ff40" : tone === "time" ? "#0fa58c4d" : tone === "amber" ? "#f59f0b66" : tone === "dark" ? C.ink : "#0b0d1217"
-  const color = tone === "brand" ? "#2a46d6" : tone === "time" ? "#0b826f" : tone === "amber" ? "#a86400" : tone === "dark" ? "#f3f4f6" : C.ink
-  const ox = anchor === "start" ? w / 2 : anchor === "end" ? -w / 2 : 0
+/**
+ * Annotation, comme sur un plan : un point de repère, un filet, du texte. Pas de capsule.
+ * `lead` : longueur du filet horizontal entre le point et le texte (0 : point collé au texte).
+ */
+export function Note({ x, y, text, sub, tone = "ink", anchor = "start", size = 11.5, dot = false, lead = 0 }: { x: number; y: number; text: string; sub?: string; tone?: "ink" | "muted" | "brand" | "time" | "amber" | "light"; anchor?: "start" | "middle" | "end"; size?: number; dot?: boolean; lead?: number }) {
+  const color = tone === "brand" ? "#2a46d6" : tone === "time" ? "#0b826f" : tone === "amber" ? "#b46e00" : tone === "muted" ? C.ink3 : tone === "light" ? "#dfe5ff" : C.ink
+  const dir = anchor === "end" ? -1 : 1
+  const tx = x + (dot ? dir * (lead + 9) : 0)
   return (
-    <g transform={`translate(${(x + ox).toFixed(1)} ${y.toFixed(1)})`}>
-      <rect x={-w / 2} y={-h / 2} width={w} height={h} rx={h / 2} fill={fill} stroke={stroke} style={{ filter: "drop-shadow(0 4px 10px #0b0d1212)" }} />
-      <text x={0} y={size * 0.36} textAnchor="middle" fontSize={size} fontWeight={tone === "light" ? 500 : 600} fill={color}>
+    <g>
+      {dot ? (
+        <g>
+          {lead > 0 ? <line x1={x} x2={x + dir * lead} y1={y} y2={y} stroke={color} strokeWidth={1.2} strokeOpacity={0.7} /> : null}
+          <circle cx={x} cy={y} r={2.6} fill={color} />
+        </g>
+      ) : null}
+      <text x={tx} y={y + size * 0.36} textAnchor={anchor === "middle" ? "middle" : anchor} fontSize={size} fontWeight={tone === "ink" || tone === "light" ? 500 : 600} fill={color}>
         {text}
       </text>
+      {sub ? (
+        <text x={tx} y={y + size * 0.36 + size + 2} textAnchor={anchor === "middle" ? "middle" : anchor} fontSize={size - 1.5} fill={tone === "light" ? "#aeb8e8" : C.ink3}>
+          {sub}
+        </text>
+      ) : null}
     </g>
+  )
+}
+
+/** Mention discrète, une fois par scène : les chiffres sont des exemples. */
+export function ExampleNote({ x, y, anchor = "end" }: { x: number; y: number; anchor?: "start" | "end" }) {
+  return (
+    <text x={x} y={y} textAnchor={anchor} fontSize={10} fill={C.ink3} className="max-sm:hidden">
+      Chiffres d&apos;exemple
+    </text>
   )
 }
 
