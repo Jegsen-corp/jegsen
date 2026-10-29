@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Suspense, useEffect, useState } from "react"
+import { Suspense, useState } from "react"
 import { useMotionValueEvent, useScroll } from "framer-motion"
 import { Sheet, SheetContent, SheetTitle } from "@/components/ui/sheet"
 import { mainNav } from "@/lib/site"
@@ -59,26 +59,11 @@ function ActiveNavLinks() {
   return <NavLinks pathname={usePathname()} />
 }
 
-/**
- * En-tête du site. Sur une page qui s'ouvre sur une surface sombre (un élément [data-hero="ink"]),
- * il passe en clair tant qu'on est en haut, puis revient à sa forme habituelle dès qu'on défile.
- */
-
-/** Lit la surface d'ouverture de la page courante (sous Suspense : dépend de l'URL). */
-function InkWatcher({ onChange }: { onChange: (ink: boolean) => void }) {
-  const pathname = usePathname()
-  useEffect(() => {
-    onChange(!!document.querySelector('[data-hero="ink"]'))
-  }, [pathname, onChange])
-  return null
-}
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  const [onInk, setOnInk] = useState(false)
   const { scrollY } = useScroll()
   useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 8))
-  const inverted = onInk && !scrolled && !open
 
   return (
     <header
@@ -86,13 +71,9 @@ export function Header() {
       className={cn(
         "fixed inset-x-0 top-0 z-[60] border-b border-transparent transition-[background-color,border-color,backdrop-filter] duration-300",
         scrolled && "border-line bg-bg/80 backdrop-blur-[18px] backdrop-saturate-[1.8]",
-        open && "bg-bg",
-        inverted && "theme-dark text-ink"
+        open && "bg-bg"
       )}
     >
-      <Suspense fallback={null}>
-        <InkWatcher onChange={setOnInk} />
-      </Suspense>
       <div className="container-site flex h-[72px] items-center justify-between gap-6">
         <Logo />
         <nav aria-label="Navigation principale" className="hidden items-center gap-1 lg:flex">
@@ -101,7 +82,7 @@ export function Header() {
           </Suspense>
         </nav>
         <div className="flex items-center gap-2.5">
-          <LinkButton href="/contact" size="md" variant={inverted ? "inverse" : "ink"} arrow className="hidden lg:inline-flex">
+          <LinkButton href="/contact" size="md" arrow className="hidden lg:inline-flex">
             Parlons-en
           </LinkButton>
           <button
