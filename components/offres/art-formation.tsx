@@ -1,134 +1,169 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Appear, ArtFrame, C, Card, Check, Draw, ExampleTag, Lines, Seal, T, useArt } from "./art-kit"
+import { Core, FACES, Grid, IsoScene, Legend, Pill, Shadow, Slab, fade, flat, iso, pop, rise, useIso } from "./iso-kit"
+import type { LegendItem } from "./iso-kit"
 
 /*
- * Formation : la charte d'utilisation au centre (les règles communes), quatre équipes autour, chacune
- * formée sur ses propres tâches, et l'adoption suivie semaine après semaine. Chiffres d'exemple.
+ * Formation : le plateau de l'entreprise, quatre équipes dans ses quatre coins, chacune avec ses personnes.
+ * Au centre, le plateau sombre de la charte d'utilisation (les règles communes), signé. Des ondes partent
+ * du centre et, atelier après atelier, chaque équipe passe au bleu : formée sur ses propres tâches.
+ * Devant, l'adoption se mesure, semaine après semaine. Chiffres d'exemple.
  */
+
+const CX = 320
+const CY = 300
+const S = 118
+const CH = 166 // hauteur du plateau de la charte, au-dessus des équipes
+const CS = 38 // demi-côté du plateau de la charte
+
+type Team = { id: string; label: string; u: number; v: number; at: number }
+const TEAMS: Team[] = [
+  { id: "compta", label: "Comptabilité", u: -74, v: -74, at: 1.3 },
+  { id: "vente", label: "Commerce", u: 74, v: -74, at: 1.75 },
+  { id: "rh", label: "RH", u: -74, v: 74, at: 2.2 },
+  { id: "exploit", label: "Exploitation", u: 74, v: 74, at: 2.65 },
+]
+const TS = 34 // demi-côté d'une tuile d'équipe
+const TH = 8
+/** Positions des trois personnes sur une tuile. */
+const SEATS: [number, number][] = [
+  [-14, 8],
+  [2, -10],
+  [16, 12],
+]
 
 const RULES = ["Données autorisées", "Outils validés", "Résultats vérifiés", "Responsabilités"]
 
-const TEAMS = [
-  { label: "Comptabilité", x: 16, y: 40, side: "left" as const },
-  { label: "Commerce", x: 400, y: 40, side: "right" as const },
-  { label: "RH", x: 16, y: 190, side: "left" as const },
-  { label: "Exploitation", x: 400, y: 190, side: "right" as const },
+const LEGENDS: LegendItem[] = [
+  { title: "La charte", sub: "Les règles communes, posées au cadrage", tone: "brand" },
+  { title: "Vos équipes", sub: "Formées sur leurs propres tâches" },
 ]
-const TEAM_W = 144
-const TEAM_H = 76
 
 export function FormationArt() {
   return (
-    <ArtFrame label="Exemple de programme de formation : une charte d'utilisation de l'IA (données autorisées, outils validés, résultats vérifiés, responsabilités), quatre équipes formées par métier, et l'usage qui progresse de semaine en semaine.">
-      {/* Liaisons équipes ↔ charte */}
-      <Appear delay={0.6} y={0}>
-        {TEAMS.map((t) => {
-          const ty = t.y + TEAM_H / 2
-          const d = t.side === "left" ? `M${t.x + TEAM_W} ${ty}C${t.x + TEAM_W + 22} ${ty} 172 ${ty < 150 ? 130 : 220} 192 ${ty < 150 ? 130 : 220}` : `M${t.x} ${ty}C${t.x - 22} ${ty} 388 ${ty < 150 ? 130 : 220} 368 ${ty < 150 ? 130 : 220}`
-          return <path key={t.label} d={d} fill="none" stroke={C.brandMid} strokeWidth={1.5} strokeDasharray="2 5" strokeLinecap="round" />
-        })}
-      </Appear>
+    <IsoScene
+      cx={CX}
+      legends={LEGENDS}
+      viewBox="0 0 640 520"
+      label="Schéma du programme de formation. Sur le plateau de l'entreprise, quatre équipes : comptabilité, commerce, RH, exploitation. Au centre, la charte d'utilisation de l'IA : données autorisées, outils validés, résultats vérifiés, responsabilités. Atelier après atelier, chaque équipe est formée sur ses propres tâches. Exemple d'adoption mesurée : 8 personnes sur 10 utilisent les outils validés en semaine 3."
+    >
+      <Scene />
+    </IsoScene>
+  )
+}
 
-      {/* La charte, signée */}
-      <Card x={192} y={40} w={176} h={250} rx={10} delay={0}>
-        {/* coin replié de la feuille */}
-        <path d="M346 40h12a10 10 0 0 1 10 10v12z" fill={C.bg2} />
-        <path d="M346 40v14a8 8 0 0 0 8 8h14" fill="none" stroke={C.line} />
-        <Seal x={208} y={58} size={24} delay={0.35} />
-        <T x={240} y={70} size={12.5} weight={600} display>Charte</T>
-        <T x={240} y={85} size={11} color={C.ink3}>d&apos;utilisation de l&apos;IA</T>
-        <line x1={208} x2={352} y1={102} y2={102} stroke={C.lineSoft} />
-        {RULES.map((r, i) => {
-          const y = 128 + i * 40
-          return (
-            <Appear key={r} delay={0.5 + i * 0.12} x={-4} y={0}>
-              <Check cx={216} cy={y - 4} r={8} />
-              <T x={232} y={y} size={11.5} weight={500}>{r}</T>
-              <Lines x={232} y={y + 9} widths={[104, 76]} gap={8} h={4} />
-            </Appear>
-          )
-        })}
-      </Card>
+function Scene() {
+  const { still } = useIso()
+  const core = iso(CX, CY, 0, 0, CH + 40)
+  return (
+    <>
+      <Shadow cy={CY} s={S} />
 
-      {/* Les équipes, formées une à une */}
-      {TEAMS.map((t, i) => (
-        <Team key={t.label} {...t} delay={0.25 + i * 0.1} formed={1.2 + i * 0.22} />
+      {/* Le plateau de l'entreprise */}
+      <motion.g variants={rise(-50, 0.05)}>
+        <Slab cy={CY} s={S} t={12} f={FACES.floor} />
+        <Grid cy={CY} s={S} step={29.5} />
+        {/* Liens de la charte vers chaque équipe */}
+        <g transform={flat(CX, CY)}>
+          {TEAMS.map((t) => (
+            <path key={t.id} d={`M0 0 L${t.u} ${t.v}`} stroke="#3355ff" strokeOpacity={0.25} strokeWidth={1.2} strokeDasharray="3 5" />
+          ))}
+        </g>
+      </motion.g>
+
+      {/* Les ondes de la charte vers les équipes */}
+      {!still
+        ? TEAMS.map((t, i) => (
+            <g key={t.id} transform={flat(CX, CY)}>
+              <motion.circle r={20} fill="none" stroke="#3355ff" strokeWidth={2} initial={{ scale: 1, opacity: 0 }} animate={{ scale: [1, 5.6], opacity: [0, 0.55, 0] }} transition={{ duration: 1.1, delay: t.at - 0.75 + i * 0, ease: "easeOut" }} style={{ transformBox: "fill-box", transformOrigin: "center" }} />
+            </g>
+          ))
+        : null}
+
+      {/* Les équipes */}
+      {[...TEAMS].sort((a, b) => a.u + a.v - (b.u + b.v)).map((t, i) => (
+        <motion.g key={t.id} variants={rise(20, 0.3 + i * 0.08, 0.8)}>
+          <Slab cy={CY} u={t.u} v={t.v} s={TS} z={TH} t={TH} f={FACES.tile} />
+          <motion.g variants={fade(t.at, 0.4)}>
+            <Slab cy={CY} u={t.u} v={t.v} s={TS} z={TH} t={TH} f={FACES.blueTile} />
+          </motion.g>
+          {SEATS.map(([du, dv], k) => (
+            <Person key={k} u={t.u + du} v={t.v + dv} at={t.at + k * 0.1} />
+          ))}
+        </motion.g>
       ))}
 
-      {/* L'adoption, suivie */}
-      <Card x={16} y={306} w={528} h={118} delay={1.1}>
-        <T x={32} y={332} size={12.5} weight={600} display>Indicateurs d&apos;adoption</T>
-        <ExampleTag x={250} y={319} />
-        {[352, 374, 396].map((y) => <line key={y} x1={32} x2={372} y1={y} y2={y} stroke={C.lineSoft} />)}
-        <AdoptionArea />
-        <Draw d="M32 392C90 390 120 378 168 370S260 352 372 346" stroke={C.brand} width={2.5} delay={1.6} duration={1.1} />
-        {[[32, 392], [202, 365], [372, 346]].map(([x, y], i) => (
-          <Appear key={i} delay={1.7 + i * 0.35} y={0}>
-            <circle cx={x} cy={y} r={4} fill="#fff" stroke={C.brand} strokeWidth={2} />
-          </Appear>
+      {/* La charte : plateau sombre, signé, les quatre règles posées dessus */}
+      <motion.g variants={rise(40, 0.2)}>
+        <Slab cy={CY} s={CS} z={CH} t={14} f={FACES.dark} />
+        <Grid cy={CY} s={CS} step={19} color="#ffffff0b" z={CH} />
+        <g transform={flat(CX, CY, 0, 0, CH)}>
+          <circle r={12} fill="none" stroke="#7d96ff" strokeOpacity={0.35} />
+          <circle r={22} fill="none" stroke="#7d96ff" strokeOpacity={0.18} strokeDasharray="3 6" />
+          {RULES.map((r, i) => {
+            const a = (i / 4) * Math.PI * 2 + Math.PI / 4
+            return <circle key={r} cx={Math.cos(a) * 27} cy={Math.sin(a) * 27} r={3} fill="#7d96ff" />
+          })}
+        </g>
+        <ellipse cx={iso(CX, CY, 0, 0, CH)[0]} cy={iso(CX, CY, 0, 0, CH)[1]} rx={60} ry={30} fill="url(#iso-core)" />
+      </motion.g>
+      <motion.g variants={pop(0.8)} style={{ transformBox: "fill-box", transformOrigin: "center" }}>
+        <path d={`M${core[0]} ${iso(CX, CY, 0, 0, CH)[1]} V ${core[1] + 20}`} stroke="#7d96ff" strokeOpacity={0.5} strokeWidth={1.5} />
+        <Core x={core[0]} y={core[1]} r={24} />
+      </motion.g>
+
+      {/* Étiquettes */}
+      <motion.g variants={fade(0.9)}>
+        <Pill x={core[0] + 112} y={core[1] - 10} text="Charte d'utilisation de l'IA" tone="dark" />
+        {RULES.map((r, i) => (
+          <Pill key={r} x={core[0] + 100} y={core[1] + 14 + i * 22} text={r} tone="brand" small />
         ))}
-        <T x={32} y={414} size={10} color={C.ink3}>Semaine 1</T>
-        <T x={202} y={414} size={10} color={C.ink3} anchor="middle">Semaine 2</T>
-        <T x={372} y={414} size={10} color={C.ink3} anchor="end">Semaine 3</T>
-        <line x1={400} x2={400} y1={330} y2={408} stroke={C.lineSoft} />
-        <Appear delay={2.3} y={6}>
-          <T x={420} y={370} size={30} weight={600} display ls={-1}>8 / 10</T>
-          <T x={420} y={390} size={11} color={C.ink3}>utilisent les outils</T>
-          <T x={420} y={404} size={11} color={C.ink3}>validés</T>
-        </Appear>
-      </Card>
-    </ArtFrame>
-  )
-}
-
-function AdoptionArea() {
-  const { reduce } = useArt()
-  return (
-    <motion.path
-      d="M32 392C90 390 120 378 168 370S260 352 372 346V396H32z"
-      fill={C.brandSoft}
-      initial={reduce ? false : { opacity: 0 }}
-      animate={{ opacity: 0.8 }}
-      transition={{ duration: 0.8, delay: 2.2 }}
-    />
-  )
-}
-
-/** Une équipe : trois personnes, le métier, et la mention « formée » une fois l'atelier passé. */
-function Team({ label, x, y, delay, formed }: { label: string; x: number; y: number; delay: number; formed: number }) {
-  const { reduce } = useArt()
-  const people = [0, 1, 2]
-  return (
-    <Card x={x} y={y} w={TEAM_W} h={TEAM_H} rx={12} delay={delay}>
-      {people.map((k) => {
-        const cx = x + 26 + k * 18
-        const cy = y + 28
+      </motion.g>
+      {TEAMS.map((t) => {
+        const [x, y] = iso(CX, CY, t.u, t.v, TH)
+        const py = y + (t.u + t.v < 0 ? 36 : 42)
+        const w = t.label.length * 6.3 + 20
         return (
-          <g key={k}>
-            <Avatar cx={cx} cy={cy} fill={C.bg2} stroke={C.ink3} />
-            <motion.g initial={reduce ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35, delay: formed + k * 0.08 }}>
-              <Avatar cx={cx} cy={cy} fill={C.brand} stroke="#fff" />
+          <g key={t.id}>
+            <motion.g variants={fade(0.9)}>
+              <Pill x={x - 22} y={py} text={t.label} />
+            </motion.g>
+            <motion.g variants={fade(t.at + 0.35, 0.4)}>
+              <Pill x={x - 22 + w / 2 + 30} y={py} text="Formée" tone="brand" small />
             </motion.g>
           </g>
         )
       })}
-      <T x={x + 16} y={y + 60} size={12} weight={600}>{label}</T>
-      <Appear delay={formed + 0.25} y={0}>
-        <rect x={x + TEAM_W - 66} y={y + 18} width={52} height={20} rx={10} fill={C.brandSoft} />
-        <T x={x + TEAM_W - 40} y={y + 32} size={10} weight={600} color={C.brand} anchor="middle">Formée</T>
-      </Appear>
-    </Card>
+      <motion.g variants={fade(3.2)}>
+        <Pill x={CX + 130} y={CY + S * 0.5 + 92} text="8 personnes sur 10 utilisent les outils validés, exemple" tone="time" small />
+      </motion.g>
+      <motion.g variants={fade(0.8)}>
+        <Pill x={CX - 160} y={core[1] - 6} text="1 à 3 semaines, ateliers par métier" small />
+      </motion.g>
+
+      <motion.g variants={fade(0.7)}>
+        <Legend x={0} y={CY + 70} title="Vos équipes" sub="Formées sur leurs propres tâches" />
+        <Legend x={0} y={CY - 250} title="La charte" sub="Les règles communes, posées au cadrage" tone="brand" />
+      </motion.g>
+    </>
   )
 }
 
-function Avatar({ cx, cy, fill, stroke }: { cx: number; cy: number; fill: string; stroke: string }) {
+/** Une personne debout sur le plateau : grise, puis bleue une fois formée. */
+function Person({ u, v, at }: { u: number; v: number; at: number }) {
+  const [x, y] = iso(CX, CY, u, v, 8)
+  const figure = (fill: string) => (
+    <g transform={`translate(${x.toFixed(1)} ${y.toFixed(1)})`}>
+      <ellipse cx={0} cy={0} rx={5} ry={2.5} fill="#0b0d12" opacity={0.12} />
+      <path d="M-4.5 0 v-8 a4.5 4.5 0 0 1 9 0 v8 z" fill={fill} />
+      <circle cx={0} cy={-13} r={4} fill={fill} />
+    </g>
+  )
   return (
     <g>
-      <circle cx={cx} cy={cy} r={11} fill={fill} stroke="#fff" strokeWidth={2} />
-      <circle cx={cx} cy={cy - 2.6} r={3} fill="none" stroke={stroke} strokeWidth={1.4} />
-      <path d={`M${cx - 5} ${cy + 6}c0-3 2.2-4.4 5-4.4s5 1.4 5 4.4`} fill="none" stroke={stroke} strokeWidth={1.4} strokeLinecap="round" />
+      {figure("#b4b9c4")}
+      <motion.g variants={fade(at, 0.3)}>{figure("#3355ff")}</motion.g>
     </g>
   )
 }

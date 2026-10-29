@@ -1,187 +1,258 @@
 "use client"
 
 import { useId } from "react"
-import { useReducedMotion } from "@/components/motion/use-reduced-motion"
-import { Appear, ArtFrame, C, Card, Check, ExampleTag, GrowBar, Person, Seal, T } from "./art-kit"
+import { motion } from "framer-motion"
+import { FACES, Grid, IsoScene, Legend, Pill, Shadow, Slab, fade, flat, iso, pop, rise, useIso } from "./iso-kit"
+import type { LegendItem } from "./iso-kit"
 
 /*
- * Intégration : un workflow en production, alimenté par vos documents et vos e-mails, branché sur vos
- * outils (messagerie, GED, ERP, CRM). Les cas douteux partent vers une personne. En bas, la mesure
- * avant / après et ce qui sécurise la mise en production. Chiffres d'exemple.
+ * Intégration : trois plateaux en escalier. À gauche, vos documents. Au centre, plus haut, le plateau sombre
+ * du workflow en production : les documents y suivent un chemin en quatre étapes, les cas douteux bifurquent
+ * vers une personne (vert). À droite, plus haut encore, vos outils, mis à jour. Les flux circulent en continu.
  */
 
-type G = "doc" | "mail" | "box" | "inbox" | "scan" | "shield" | "sync" | "folder" | "grid" | "contact"
+const CX = 320
+const CY = 330
+const PS = 58 // demi-côté des plateaux
+const DOCS: [number, number, number] = [-118, 118, 0] // (u, v, z) du centre de chaque plateau
+const WORK: [number, number, number] = [0, 0, 58]
+const TOOLS: [number, number, number] = [118, -118, 116]
 
-/** Pictogrammes 16 × 16, trait de 1,5. */
-function Glyph({ g, x, y, color = C.ink2 }: { g: G; x: number; y: number; color?: string }) {
-  const p = { fill: "none", stroke: color, strokeWidth: 1.5, strokeLinecap: "round" as const, strokeLinejoin: "round" as const }
-  const d: Record<G, React.ReactNode> = {
-    doc: <><path d="M4 1.5h5.5L13 5v9.5H4z" {...p} /><path d="M9.5 1.5V5H13M6.5 8.5h4M6.5 11h3" {...p} /></>,
-    mail: <><rect x="1.5" y="3.5" width="13" height="9.5" rx="1.5" {...p} /><path d="M2 4.5l6 4.5 6-4.5" {...p} /></>,
-    box: <><path d="M2 5l6-3 6 3v6.5l-6 3-6-3z" {...p} /><path d="M2 5l6 3 6-3M8 8v6.5" {...p} /></>,
-    inbox: <><path d="M2 9.5h3.5l1 1.5h3l1-1.5H14" {...p} /><path d="M2 9.5 4 3h8l2 6.5V13H2z" {...p} /></>,
-    scan: <><path d="M2 5V2.5h2.5M11.5 2.5H14V5M14 11v2.5h-2.5M4.5 13.5H2V11" {...p} /><path d="M5 6h6M5 8h4M5 10h5" {...p} /></>,
-    shield: <><path d="M8 1.5l5.5 2v4.2c0 3.3-2.4 5.6-5.5 6.8-3.1-1.2-5.5-3.5-5.5-6.8V3.5z" {...p} /><path d="M5.5 8l1.8 1.8L10.8 6.3" {...p} /></>,
-    sync: <><path d="M13 6.5A5 5 0 0 0 3.6 5M3 9.5A5 5 0 0 0 12.4 11" {...p} /><path d="M13.2 3v3.5H9.7M2.8 13V9.5h3.5" {...p} /></>,
-    folder: <><path d="M1.5 4.5V13h13V5.5H8L6.5 3.5h-5z" {...p} /></>,
-    grid: <><rect x="2" y="2" width="5" height="5" rx="1" {...p} /><rect x="9" y="2" width="5" height="5" rx="1" {...p} /><rect x="2" y="9" width="5" height="5" rx="1" {...p} /><rect x="9" y="9" width="5" height="5" rx="1" {...p} /></>,
-    contact: <><circle cx="8" cy="6" r="2.6" {...p} /><path d="M3 14c.6-2.6 2.6-4 5-4s4.4 1.4 5 4" {...p} /></>,
+const docTiles = [
+  { id: "doc", label: "Factures", du: -34, dv: 34 },
+  { id: "mail", label: "E-mails", du: 0, dv: 0 },
+  { id: "box", label: "Bons de livraison", du: 34, dv: -34 },
+] as const
+const toolTiles = [
+  { id: "mail", label: "Messagerie", du: -24, dv: -24 },
+  { id: "ged", label: "GED", du: 24, dv: -24 },
+  { id: "erp", label: "ERP", du: -24, dv: 24 },
+  { id: "crm", label: "CRM", du: 24, dv: 24 },
+] as const
+/** Étapes du workflow, en coordonnées locales du plateau sombre, de l'entrée (gauche) à la sortie (droite). */
+const steps = [
+  { id: "in", label: "Réception", u: -38, v: 38 },
+  { id: "read", label: "Extraction", u: -13, v: 13 },
+  { id: "check", label: "Contrôles", u: 13, v: -13 },
+  { id: "out", label: "Mise à jour", u: 38, v: -38 },
+] as const
+const HUMAN = { u: 30, v: 34 } // la personne, devant le plateau
+
+const P = { fill: "none", stroke: "#686e7a", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const }
+function TileIcon({ id }: { id: string }) {
+  switch (id) {
+    case "doc":
+      return <g {...P}><path d="M-7 -10h9l5 5v15h-14z" /><path d="M-3 0h6M-3 4h6" /></g>
+    case "mail":
+      return <g {...P}><rect x="-10" y="-7" width="20" height="14" rx="2" /><path d="M-9 -5l9 6 9-6" /></g>
+    case "box":
+      return <g {...P}><path d="M-9 -4l9-5 9 5v9l-9 5-9-5z" /><path d="M-9 -4l9 5 9-5M0 1v9" /></g>
+    case "ged":
+      return <g {...P}><path d="M-10 -6v13h20v-10h-9l-2-3h-9z" /></g>
+    case "erp":
+      return <g {...P}><rect x="-9" y="-9" width="18" height="18" rx="2" /><path d="M-9 -2h18M-9 4h18M-2 -9v18" /></g>
+    case "crm":
+      return <g {...P}><circle cx="0" cy="-4" r="4.5" /><path d="M-8 9c1-5 4-7 8-7s7 2 8 7" /></g>
   }
-  return <g transform={`translate(${x} ${y})`}>{d[g]}</g>
+  return null
+}
+const B = { fill: "none", stroke: "#ffffff", strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const }
+function StepIcon({ id }: { id: string }) {
+  switch (id) {
+    case "in":
+      return <g {...B}><path d="M-8 2h4l1.5 2.5h5L4 2h4" /><path d="M-8 2l2-7h12l2 7v5H-8z" /></g>
+    case "read":
+      return <g {...B}><path d="M-8 -3v-5h5M3 -8h5v5M8 3v5H3M-3 8h-5V3" /><path d="M-4 -1h8M-4 2.5h5" /></g>
+    case "check":
+      return <g {...B}><path d="M0 -9l7 2.5v5c0 4-3 6.7-7 8-4-1.3-7-4-7-8v-5z" /><path d="M-3 0l2.2 2.2L3.5 -2" /></g>
+    case "out":
+      return <g {...B}><path d="M7 -2A7 7 0 0 0 -5.5 -4M-7 2A7 7 0 0 0 5.5 4" /><path d="M7.5 -6v4h-4M-7.5 6V2h4" /></g>
+  }
+  return null
 }
 
-const SOURCES: { label: string; g: G }[] = [
-  { label: "Factures", g: "doc" },
-  { label: "E-mails", g: "mail" },
-  { label: "Bons de livraison", g: "box" },
+const LEGENDS: LegendItem[] = [
+  { title: "Vos documents", sub: "Tels qu'ils arrivent" },
+  { title: "Le workflow", sub: "Branché, testé, mesuré", tone: "brand" },
+  { title: "Vos outils", sub: "Mis à jour, sans ressaisie", tone: "time" },
 ]
-const SRC_Y = [64, 126, 188] // centres des pastilles d'entrée
-
-const STEPS: { label: string; g: G }[] = [
-  { label: "Réception", g: "inbox" },
-  { label: "Extraction des données", g: "scan" },
-  { label: "Contrôles de cohérence", g: "shield" },
-  { label: "Mise à jour de vos outils", g: "sync" },
-]
-const STEP_Y = [100, 146, 192, 238]
-
-const TOOLS: { label: string; g: G }[] = [
-  { label: "Messagerie", g: "mail" },
-  { label: "GED", g: "folder" },
-  { label: "ERP", g: "grid" },
-  { label: "CRM", g: "contact" },
-]
-const TOOL_Y = [64, 118, 172, 226]
 
 export function IntegrationArt() {
-  const reduce = useReducedMotion()
-  const id = useId().replace(/[:«»]/g, "")
-  // Entrées : chaque source rejoint l'étape « Réception »
-  const inPaths = SRC_Y.map((y) => `M140 ${y}C156 ${y} 158 ${STEP_Y[0]} 186 ${STEP_Y[0]}`)
-  // Sorties : l'étape « Mise à jour » alimente chaque outil
-  const outPaths = TOOL_Y.map((y) => `M374 ${STEP_Y[3]}C398 ${STEP_Y[3]} 398 ${y} 420 ${y}`)
-
   return (
-    <ArtFrame label="Exemple d'intégration : factures, e-mails et bons de livraison passent par un workflow en production (réception, extraction, contrôles, mise à jour), branché sur la messagerie, la GED, l'ERP et le CRM. Les cas douteux sont transmis à une personne. Le temps par document passe de 9 à 2 minutes dans cet exemple.">
-      <defs>
-        {inPaths.map((d, i) => <path key={i} id={`${id}-in${i}`} d={d} />)}
-        {outPaths.map((d, i) => <path key={i} id={`${id}-out${i}`} d={d} />)}
-      </defs>
-
-      <Appear delay={0}>
-        <T x={16} y={34} size={11} color={C.ink3}>Vos documents</T>
-        <T x={544} y={34} size={11} color={C.ink3} anchor="end">Vos outils</T>
-      </Appear>
-
-      {/* Liaisons */}
-      <Appear delay={0.5} y={0}>
-        {inPaths.map((d, i) => <path key={i} d={d} fill="none" stroke={C.brandMid} strokeWidth={1.5} />)}
-        {outPaths.map((d, i) => <path key={i} d={d} fill="none" stroke={C.brandMid} strokeWidth={1.5} />)}
-      </Appear>
-
-      {/* Entrées */}
-      {SOURCES.map((s, i) => (
-        <Card key={s.label} x={16} y={SRC_Y[i] - 22} w={124} h={44} rx={12} delay={0.1 + i * 0.08}>
-          <rect x={28} y={SRC_Y[i] - 12} width={24} height={24} rx={7} fill={C.bg2} />
-          <Glyph g={s.g} x={32} y={SRC_Y[i] - 8} />
-          {s.label.includes(" ") && s.label.length > 12 ? (
-            <>
-              <T x={60} y={SRC_Y[i] - 2} size={11.5} weight={500}>{s.label.slice(0, s.label.lastIndexOf(" "))}</T>
-              <T x={60} y={SRC_Y[i] + 12} size={11.5} weight={500}>{s.label.slice(s.label.lastIndexOf(" ") + 1)}</T>
-            </>
-          ) : (
-            <T x={60} y={SRC_Y[i] + 4} size={11.5} weight={500}>{s.label}</T>
-          )}
-        </Card>
-      ))}
-
-      {/* Le workflow, signé */}
-      <Card x={170} y={24} w={220} h={252} delay={0.25}>
-        <Seal x={186} y={38} size={22} delay={1.3} />
-        <T x={216} y={54} size={13} weight={600} display>Workflow</T>
-        <rect x={282} y={40} width={94} height={20} rx={10} fill={C.timeSoft} />
-        <circle cx={293} cy={50} r={3.5} fill={C.time} />
-        <T x={301} y={54} size={10.5} weight={600} color={C.time}>En production</T>
-        <line x1={170} x2={390} y1={72} y2={72} stroke={C.lineSoft} />
-        <line x1={200} x2={200} y1={STEP_Y[0]} y2={STEP_Y[3]} stroke={C.brandMid} strokeWidth={1.5} />
-        {STEPS.map((s, i) => (
-          <Appear key={s.label} delay={0.55 + i * 0.12} x={-4} y={0}>
-            <circle cx={200} cy={STEP_Y[i]} r={14} fill={i === 3 ? C.brand : C.brandSoft} />
-            <Glyph g={s.g} x={192} y={STEP_Y[i] - 8} color={i === 3 ? "#fff" : C.brand} />
-            <T x={224} y={STEP_Y[i] + 4} size={11.5} weight={500}>{s.label}</T>
-          </Appear>
-        ))}
-      </Card>
-
-      {/* Sorties */}
-      {TOOLS.map((t, i) => (
-        <Card key={t.label} x={420} y={TOOL_Y[i] - 21} w={124} h={42} rx={12} delay={0.35 + i * 0.08}>
-          <rect x={432} y={TOOL_Y[i] - 12} width={24} height={24} rx={7} fill={C.bg2} />
-          <Glyph g={t.g} x={436} y={TOOL_Y[i] - 8} />
-          <T x={466} y={TOOL_Y[i] + 4} size={11.5} weight={500}>{t.label}</T>
-        </Card>
-      ))}
-
-      {/* Les cas douteux partent vers une personne */}
-      <Appear delay={1.1} y={0}>
-        <path d={`M186 ${STEP_Y[2]}C160 ${STEP_Y[2]} 158 ${STEP_Y[2] + 40} 158 300C158 330 168 346 196 352`} fill="none" stroke={C.time} strokeWidth={1.5} strokeDasharray="2 5" strokeLinecap="round" />
-      </Appear>
-      <Card x={170} y={312} w={220} h={112} delay={1.15}>
-        <Person cx={204} cy={352} r={15} />
-        <T x={228} y={348} size={12.5} weight={600}>Une personne décide</T>
-        <T x={228} y={364} size={11} color={C.ink3}>des cas douteux</T>
-        <line x1={186} x2={374} y1={384} y2={384} stroke={C.lineSoft} />
-        <T x={186} y={406} size={11} color={C.ink3}>Exceptions tracées</T>
-        <T x={374} y={406} size={11.5} weight={600} anchor="end">6 %</T>
-      </Card>
-
-      {/* Mesure avant / après */}
-      <Card x={16} y={244} w={124} h={180} delay={1.3}>
-        <T x={30} y={270} size={12} weight={600} display>Temps par</T>
-        <T x={30} y={285} size={12} weight={600} display>document</T>
-        <T x={30} y={314} size={10.5} color={C.ink3}>Avant</T>
-        <T x={126} y={314} size={11.5} weight={600} anchor="end">9 min</T>
-        <GrowBar x={30} y={320} w={96} h={7} fill="#0b0d1230" delay={1.5} />
-        <T x={30} y={348} size={10.5} color={C.ink3}>Après</T>
-        <T x={126} y={348} size={11.5} weight={600} color={C.time} anchor="end">2 min</T>
-        <GrowBar x={30} y={354} w={22} h={7} fill={C.time} delay={1.7} />
-        <ExampleTag x={30} y={384} />
-      </Card>
-
-      {/* Ce qui sécurise la mise en production */}
-      <Card x={420} y={272} w={124} h={152} delay={1.4}>
-        <T x={434} y={298} size={12} weight={600} display>Sécurisé</T>
-        {["Jeux de tests", "Droits d'accès", "Journalisation", "Documentation"].map((l, i) => (
-          <g key={l}>
-            <Check cx={442} cy={322 + i * 24} r={7} color={C.brand} />
-            <T x={456} y={326 + i * 24} size={11} color={C.ink2}>{l}</T>
-          </g>
-        ))}
-      </Card>
-
-      {/* Documents en circulation, en continu : l'automatisation tourne */}
-      {!reduce
-        ? SRC_Y.map((_, i) => (
-            <g key={i}>
-              <Token href={`#${id}-in${i}`} begin={1.6 + i * 0.9} />
-              <Token href={`#${id}-out${i + (i === 2 ? 1 : 0)}`} begin={2.3 + i * 0.9} />
-            </g>
-          ))
-        : null}
-    </ArtFrame>
+    <IsoScene
+      cx={CX}
+      legends={LEGENDS}
+      viewBox="0 70 640 420"
+      label="Schéma de l'intégration en trois plateaux. À gauche, vos documents : factures, e-mails, bons de livraison. Au centre, le workflow en production : réception, extraction, contrôles, mise à jour. Les cas douteux sont transmis à une personne. À droite, vos outils mis à jour : messagerie, GED, ERP, CRM. Exemple : 2 minutes par document au lieu de 9, 6 % d'exceptions."
+    >
+      <Scene />
+    </IsoScene>
   )
 }
 
-/** Petit document bleu qui suit une liaison, en boucle. */
-function Token({ href, begin }: { href: string; begin: number }) {
+function Scene() {
+  const { still } = useIso()
+  const id = useId().replace(/[:«»]/g, "")
+  const at = (p: readonly [number, number, number], du = 0, dv = 0, dz = 0) => iso(CX, CY, p[0] + du, p[1] + dv, p[2] + dz)
+  const pt = (p: [number, number]) => `${p[0].toFixed(1)} ${p[1].toFixed(1)}`
+  const DOC_H = 9
+  const TOOL_H = 9
+  const NODE_H = 8
+
+  // Chemin du workflow, en coordonnées locales du plateau sombre (posé à plat)
+  const path = steps.map((s, i) => `${i ? "L" : "M"}${s.u} ${s.v}`).join(" ")
+  const branch = `M${steps[2].u} ${steps[2].v} Q ${steps[2].u + 10} ${HUMAN.v - 4} ${HUMAN.u} ${HUMAN.v}`
+
+  // Flux entre plateaux : des tuiles de documents à l'entrée du workflow, de la sortie aux outils
+  const entry = at(WORK, steps[0].u, steps[0].v, NODE_H)
+  const exit = at(WORK, steps[3].u, steps[3].v, NODE_H)
+
   return (
-    <g opacity={0}>
-      <rect x={-5} y={-6.5} width={10} height={13} rx={2} fill="#fff" stroke={C.brand} strokeWidth={1.4} />
-      <path d="M-2.5 -2h5M-2.5 1h5M-2.5 4h3" stroke={C.brandMid} strokeWidth={1.1} strokeLinecap="round" />
-      <animateMotion dur="1.1s" begin={`${begin}s;${href.replace("#", "")}-a.end+2.6s`} id={`${href.replace("#", "")}-a`} fill="freeze" calcMode="spline" keyTimes="0;1" keySplines="0.4 0 0.2 1">
-        <mpath href={href} />
-      </animateMotion>
-      <animate attributeName="opacity" values="0;1;1;0" keyTimes="0;0.15;0.85;1" dur="1.1s" begin={`${begin}s;${href.replace("#", "")}-a.end+2.6s`} fill="freeze" />
+    <>
+      <Shadow cy={at(DOCS)[1]} s={PS} dy={18} />
+      <Shadow cy={at(WORK)[1] + WORK[2]} s={PS} dy={18} />
+      <Shadow cy={at(TOOLS)[1] + TOOLS[2]} s={PS} dy={18} />
+
+      {/* Vos documents */}
+      <motion.g variants={rise(-40, 0.05)}>
+        <Slab cy={CY} u={DOCS[0]} v={DOCS[1]} s={PS} z={DOCS[2]} t={12} f={FACES.floor} />
+        {docTiles.map((t) => (
+          <g key={t.id}>
+            <Slab cy={CY} u={DOCS[0] + t.du} v={DOCS[1] + t.dv} s={15} z={DOC_H} t={DOC_H} f={FACES.tile} />
+            <g transform={flat(CX, CY, DOCS[0] + t.du, DOCS[1] + t.dv, DOC_H)}>
+              <TileIcon id={t.id} />
+            </g>
+          </g>
+        ))}
+      </motion.g>
+
+      {/* Flux d'entrée */}
+      <motion.g variants={fade(1.0)}>
+        {docTiles.map((t, i) => {
+          const from = at(DOCS, t.du, t.dv, DOC_H)
+          const d = `M${pt(from)} C ${pt([from[0], from[1] - 50])} ${pt([entry[0] - 40, entry[1] + 10])} ${pt(entry)}`
+          return <Flow key={t.id} d={d} color="#3355ff" delay={i * 0.5} still={still} />
+        })}
+      </motion.g>
+
+      {/* Le workflow, en production */}
+      <motion.g variants={rise(40, 0.2)}>
+        <Slab cy={CY} u={WORK[0]} v={WORK[1]} s={PS + 10} z={WORK[2]} t={14} f={FACES.dark} />
+        <Grid cy={CY} s={PS + 10} color="#ffffff0b" z={WORK[2]} />
+        <g transform={flat(CX, CY, 0, 0, WORK[2])}>
+          <defs>
+            <path id={`${id}-p`} d={path} />
+          </defs>
+          <path d={path} stroke="#7d96ff" strokeOpacity={0.6} strokeWidth={2} strokeLinecap="round" />
+          <path d={branch} stroke="#38d6b8" strokeOpacity={0.75} strokeWidth={1.6} strokeDasharray="3 5" fill="none" />
+          {[[-52, -30], [40, 44], [-46, 16], [22, -50], [-10, -44], [50, 8]].map(([a, b]) => (
+            <circle key={`${a}${b}`} cx={a} cy={b} r={1.8} fill="#ffffff40" />
+          ))}
+          {/* Documents en circulation */}
+          {!still
+            ? [0, 1, 2].map((k) => (
+                <g key={k}>
+                  <rect x={-5} y={-6.5} width={10} height={13} rx={2} fill="#ffffff" stroke="#3355ff" strokeWidth={1.3}>
+                    <animateMotion dur="4.2s" begin={`${-k * 1.4}s`} repeatCount="indefinite" rotate="0">
+                      <mpath href={`#${id}-p`} />
+                    </animateMotion>
+                  </rect>
+                </g>
+              ))
+            : null}
+        </g>
+        {steps.map((s, i) => (
+          <motion.g key={s.id} variants={pop(0.7 + i * 0.12)} style={{ transformBox: "fill-box", transformOrigin: "center" }}>
+            <Slab cy={CY} u={s.u} v={s.v} s={11} z={WORK[2] + NODE_H} t={NODE_H} f={i === 3 ? FACES.green : FACES.blue} />
+            <g transform={flat(CX, CY, s.u, s.v, WORK[2] + NODE_H)}>
+              <StepIcon id={s.id} />
+            </g>
+          </motion.g>
+        ))}
+        {/* La personne qui décide des cas douteux */}
+        <motion.g variants={pop(1.5)} style={{ transformBox: "fill-box", transformOrigin: "center" }}>
+          <Slab cy={CY} u={HUMAN.u} v={HUMAN.v} s={11} z={WORK[2] + 10} t={10} f={FACES.greenSoft} />
+          <g transform={flat(CX, CY, HUMAN.u, HUMAN.v, WORK[2] + 10)}>
+            <g fill="none" stroke="#0b826f" strokeWidth={1.7} strokeLinecap="round">
+              <circle cx="0" cy="-4" r="4.2" />
+              <path d="M-8 8c1-5 4-7 8-7s7 2 8 7" />
+            </g>
+          </g>
+        </motion.g>
+        <ellipse cx={at(WORK, 0, 0)[0]} cy={at(WORK, 0, 0)[1]} rx={70} ry={35} fill="url(#iso-core)" opacity={0.6} />
+      </motion.g>
+
+      {/* Flux de sortie : jusqu'au bord du plateau des outils, puis distribué à plat vers chaque outil */}
+      <motion.g variants={fade(1.3)}>
+        {(() => {
+          const to = at(TOOLS, -PS + 6, PS - 10, 2)
+          const d = `M${pt(exit)} C ${pt([exit[0] + 36, exit[1] - 36])} ${pt([to[0] - 46, to[1] + 4])} ${pt(to)}`
+          return <Flow d={d} color="#0fa58c" delay={0.3} still={still} />
+        })()}
+      </motion.g>
+
+      {/* Vos outils */}
+      <motion.g variants={rise(60, 0.35)}>
+        <Slab cy={CY} u={TOOLS[0]} v={TOOLS[1]} s={PS} z={TOOLS[2]} t={12} f={FACES.blueFloor} />
+        <g transform={flat(CX, CY, TOOLS[0], TOOLS[1], TOOLS[2])}>
+          {toolTiles.map((t) => (
+            <path key={t.id} d={`M${-PS + 6} ${PS - 10} L${t.du} ${t.dv}`} stroke="#0fa58c" strokeOpacity={0.55} strokeWidth={1.4} />
+          ))}
+          <circle cx={-PS + 6} cy={PS - 10} r={3.5} fill="#0fa58c" />
+        </g>
+        {toolTiles.map((t) => (
+          <g key={t.id}>
+            <Slab cy={CY} u={TOOLS[0] + t.du} v={TOOLS[1] + t.dv} s={14} z={TOOLS[2] + TOOL_H} t={TOOL_H} f={FACES.blueTile} />
+            <g transform={flat(CX, CY, TOOLS[0] + t.du, TOOLS[1] + t.dv, TOOLS[2] + TOOL_H)}>
+              <TileIcon id={t.id} />
+            </g>
+          </g>
+        ))}
+      </motion.g>
+
+      {/* Étiquettes */}
+      <motion.g variants={fade(0.9)}>
+        {docTiles.map((t, i) => {
+          const [x, y] = at(DOCS, t.du, t.dv, DOC_H)
+          return <Pill key={t.id} x={x} y={y + (i === 1 ? 54 : 32)} text={t.label} small />
+        })}
+        {toolTiles.map((t) => {
+          const [x, y] = at(TOOLS, t.du, t.dv, TOOL_H)
+          const front = t.du + t.dv > 0
+          return <Pill key={t.id} x={x} y={front ? y + 30 : y - 24} text={t.label} tone="brand" small />
+        })}
+      </motion.g>
+      <motion.g variants={fade(1.2)}>
+        {steps.map((s, i) => {
+          const [x, y] = at(WORK, s.u, s.v, NODE_H)
+          return <Pill key={s.id} x={x} y={y - (i % 2 ? 56 : 32)} text={s.label} tone={i === 3 ? "time" : "brand"} small />
+        })}
+        <Pill x={at(WORK, 0, 0)[0]} y={at(WORK, 0, 0)[1] - 96} text="En production" tone="dark" small />
+      </motion.g>
+      <motion.g variants={fade(1.8)}>
+        <Pill x={at(WORK, HUMAN.u, HUMAN.v, 10)[0] + 8} y={at(WORK, HUMAN.u, HUMAN.v, 10)[1] + 36} text="Une personne décide des cas douteux" tone="time" small />
+        <Pill x={at(WORK, HUMAN.u, HUMAN.v, 10)[0] + 8} y={at(WORK, HUMAN.u, HUMAN.v, 10)[1] + 58} text="6 % d'exceptions, exemple" small />
+      </motion.g>
+      <motion.g variants={fade(2.1)}>
+        <Pill x={at(TOOLS)[0]} y={at(TOOLS)[1] - 84} text="2 min par document, 9 avant" tone="time" small />
+      </motion.g>
+
+      {/* Légendes */}
+      <motion.g variants={fade(0.7)}>
+        <Legend x={at(DOCS)[0] - 70} y={at(DOCS)[1] + 112} title="Vos documents" sub="Tels qu'ils arrivent" />
+        <Legend x={CX - 60} y={at(WORK)[1] + 150} title="Le workflow" sub="Branché, testé, mesuré" tone="brand" />
+        <Legend x={at(TOOLS)[0] - 40} y={at(TOOLS)[1] + 118} title="Vos outils" sub="Mis à jour, sans ressaisie" tone="time" />
+      </motion.g>
+    </>
+  )
+}
+
+/** Trait entre deux plateaux : fond discret et tirets qui avancent. */
+function Flow({ d, color, delay, still }: { d: string; color: string; delay: number; still: boolean }) {
+  return (
+    <g>
+      <path d={d} fill="none" stroke={color} strokeOpacity={0.22} strokeWidth={1.5} />
+      {!still ? <motion.path d={d} fill="none" stroke={color} strokeWidth={2.5} strokeLinecap="round" strokeDasharray="7 26" initial={{ strokeDashoffset: 66 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 2.2, ease: "linear", repeat: Infinity, delay }} /> : null}
     </g>
   )
 }

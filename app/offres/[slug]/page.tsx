@@ -81,7 +81,7 @@ async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["p
       />
 
       <PageHero blobs={[1]} crumbs={[{ label: offer.crumb }]}>
-        <div className="grid items-center gap-x-[clamp(40px,5vw,80px)] gap-y-12 lg:grid-cols-[minmax(0,0.86fr)_minmax(0,1.14fr)]">
+        <div className="grid items-center gap-x-[clamp(40px,5vw,80px)] gap-y-12 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
           <div>
             <Reveal>
               <Eyebrow>{offer.kicker}</Eyebrow>
@@ -103,7 +103,7 @@ async function OfferContent({ params }: { params: PageProps<"/offres/[slug]">["p
               </ButtonRow>
             </Reveal>
           </div>
-          <Reveal delay={0.05} className="mx-auto w-full max-w-[620px] lg:-mr-4 lg:max-w-none xl:-mr-10">
+          <Reveal delay={0.05} className="mx-auto w-full max-w-[640px] lg:-mr-6 lg:max-w-none xl:-mr-14">
             <OfferArt kind={visual} />
           </Reveal>
         </div>
