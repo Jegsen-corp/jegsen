@@ -1,28 +1,27 @@
 import Link from "next/link"
 import type { Metadata } from "next"
 import { AgentsScene, BrainScene, CustomScene, DeliveryScene, InvoicesScene, MailScene, MinutesScene, RequestsScene, TenderScene } from "@/components/cas-usage/scenes"
-import { Reveal } from "@/components/motion/reveal"
-import { CtaBlock, Eyebrow, PageHero, SectionHead } from "@/components/site/blocks"
+import { AboveFold, Reveal } from "@/components/motion/reveal"
+import { CtaBlock, Crumbs } from "@/components/site/blocks"
 import { Icon } from "@/components/site/icon"
-import type { IconShape } from "@/lib/content/types"
 import { LinkButton } from "@/components/site/links"
 import { caseHref, processCases } from "@/lib/content/cases"
+import type { IconShape } from "@/lib/content/types"
 import { pageMeta } from "@/lib/metadata"
 
 export const metadata: Metadata = pageMeta({
   title: "Cas d'usage de l'IA en entreprise | Jegsen IA",
   description:
-    "Factures, bons de livraison, e-mails, comptes rendus, demandes entrantes, cerveau d'entreprise, workflows agentiques : les processus et usages techniques que nous mettons en production.",
+    "Factures, bons de livraison, e-mails, comptes rendus, demandes entrantes, appels d'offres, cerveau d'entreprise, workflows agentiques : les processus et usages techniques que nous mettons en production.",
   path: "/cas-usage",
 })
 
 /*
- * Page des cas d'usage : on montre, on n'écrit pas. Chaque processus en une scène animée et une ligne,
- * le sixième emplacement pour votre processus, puis le socle technique en deux scènes et une rangée de
- * pictogrammes. Le détail de chaque cas reste sur sa propre page.
+ * Page des cas d'usage : on montre, on n'écrit pas, et on change de surface pour casser la monotonie.
+ * Encre en ouverture (le grand arc du logo), les processus en pleine largeur, scène et texte en
+ * alternance, le sur-mesure en bande encre, le socle sur papier, l'appel à l'action en bleu.
  */
 
-/** Une ligne par processus : ce qui entre, ce qui sort. */
 const ONE_LINERS: Record<string, { what: string; scene: React.ComponentType }> = {
   "factures-fournisseurs": { what: "Lues, rapprochées, imputées. Les écarts remontent à une personne.", scene: InvoicesScene },
   "bons-de-livraison": { what: "Photographiés, lus, enregistrés dans vos outils, réserves comprises.", scene: DeliveryScene },
@@ -42,101 +41,131 @@ const TECH: Tech[] = [
   { title: "Choix et hébergement des modèles", icon: [{ d: "M12 3l7.5 3v5.5c0 4.6-3.2 8.3-7.5 9.5-4.3-1.2-7.5-4.9-7.5-9.5V6L12 3z" }, { d: "M8.8 12l2.2 2.2 4.3-4.4" }] },
 ]
 
+const pad = (n: number) => String(n).padStart(2, "0")
+
 export default function UseCasesPage() {
   return (
     <>
-      <PageHero blobs={[2]} crumbs={[{ label: "Cas d'usage" }]} className="pb-[20px]">
-        <Reveal>
-          <Eyebrow>Cas d'usage</Eyebrow>
-        </Reveal>
-        <Reveal as="h1" className="max-w-[16ch] text-[clamp(2.4rem,5vw,4.2rem)]">
-          Ce que l'IA fait à votre place.
-        </Reveal>
-        <Reveal as="p" delay={0.1} className="lead max-w-[44ch]">
-          Lire, vérifier, ressaisir, trier. Vous gardez les décisions.
-        </Reveal>
-      </PageHero>
-
-      {/* Six scènes : cinq processus, et le vôtre */}
-      <section className="section-tight pt-6">
+      {/* Ouverture en encre : le grand arc du logo, le titre, le sommaire */}
+      <section data-hero="ink" className="theme-dark relative isolate overflow-hidden bg-[#0b0d12] pt-[clamp(112px,14vw,150px)] pb-[clamp(48px,6vw,80px)]">
+        <svg aria-hidden="true" viewBox="0 0 64 64" className="pointer-events-none absolute -top-[18vw] -right-[16vw] -z-10 size-[min(70vw,900px)]">
+          <path d="M32 10A22 22 0 1 1 10 32" fill="none" stroke="#ffffff" strokeOpacity="0.055" strokeWidth="7" strokeLinecap="round" />
+          <circle cx="10" cy="32" r="5.5" fill="#3355ff" opacity="0.9" />
+        </svg>
         <div className="container-site">
-          <ul className="m-0 grid list-none gap-[18px] p-0 sm:grid-cols-2 lg:grid-cols-3">
+          <Crumbs items={[{ label: "Cas d'usage" }]} />
+          <AboveFold>
+            <Reveal as="h1" className="max-w-[12ch] text-[clamp(2.8rem,7vw,6.4rem)] leading-[0.95] text-ink">
+              Ce que l'IA fait à votre place.
+            </Reveal>
+            <Reveal as="p" delay={0.1} className="mt-6 max-w-[40ch] text-[clamp(1.05rem,1.5vw,1.3rem)] leading-relaxed text-ink-2">
+              Lire, vérifier, ressaisir, trier. Vous gardez les décisions.
+            </Reveal>
+            <Reveal delay={0.2} className="mt-[clamp(40px,6vw,80px)] border-t border-line pt-6">
+              <ol className="m-0 grid list-none gap-x-8 gap-y-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
+                {processCases.map((c, i) => (
+                  <li key={c.slug}>
+                    <Link href={`#${c.slug}`} className="group inline-flex items-baseline gap-3 py-1 text-ink-2 transition-colors hover:text-ink">
+                      <span className="font-display text-[12px] font-semibold tracking-[0.08em] text-ink-3">{pad(i + 1)}</span>
+                      <span className="font-display text-[clamp(1rem,1.3vw,1.15rem)] font-semibold tracking-[-0.02em]">{c.shortTitle}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ol>
+            </Reveal>
+          </AboveFold>
+        </div>
+      </section>
+
+      {/* Les processus : scène et texte en alternance, séparés par des filets épais */}
+      <section className="pt-[clamp(24px,4vw,56px)] pb-[clamp(56px,7vw,90px)]">
+        <div className="container-site">
+          <ol className="m-0 list-none p-0">
             {processCases.map((c, i) => {
               const o = ONE_LINERS[c.slug]
               const SceneComp = o?.scene ?? InvoicesScene
+              const flip = i % 2 === 1
               return (
-                <li key={c.slug} className="group relative">
-                  <Reveal delay={(i % 3) * 0.08} className="flex h-full flex-col overflow-hidden rounded-[24px] border border-line bg-surface transition-[border-color,box-shadow] duration-500 group-hover:border-line-strong group-hover:shadow-[var(--shadow)]">
-                    <div className="bg-[radial-gradient(120%_80%_at_50%_0%,#eef0ff_0%,#f8f8f6_70%)] px-5 pt-5 pb-1">
+                <li key={c.slug} id={c.slug} className="scroll-mt-24 border-t-[1.5px] border-ink last:border-b-[1.5px]">
+                  <Reveal className={`grid items-center gap-x-[clamp(32px,5vw,80px)] gap-y-6 py-[clamp(28px,4vw,56px)] md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] ${flip ? "md:[&>*:first-child]:order-2" : ""}`}>
+                    {/* La scène, posée sur un pavé papier */}
+                    <div className="relative rounded-[28px] bg-[#efeee8] px-[clamp(16px,3vw,40px)] py-[clamp(12px,2vw,24px)]">
+                      <span aria-hidden="true" className="absolute top-4 left-5 font-display text-[clamp(2.4rem,4vw,3.6rem)] leading-none font-bold tracking-[-0.05em] text-ink/[0.08]">
+                        {pad(i + 1)}
+                      </span>
                       <SceneComp />
                     </div>
-                    <div className="flex flex-1 flex-col px-6 pt-4 pb-6">
-                      <p className="m-0 mb-1.5 text-[12.5px] font-semibold tracking-[0.02em] text-brand">{c.audiences[0]}</p>
-                      <h2 className="mb-2 text-[1.3rem] leading-tight">
-                        <Link href={caseHref(c.slug)} className="after:absolute after:inset-0 after:rounded-[24px] after:content-['']">
+                    <div className={flip ? "md:pr-[clamp(0px,3vw,40px)]" : "md:pl-[clamp(0px,3vw,40px)]"}>
+                      <p className="m-0 mb-3 text-[13px] font-semibold tracking-[0.02em] text-brand">{c.audiences[0]}</p>
+                      <h2 className="mb-3 text-[clamp(1.8rem,3.2vw,2.8rem)] leading-[1]">
+                        <Link href={caseHref(c.slug)} className="transition-colors hover:text-brand">
                           {c.shortTitle}
                         </Link>
                       </h2>
-                      <p className="m-0 text-[14.5px] leading-relaxed text-ink-2">{o?.what ?? c.summary}</p>
-                      <span aria-hidden="true" className="mt-auto inline-flex items-center gap-2 pt-5 text-[14px] font-semibold text-ink transition-colors group-hover:text-brand">
+                      <p className="m-0 max-w-[36ch] text-[clamp(1rem,1.3vw,1.15rem)] leading-relaxed text-ink-2">{o?.what ?? c.summary}</p>
+                      <Link href={caseHref(c.slug)} className="group mt-6 inline-flex items-center gap-2 text-[15px] font-semibold text-ink">
                         Voir le cas
-                        <span className="transition-transform group-hover:translate-x-1">→</span>
-                      </span>
+                        <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
+                      </Link>
                     </div>
                   </Reveal>
                 </li>
               )
             })}
-            {/* Votre processus */}
-            <li className="group relative sm:col-span-2 lg:col-span-3">
-              <Reveal delay={0.16} className="theme-dark grid items-center overflow-hidden rounded-[24px] md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]" style={{ background: "#0b0d12" }}>
-                <div className="mx-auto w-full max-w-[380px] px-5 pt-5 pb-1 md:py-6">
-                  <CustomScene />
-                </div>
-                <div className="flex flex-col px-6 pt-4 pb-6 md:py-8 md:pr-10">
-                  <p className="m-0 mb-1.5 text-[12.5px] font-semibold tracking-[0.02em] text-ink-2">Sur mesure</p>
-                  <h2 className="mb-2 text-[1.3rem] leading-tight">Votre processus</h2>
-                  <p className="m-0 max-w-[48ch] text-[14.5px] leading-relaxed text-ink-2">Décrivez la tâche qui mobilise le plus vos équipes. On vous dit si elle se prête à l'automatisation.</p>
-                  <div className="pt-5">
-                    <LinkButton href="/contact" variant="inverse" size="md" arrow>
-                      Nous écrire
-                    </LinkButton>
-                  </div>
-                </div>
-              </Reveal>
-            </li>
-          </ul>
+          </ol>
         </div>
       </section>
 
-      {/* Le socle technique : deux scènes, puis des pictogrammes */}
-      <section className="section">
+      {/* Votre processus : bande encre */}
+      <section className="theme-dark bg-[#0b0d12]">
+        <div className="container-site grid items-center gap-x-[clamp(32px,5vw,80px)] gap-y-6 py-[clamp(40px,5vw,72px)] md:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
+          <Reveal className="mx-auto w-full max-w-[400px]">
+            <CustomScene />
+          </Reveal>
+          <Reveal delay={0.1}>
+            <p className="m-0 mb-3 text-[13px] font-semibold tracking-[0.02em] text-ink-3">Sur mesure</p>
+            <h2 className="mb-3 max-w-[14ch] text-[clamp(1.9rem,3.6vw,3.2rem)] leading-[1] text-ink">Votre processus n'est pas dans la liste ?</h2>
+            <p className="m-0 max-w-[46ch] text-[clamp(1rem,1.3vw,1.15rem)] leading-relaxed text-ink-2">Décrivez la tâche qui mobilise le plus vos équipes. On vous dit si elle se prête à l'automatisation, en un échange de 30 minutes.</p>
+            <div className="mt-7">
+              <LinkButton href="/contact" variant="inverse" arrow>
+                Nous écrire
+              </LinkButton>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Le socle : sur papier */}
+      <section className="bg-[#efeee8] py-[clamp(64px,8vw,120px)]">
         <div className="container-site">
-          <SectionHead eyebrow="Le socle" title="Vos données, organisées et branchées." lead="Derrière chaque automatisation, la même base." />
+          <Reveal className="mb-[clamp(32px,5vw,56px)] grid items-end gap-6 md:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+            <h2 className="m-0 max-w-[12ch] text-[clamp(2rem,4vw,3.4rem)] leading-[1]">Le socle : vos données, organisées et branchées.</h2>
+            <p className="m-0 max-w-[40ch] text-[clamp(1rem,1.3vw,1.15rem)] leading-relaxed text-ink-2 md:justify-self-end">Derrière chaque automatisation, la même base.</p>
+          </Reveal>
           <div className="grid gap-[18px] md:grid-cols-2">
             {[
               { href: "/cas-usage/cerveau-entreprise", title: "Cerveau d'entreprise", what: "Vos documents rassemblés, interrogeables, qui citent leurs sources.", Scene: BrainScene },
               { href: "/cas-usage/workflows-agentiques", title: "Workflows agentiques", what: "Des agents qui agissent dans vos outils, sous contrôle humain.", Scene: AgentsScene },
             ].map((t, i) => (
-              <Reveal key={t.href} delay={i * 0.08} className="group relative overflow-hidden rounded-[24px] border border-line bg-surface transition-[border-color,box-shadow] duration-500 hover:border-line-strong hover:shadow-[var(--shadow)]">
-                <div className="bg-[radial-gradient(120%_80%_at_50%_0%,#eef0ff_0%,#f8f8f6_70%)] px-6 pt-5 pb-1">
+              <Reveal key={t.href} delay={i * 0.08} className="group relative overflow-hidden rounded-[28px] bg-surface">
+                <div className="px-6 pt-5 pb-1">
                   <t.Scene />
                 </div>
-                <div className="px-6 pt-4 pb-6">
-                  <h3 className="mb-1.5 text-[1.3rem]">
+                <div className="px-7 pt-3 pb-7">
+                  <h3 className="mb-1.5 text-[1.4rem]">
                     <Link href={t.href} className="after:absolute after:inset-0 after:content-['']">
                       {t.title}
                     </Link>
                   </h3>
-                  <p className="m-0 text-[14.5px] text-ink-2">{t.what}</p>
+                  <p className="m-0 text-[15px] text-ink-2">{t.what}</p>
                 </div>
               </Reveal>
             ))}
           </div>
-          <Reveal as="ul" className="m-0 mt-[18px] grid list-none gap-x-6 gap-y-3 rounded-[24px] border border-line bg-surface/70 p-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Reveal as="ul" className="m-0 mt-[18px] grid list-none gap-x-8 gap-y-4 border-t-[1.5px] border-ink p-0 pt-6 sm:grid-cols-2 lg:grid-cols-3">
             {TECH.map((t) => (
-              <li key={t.title} className="flex items-center gap-3 text-[14.5px] font-medium text-ink">
-                <span className="grid size-9 flex-none place-items-center rounded-xl bg-brand-soft text-brand">
+              <li key={t.title} className="flex items-center gap-3 text-[15px] font-medium text-ink">
+                <span className="grid size-9 flex-none place-items-center rounded-xl bg-surface text-brand">
                   <Icon shapes={t.icon} className="size-[18px]" />
                 </span>
                 {t.title}
