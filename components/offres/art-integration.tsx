@@ -1,258 +1,218 @@
 "use client"
 
-import { useId } from "react"
 import { motion } from "framer-motion"
-import { FACES, Grid, IsoScene, Legend, Pill, Shadow, Slab, fade, flat, iso, pop, rise, useIso } from "./iso-kit"
-import type { LegendItem } from "./iso-kit"
+import { C, CENTER, Frame, Legend, Mark, Pill, draw, fade, pop, rise, useStill } from "./art-kit"
 
 /*
- * Intégration : trois plateaux en escalier. À gauche, vos documents. Au centre, plus haut, le plateau sombre
- * du workflow en production : les documents y suivent un chemin en quatre étapes, les cas douteux bifurquent
- * vers une personne (vert). À droite, plus haut encore, vos outils, mis à jour. Les flux circulent en continu.
+ * Intégration : un panneau de câblage. À gauche, vos documents arrivent par des câbles bleus dans le
+ * module du workflow (boîtier sombre, quatre étapes, voyant « en production »). À droite, le module est
+ * branché, prise par prise, sur vos outils : chaque câble vert se tire puis s'enclenche. En dessous, la
+ * sortie des cas douteux vers une personne. Les impulsions circulent en continu. Chiffres d'exemple.
  */
 
-const CX = 320
-const CY = 330
-const PS = 58 // demi-côté des plateaux
-const DOCS: [number, number, number] = [-118, 118, 0] // (u, v, z) du centre de chaque plateau
-const WORK: [number, number, number] = [0, 0, 58]
-const TOOLS: [number, number, number] = [118, -118, 116]
+const MOD = { x: 222, y: 72, w: 196, h: 286 } // le boîtier
+const PORT_IN_X = MOD.x
+const PORT_OUT_X = MOD.x + MOD.w
+const STEPS = ["Réception", "Extraction des données", "Contrôles de cohérence", "Mise à jour de vos outils"]
+const STEP_Y = (i: number) => MOD.y + 92 + i * 44
 
-const docTiles = [
-  { id: "doc", label: "Factures", du: -34, dv: 34 },
-  { id: "mail", label: "E-mails", du: 0, dv: 0 },
-  { id: "box", label: "Bons de livraison", du: 34, dv: -34 },
-] as const
-const toolTiles = [
-  { id: "mail", label: "Messagerie", du: -24, dv: -24 },
-  { id: "ged", label: "GED", du: 24, dv: -24 },
-  { id: "erp", label: "ERP", du: -24, dv: 24 },
-  { id: "crm", label: "CRM", du: 24, dv: 24 },
-] as const
-/** Étapes du workflow, en coordonnées locales du plateau sombre, de l'entrée (gauche) à la sortie (droite). */
-const steps = [
-  { id: "in", label: "Réception", u: -38, v: 38 },
-  { id: "read", label: "Extraction", u: -13, v: 13 },
-  { id: "check", label: "Contrôles", u: 13, v: -13 },
-  { id: "out", label: "Mise à jour", u: 38, v: -38 },
-] as const
-const HUMAN = { u: 30, v: 34 } // la personne, devant le plateau
+const DOCS = [
+  { id: "doc", label: "Factures", y: 126 },
+  { id: "mail", label: "E-mails", y: 206 },
+  { id: "box", label: "Bons de livraison", y: 286 },
+]
+const TOOLS = [
+  { id: "mail", label: "Messagerie", y: 112 },
+  { id: "ged", label: "GED", y: 184 },
+  { id: "erp", label: "ERP", y: 256 },
+  { id: "crm", label: "CRM", y: 328 },
+]
+const DOC_X = 10 // bord gauche des fiches
+const DOC_W = 160
+const TOOL_X = 516 // centre des prises
 
-const P = { fill: "none", stroke: "#686e7a", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const }
-function TileIcon({ id }: { id: string }) {
+const f = (n: number) => n.toFixed(1)
+/** Câble en S entre deux points. */
+const cable = (x1: number, y1: number, x2: number, y2: number) => {
+  const k = (x2 - x1) * 0.55
+  return `M${f(x1)} ${f(y1)} C ${f(x1 + k)} ${f(y1)} ${f(x2 - k)} ${f(y2)} ${f(x2)} ${f(y2)}`
+}
+
+const P = { fill: "none", stroke: C.ink2, strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const }
+function Icon({ id }: { id: string }) {
   switch (id) {
     case "doc":
-      return <g {...P}><path d="M-7 -10h9l5 5v15h-14z" /><path d="M-3 0h6M-3 4h6" /></g>
+      return <g {...P}><path d="M-7 -9h9l5 5v13h-14z" /><path d="M2 -9v5h5M-3 1h6M-3 5h6" /></g>
     case "mail":
-      return <g {...P}><rect x="-10" y="-7" width="20" height="14" rx="2" /><path d="M-9 -5l9 6 9-6" /></g>
+      return <g {...P}><rect x="-9" y="-6" width="18" height="13" rx="2" /><path d="M-8 -4l8 5.5 8-5.5" /></g>
     case "box":
-      return <g {...P}><path d="M-9 -4l9-5 9 5v9l-9 5-9-5z" /><path d="M-9 -4l9 5 9-5M0 1v9" /></g>
+      return <g {...P}><path d="M-8 -3.5l8-4.5 8 4.5v8l-8 4.5-8-4.5z" /><path d="M-8 -3.5l8 4.5 8-4.5M0 1v8" /></g>
     case "ged":
-      return <g {...P}><path d="M-10 -6v13h20v-10h-9l-2-3h-9z" /></g>
+      return <g {...P}><path d="M-9 -5v12h18v-9h-8l-2-3z" /></g>
     case "erp":
-      return <g {...P}><rect x="-9" y="-9" width="18" height="18" rx="2" /><path d="M-9 -2h18M-9 4h18M-2 -9v18" /></g>
+      return <g {...P}><rect x="-8" y="-8" width="16" height="16" rx="2" /><path d="M-8 -2h16M-8 3h16M-2 -8v16" /></g>
     case "crm":
-      return <g {...P}><circle cx="0" cy="-4" r="4.5" /><path d="M-8 9c1-5 4-7 8-7s7 2 8 7" /></g>
+      return <g {...P}><circle cx="0" cy="-3.5" r="4" /><path d="M-7 8c1-4.5 3.5-6.5 7-6.5s6 2 7 6.5" /></g>
   }
   return null
 }
-const B = { fill: "none", stroke: "#ffffff", strokeWidth: 1.7, strokeLinecap: "round" as const, strokeLinejoin: "round" as const }
-function StepIcon({ id }: { id: string }) {
-  switch (id) {
-    case "in":
-      return <g {...B}><path d="M-8 2h4l1.5 2.5h5L4 2h4" /><path d="M-8 2l2-7h12l2 7v5H-8z" /></g>
-    case "read":
-      return <g {...B}><path d="M-8 -3v-5h5M3 -8h5v5M8 3v5H3M-3 8h-5V3" /><path d="M-4 -1h8M-4 2.5h5" /></g>
-    case "check":
-      return <g {...B}><path d="M0 -9l7 2.5v5c0 4-3 6.7-7 8-4-1.3-7-4-7-8v-5z" /><path d="M-3 0l2.2 2.2L3.5 -2" /></g>
-    case "out":
-      return <g {...B}><path d="M7 -2A7 7 0 0 0 -5.5 -4M-7 2A7 7 0 0 0 5.5 4" /><path d="M7.5 -6v4h-4M-7.5 6V2h4" /></g>
+const W = { fill: "none", stroke: "#dfe5ff", strokeWidth: 1.6, strokeLinecap: "round" as const, strokeLinejoin: "round" as const }
+function StepIcon({ i }: { i: number }) {
+  switch (i) {
+    case 0:
+      return <g {...W}><path d="M-7 1.5h3.5l1.3 2h4.4l1.3-2H7" /><path d="M-7 1.5l1.8-6h10.4l1.8 6v4.5H-7z" /></g>
+    case 1:
+      return <g {...W}><path d="M-7 -2.5v-4.5h4.5M2.5 -7H7v4.5M7 2.5V7H2.5M-2.5 7H-7V2.5" /><path d="M-3.5 -1h7M-3.5 2h4.5" /></g>
+    case 2:
+      return <g {...W}><path d="M0 -7.5l6 2.2v4.3c0 3.4-2.6 5.8-6 6.9-3.4-1.1-6-3.5-6-6.9v-4.3z" /><path d="M-2.6 0l1.9 1.9 3.6-3.9" /></g>
+    default:
+      return <g {...W}><path d="M6 -1.5A6 6 0 0 0 -4.7 -3.4M-6 1.5A6 6 0 0 0 4.7 3.4" /><path d="M6.5 -5v3.5H3M-6.5 5V1.5H-3" /></g>
   }
-  return null
 }
-
-const LEGENDS: LegendItem[] = [
-  { title: "Vos documents", sub: "Tels qu'ils arrivent" },
-  { title: "Le workflow", sub: "Branché, testé, mesuré", tone: "brand" },
-  { title: "Vos outils", sub: "Mis à jour, sans ressaisie", tone: "time" },
-]
 
 export function IntegrationArt() {
   return (
-    <IsoScene
-      cx={CX}
-      legends={LEGENDS}
-      viewBox="0 70 640 420"
-      label="Schéma de l'intégration en trois plateaux. À gauche, vos documents : factures, e-mails, bons de livraison. Au centre, le workflow en production : réception, extraction, contrôles, mise à jour. Les cas douteux sont transmis à une personne. À droite, vos outils mis à jour : messagerie, GED, ERP, CRM. Exemple : 2 minutes par document au lieu de 9, 6 % d'exceptions."
+    <Frame
+      viewBox="0 20 640 440"
+      label="Panneau de câblage de l'intégration. À gauche, vos documents (factures, e-mails, bons de livraison) entrent dans le module du workflow, en production : réception, extraction des données, contrôles de cohérence, mise à jour de vos outils. À droite, le module est branché sur la messagerie, la GED, l'ERP et le CRM. Les cas douteux sortent vers une personne qui décide. Exemple : 2 minutes par document au lieu de 9, 6 % d'exceptions."
+      legends={[
+        { title: "Vos documents", sub: "Tels qu'ils arrivent" },
+        { title: "Le workflow", sub: "Branché, testé, mesuré", tone: "brand" },
+        { title: "Vos outils", sub: "Mis à jour, sans ressaisie", tone: "time" },
+      ]}
     >
       <Scene />
-    </IsoScene>
+    </Frame>
   )
 }
 
 function Scene() {
-  const { still } = useIso()
-  const id = useId().replace(/[:«»]/g, "")
-  const at = (p: readonly [number, number, number], du = 0, dv = 0, dz = 0) => iso(CX, CY, p[0] + du, p[1] + dv, p[2] + dz)
-  const pt = (p: [number, number]) => `${p[0].toFixed(1)} ${p[1].toFixed(1)}`
-  const DOC_H = 9
-  const TOOL_H = 9
-  const NODE_H = 8
-
-  // Chemin du workflow, en coordonnées locales du plateau sombre (posé à plat)
-  const path = steps.map((s, i) => `${i ? "L" : "M"}${s.u} ${s.v}`).join(" ")
-  const branch = `M${steps[2].u} ${steps[2].v} Q ${steps[2].u + 10} ${HUMAN.v - 4} ${HUMAN.u} ${HUMAN.v}`
-
-  // Flux entre plateaux : des tuiles de documents à l'entrée du workflow, de la sortie aux outils
-  const entry = at(WORK, steps[0].u, steps[0].v, NODE_H)
-  const exit = at(WORK, steps[3].u, steps[3].v, NODE_H)
-
+  const still = useStill()
+  const HUMAN = { x: 318, y: 414 }
   return (
     <>
-      <Shadow cy={at(DOCS)[1]} s={PS} dy={18} />
-      <Shadow cy={at(WORK)[1] + WORK[2]} s={PS} dy={18} />
-      <Shadow cy={at(TOOLS)[1] + TOOLS[2]} s={PS} dy={18} />
+      {/* Câbles d'entrée : des fiches au module */}
+      {DOCS.map((d, i) => (
+        <Cable key={d.id} d={cable(DOC_X + DOC_W, d.y, PORT_IN_X, STEP_Y(0) + (i - 1) * 9)} color={C.brand} at={0.9 + i * 0.15} still={still} pulseDelay={i * 0.7} />
+      ))}
+      {/* Câbles de sortie : du module aux prises des outils */}
+      {TOOLS.map((t, i) => (
+        <Cable key={t.id} d={cable(PORT_OUT_X, STEP_Y(3) + (i - 1.5) * 7, TOOL_X - 26, t.y)} color={C.time} at={1.5 + i * 0.18} still={still} pulseDelay={0.4 + i * 0.5} plug />
+      ))}
+      {/* Sortie des cas douteux vers une personne */}
+      <motion.g variants={fade(2.3)}>
+        <path d={`M${PORT_IN_X} ${STEP_Y(2)} C ${PORT_IN_X - 40} ${STEP_Y(2)} ${HUMAN.x - 90} ${HUMAN.y} ${HUMAN.x - 58} ${HUMAN.y}`} fill="none" stroke={C.time} strokeWidth={2} strokeDasharray="3 6" strokeLinecap="round" />
+      </motion.g>
 
-      {/* Vos documents */}
-      <motion.g variants={rise(-40, 0.05)}>
-        <Slab cy={CY} u={DOCS[0]} v={DOCS[1]} s={PS} z={DOCS[2]} t={12} f={FACES.floor} />
-        {docTiles.map((t) => (
-          <g key={t.id}>
-            <Slab cy={CY} u={DOCS[0] + t.du} v={DOCS[1] + t.dv} s={15} z={DOC_H} t={DOC_H} f={FACES.tile} />
-            <g transform={flat(CX, CY, DOCS[0] + t.du, DOCS[1] + t.dv, DOC_H)}>
-              <TileIcon id={t.id} />
-            </g>
+      {/* Vos documents : trois fiches */}
+      {DOCS.map((d, i) => (
+        <motion.g key={d.id} variants={rise(14, 0.1 + i * 0.1, 0.8)}>
+          <rect x={DOC_X} y={d.y - 26} width={DOC_W} height={52} rx={14} fill={C.surface} stroke={C.line} filter="url(#art-shadow)" />
+          <rect x={DOC_X + 12} y={d.y - 14} width={28} height={28} rx={8} fill={C.bg2} />
+          <g transform={`translate(${DOC_X + 26} ${d.y})`}>
+            <Icon id={d.id} />
           </g>
-        ))}
-      </motion.g>
+          <text x={DOC_X + 50} y={d.y + 4} fontSize={11.5} fontWeight={600} fill={C.ink}>
+            {d.label}
+          </text>
+          {/* La fiche est branchée : connecteur sur son bord */}
+          <circle cx={DOC_X + DOC_W} cy={d.y} r={5} fill={C.surface} stroke={C.brand} strokeWidth={2} />
+        </motion.g>
+      ))}
 
-      {/* Flux d'entrée */}
-      <motion.g variants={fade(1.0)}>
-        {docTiles.map((t, i) => {
-          const from = at(DOCS, t.du, t.dv, DOC_H)
-          const d = `M${pt(from)} C ${pt([from[0], from[1] - 50])} ${pt([entry[0] - 40, entry[1] + 10])} ${pt(entry)}`
-          return <Flow key={t.id} d={d} color="#3355ff" delay={i * 0.5} still={still} />
-        })}
-      </motion.g>
-
-      {/* Le workflow, en production */}
-      <motion.g variants={rise(40, 0.2)}>
-        <Slab cy={CY} u={WORK[0]} v={WORK[1]} s={PS + 10} z={WORK[2]} t={14} f={FACES.dark} />
-        <Grid cy={CY} s={PS + 10} color="#ffffff0b" z={WORK[2]} />
-        <g transform={flat(CX, CY, 0, 0, WORK[2])}>
-          <defs>
-            <path id={`${id}-p`} d={path} />
-          </defs>
-          <path d={path} stroke="#7d96ff" strokeOpacity={0.6} strokeWidth={2} strokeLinecap="round" />
-          <path d={branch} stroke="#38d6b8" strokeOpacity={0.75} strokeWidth={1.6} strokeDasharray="3 5" fill="none" />
-          {[[-52, -30], [40, 44], [-46, 16], [22, -50], [-10, -44], [50, 8]].map(([a, b]) => (
-            <circle key={`${a}${b}`} cx={a} cy={b} r={1.8} fill="#ffffff40" />
-          ))}
-          {/* Documents en circulation */}
-          {!still
-            ? [0, 1, 2].map((k) => (
-                <g key={k}>
-                  <rect x={-5} y={-6.5} width={10} height={13} rx={2} fill="#ffffff" stroke="#3355ff" strokeWidth={1.3}>
-                    <animateMotion dur="4.2s" begin={`${-k * 1.4}s`} repeatCount="indefinite" rotate="0">
-                      <mpath href={`#${id}-p`} />
-                    </animateMotion>
-                  </rect>
-                </g>
-              ))
-            : null}
-        </g>
-        {steps.map((s, i) => (
-          <motion.g key={s.id} variants={pop(0.7 + i * 0.12)} style={{ transformBox: "fill-box", transformOrigin: "center" }}>
-            <Slab cy={CY} u={s.u} v={s.v} s={11} z={WORK[2] + NODE_H} t={NODE_H} f={i === 3 ? FACES.green : FACES.blue} />
-            <g transform={flat(CX, CY, s.u, s.v, WORK[2] + NODE_H)}>
-              <StepIcon id={s.id} />
+      {/* Le module du workflow */}
+      <motion.g variants={rise(20, 0.2, 0.9)}>
+        <rect x={MOD.x} y={MOD.y} width={MOD.w} height={MOD.h} rx={22} fill="url(#art-dark)" stroke="#ffffff1f" filter="url(#art-shadow)" />
+        <rect x={MOD.x + 10} y={MOD.y + 10} width={MOD.w - 20} height={MOD.h - 20} rx={16} fill="none" stroke="#ffffff10" />
+        <ellipse cx={MOD.x + MOD.w / 2} cy={MOD.y + 48} rx={80} ry={40} fill="url(#art-core)" opacity={0.7} />
+        {/* Voyant : en production */}
+        <motion.g variants={fade(2.6, 0.4)}>
+          <circle cx={MOD.x + 28} cy={MOD.y + MOD.h - 26} r={4} fill={C.timeLight} style={{ filter: "drop-shadow(0 0 6px #38d6b8)" }} />
+          <text x={MOD.x + 40} y={MOD.y + MOD.h - 22} fontSize={10} fontWeight={600} fill={C.timeLight} letterSpacing="0.04em">
+            EN PRODUCTION
+          </text>
+        </motion.g>
+        <text x={MOD.x + 50} y={MOD.y + 42} fontSize={13} fontWeight={600} fill="#f3f4f6" style={{ fontFamily: "var(--font-display)" }}>
+          Workflow
+        </text>
+        <line x1={MOD.x + 20} x2={MOD.x + MOD.w - 20} y1={MOD.y + 62} y2={MOD.y + 62} stroke="#ffffff14" />
+        {/* Les quatre étapes, avec leurs ports */}
+        {STEPS.map((s, i) => (
+          <motion.g key={s} variants={fade(0.6 + i * 0.12, 0.5)}>
+            <circle cx={MOD.x + 36} cy={STEP_Y(i)} r={13} fill={i === 3 ? C.time : C.brand} />
+            <g transform={`translate(${MOD.x + 36} ${STEP_Y(i)})`}>
+              <StepIcon i={i} />
             </g>
+            <text x={MOD.x + 58} y={STEP_Y(i) + 4} fontSize={11} fontWeight={500} fill="#dfe5ff">
+              {s}
+            </text>
+            {i < 3 ? <line x1={MOD.x + 36} x2={MOD.x + 36} y1={STEP_Y(i) + 15} y2={STEP_Y(i + 1) - 15} stroke="#7d96ff" strokeOpacity={0.5} strokeWidth={1.5} /> : null}
           </motion.g>
         ))}
-        {/* La personne qui décide des cas douteux */}
-        <motion.g variants={pop(1.5)} style={{ transformBox: "fill-box", transformOrigin: "center" }}>
-          <Slab cy={CY} u={HUMAN.u} v={HUMAN.v} s={11} z={WORK[2] + 10} t={10} f={FACES.greenSoft} />
-          <g transform={flat(CX, CY, HUMAN.u, HUMAN.v, WORK[2] + 10)}>
-            <g fill="none" stroke="#0b826f" strokeWidth={1.7} strokeLinecap="round">
-              <circle cx="0" cy="-4" r="4.2" />
-              <path d="M-8 8c1-5 4-7 8-7s7 2 8 7" />
-            </g>
-          </g>
-        </motion.g>
-        <ellipse cx={at(WORK, 0, 0)[0]} cy={at(WORK, 0, 0)[1]} rx={70} ry={35} fill="url(#iso-core)" opacity={0.6} />
-      </motion.g>
-
-      {/* Flux de sortie : jusqu'au bord du plateau des outils, puis distribué à plat vers chaque outil */}
-      <motion.g variants={fade(1.3)}>
-        {(() => {
-          const to = at(TOOLS, -PS + 6, PS - 10, 2)
-          const d = `M${pt(exit)} C ${pt([exit[0] + 36, exit[1] - 36])} ${pt([to[0] - 46, to[1] + 4])} ${pt(to)}`
-          return <Flow d={d} color="#0fa58c" delay={0.3} still={still} />
-        })()}
-      </motion.g>
-
-      {/* Vos outils */}
-      <motion.g variants={rise(60, 0.35)}>
-        <Slab cy={CY} u={TOOLS[0]} v={TOOLS[1]} s={PS} z={TOOLS[2]} t={12} f={FACES.blueFloor} />
-        <g transform={flat(CX, CY, TOOLS[0], TOOLS[1], TOOLS[2])}>
-          {toolTiles.map((t) => (
-            <path key={t.id} d={`M${-PS + 6} ${PS - 10} L${t.du} ${t.dv}`} stroke="#0fa58c" strokeOpacity={0.55} strokeWidth={1.4} />
-          ))}
-          <circle cx={-PS + 6} cy={PS - 10} r={3.5} fill="#0fa58c" />
-        </g>
-        {toolTiles.map((t) => (
-          <g key={t.id}>
-            <Slab cy={CY} u={TOOLS[0] + t.du} v={TOOLS[1] + t.dv} s={14} z={TOOLS[2] + TOOL_H} t={TOOL_H} f={FACES.blueTile} />
-            <g transform={flat(CX, CY, TOOLS[0] + t.du, TOOLS[1] + t.dv, TOOLS[2] + TOOL_H)}>
-              <TileIcon id={t.id} />
-            </g>
-          </g>
+        {/* Ports : entrée, sortie */}
+        {[-1, 0, 1].map((k) => (
+          <rect key={k} x={PORT_IN_X - 4} y={STEP_Y(0) + k * 9 - 2.5} width={8} height={5} rx={1.5} fill="#2a46d6" />
         ))}
+        {[-1.5, -0.5, 0.5, 1.5].map((k) => (
+          <rect key={k} x={PORT_OUT_X - 4} y={STEP_Y(3) + k * 7 - 2.5} width={8} height={5} rx={1.5} fill="#0b826f" />
+        ))}
+        <rect x={PORT_IN_X - 4} y={STEP_Y(2) - 2.5} width={8} height={5} rx={1.5} fill="#0b826f" />
+      </motion.g>
+      <Mark x={MOD.x + 32} y={MOD.y + 36} size={24} delay={0.7} onDark />
+
+      {/* Vos outils : quatre prises */}
+      {TOOLS.map((t, i) => (
+        <motion.g key={t.id} variants={rise(14, 0.3 + i * 0.1, 0.8)}>
+          <rect x={TOOL_X - 26} y={t.y - 26} width={52} height={52} rx={14} fill={C.surface} stroke={C.line} filter="url(#art-shadow)" />
+          <g transform={`translate(${TOOL_X} ${t.y})`}>
+            <Icon id={t.id} />
+          </g>
+          <text x={TOOL_X + 34} y={t.y + 4} fontSize={12} fontWeight={600} fill={C.ink}>
+            {t.label}
+          </text>
+          {/* La prise : s'allume quand le câble s'enclenche */}
+          <motion.rect x={TOOL_X - 29} y={t.y - 9} width={6} height={18} rx={2} fill={C.time} variants={fade(1.5 + i * 0.18 + 0.75, 0.2)} />
+        </motion.g>
+      ))}
+
+      {/* Une personne décide des cas douteux */}
+      <motion.g variants={pop(2.4)} style={CENTER}>
+        <rect x={HUMAN.x - 58} y={HUMAN.y - 22} width={238} height={44} rx={14} fill={C.surface} stroke={C.line} filter="url(#art-shadow)" />
+        <circle cx={HUMAN.x - 34} cy={HUMAN.y} r={13} fill={C.timeSoft} stroke={C.time} strokeWidth={1.4} />
+        <g fill="none" stroke={C.time} strokeWidth={1.5} strokeLinecap="round">
+          <circle cx={HUMAN.x - 34} cy={HUMAN.y - 3.5} r={3.6} />
+          <path d={`M${HUMAN.x - 40.5} ${HUMAN.y + 7.5}c0-3.8 2.8-6 6.5-6s6.5 2.2 6.5 6`} />
+        </g>
+        <text x={HUMAN.x - 14} y={HUMAN.y - 2} fontSize={12} fontWeight={600} fill={C.ink}>
+          Une personne décide des cas douteux
+        </text>
+        <text x={HUMAN.x - 14} y={HUMAN.y + 13} fontSize={10.5} fill={C.ink3}>
+          6 % d&apos;exceptions, tracées (exemple)
+        </text>
       </motion.g>
 
-      {/* Étiquettes */}
-      <motion.g variants={fade(0.9)}>
-        {docTiles.map((t, i) => {
-          const [x, y] = at(DOCS, t.du, t.dv, DOC_H)
-          return <Pill key={t.id} x={x} y={y + (i === 1 ? 54 : 32)} text={t.label} small />
-        })}
-        {toolTiles.map((t) => {
-          const [x, y] = at(TOOLS, t.du, t.dv, TOOL_H)
-          const front = t.du + t.dv > 0
-          return <Pill key={t.id} x={x} y={front ? y + 30 : y - 24} text={t.label} tone="brand" small />
-        })}
-      </motion.g>
-      <motion.g variants={fade(1.2)}>
-        {steps.map((s, i) => {
-          const [x, y] = at(WORK, s.u, s.v, NODE_H)
-          return <Pill key={s.id} x={x} y={y - (i % 2 ? 56 : 32)} text={s.label} tone={i === 3 ? "time" : "brand"} small />
-        })}
-        <Pill x={at(WORK, 0, 0)[0]} y={at(WORK, 0, 0)[1] - 96} text="En production" tone="dark" small />
-      </motion.g>
-      <motion.g variants={fade(1.8)}>
-        <Pill x={at(WORK, HUMAN.u, HUMAN.v, 10)[0] + 8} y={at(WORK, HUMAN.u, HUMAN.v, 10)[1] + 36} text="Une personne décide des cas douteux" tone="time" small />
-        <Pill x={at(WORK, HUMAN.u, HUMAN.v, 10)[0] + 8} y={at(WORK, HUMAN.u, HUMAN.v, 10)[1] + 58} text="6 % d'exceptions, exemple" small />
-      </motion.g>
-      <motion.g variants={fade(2.1)}>
-        <Pill x={at(TOOLS)[0]} y={at(TOOLS)[1] - 84} text="2 min par document, 9 avant" tone="time" small />
+      {/* Mesure */}
+      <motion.g variants={fade(3)}>
+        <Pill x={TOOL_X + 90} y={TOOLS[3].y + 54} text="2 min par document, 9 avant" tone="time" anchor="end" small />
       </motion.g>
 
-      {/* Légendes */}
-      <motion.g variants={fade(0.7)}>
-        <Legend x={at(DOCS)[0] - 70} y={at(DOCS)[1] + 112} title="Vos documents" sub="Tels qu'ils arrivent" />
-        <Legend x={CX - 60} y={at(WORK)[1] + 150} title="Le workflow" sub="Branché, testé, mesuré" tone="brand" />
-        <Legend x={at(TOOLS)[0] - 40} y={at(TOOLS)[1] + 118} title="Vos outils" sub="Mis à jour, sans ressaisie" tone="time" />
-      </motion.g>
+      <Legend x={DOC_X} y={62} title="Vos documents" sub="Tels qu'ils arrivent" />
+      <Legend x={TOOL_X - 26} y={62} title="Vos outils" sub="Mis à jour, sans ressaisie" tone="time" />
+      <Legend x={DOC_X} y={372} title="Le workflow" sub="Branché, testé, mesuré" tone="brand" />
     </>
   )
 }
 
-/** Trait entre deux plateaux : fond discret et tirets qui avancent. */
-function Flow({ d, color, delay, still }: { d: string; color: string; delay: number; still: boolean }) {
+/** Un câble : se tire, puis (option) s'enclenche dans sa prise ; ensuite les impulsions circulent. */
+function Cable({ d, color, at, still, pulseDelay, plug = false }: { d: string; color: string; at: number; still: boolean; pulseDelay: number; plug?: boolean }) {
   return (
     <g>
-      <path d={d} fill="none" stroke={color} strokeOpacity={0.22} strokeWidth={1.5} />
-      {!still ? <motion.path d={d} fill="none" stroke={color} strokeWidth={2.5} strokeLinecap="round" strokeDasharray="7 26" initial={{ strokeDashoffset: 66 }} animate={{ strokeDashoffset: 0 }} transition={{ duration: 2.2, ease: "linear", repeat: Infinity, delay }} /> : null}
+      <motion.path d={d} fill="none" stroke={color} strokeWidth={4} strokeLinecap="round" strokeOpacity={0.9} variants={draw(at, 0.7)} />
+      <motion.path d={d} fill="none" stroke="#ffffff" strokeWidth={1.2} strokeLinecap="round" strokeOpacity={0.35} variants={draw(at, 0.7)} />
+      {!still ? (
+        <motion.path d={d} fill="none" stroke="#ffffff" strokeWidth={2} strokeLinecap="round" strokeDasharray="6 30" initial={{ strokeDashoffset: 36, opacity: 0 }} animate={{ strokeDashoffset: -36, opacity: 0.9 }} transition={{ strokeDashoffset: { duration: 1.6, ease: "linear", repeat: Infinity, delay: at + 0.9 + pulseDelay }, opacity: { delay: at + 0.9, duration: 0.3 } }} />
+      ) : null}
+      {plug ? null : null}
     </g>
   )
 }

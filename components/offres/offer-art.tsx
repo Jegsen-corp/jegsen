@@ -6,7 +6,7 @@ import { FormationArt } from "./art-formation"
 import { IntegrationArt } from "./art-integration"
 import { MaintenanceArt } from "./art-maintenance"
 
-/** Illustration d'en-tête de la page d'offre. */
+/** Illustration d'en-tête de la page d'offre : une forme propre à chaque offre. */
 export function OfferArt({ kind }: { kind: OfferVisual }) {
   switch (kind) {
     case "diagnostic":
