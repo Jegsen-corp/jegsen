@@ -3,10 +3,10 @@
  * Le nom est centralisé ici. Le changer ici le change partout sur le site.
  */
 export const product = {
-  name: "brAIn",
+  name: "Pew",
   tagline: "L'aide à la décision de votre comité de direction.",
   lead:
-    "Nous développons brAIn pour préparer chaque décision de votre CODIR à partir des données de l'entreprise : options comparées, chiffres sourcés, précédents et contre-arguments. Le CODIR tranche. brAIn suit ensuite la décision jusqu'au résultat et apprend de chaque revue. Un programme pilote est ouvert à quelques comités de direction.",
+    "Nous développons Pew pour préparer chaque décision de votre CODIR à partir des données de l'entreprise : options comparées, chiffres sourcés, précédents et contre-arguments. Le CODIR tranche. Pew suit ensuite la décision jusqu'au résultat et apprend de chaque revue. Un programme pilote est ouvert à quelques comités de direction.",
   benefits: [
     {
       motif: "facts",
@@ -16,12 +16,12 @@ export const product = {
     {
       motif: "debate",
       title: "Entendre la contradiction",
-      text: "Avant de trancher, brAIn donne le meilleur argument contraire et rappelle ce qui s'est passé dans des cas proches.",
+      text: "Avant de trancher, Pew donne le meilleur argument contraire et rappelle ce qui s'est passé dans des cas proches.",
     },
     {
       motif: "seal",
       title: "Garder la main",
-      text: "brAIn éclaire et recommande. La décision reste celle du CODIR, notée avec son pourquoi.",
+      text: "Pew éclaire et recommande. La décision reste celle du CODIR, notée avec son pourquoi.",
     },
     {
       motif: "loop",

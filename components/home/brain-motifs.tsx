@@ -6,7 +6,7 @@ import { useReducedMotion } from "@/components/motion/use-reduced-motion"
 import type { ProductMotif } from "@/lib/content/product"
 
 /*
- * Motifs des quatre bénéfices de brAIn. Même vocabulaire que l'illustration principale :
+ * Motifs des quatre bénéfices de Pew. Même vocabulaire que l'illustration principale :
  * traits fins, bleu de la marque, ambre pour la contradiction. Dessinés une fois à l'apparition.
  */
 
@@ -97,7 +97,7 @@ function Debate() {
   )
 }
 
-/** Le sceau de la décision : brAIn recommande, le CODIR valide. */
+/** Le sceau de la décision : Pew recommande, le CODIR valide. */
 function Seal() {
   return (
     <>

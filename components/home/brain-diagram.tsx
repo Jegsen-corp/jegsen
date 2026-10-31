@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { useSyncExternalStore } from "react"
 import { EASE } from "@/components/motion/reveal"
 import { useReducedMotion } from "@/components/motion/use-reduced-motion"
+import { product } from "@/lib/content/product"
 
 /*
  * Cerveau d'entreprise : vue éclatée isométrique en trois plateaux.
@@ -62,7 +63,7 @@ const USE_S = 24
 const uses = [
   { id: "answer", label: "Réponses sourcées", u: -50, v: 80 },
   { id: "flow", label: "Workflows agentiques", u: 15, v: 15 },
-  { id: "decide", label: "Décisions avec brAIn", u: 80, v: -50 },
+  { id: "decide", label: `Décisions avec ${product.name}`, u: 80, v: -50 },
 ] as const
 
 const faces = {
@@ -245,7 +246,7 @@ export function BrainDiagram() {
         Schéma du cerveau d&apos;entreprise en trois niveaux. En bas, les données de l&apos;entreprise : documents,
         e-mails, CRM, ERP et procédures. Au milieu, le cerveau d&apos;entreprise, qui les indexe et cite ses sources. En
         haut, ce que les équipes en font : des réponses sourcées, des workflows agentiques et des décisions préparées
-        avec brAIn.
+        avec {product.name}.
       </figcaption>
 
       <div

@@ -7,7 +7,7 @@ import { PerchedMascot } from "@/components/home/perched-mascot"
 import { product } from "@/lib/content/product"
 
 /*
- * Illustration centrale du produit : une décision de CODIR préparée par brAIn.
+ * Illustration centrale du produit : une décision de CODIR préparée par Pew.
  * Volontairement épurée : la question, trois options, la recommandation, un contre-argument,
  * et la main laissée au CODIR. Données fictives, signalées dans la fenêtre.
  */

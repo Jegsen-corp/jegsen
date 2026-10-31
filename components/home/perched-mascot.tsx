@@ -7,7 +7,7 @@ import { useReducedMotion } from "@/components/motion/use-reduced-motion"
 import { MASCOT_BLINK as BLINK, MASCOT_FLIGHT, MASCOT_POINTS, MASCOT_STANDING } from "@/lib/mascot-sprite"
 
 /*
- * La mésange arrive en vol depuis la droite et se pose sur le bord haut de la fenêtre brAIn.
+ * La mésange arrive en vol depuis la droite et se pose sur le bord haut de la fenêtre Pew.
  * Une fois posée, elle cligne de l'œil de temps en temps. Sans animation (préférence du système), elle est déjà posée.
  * Les deux dessins sont alignés sur la pointe du bec.
  */
