@@ -31,7 +31,8 @@ function Scene({ label, children, dark = false }: { label: string; children: (p:
       style={{ fontFamily: FONT }}
     >
       <defs>
-        <filter id="cs-shadow" x="-20%" y="-20%" width="140%" height="160%" colorInterpolationFilters="sRGB">
+        {/* Zone du filtre en unités du dessin : en pourcentage de chaque forme, l'ombre des petites formes était coupée net. */}
+        <filter id="cs-shadow" filterUnits="userSpaceOnUse" x="-60" y="-60" width="440" height="320" colorInterpolationFilters="sRGB">
           <feDropShadow dx="0" dy="1" stdDeviation="0.6" floodColor="#0b0d12" floodOpacity="0.07" />
           <feDropShadow dx="0" dy="10" stdDeviation="10" floodColor="#1d2a66" floodOpacity={dark ? 0.3 : 0.09} />
         </filter>
@@ -212,7 +213,7 @@ export function MailScene() {
               <rect x={198} y={f.y + 16} width={60} height={3} fill={f.color} opacity={0.9} />
               {/* le dossier se remplit */}
               {[0, 1, 2].map((k) => (
-                <motion.rect key={k} x={206 + k * 3} y={f.y + 24 - k * 2} width={44} height={3.5} rx={1.5} fill={C.lineSoft} variants={fade(1 + i * 0.3 + k * 0.25, 0.3)} />
+                <motion.rect key={k} x={206} y={f.y + 24 + k * 5} width={[44, 34, 40][k]} height={3} rx={1.5} fill={C.lineSoft} variants={fade(1 + i * 0.3 + k * 0.25, 0.3)} />
               ))}
             </motion.g>
           ))}

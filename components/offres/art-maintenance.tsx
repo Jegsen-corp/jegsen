@@ -136,8 +136,8 @@ function Scene() {
       {/* Le journal des interventions, sous l'écran */}
       <Journal />
 
-      <Legend x={0} y={SCR.y - 26} title="La supervision" sub="Ce qui veille, en continu" tone="brand" anchor="start" />
-      <Legend x={640} y={SCR.y - 26} title="Les gains" sub="Suivis mois après mois" tone="time" anchor="end" />
+      <Legend x={0} y={SCR.y - 36} title="La supervision" sub="Ce qui veille, en continu" tone="brand" anchor="start" />
+      <Legend x={640} y={SCR.y - 36} title="Les gains" sub="Suivis mois après mois" tone="time" anchor="end" />
       <ExampleNote x={640} y={SCR.y + SCR.h + 84} />
     </>
   )

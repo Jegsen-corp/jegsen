@@ -45,9 +45,9 @@ function Field({ id, label, children, className }: { id: string; label: string; 
   )
 }
 
-function Row({ children }: { children: ReactNode }) {
+function Row({ children, className }: { children: ReactNode; className?: string }) {
   // Requête de conteneur : deux colonnes seulement si le formulaire lui-même est assez large (pas l'écran).
-  return <div className="grid gap-4 @md:grid-cols-2">{children}</div>
+  return <div className={cn("grid gap-4 @md:grid-cols-2", className)}>{children}</div>
 }
 
 /** Formulaire relié au paramètre `?offre=` de l'URL (à placer sous un Suspense). */
@@ -129,7 +129,8 @@ export function ContactFormFields() {
           <Input id="phone" name="phone" type="tel" autoComplete="tel" className={fieldClass} />
         </Field>
       </Row>
-      <Row>
+      {/* Les sujets sont longs (« Diagnostic de rentabilité IA ») : côte à côte seulement si le formulaire est large, sujet plus large que l'effectif */}
+      <Row className="@md:grid-cols-1 @lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)]">
         <Field id="subject" label="Sujet">
           <Select value={subject} onValueChange={setSubject}>
             <SelectTrigger id="subject" className={cn(fieldClass, "data-[size=default]:h-auto [&_[data-slot=select-value]]:block! [&_[data-slot=select-value]]:truncate")}>
@@ -164,7 +165,7 @@ export function ContactFormFields() {
           id="message"
           name="message"
           required
-          placeholder="Quel processus vous prend le plus de temps ? Quels outils utilisez-vous ? Quels volumes (documents, e-mails, demandes) par mois ?"
+          placeholder="Quel processus vous prend le plus de temps ? Quels outils utilisez-vous ? Quels volumes (documents, e‑mails, demandes) par mois ?"
           className={cn(fieldClass, "min-h-[150px] resize-y")}
         />
       </Field>

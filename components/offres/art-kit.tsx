@@ -60,7 +60,8 @@ export function Frame({ label, viewBox, legends = [], children, className = "" }
             <filter id="art-soft" x="-30%" y="-30%" width="160%" height="160%">
               <feGaussianBlur stdDeviation="14" />
             </filter>
-            <filter id="art-shadow" x="-20%" y="-20%" width="140%" height="160%" colorInterpolationFilters="sRGB">
+            {/* Zone du filtre en unités du dessin : en pourcentage de chaque forme, l'ombre des petites formes était coupée net. */}
+            <filter id="art-shadow" filterUnits="userSpaceOnUse" x="-100" y="-100" width="840" height="700" colorInterpolationFilters="sRGB">
               <feDropShadow dx="0" dy="1" stdDeviation="0.8" floodColor="#0b0d12" floodOpacity="0.06" />
               <feDropShadow dx="0" dy="16" stdDeviation="16" floodColor="#1d2a66" floodOpacity="0.1" />
             </filter>

@@ -67,19 +67,18 @@ function Scene() {
             <circle cx={CX} cy={CY} r={p.r} fill="none" stroke="#0b0d1209" strokeWidth={14} />
             <motion.path d={arc(p.r, a)} fill="none" stroke="#c9ccd3" strokeWidth={14} strokeLinecap="round" variants={draw(0.4 + i * 0.12, 0.9)} />
             {p.pick ? <motion.path d={arc(p.r, a)} fill="none" stroke={C.brand} strokeWidth={14} strokeLinecap="round" variants={fade(at, 0.3)} /> : null}
-            {/* Nom et heures, à la naissance de l'arc */}
+            {/* Nom et heures, juste avant la naissance de l'arc (posées sur l'arc, les heures se lisaient mal) */}
             <motion.g variants={fade(0.6 + i * 0.12, 0.5)}>
-              <text x={CX - 12} y={CY - p.r + 4} textAnchor="end" fontSize={11} fontWeight={500} fill={C.ink2}>
+              <text x={CX - 12} y={CY - p.r + 4} textAnchor="end" fontSize={11} fontWeight={p.pick ? 600 : 500} fill={C.ink2}>
                 {p.label}
+                <tspan dx={8} fill={C.ink}>{p.hours} h</tspan>
               </text>
               {p.pick ? (
                 <motion.text x={CX - 12} y={CY - p.r + 4} textAnchor="end" fontSize={11} fontWeight={600} fill={C.brand} variants={fade(at, 0.3)}>
                   {p.label}
+                  <tspan dx={8} fill={C.ink}>{p.hours} h</tspan>
                 </motion.text>
               ) : null}
-              <text x={CX + 10} y={CY - p.r + 4} fontSize={11} fontWeight={600} fill={C.ink}>
-                {p.hours} h
-              </text>
             </motion.g>
             {/* Le point de mesure, au bout de l'arc */}
             {p.pick ? <motion.circle cx={ex} cy={ey} r={5} fill="#fff" stroke={C.brand} strokeWidth={2.5} variants={pop(at)} style={CENTER} /> : null}
