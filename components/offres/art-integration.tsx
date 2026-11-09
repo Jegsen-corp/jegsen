@@ -10,7 +10,7 @@ import { C, CENTER, ExampleNote, Frame, Legend, Mark, Note, draw, fade, pop, ris
  * sortie des cas douteux vers une personne. Les impulsions circulent en continu. Chiffres d'exemple.
  */
 
-const MOD = { x: 222, y: 72, w: 196, h: 286 } // le boîtier
+const MOD = { x: 218, y: 72, w: 208, h: 286 } // le boîtier, assez large pour que les étapes ne touchent pas son bord
 const PORT_IN_X = MOD.x
 const PORT_OUT_X = MOD.x + MOD.w
 const STEPS = ["Réception", "Extraction des données", "Contrôles de cohérence", "Mise à jour de vos outils"]
@@ -22,14 +22,17 @@ const DOCS = [
   { id: "box", label: "Bons de livraison", y: 286 },
 ]
 const TOOLS = [
-  { id: "mail", label: "Messagerie", y: 112 },
-  { id: "ged", label: "GED", y: 184 },
-  { id: "erp", label: "ERP", y: 256 },
+  { id: "mail", label: "Messagerie", y: 118 },
+  { id: "ged", label: "GED", y: 188 },
+  { id: "erp", label: "ERP", y: 258 },
   { id: "crm", label: "CRM", y: 328 },
 ]
 const DOC_X = 10 // bord gauche des fiches
 const DOC_W = 160
-const TOOL_X = 516 // centre des prises
+const TOOL_X = 520 // centre des prises
+const IN_GAP = 13 // écart entre les ports d'entrée
+const OUT_GAP = 13 // écart entre les ports de sortie
+const LEGEND_Y = 54 // légendes du haut, au-dessus des fiches et des prises
 
 const f = (n: number) => n.toFixed(1)
 /** Câble en S entre deux points. */
@@ -88,20 +91,22 @@ export function IntegrationArt() {
 
 function Scene() {
   const still = useStill()
-  const HUMAN = { x: 318, y: 414 }
+  // La bulle des cas douteux, centrée sous le module, à l'écart de la mesure à droite
+  const BUB = { x: 186, y: 394, w: 282, h: 44 }
+  const BUB_CY = BUB.y + BUB.h / 2
   return (
     <>
       {/* Câbles d'entrée : des fiches au module */}
       {DOCS.map((d, i) => (
-        <Cable key={d.id} d={cable(DOC_X + DOC_W, d.y, PORT_IN_X, STEP_Y(0) + (i - 1) * 9)} color={C.brand} at={0.9 + i * 0.15} still={still} pulseDelay={i * 0.7} />
+        <Cable key={d.id} d={cable(DOC_X + DOC_W, d.y, PORT_IN_X, STEP_Y(0) + (i - 1) * IN_GAP)} color={C.brand} at={0.9 + i * 0.15} still={still} pulseDelay={i * 0.7} />
       ))}
       {/* Câbles de sortie : du module aux prises des outils */}
       {TOOLS.map((t, i) => (
-        <Cable key={t.id} d={cable(PORT_OUT_X, STEP_Y(3) + (i - 1.5) * 7, TOOL_X - 26, t.y)} color={C.time} at={1.5 + i * 0.18} still={still} pulseDelay={0.4 + i * 0.5} plug />
+        <Cable key={t.id} d={cable(PORT_OUT_X, STEP_Y(3) + (i - 1.5) * OUT_GAP, TOOL_X - 26, t.y)} color={C.time} at={1.5 + i * 0.18} still={still} pulseDelay={0.4 + i * 0.5} plug />
       ))}
       {/* Sortie des cas douteux vers une personne */}
       <motion.g variants={fade(2.3)}>
-        <path d={`M${PORT_IN_X} ${STEP_Y(2)} C ${PORT_IN_X - 40} ${STEP_Y(2)} ${HUMAN.x - 90} ${HUMAN.y} ${HUMAN.x - 58} ${HUMAN.y}`} fill="none" stroke={C.time} strokeWidth={2} strokeDasharray="3 6" strokeLinecap="round" />
+        <path d={`M${PORT_IN_X} ${STEP_Y(2)} C ${PORT_IN_X - 48} ${STEP_Y(2)} ${BUB.x - 36} ${BUB_CY} ${BUB.x} ${BUB_CY}`} fill="none" stroke={C.time} strokeWidth={2} strokeDasharray="3 6" strokeLinecap="round" />
       </motion.g>
 
       {/* Vos documents : trois fiches */}
@@ -151,10 +156,10 @@ function Scene() {
         ))}
         {/* Ports : entrée, sortie */}
         {[-1, 0, 1].map((k) => (
-          <rect key={k} x={PORT_IN_X - 4} y={STEP_Y(0) + k * 9 - 2.5} width={8} height={5} rx={1.5} fill="#2a46d6" />
+          <rect key={k} x={PORT_IN_X - 4} y={STEP_Y(0) + k * IN_GAP - 2.5} width={8} height={5} rx={1.5} fill="#2a46d6" />
         ))}
         {[-1.5, -0.5, 0.5, 1.5].map((k) => (
-          <rect key={k} x={PORT_OUT_X - 4} y={STEP_Y(3) + k * 7 - 2.5} width={8} height={5} rx={1.5} fill="#0b826f" />
+          <rect key={k} x={PORT_OUT_X - 4} y={STEP_Y(3) + k * OUT_GAP - 2.5} width={8} height={5} rx={1.5} fill="#0b826f" />
         ))}
         <rect x={PORT_IN_X - 4} y={STEP_Y(2) - 2.5} width={8} height={5} rx={1.5} fill="#0b826f" />
       </motion.g>
@@ -177,16 +182,16 @@ function Scene() {
 
       {/* Une personne décide des cas douteux */}
       <motion.g variants={pop(2.4)} style={CENTER}>
-        <rect x={HUMAN.x - 58} y={HUMAN.y - 22} width={238} height={44} rx={14} fill={C.surface} stroke={C.line} filter="url(#art-shadow)" />
-        <circle cx={HUMAN.x - 34} cy={HUMAN.y} r={13} fill={C.timeSoft} stroke={C.time} strokeWidth={1.4} />
+        <rect x={BUB.x} y={BUB.y} width={BUB.w} height={BUB.h} rx={14} fill={C.surface} stroke={C.line} filter="url(#art-shadow)" />
+        <circle cx={BUB.x + 24} cy={BUB_CY} r={13} fill={C.timeSoft} stroke={C.time} strokeWidth={1.4} />
         <g fill="none" stroke={C.time} strokeWidth={1.5} strokeLinecap="round">
-          <circle cx={HUMAN.x - 34} cy={HUMAN.y - 3.5} r={3.6} />
-          <path d={`M${HUMAN.x - 40.5} ${HUMAN.y + 7.5}c0-3.8 2.8-6 6.5-6s6.5 2.2 6.5 6`} />
+          <circle cx={BUB.x + 24} cy={BUB_CY - 3.5} r={3.6} />
+          <path d={`M${BUB.x + 17.5} ${BUB_CY + 7.5}c0-3.8 2.8-6 6.5-6s6.5 2.2 6.5 6`} />
         </g>
-        <text x={HUMAN.x - 14} y={HUMAN.y - 2} fontSize={12} fontWeight={600} fill={C.ink}>
+        <text x={BUB.x + 46} y={BUB_CY - 2} fontSize={12} fontWeight={600} fill={C.ink}>
           Une personne décide des cas douteux
         </text>
-        <text x={HUMAN.x - 14} y={HUMAN.y + 13} fontSize={10.5} fill={C.ink3}>
+        <text x={BUB.x + 46} y={BUB_CY + 13} fontSize={10.5} fill={C.ink3}>
           6 % d&apos;exceptions, toutes tracées
         </text>
       </motion.g>
@@ -196,8 +201,8 @@ function Scene() {
         <Note x={TOOL_X - 26} y={TOOLS[3].y + 50} text="2 min par document" sub="au lieu de 9, avant" tone="time" />
       </motion.g>
 
-      <Legend x={DOC_X} y={62} title="Vos documents" sub="Tels qu'ils arrivent" />
-      <Legend x={TOOL_X - 26} y={62} title="Vos outils" sub="Mis à jour, sans ressaisie" tone="time" />
+      <Legend x={DOC_X} y={LEGEND_Y} title="Vos documents" sub="Tels qu'ils arrivent" />
+      <Legend x={TOOL_X - 26} y={LEGEND_Y} title="Vos outils" sub="Mis à jour, sans ressaisie" tone="time" />
       <Legend x={DOC_X} y={372} title="Le workflow" sub="Branché, testé, mesuré" tone="brand" />
       <ExampleNote x={DOC_X} y={444} anchor="start" />
     </>
